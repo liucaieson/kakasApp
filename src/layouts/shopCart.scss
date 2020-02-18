@@ -1,0 +1,684 @@
+@import "../styles/common";
+@import "../styles/utils";
+.betting{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color:$bg-color8;
+  transition: all .3s ease-in-out;
+  z-index: 99;
+  max-height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  .header{
+    width: 100%;
+    background-color: $bg-color;
+    color: #fff;
+    font-size: px2vw(14);
+    font-weight: 700;
+    height: px2vh(35);
+    padding: 0 15px;
+    position: relative;
+    text-align: left;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    .name{
+      width: 10%;
+      line-height: px2vh(35);
+      float: left;
+    }
+    .balance{
+      float: left;
+      width: 79%;
+      text-align: center;
+      line-height: px2vh(35);
+      color: #ffd357;
+      font-weight: normal;
+    }
+    .down{
+      box-sizing: border-box;
+      float: right;
+      width: 10%;
+      line-height: px2vh(35);
+    }
+
+  }
+  .tabs{
+    color: #fff;
+    width: 100%;
+    height: px2vh(36);
+    background-color: $bg-color2;
+    box-sizing: border-box;
+    font-size: px2vw(14);
+    border-bottom: 1px solid #315e51;
+    .bet-tabs{
+      width: 50%;
+      float: left;
+      text-align: center;
+      line-height: px2vw(34);
+      border-bottom: 2px solid transparent;
+      .badge{
+        background: #f50;
+        border-radius: 3px;
+        color: #fff;
+        display: inline-block;
+        font-size: 14px;
+        line-height: 20px;
+        height: 19px;
+        margin-left: 10px;
+        padding: 0 6px;
+        text-align: center;
+      }
+    }
+    .active{
+      border-bottom: 2px solid #fff;
+    }
+  }
+/*    !*投注单列表样式*!
+    .bet-box{
+      width: 100%;
+      height: 74vh;
+      flex-direction: column;
+      display: flex;
+      color: #0F1A22;
+      padding: 0 px2vw(4);
+      flex-grow: 1;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      background-color: $bg-color8;
+      overflow: overlay;
+      .bet-list{
+        width: 100%;
+        font-size: px2vw(12);
+        margin-top: px2vh(4);
+        padding-bottom: px2vh(200);
+        .bet-none{
+          width: 100%;
+          height: 80px;
+          flex-direction: column;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 4px;
+          color: white;
+          font-size: 14px;
+        }
+        .bet-item{
+          width: 100%;
+          flex-direction: column;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-shadow: -4px 0 4px -4px rgba(0,0,0,.2), 4px 0 4px -4px rgba(0,0,0,.2);
+          padding: 0 px2vw(6);
+          animation: SlideUpIn .2s linear 1;
+          margin-bottom:px2vh(12);
+          .bet-item-header{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            background-color: #fff;
+            padding-top: px2vw(6);
+            padding-left: px2vw(6);
+            .left{
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              .title{
+                font-size: px2vw(12);
+                color: $fz-color1;
+                display: flex;
+                align-items: center;
+                padding-left: px2vw(6);
+                justify-content: start;
+                .logo{
+                  float: left;
+                  width: px2vw(12);
+                  height: px2vw(12);
+                  background-image: image-set(
+                      url('../assets/gerenzhongxinsaiguo@2x.png') 2x,
+                      url('../assets/gerenzhongxinsaiguo@3x.png') 3x
+                  );
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                }
+                .title{
+                  flex: 1;
+                }
+              }
+              .odds-name{
+                padding-left:px2vw(6);
+                font-size: px2vw(11);
+                line-height: px2vw(20);
+                font-weight: 400;
+                color: $fz-color6;
+              }
+            }
+            .right{
+              margin-right: px2vw(20);
+              .del{
+                font-size: px2vw(14);
+                font-weight: 700;
+                border: none;
+                color: #999;
+                cursor: pointer;
+                padding: px2vw(4) px2vh(4);
+              }
+            }
+          }
+          .bet-item-content{
+            width: 100%;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            color: #0F1A22;
+            .handicapInfo{
+              width: 100%;
+              flex-direction: row;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding-left: 4px;
+              font-size: px2vw(13);
+              padding-bottom: px2vh(4);
+              .handicap{
+                font-weight: 700;
+                flex: 1;
+                padding-left: 10px;
+              }
+              .odds{
+                margin-right: px2vw(20);
+                font-weight: 700;
+                background: #f50;
+                color: #fff;
+                border-radius: 2px;
+                padding-left: px2vw(4);
+                padding-right: px2vw(4);
+                font-size: px2vw(12);
+                flex-shrink: 0;
+                display: flex;
+              }
+            }
+            .errInfo {
+              width: 100%;
+              color: red;
+              padding: 1px 3px;
+              margin-left: 14px;
+            }
+            .winInfo{
+              width: 100%;
+              padding-left: px2vw(10);
+              padding-top: px2vh(5);
+              padding-bottom: px2vh(5);
+              .bet-select{
+                float: left;
+                width: 45%;
+                position: relative;
+                .bet-input{
+                  width: 100%;
+                  height: px2vh(32);
+                  -moz-appearance: textfield;
+                  padding: px2vh(4) px2vw(8);
+                  border: 1px solid #ccd3da;
+                  font-size: px2vw(12);
+                  background-color: #f8f9fa;
+                  text-align: right;
+                  vertical-align: baseline;
+                  font-weight: 500;
+                  border-radius: 2px;
+                }
+              }
+              .money{
+                float: right;
+                font-size: px2vw(14);
+                line-height: px2vh(32);
+                margin-right: px2vw(20);
+                font-weight: bold;
+                text-align: right;
+                color: black;
+              }
+            }
+          }
+        }
+        .mixed-item{
+          width: 100%;
+          flex-direction: column;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: px2vw(10) px2vh(8);
+          animation: SlideUpIn .2s linear 1;
+          background-color: white;
+          background-image: linear-gradient(90deg,#aeaeae 80%,hsla(0,0%,100%,0) 0);
+          background-position: top;
+          background-size: 8px 1px;
+          background-repeat: repeat-x;
+          .mixed-header{
+            width: 100%;
+            flex-direction: row;
+            display: flex;
+            justify-content:space-between ;
+            align-items: start;
+            padding-top: px2vh(4);
+            padding-bottom: px2vh(4);
+            .left{
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              .title{
+                font-size: px2vw(12);
+                color: $fz-color1;
+                display: flex;
+                align-items: center;
+                padding-left: px2vw(6);
+                justify-content: start;
+                .logo{
+                  float: left;
+                  width: px2vw(12);
+                  height: px2vw(12);
+                  background-image: image-set(
+                      url('../assets/gerenzhongxinsaiguo@2x.png') 2x,
+                      url('../assets/gerenzhongxinsaiguo@3x.png') 3x
+                  );
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                }
+                .title{
+                  flex: 1;
+                }
+              }
+
+              .odds-name{
+                padding-left:px2vw(6);
+                font-size: px2vw(11);
+                line-height: px2vw(20);
+                font-weight: 400;
+                color: $fz-color6;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                .time{
+
+                }
+              }
+            }
+            .right{
+              width: px2vw(20);
+              text-align: right;
+              .del{
+                font-size: px2vw(14);
+                font-weight: 700;
+                border: none;
+                color: #999;
+                cursor: pointer;
+                padding: px2vw(4) px2vh(2);
+              }
+            }
+          }
+          .item-content{
+            width: 100%;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            color: #0F1A22;
+            .winInfo{
+              width: 100%;
+              flex-direction: row;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding-left: 4px;
+              font-size: px2vw(13);
+              padding-bottom: px2vh(4);
+              .handicap{
+                font-weight: 700;
+                flex: 1;
+                padding-left: 10px;
+              }
+              .odds{
+                margin-right: px2vw(10);
+                font-weight: 700;
+                background: #f50;
+                color: #fff;
+                border-radius: 2px;
+                padding-left: px2vw(4);
+                padding-right: px2vw(4);
+                font-size: px2vw(12);
+                flex-shrink: 0;
+                display: flex;
+              }
+            }
+          }
+        }
+      }
+    }
+    !*投注单按钮样式*!
+    .bet-total{
+      width: 100%;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: px2vw(13);
+      bottom: 0;
+      position: absolute;
+      z-index: 3;
+      border-radius: 0 0 3px 3px;
+      .type{
+        font-size: 12px;
+        width: 100%;
+        background-color:$bg-color2 ;
+      }
+      .calc{
+        width: 100%;
+        background-color:$bg-color2;
+        padding: 8px 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .left{
+          text-align: center;
+          width: 50%;
+          line-height: 26px;
+        }
+        .right{
+          text-align: center;
+          width: 50%;
+          line-height: 26px;
+          .profit{
+            font-size: 16px;
+            color: #f1af1c;
+            font-weight: bold;
+          }
+        }
+      }
+      .button{
+        width: 100%;
+        background-color:#315e51 ;
+        padding: px2vw(10) 0;
+        text-align: center;
+        .button-submit{
+          margin: 0 auto;
+          width: 90%;
+          height: px2vh(36);
+          display: block;
+          font-size: px2vw(14);
+          border-radius: 3px;
+          background: #f50;
+          cursor: pointer;
+          color: white;
+          font-weight: bold;
+          box-shadow: none;
+          outline: none;
+          user-select: none;
+          border: none;
+        }
+      }
+    }
+
+    .mixed-total{
+      width: 100%;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: px2vw(13);
+      bottom: 0;
+      position: absolute;
+      z-index: 3;
+      border-radius: 0 0 3px 3px;
+      .type{
+        font-size: px2vw(12);
+        width: 100%;
+        color: #303030;
+        .title{
+          width: 100%;
+          height: px2vh(24);
+          line-height: px2vh(24);
+          background-color:#f1f1f1 ;
+          border-bottom:1px solid #b3b2b2;
+          @include clearfix();
+          .left{
+            width: 50%;
+            float: left;
+            padding-left: px2vw(10);
+          }
+          .right{
+            float: left;
+            width: 40%;
+            padding-left: px2vh(10);
+            text-align: center;
+          }
+        }
+        .row{
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: px2vh(36);
+          line-height: px2vh(36);
+          background-color:#efe9dd ;
+          padding-left: px2vw(10);
+          border-bottom:1px solid #b3b2b2;
+          @include clearfix();
+          .name{
+            width: 40%;
+            float: left;
+            padding-left: 10px;
+          }
+          .length{
+            float: left;
+            width: 10%;
+            .x{
+              margin-left: 4px;
+            }
+          }
+          .input{
+            float: left;
+            width: 45%;
+            -moz-appearance: textfield;
+            border: 1px solid #ccd3da;
+            font-size: px2vw(12);
+            background-color: #f8f9fa;
+            text-align: right;
+            vertical-align: baseline;
+            font-weight: 500;
+            border-radius: 2px;
+          }
+        }
+      }
+      .calc{
+        width: 100%;
+        background-color:$bg-color2;
+        display: flex;
+        height: px2vh(30);
+        .left{
+          width: 40%;
+          padding-left: px2vw(20);
+          .text{
+            float: left;
+            line-height: px2vh(30);
+          }
+          .amount{
+            float: left;
+            margin-left: px2vw(10);
+            font-weight: bold;
+            font-size: px2vw(14);
+            line-height: px2vh(30);
+          }
+        }
+        .right{
+          float: right;
+          width: 60%;
+          line-height: px2vw(30);
+          .profit{
+            padding-left: px2vw(10);
+            font-size: px2vw(14);
+            color: #f1af1c;
+            font-weight: bold;
+            @include textOverflow();
+          }
+        }
+      }
+      .button{
+        width: 100%;
+        background-color:#315e51 ;
+        padding: px2vh(10) 0;
+        text-align: center;
+        .button-submit{
+          margin: 0 auto;
+          width: 90%;
+          height: px2vh(36);
+          display: block;
+          font-size: px2vw(14);
+          border-radius: 3px;
+          background: #f50;
+          cursor: pointer;
+          color: white;
+          font-weight: bold;
+          box-shadow: none;
+          outline: none;
+          user-select: none;
+          border: none;
+        }
+      }
+    }*/
+}
+
+/*silde划入动画*/
+@-webkit-keyframes SlideUpIn {
+  0% {
+    -webkit-transform: scaleY(0.8);
+    transform: scaleY(0.8);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+}
+@keyframes SlideUpIn {
+  0% {
+    -webkit-transform: scaleY(0.8);
+    transform: scaleY(0.8);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes SlideUpOut {
+  0% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(0.8);
+    transform: scaleY(0.8);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    opacity: 0;
+  }
+}
+@keyframes SlideUpOut {
+  0% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(0.8);
+    transform: scaleY(0.8);
+    -webkit-transform-origin: 0% 0%;
+    transform-origin: 0% 0%;
+    opacity: 0;
+  }
+}
+@-webkit-keyframes SlideDownIn {
+  0% {
+    -webkit-transform: scaleY(0.8);
+    transform: scaleY(0.8);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    opacity: 1;
+  }
+}
+@keyframes SlideDownIn {
+  0% {
+    -webkit-transform: scaleY(0.8);
+    transform: scaleY(0.8);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes SlideDownOut {
+  0% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(0.8);
+    transform: scaleY(0.8);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    opacity: 0;
+  }
+}
+@keyframes SlideDownOut {
+  0% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scaleY(0.8);
+    transform: scaleY(0.8);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    opacity: 0;
+  }
+}

@@ -1,0 +1,117 @@
+@import "../../../../styles/utils";
+@import "../../../../styles/common";
+
+.help {
+  width: 100%;
+  position: relative;
+  .game-tab {
+    @include game-tab-layout();
+  }
+  .list-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    .item {
+      width: calc(100% - 16px);
+      margin: 0 auto;
+      padding-left: px2vw(15);
+      margin-bottom: px2vh(8);
+      border-radius: 3px;
+      background: #f5f2f0;
+      .title {
+        color: #222;
+        position: relative;
+        height: px2vh(44);
+        word-wrap: break-word;
+        display: table-cell;
+        vertical-align: middle;
+        padding-right: 5px;
+        opacity: 0.8;
+      }
+    }
+  }
+  .main{
+    width: 100%;
+    padding-top: px2vh(14);
+    .selection{
+      margin:8px 0;
+      width: 100%;
+      height: px2vh(44);
+      line-height: px2vh(44);
+      padding: 0 8px;
+      clear: both;
+      border-radius: 3px;
+      overflow: hidden;
+      background-color: #FFF;
+      box-sizing: border-box;
+      .select{
+        width: 100%;
+        height: px2vh(44);
+        line-height: px2vh(44);
+        padding-left: 17px;
+        display: block;
+        color: rgba(51, 51, 51, 0.6);
+        /* font-size: 14px; */
+        /* font-weight: 900; */
+        background: url(../../../../assets/arrow_godown_b.svg) no-repeat 98%;
+        border: solid 1px rgba(0, 0, 0, 0.4);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        /* opacity: 0.6; */
+        border-radius: 3px;
+      }
+    }
+
+    .table{
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+      color: #1f1c18;
+      .title{
+        width: 100%;
+        text-align: center;
+        height: px2vh(48);
+        line-height: px2vh(48);
+        font-size: px2vw(12);
+        background-color: #8c7769;
+        color: rgba(255,255,255,0.56);
+      }
+      .line{
+        width: 100%;
+        text-align: center;
+        height: px2vh(48);
+        line-height: px2vh(48);
+        font-size: px2vw(12);
+        color: #323232;
+        &:nth-child(odd){
+          background-color: #f9f7f6;
+        }
+      }
+    }
+    h1{
+      padding-left: 10px;
+      margin-bottom: 20px;
+      color: #323232;
+      font-weight: 500;
+      font-size: px2vw(16);
+    }
+    ul{
+      padding: 0 16px 0 14px;
+      li{
+        margin-bottom: 20px;
+        margin-left: 14px;
+        line-height: 1.21;
+        font-size: px2vw(14);
+        a{
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+

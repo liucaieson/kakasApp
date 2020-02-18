@@ -1,0 +1,231 @@
+$pageWith:375;
+$pageHeight: 667;
+
+@mixin textOverflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+@function px2vw($px) {
+  @return $px / $pageWith * 100vw;
+}
+
+@function px2vh($px) {
+  @return $px / $pageHeight * 100vh;
+}
+
+
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+  overflow: hidden;
+  position: relative;
+  line-height: $lineHeight;
+  max-height: $lineHeight * $lineCount;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+  &:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: $bgColor;
+  }
+}
+
+
+@mixin textOverflowMulti($line: 3, $bg: #fff) {
+  position: relative;
+  max-height: $line * 1.5em;
+  margin-right: -1em;
+  padding-right: 1em;
+  overflow: hidden;
+  line-height: 1.5em;
+  text-align: justify;
+  &:before{
+  position: absolute;
+  right: 14px;
+  bottom: 0;
+  padding: 0 1px;
+  background: $bg;
+  content: '...';
+  }
+  &:after {
+    position: absolute;
+    right: 14px;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: white;
+    content: '';
+  }
+}
+// mixins for clearfix
+// ------------------------
+@mixin clearfix {
+  zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: ' ';
+  }
+  &:after {
+    clear: both;
+    height: 0;
+    font-size: 0;
+    visibility: hidden;
+  }
+}
+
+/*换行*/
+@mixin wrapBreak {
+  &:after {
+    content: '\A';
+    white-space: pre;
+  }
+}
+
+@mixin dot{
+  &:after{
+    display: block;
+    margin-left: 5.2em;
+    content: '...\A..\A.';
+    white-space: pre-wrap;
+    animation: dot 3s infinite step-start both;
+  }
+}
+
+@mixin borderCommon {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  -webkit-transform-origin: left top;
+  transform-origin: left top;
+  pointer-events: none; /* 防止点击触发 */
+  box-sizing: border-box;
+}
+
+
+@mixin min-device-pixel-ratio($scale2, $scale3) {
+  @media screen and (min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2) {
+    width: 200%;
+    height: 200%;
+    transform: $scale2;
+  }
+  @media screen and (min-device-pixel-ratio: 3), (-webkit-min-device-pixel-ratio: 3) {
+    width: 300%;
+    height: 300%;
+    transform: $scale3;
+  }
+}
+
+@mixin border-1px($color: #DDD, $radius: 4PX, $style: solid) {
+  position: relative;
+  &::before {
+    content: "";
+    pointer-events: none;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: 0 0;
+    border: 1PX $style $color;
+    border-radius: $radius;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    @media screen and (min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2) {
+      width: 200%;
+      height: 200%;
+      border-radius: $radius * 2;
+      transform: scale(.5);
+    }
+    @media screen and (min-device-pixel-ratio: 3), (-webkit-min-device-pixel-ratio: 3) {
+      width: 300%;
+      height: 300%;
+      border-radius: $radius * 3;
+      transform: scale(.33);
+    }
+  }
+}
+
+@mixin border-top-1px($color: #DDD, $style: solid) {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-top: 1Px $style $color;
+    transform-origin: 0 0;
+    @include min-device-pixel-ratio(scaleY(.5), scaleY(.33));
+  }
+}
+@mixin border-bottom-1px($color: #DDD, $style: solid) {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 1Px $style $color;
+    transform-origin: 0 0;
+    @media screen and (min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2) {
+      width: 200%;
+      transform: scale(.5);
+    }
+    @media screen and (min-device-pixel-ratio: 3), (-webkit-min-device-pixel-ratio: 3) {
+      width: 300%;
+      transform: scale(.33);
+    }
+  }
+}
+@mixin border-left-1px($color: #DDD, $style: solid) {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-left: 1Px $style $color;
+    transform-origin: 0 0;
+    @include min-device-pixel-ratio(scaleY(.5), scaleY(.33));
+  }
+}
+
+@mixin border-right-1px($color: #DDD, $style: solid) {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    border-right: 1Px $style $color;
+    transform-origin: 0 0;
+    @media screen and (min-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2) {
+      height: 200%;
+      transform: scale(.5);
+    }
+    @media screen and (min-device-pixel-ratio: 3), (-webkit-min-device-pixel-ratio: 3) {
+      height: 300%;
+      transform: scale(.33);
+    }
+  }
+}
+
+
+

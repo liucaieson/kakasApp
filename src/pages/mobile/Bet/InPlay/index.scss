@@ -1,0 +1,52 @@
+@import "../../../../styles/utils";
+@import "../../../../styles/common";
+@import "../../../../styles/bilnk";
+
+.inplay {
+  width: 100%;
+  height: 100%;
+  color: #0b1422;
+  background: #fff;
+  .game-tab {
+    width: 100%;
+    height: px2vh(40);
+    background-color: #503f32;
+    .name {
+      color: white;
+      font-size: px2vw(14);
+      padding-left: px2vw(8);
+      line-height: px2vh(40);
+      @include border-bottom-1px(#8e8a87);
+    }
+
+  }
+  .game-list {
+    width: 100%;
+    padding-bottom: 8px;
+    .item {
+      display: block;
+      padding-left: 16px;
+      line-height: px2vh(48);
+      height: px2vh(48);
+      margin: 8px 8px 0;
+      background-color: #f5f2f0;
+      border-radius: 3px;
+      width: calc(100% - 16px);
+      color: #453c35;
+      box-sizing: border-box;
+      .ball {
+        background: url(../../../../assets/soccer.svg) no-repeat 0 50%;
+      }
+      .icon {
+        height: px2vh(46);
+        width: px2vh(46);
+        float: left;
+        opacity: 0.9;
+      }
+      .name {
+        float: left;
+        opacity: 0.8;
+      }
+    }
+  }
+}

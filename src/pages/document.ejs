@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="utf-8">
+    <meta name="theme-color" content="#000000">
+
+    <title>亚冠体育</title>
+    <!-- set `maximum-scale` for some compatibility issues -->
+    <!-- 强制显示方式 -->
+    <meta name="viewport" id="viewportMeta" content="width=device-width,viewport-fit=cover,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+    <!-- 允许全屏 -->
+    <meta name="keywords" content="体育，亚冠体育">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 顶端状态条样式 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <!-- 忽略将数字变为电话号码 -->
+    <meta content="telephone=no" name="format-detection">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- qq强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- uc强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- qq强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- uc应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- qq应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <meta name=”apple-mobile-web-app-status-bar-style” content=”black-translucent” />
+
+</head>
+<body><div id="root"></div></body>
+<script>
+
+  var isIphoneX = window.devicePixelRatio && window.devicePixelRatio === 3 && window.screen.width === 375 && testUA('iPhone')
+  // 处理lib-flexible放大viewport的情况
+  var scale = window.innerWidth / window.screen.width
+  if (isIphoneX) {
+    check()
+    window.onscroll = throttle(check, 200)
+  }
+  function check () {
+    // 100为经验值
+    // alert(window.screen.height - window.innerHeight / scale)
+    if (window.screen.height - window.innerHeight / scale < 100) {
+      console.log(1)
+      document.body.classList.add('fix-iphonex-bottom')
+    } else {
+      document.body.classList.remove('fix-iphonex-bottom')
+    }
+  }
+  function testUA (str) {
+    return navigator.userAgent.indexOf(str) > -1
+  }
+  function throttle (func, wait) {
+    var ctx, args, rtn, timeoutID; // caching
+    var last = 0;
+    return function throttled () {
+      ctx = this;
+      args = arguments;
+      var delta = new Date() - last;
+      if (!timeoutID)
+        if (delta >= wait) call();
+        else timeoutID = setTimeout(call, wait - delta);
+      return rtn;
+    };
+
+    function call () {
+      timeoutID = 0;
+      last = +new Date();
+      rtn = func.apply(ctx, args);
+      ctx = null;
+      args = null;
+    }
+  }
+
+  const initViewport = function(height){
+    var metaEl = document.querySelector("#viewportMeta");
+    var content = "height=" + window.innerHeight + ",width=" + window.innerWidth + ",user-scalable=no";
+    metaEl.setAttribute('name', 'viewport');
+    metaEl.setAttribute('content', content);
+  }
+  const realHeight = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight
+  initViewport(realHeight);
+
+
+</script>
+</html>

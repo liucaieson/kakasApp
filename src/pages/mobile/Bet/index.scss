@@ -1,0 +1,250 @@
+@import "../../../styles/utils";
+@import "../../../styles/common";
+@import "../../../styles/bilnk";
+.bet{
+  width: 100%;
+  height: 100%;
+  color: #0b1422;
+  background: #fff;
+  .header{
+    display: flex;
+    justify-content: space-between;
+    background-color: #503f32;
+    height: px2vh(64);
+    width: 100%;
+    .back{
+      width: 15.5%;
+      height: px2vh(64);
+      float: left;
+      position: relative;
+      text-align: center;
+      line-height: px2vh(64);
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      .back-icon{
+        background: url(../../../assets/back_arrow.svg) no-repeat 50% 50%;
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+      }
+    }
+    .header-tab{
+      color: rgba(255,255,255,0.72);
+      width: 23%;
+      font-size: px2vw(15);
+      line-height: px2vh(64);
+      height: 64px;
+      float: left;
+      position: relative;
+      text-align: center;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    .active{
+      color: #eba01e;
+    }
+    .header-menu{
+      width: 15.5%;
+      height: px2vh(64);
+      float: left;
+      position: relative;
+      text-align: center;
+      line-height: px2vh(64);
+      cursor: pointer;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      .menu-icon{
+        display: block;
+        background: url(../../../assets/menu_icon.svg) no-repeat 50% 50%;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .header-menu{
+    background-color: #503f32;
+    width: 100%;
+    @include clearfix();
+    .info{
+      background-color:#8c7769;
+      width: 100%;
+      height: px2vh(40);
+      line-height: px2vh(40);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      @include border-bottom-1px(rgba(255,255,255,0.72));
+      .left{
+        font-size: px2vw(12);
+        padding-left: px2vw(4);
+      }
+      .right{
+        display: flex;
+        align-items: center;
+        padding-right: px2vw(4);
+        font-size: px2vw(12);
+        .rmb{
+          padding-right: px2vw(4);
+        }
+        .balance{
+          color: #f5ad35;
+        }
+        .icon{
+          padding-left: px2vw(6);
+          display: block;
+          background: url(../../../assets/reload_curr.svg) no-repeat 50% 50%;
+          width: px2vw(14);
+          height: px2vw(14);
+        }
+      }
+    }
+    .line{
+      background-color:#8c7769;
+      width: 100%;
+      height: px2vh(40);
+      font-size: px2vw(13);
+      @include border-bottom-1px(rgba(255,255,255,0.72));
+      .item{
+        padding-left: px2vw(6);
+        background-color:#8c7769;
+        float: left;
+        box-sizing: border-box;
+        width: 50%;
+        height: px2vh(40);
+        text-align: left;
+        line-height: px2vh(40);
+        color:rgba(255,255,255,0.72);
+        @include border-right-1px(rgba(255,255,255,0.72))
+      }
+    }
+  }
+  .main{
+    .game-tab{
+      width: 100%;
+      height: px2vh(40);
+      background-color: #503f32;
+      .name{
+        color: white;
+        font-size: px2vw(14);
+        padding-left: px2vw(8);
+        line-height: px2vh(40);
+        @include border-bottom-1px(#8e8a87);
+      }
+    }
+    .game-list{
+      width: 100%;
+      padding-bottom:8px;
+      .item{
+        padding-left: 16px;
+        line-height: px2vh(48);
+        height: px2vh(48);
+        margin: 8px 8px 0;
+        background-color: #f5f2f0;
+        border-radius: 3px;
+        width: calc(100% - 16px);
+        color: #453c35;
+        box-sizing: border-box;
+        .ball{
+          background:url(../../../assets/soccer.svg) no-repeat 0 50%;
+        }
+        .icon{
+          height: px2vh(46);
+          width: px2vh(46);
+          float: left;
+          opacity: 0.9;
+        }
+        .name{
+          float: left;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+  .menu{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-height: 100%;
+    z-index: 3;
+    .bottom-nav{
+      width: 100%;
+      .nav{
+        width: calc(100% - (env(safe-area-inset-left) + env(safe-area-inset-right)));
+        margin: 0 env(safe-area-inset-left);
+        padding-bottom: constant(safe-area-inset-bottom);
+        padding-bottom: env(safe-area-inset-bottom);
+        position: fixed;
+        bottom: 0;
+        background: #4b4339;
+        ul{
+          margin: 0!important;
+          padding: 0!important;
+          display: flex;
+          .item{
+            position: relative;
+            width: 20%;
+            height: px2vh(44);
+            margin-right: -4px;
+            padding: 8px 0 6px 0;
+            text-align: center;
+            background: #4b4339;
+            vertical-align: bottom;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            .icon{
+              display: block;
+              width: 100%;
+              height: px2vh(22);
+              opacity: 0.56;
+            }
+            .active{
+              opacity: 1!important;
+            }
+            .text{
+              display: block;
+              height: px2vh(12);
+              width: 100%;
+              font-size: px2vw(11);
+              text-align: center;
+              color: #FFF;
+              opacity: 0.56;
+            }
+            .home{
+              background: url(../../../assets/btnHome.svg) no-repeat top center
+            }
+            .live{
+              background: url(../../../assets/btnSchedule.svg) no-repeat top center
+            }
+            .bill{
+
+            }
+            .history{
+              background: url(../../../assets/btnStatement.svg) no-repeat top center
+
+            }
+            .accountRunning{
+              background: url(../../../assets/btnOpenbet.svg) no-repeat top center
+
+            }
+            .text{
+              opacity: 0.56;
+              display: block;
+              height: px2vh(14);
+              width: 100%;
+              font-size: px2vw(11);
+              text-align: center;
+              color: #FFF;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

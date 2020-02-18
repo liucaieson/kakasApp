@@ -1,0 +1,240 @@
+@import "../../../../styles/utils";
+@import "../../../../styles/common";
+
+.accountHistory {
+  width: 100%;
+  position: relative;
+  .game-tab {
+    @include game-tab-layout();
+  }
+  .play-tab {
+    width: 100%;
+    height: px2vh(44);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .tab {
+      display: block;
+      width: 50%;
+      height: px2vh(44);
+      line-height: px2vh(44);
+      text-align: center;
+      font-size: px2vw(14);
+      background-color: white;
+      box-sizing: border-box;
+      color: #6d6d6d;
+    }
+    .active {
+      position: relative;
+      color: #bf7800 !important;
+      border-bottom: 2px solid #c58311;
+    }
+  }
+  .main{
+    .sub-title{
+      height: 6vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 0 auto;
+      .tab-box{
+        display: flex;
+        overflow: hidden;
+        min-height: 27px;
+        opacity: 1;
+        height: 6vh;
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+        @include border-bottom-1px(rgba(0,0,0,.2));
+        .tab1{
+          color: #333;
+          background-color: transparent;
+          display: flex;
+          flex: 1 1;
+          justify-content: center;
+          align-items: center;
+          font-size: 14px;
+          line-height: 1;
+          transition: background 0.2s;
+          position: relative;
+          width: 100%;
+          box-sizing: border-box;
+        }
+        .tab2{
+          color: #333;
+          background-color: transparent;
+          display: flex;
+          flex: 1 1;
+          justify-content: center;
+          align-items: center;
+          font-size: 14px;
+          line-height: 1;
+          transition: background 0.2s;
+          position: relative;
+          width: 100%;
+          box-sizing: border-box;
+          border-left-width: 0;
+        }
+        .tab3{
+          color: #333;
+          background-color: transparent;
+          display: flex;
+          flex: 1 1;
+          justify-content: center;
+          align-items: center;
+          font-size: 14px;
+          line-height: 1;
+          transition: background 0.2s;
+          position: relative;
+          width: 100%;
+          box-sizing: border-box;
+          border-left-width: 0;
+        }
+        .active{
+          position: relative;
+          color: #bf7800 !important;
+          border-bottom: 2px solid #c58311;
+        }
+      }
+    }
+    .list-box {
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding-bottom: 50px;
+      background-color:#fff;
+      .item {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 6px;
+        margin-bottom: px2vh(4);
+        .title {
+          width: 100%;
+          padding: 0 px2vw(10);
+          font-size: px2vw(16);
+          height: px2vh(50);
+          line-height: px2vh(50);
+          color: #333;
+          background-color: rgba(0,0,0,.05);
+          box-sizing: border-box;
+          .money{
+            float: left;
+          }
+          .type{
+            padding-left: px2vw(10);
+            float: left;
+
+          }
+          .balance {
+            float: right;
+            font-size: px2vw(14);
+            .num{
+              padding-right: 10px;
+              .red{
+                font-weight: 700;
+                color: #f5ad35;
+              }
+              .gray{
+                color:rgba(0,0,0,0.4);
+              }
+            }
+          }
+        }
+        .detail{
+          width: 100%;
+          font-size: px2vw(16);
+          color: #232323;
+          background-color: #fff;
+          box-sizing: border-box;
+          .info{
+            width: 100%;
+            display: flex;
+            padding: px2vw(10) px2vh(10);
+            box-sizing: border-box;
+            @include border-bottom-1px(#232323);
+            .left{
+              width: 80%;
+              .dish-name{
+                font-size: px2vw(16);
+                line-height: px2vh(30);
+                color: #232323;
+              }
+              .odds-name{
+                font-size: px2vw(14);
+                color: #232323;
+              }
+              .match{
+                font-size: px2vw(13);
+                color: #333333;
+              }
+              .time{
+                font-size: px2vw(12);
+                line-height: px2vh(20);
+                color: #616060;
+              }
+            }
+            .right{
+              width: 20%;
+              text-align: right;
+              padding-right: px2vw(10);
+              font-size: px2vw(16);
+              color: #3e3d3d;
+              .dish{
+
+              }
+              .win{
+                .red{
+                  color: #ff8834;
+                }
+                .green{
+                  color: #a8b3b0;
+                }
+              }
+            }
+          }
+          .money{
+            width: 100%;
+            display: flex;
+            padding: px2vh(4) px2vw(10);
+            .left{
+              width: 50%;
+              .text{
+                font-size: px2vw(12);
+                color: #000;
+              }
+              .mun{
+                font-size: px2vw(16);
+              }
+            }
+            .right{
+              width: 50%;
+              padding-left: px2vw(10);
+              .text{
+                font-size: px2vw(12);
+                color: #000000;
+              }
+              .num{
+                font-size: px2vw(16);
+              }
+            }
+          }
+        }
+      }
+    }
+    .no-data{
+      width: 100%;
+      line-height: px2vh(48);
+      font-size: px2vw(16);
+      text-align: center;
+    }
+  }
+
+}

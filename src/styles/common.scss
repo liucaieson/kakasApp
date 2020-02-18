@@ -1,0 +1,340 @@
+$normal-color: #d9d9d9;
+$white: #fff;
+$black: #000;
+$bg-color: #e43342;
+$topHeight: 7vh;
+
+$bg-color: #315e51;
+$bg-color2: #427f6d;
+$bg-color3: #fcf7ed;
+$bg-color4: #f7f7f7;
+$bg-color5: #dc9602;
+$bg-color6: #e3eeeb;
+$bg-color7: #30717b;
+$bg-color8: #caced2;
+$mixed-area-bg: #324e69;
+$mixed-active1: #d48105;
+$mixed-active2: #a21a0d;
+$border-color1: #8b958d;
+$border-color2: #bcc3be;
+$border-color3: #bedede;
+$active-color1: #dc9602;
+$active-color2: #e4792c;
+$fz-color1: #474747;
+$fz-color2: #315e51;
+$fz-color3: #1e1f25;
+$fz-color4: #dc9602;
+$fz-color5: #d04e3c;
+$fz-color6: #516375;
+
+@mixin topHeader($height:7vh) {
+  position: fixed;
+  top: 0;
+  z-index: 6;
+  width: 100%;
+  height: $height;
+  background: $bg-color;
+}
+
+@mixin headerNav($height:7vh) {
+  height: $height;
+  display: flex;
+  z-index: 10;
+}
+
+@mixin betBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  transition: all .5s;
+  cursor: pointer;
+  background: transparent;
+  position: absolute;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 10%;
+}
+
+@mixin up($right:20% , $top: 50%) {
+  width: 13px;
+  height: 12px;
+  background-image: url("@/assets/liebiao-zhang.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: $right;
+  top: $top;
+  color: #FF1E1E;
+  opacity: 0;
+  -webkit-animation: flash 1s linear 7 alternate;
+  animation: flash 1s linear 7 alternate;
+  transform: translateY(-55%);
+}
+
+@mixin down($right:20% , $top: 50%) {
+  width: 13px;
+  height: 12px;
+  background-image: url("@/assets/liebiao-jiang.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: $right;
+  top: $top;
+  color: #27ff33;
+  opacity: 0;
+  -webkit-animation: flash 1s linear 7 alternate;
+  animation: flash 1s linear 7 alternate;
+  transform: translateY(-55%);
+}
+
+@mixin match-info-layout {
+  color: #0b1422;
+  width: 46%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  .home-name {
+    width: 100%;
+    line-height: px2vh(62);
+    @include textOverflow();
+  }
+  .away-name {
+    width: 100%;
+    line-height: px2vh(62);
+    @include textOverflow();
+  }
+}
+
+/* 比赛列表页面的投注项布局 */
+@mixin match-list-page-dish-layout {
+  width: 27%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  .item {
+    width: 100%;
+    height: px2vh(58);
+    text-align: center;
+    cursor: pointer;
+    vertical-align: middle;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    line-height: 1;
+    margin: 3px 0;
+    .active {
+      background: rgba(244, 200, 123, 0.64)!important;
+      border: solid 1px rgba(188, 125, 16, 0.56)!important;
+    }
+    .up {
+      @include up(5%);
+    }
+    .down {
+      @include down(5%);
+    }
+    .price {
+      @include dish-box(80);
+    }
+  }
+  .lock{
+    width: px2vw(80);
+    height: px2vh(48);
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 3px auto;
+    background-color: rgba(0,0,0,0.1);
+    .icon{
+      width: px2vw(16);
+      height: px2vw(20);
+      background: url(@/assets/lock.svg) no-repeat 0 50%;
+    }
+  }
+  .active {
+    background: $active-color2;
+    color: #fff
+  }
+}
+
+@mixin dish-box($width: 64) {
+  width: px2vw($width);
+  font-weight: 700;
+  font-size: px2vw(12);
+  line-height: 1.2;
+  display: flex;
+  margin-right: 2%;
+  flex-direction: column;
+  justify-content: center;
+  height: px2vh(48);
+  @include border-1px(rgba(216, 216, 216, 0.7));
+  .handicap {
+    font-size: px2vw(12);
+    line-height: 1.5;
+    color: #725737;
+    .i {
+      margin-right: 2px;
+    }
+  }
+  .mun {
+    color: #c8250a;
+    font-size: px2vw(13);
+    line-height: 1.5;
+  }
+
+}
+
+/* 比赛赔率表格的公共css */
+@mixin match-bet-layout {
+  .item1 {
+    width: 50%;
+    min-height: auto;
+    height: px2vh(54);
+    transition: transform .1s ease-in-out;
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    border-radius: 4px;
+    color: #333;
+    background-color: white;
+    position: relative;
+    .up {
+      @include up()
+    }
+    .down {
+      @include down()
+    }
+    .name {
+      flex: 1;
+      text-align: left;
+      font-size: px2vw(14);
+      padding-left: 2%;
+
+    }
+    .active {
+      background: rgba(244, 200, 123, 0.64)!important;
+      border: solid 1px rgba(188, 125, 16, 0.56)!important;
+    }
+    .dish {
+      @include dish-box()
+    }
+  }
+  .item2 {
+    width: 33%;
+    min-height: auto;
+    height: px2vh(54);
+    transition: transform .1s ease-in-out;
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    border-radius: 4px;
+    color: #333;
+    background-color: white;
+    position: relative;
+    .up {
+      @include up()
+    }
+    .down {
+      @include down()
+    }
+    .active {
+      background: rgba(244, 200, 123, 0.64)!important;
+      border: solid 1px rgba(188, 125, 16, 0.56)!important;
+    }
+    .dish {
+      @include dish-box(80)
+    }
+  }
+  .item3 {
+    width: 100%;
+    min-height: auto;
+    height: px2vh(54);
+    transition: transform .1s ease-in-out;
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    border-radius: 4px;
+    color: #333;
+    background-color: white;
+    position: relative;
+    .up {
+      @include up()
+    }
+    .down {
+      @include down()
+    }
+    .active {
+      background: rgba(244, 200, 123, 0.64)!important;
+      border: solid 1px rgba(188, 125, 16, 0.56)!important;
+    }
+    .name {
+      text-align: left;
+      width: 50%;
+      font-size: px2vw(14);
+      padding-left: 2%;
+    }
+    .dish {
+      @include dish-box()
+    }
+  }
+
+}
+
+@mixin game-tab-layout{
+  width: 100%;
+  height: px2vh(40);
+  background-color: #503f32;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 3%;
+  .item {
+    font-size: px2vw(13);
+    line-height: 6vh;
+    padding: 0 px2vw(6);
+  }
+  .line {
+    font-size: px2vw(13);
+    line-height: 6vh;
+    padding: 0 px2vw(6);
+    color: #abd492;
+  }
+  .box{
+    flex: 1;
+    .time{
+      float: right;
+      margin-right: px2vw(10);
+      background: url(../../../../assets/button_login.svg) no-repeat 50%;
+      background-size: 30px 32px;
+      height: 48px;
+      width: 48px;
+      text-align: center;
+      vertical-align: middle;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: px2vw(10);
+    }
+  }
+}
+
+

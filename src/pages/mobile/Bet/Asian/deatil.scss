@@ -1,0 +1,121 @@
+@import "../../../../styles/utils";
+@import "../../../../styles/common";
+@import "../../../../styles/bilnk";
+.detail{
+  width: 100%;
+  height: 100%;
+  color: #0b1422;
+  background: #fff;
+  .game-tab {
+    @include game-tab-layout();
+  }
+  .main {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    .content{
+      height: px2vh(70);
+      background-image: linear-gradient(to bottom, #3d7e61, #21241e);
+      background-size: cover;
+      background-position: top;
+      overflow: hidden;
+      position: relative;
+      .date{
+        margin-top: px2vh(10);
+        text-align: center;
+        font-weight: 500;
+        font-size: px2vw(12);
+        color: white;
+      }
+      .team{
+        margin-top: px2vh(10);
+        font-size: px2vw(14);
+        line-height: 1.4;
+        display: flex;
+        flex-wrap: nowrap;
+        vertical-align: top;
+        position: relative;
+        width: 100%;
+        .home-name{
+          width: 45%;
+          text-align:center;
+          float: left;
+          line-height: 1.8;
+          color: #fff;
+        }
+        .vs{
+          border-radius: 3px;
+          color: #fff;
+          font-size: px2vw(16);
+          font-weight: 500;
+          left: 45%;
+          padding: 2px;
+          text-align: center;
+          text-transform: uppercase;
+          width: 8%;
+          line-height: 1.5;
+        }
+        .away-name{
+          float: right;
+          width: 45%;
+          text-align: center;
+          line-height: 1.8;
+          color: #fff;
+        }
+      }
+    }
+    .all-odds{
+      width: 100%;
+      .odds-box{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        .odds-name{
+          width: 100%;
+          height: px2vh(40);
+          line-height: px2vh(40);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background-color: #8c7769;
+          .name{
+            flex: 1;
+            text-align: left;
+            padding-left: px2vw(16);
+            font-size: px2vw(12);
+            font-weight: 700;
+            cursor: pointer;
+            position: relative;
+            transition: all .2s;
+            color: #fff;
+          }
+          .arrow{
+            width: px2vw(44);
+            height: px2vh(40);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: px2vw(12);
+            color: #fcf7ed;
+          }
+        }
+        .odds-item{
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          font-size: px2vw(12);
+          box-sizing: border-box;
+          @include match-bet-layout();
+        }
+      }
+    }
+    .event-loading {
+      position: relative;
+      width: 100%;
+      height: 50px;
+      text-align: center;
+      font-size: 16px;
+    }
+  }
+}

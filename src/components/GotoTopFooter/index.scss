@@ -1,0 +1,14 @@
+@import "../../styles/utils";
+
+.to-top{
+  margin: 8px auto;
+  width: calc(100% - 16px);
+  display: block;
+  height: px2vh(48);
+  line-height: 48px;
+  background-color: #e5e0dc;
+  border-radius: 3px;
+  color: #5a5249;
+  text-align: center;
+  margin-bottom: px2vh(80);
+}

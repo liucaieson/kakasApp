@@ -1,0 +1,160 @@
+@import "../../../../styles/utils";
+@import "../../../../styles/common";
+
+.box{
+  width: 100%;
+  .main {
+    width: 100%;
+    position: relative;
+    background-color: $bg-color4;
+    padding-bottom: px2vh(64);
+    .game-tab {
+      @include game-tab-layout();
+    }
+    .play-tab{
+      width: 100%;
+      height: px2vh(44);
+      padding-bottom: px2vh(8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .tab{
+        display: block;
+        width: 50%;
+        height: px2vh(44);
+        line-height: px2vh(44);
+        text-align: center;
+        font-size: px2vw(14);
+        background-color: white;
+        box-sizing: border-box;
+        color: #6d6d6d;
+      }
+      .active{
+        position: relative;
+        color: #bf7800!important;
+        border-bottom: 2px solid #c58311;
+      }
+    }
+    .area-box{
+      width: 100%;
+      padding-bottom: 1px;
+      .area-name{
+        color: white;
+        width: 100%;
+        height: px2vh(44);
+        line-height: px2vh(44);
+        padding-left: 4%;
+        text-align: left;
+        background-color: #2d6265;
+      }
+      .competition-box {
+        width: 100%;
+        margin-bottom: .5vh;
+        .name-box {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-left: 16px;
+          line-height: px2vh(48);
+          height: px2vh(48);
+          margin: 8px 8px 0;
+          background-color: #f5f2f0;
+          border-radius: 3px;
+          width: calc(100% - 16px);
+          color: #453c35;
+          box-sizing: border-box;
+          .name {
+            opacity: 0.8;
+          }
+          .count {
+            width: px2vw(59);
+            height: px2vh(48);
+            color: #453c35;
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+            border-radius: 0 3px 3px 0;
+            background: rgba(233, 228, 226, 0.4);
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+          }
+        }
+        .match-box {
+          width: 100%;
+          color: $fz-color1;
+          .match-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: white;
+            @include border-bottom-1px(#dedede);
+            .left {
+              width: 70%;
+              padding-left: 5%;
+              text-align: left;
+              color: $fz-color1;
+              .name {
+                font-size: px2vw(14);
+                line-height: px2vw(28);
+              }
+              .time {
+                font-size: px2vw(12);
+                line-height: px2vw(24);
+              }
+            }
+            .right {
+              width: 30%;
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              flex-direction: row-reverse;
+              padding-right: 4%;
+              .dish-count {
+                color: $fz-color4;
+                width: px2vw(24);
+                height: px2vw(24);
+                padding-right: px2vw(1);
+                line-height: px2vw(22);
+                font-size: px2vw(12);
+                @include border-1px(#dc9602)
+              }
+            }
+          }
+        }
+      }
+
+    }
+    .event-loading {
+      position: relative;
+      width: 100%;
+      height: 50px;
+      text-align: center;
+      font-size: 16px;
+    }
+  }
+}
+.modal-ok {
+  width: 86%;
+  margin: 0 auto;
+  height: 5vh;
+  overflow: scroll;
+  margin-top: px2vh(6);
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  color: white;
+  .button {
+    width: 100%;
+    height: 4vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3e3f6d;
+    border-radius: 4px;
+  }
+}
+
+
+
