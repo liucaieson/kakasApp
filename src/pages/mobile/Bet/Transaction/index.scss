@@ -1,9 +1,10 @@
 @import "../../../../styles/utils";
 @import "../../../../styles/common";
 
-.accountHistory {
+.transaction {
   width: 100%;
   position: relative;
+  padding-bottom: px2vh(70);
   .game-tab {
     @include game-tab-layout();
   }
@@ -123,7 +124,7 @@
           height: px2vh(50);
           line-height: px2vh(50);
           color: #333;
-          background-color: rgba(0,0,0,.05);
+          background-color:#e8e0cf;
           box-sizing: border-box;
           .money{
             float: left;
@@ -160,6 +161,9 @@
             padding: px2vw(10) px2vh(10);
             box-sizing: border-box;
             @include border-bottom-1px(#232323);
+            &:nth-child(even){
+              background-color: #f9f7f6;
+            }
             .left{
               width: 80%;
               .dish-name{

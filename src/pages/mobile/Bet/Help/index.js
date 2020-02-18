@@ -28,7 +28,7 @@ const list = [
     link: '/bet/newFunction',
   },*/
   {
-    name: '混个过关交易指南',
+    name: '混合过关交易指南',
     link: '/bet/mixedTradeGuide',
   },
   {

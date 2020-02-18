@@ -108,7 +108,7 @@ class Transaction extends PureComponent {
     const { historyBets: { data }, loading } = this.props;
     const { isShowLoading, betStatus} = this.state;
     return (
-      <div className={styles.accountHistory}>
+      <div className={styles.transaction}>
         <div className={styles['play-tab']}>
           <div className={styles.tab + ' ' + styles.active}
           >交易状况
