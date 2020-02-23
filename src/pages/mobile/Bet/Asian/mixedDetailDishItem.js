@@ -39,7 +39,7 @@ class DetailDishItem extends PureComponent {
 
   /* 添加投注单到购物车 */
   addMixedShopCart = (type, matchId, gamblingId, choiceId, id) => {
-    const { dispatch,  } = this.props;
+    const { dispatch } = this.props;
     dispatch({
       type: 'shopCart/addMixedBetShopCart',
       payload: {
@@ -99,7 +99,7 @@ class DetailDishItem extends PureComponent {
       return (
         <div key={choiceId}
              className={styles.item1}
-             onClick={() => this.addMixedShopCart( 2 , matchId, gamblingId, choiceId, dishId)}
+             onClick={() => this.addMixedShopCart( 2, matchId, gamblingId, choiceId, dishId)}
         >
           <div className={styles.name}>
             {

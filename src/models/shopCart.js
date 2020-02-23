@@ -32,6 +32,78 @@ export default {
         payload: false,
       });
     },
+    /* 检查是否有过期比赛 */
+    * checkBetOrder({ payload, callback }, { call, put, select }) {
+      if (payload.dishId === '') {
+        return;
+      }
+      let data = yield call(checkMatchStatus, payload);
+      const chsListObj = {};
+      let dishInfo = {};
+      data.forEach(v => {
+        dishInfo = v;
+        chsListObj[v.choiceId] = v;
+      });
+      /* 储存以choiceId为key的盘口竟猜项数据 */
+      const chsDB = yield select(state => state.chsDB.chsDB);
+
+      const newChsDB = {
+        ...chsDB,
+        ...chsListObj,
+      };
+
+      yield put({
+        type: 'save',
+        payload: {
+          type: 1,
+          choiceId: dishInfo.choiceId,
+          dishInfo,
+        },
+      });
+
+      yield put({
+        type: 'chsDB/saveChsData',
+        payload: newChsDB,
+      });
+    },
+    /* 检查混合过关是否有过期比赛 */
+    * checkMixedOrder({ payload, callback }, { call, put, select }) {
+      if (payload.dishId === '') {
+        return;
+      }
+      let data = yield call(checkMatchStatus, payload);
+      let mixedDishId = [];
+      const mixedDishInfo = {};
+      data.forEach((val) => {
+        mixedDishId.push(val.matchId);
+        mixedDishInfo[val.matchId] = { ...val, amount: 0 };
+      });
+
+      const chsListObj = {};
+      data.forEach(v => {
+        chsListObj[v.choiceId] = v;
+      });
+      /* 储存以choiceId为key的盘口竟猜项数据 */
+      const chsDB = yield select(state => state.chsDB.chsDB);
+      const newChsDB = {
+        ...chsDB,
+        ...chsListObj,
+      };
+      yield put({
+        type: 'chsDB/saveChsData',
+        payload: newChsDB,
+      });
+
+      yield put({
+        type: 'saveMixed',
+        payload: {
+          type: 2,
+          mixedDishId,
+          mixedDishInfo,
+        },
+      });
+    },
+
     /* 提交购物车投注单 */
     * postBetOrder({ payload, callback }, { call, put, select }) {
       let data = yield call(postBetOrder, payload);
@@ -79,88 +151,46 @@ export default {
       }
     },
 
-    * addBetShopCart({ payload, callback }, { call, put, select }) {
+    *addBetShopCart({ payload, callback }, { call, put, select }) {
       if (payload.dishId === '') {
         return;
       }
-      const oldShopCart = yield select(state => state.shopCart);
-      let data = yield call(checkMatchStatus, {
-        sport: payload.sport,
-        dishId: payload.dishId,
-      });
-
-      const chsListObj = {};
-      data.forEach(v => {
-        chsListObj[v.choiceId] = v;
-      });
-      /* 储存以choiceId为key的盘口竟猜项数据 */
-      const chsDB = yield select(state => state.chsDB.chsDB);
-
-      const newChsDB = {
-        ...chsDB,
-        ...chsListObj,
-      };
-
       yield put({
-        type: 'chsDB/saveChsData',
-        payload: newChsDB,
+        type: 'save',
+        payload: {
+          type: 1,
+          choiceId: payload.choiceId,
+          dishInfo: {
+            dishId: payload.dishId,
+            matchId: payload.matchId,
+            gamblingId: payload.gamblingId,
+            choiceId: payload.choiceId,
+          },
+        },
       });
-
-      if (payload.type === 1) {
-        let choiceId = '';
-        let dishInfo = {};
-
-        data.forEach((val) => {
-          choiceId = val.choiceId;
-          dishInfo = { ...val, amount: 0 };
-        });
-
-        yield put({
-          type: 'save',
-          payload: {
-            type: payload.type,
-            choiceId,
-            dishInfo,
-          },
-        });
-      } else {
-        let choiceId = [];
-        let dishInfo = {};
-        data.forEach((val) => {
-          choiceId.push(val.choiceId);
-          dishInfo.push({ ...val, amount: 0 });
-        });
-
-        yield put({
-          type: 'save',
-          payload: {
-            type: payload.type,
-            choiceId,
-            dishInfo,
-          },
-        });
-      }
     },
-    * addMixedBetShopCart({ payload, callback }, { call, put, select }) {
+    *addMixedBetShopCart({ payload, callback }, { call, put, select }) {
       if (payload.dishId === '') {
         return;
       }
       let mixedDishId = yield select(state => state.shopCart.mixedDishId);
       let mixedDishInfo = yield select(state => state.shopCart.mixedDishInfo);
       /* 储存以choiceId为key的盘口竟猜项数据 */
-      const chsDB = yield select(state => state.chsDB.chsDB);
-      if(mixedDishId.includes(payload.matchId)){
-        mixedDishId.push(payload.matchId);
-        mixedDishInfo[payload.matchId]= {
-            ...chsDB[payload.choiceId],
-        };
-      }else{
+      if (mixedDishId.includes(payload.matchId)) {
         mixedDishInfo[payload.matchId] = {
-          ...chsDB[payload.choiceId],
-          matchId:payload.matchId,
-          gamblingId:payload.gamblingId,
-          choiceId:payload.choiceId,
-        }
+          dishId: payload.dishId,
+          matchId: payload.matchId,
+          gamblingId: payload.gamblingId,
+          choiceId: payload.choiceId,
+        };
+      } else {
+        mixedDishId.push(payload.matchId);
+        mixedDishInfo[payload.matchId] = {
+          dishId: payload.dishId,
+          matchId: payload.matchId,
+          gamblingId: payload.gamblingId,
+          choiceId: payload.choiceId,
+        };
       }
 
       yield put({
@@ -171,7 +201,18 @@ export default {
           mixedDishInfo,
         },
       });
-
+    },
+    *delAllShopCart({ payload }, { call, put, select }) {
+      yield put({
+        type: 'allDel',
+        payload:{
+          type: 1,
+          choiceId: 0,
+          mixedDishId: [],
+          dishInfo: {},
+          mixedDishInfo: {},
+        }
+      })
     },
   },
 
@@ -188,6 +229,16 @@ export default {
       return {
         ...state,
         type: payload.type,
+        mixedDishId: payload.mixedDishId,
+        mixedDishInfo: payload.mixedDishInfo,
+      };
+    },
+    allDel(state, { payload }) {
+      return {
+        ...state,
+        type: payload.type,
+        choiceId: payload.choiceId,
+        dishInfo: payload.dishInfo,
         mixedDishId: payload.mixedDishId,
         mixedDishInfo: payload.mixedDishInfo,
       };

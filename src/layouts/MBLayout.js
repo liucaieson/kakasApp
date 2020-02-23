@@ -2,13 +2,12 @@ import React, { PureComponent, Fragment } from 'react';
 import NProgress from 'nprogress';
 import withRouter from 'umi/withRouter';
 import { connect } from 'dva';
-import { Icon } from 'antd-mobile';
 import '@/layouts/nprogress.less';
 import { LocaleProvider } from 'antd-mobile';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import styles from './index.scss';
 import Slide from '../components/slideAnimate';
-import { dishNameMap } from '../utils/utils';
+import ShopCart from './ShopCart/index';
 
 NProgress.configure({ showSpinner: false });
 
@@ -33,7 +32,6 @@ class BasicLayout extends PureComponent {
   };
 
   timer = null;
-  timer1 = null;
 
   componentDidMount() {
     const { dispatch, location } = this.props;
@@ -76,26 +74,10 @@ class BasicLayout extends PureComponent {
     });
   };
 
-  closeShopCart = () => {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'shopCart/closeCart',
-    });
-  };
-
-  hideCart = () => {
-    this.setState({
-      showCart: false,
-    });
-  };
-
-
   render() {
     const {
       children, location, loading,
-      userInfo: { userName, balance },
-      shopCart: { showCart, mixedDishId, mixedDishInfo, type, dishInfo },
-      chsDB: { chsDB },
+      shopCart: { showCart },
     } = this.props;
     const { href } = window.location; // 浏览器地址栏中地址
     if (currHref !== href) {
@@ -110,7 +92,7 @@ class BasicLayout extends PureComponent {
 
     return (
       <LocaleProvider locale={zh_CN}>
-        <div className={styles.index} key='home'>
+        <div className={styles.index} >
           <div className={styles.topUnderContent}>
             <div className={styles.main}>
               <div style={{ overflowX: 'hidden', height: '100%' }}>
@@ -125,172 +107,7 @@ class BasicLayout extends PureComponent {
                  clsName="downSlides"
           >
             <div className={styles['bet-order']}>
-              {
-                type === 1 ?
-                  <div className={styles['money-wrap']}>
-                    <div className={styles.header}>
-                      <div className={styles['trade-name']}>竞猜单</div>
-                      <div className={styles.balance}>
-                        余额：{balance}
-                      </div>
-                      <div className={styles.close} onClick={this.closeShopCart}>
-                        <Icon type='cross' className={styles.closeBet}/>
-                      </div>
-                    </div>
-                    <div className={styles.content}>
-                      <div className={styles['bet-info']}>
-                        <div className={styles.info}>
-                          <div className={styles.type}>
-                            <span className={styles.name}>足球</span>
-                            <span className={styles.score}>（{dishInfo.oddName}）</span>
-                          </div>
-                          <div className={styles.competitions}>
-                            {dishInfo.cptName}
-                          </div>
-                          <div className={styles.team}>
-                            <span className={styles.name}>{dishInfo.homeName} vs {dishInfo.awayName}</span>
-
-                          </div>
-                        </div>
-                        <div className={styles.choose}>
-                          {chsDB[dishInfo.choiceId] && dishNameMap[chsDB[dishInfo.choiceId].name]}
-                          <span className={styles.handicap}>{dishInfo.choiceHandicap}</span>
-                          @
-                          <span className={styles.odds}>
-                        {dishInfo.choiceId &&
-                        chsDB[dishInfo.choiceId].dish}
-                      </span>
-                        </div>
-                        {
-                          dishInfo.code === '3001' || dishInfo.code === '2111' ?
-                            <div className={styles['bet-input']}>
-                              该投注项当前不可投注：{dishInfo.message}
-                            </div> :
-                            <div className={styles['bet-input']}>
-                              <div className={styles.left}>
-                                <div className={styles.num}>11</div>
-                                <div className={styles.clearNum}/>
-                              </div>
-                              <div className={styles.right}>
-                                <div className={styles.high}>最低投注:<i>50</i></div>
-                                <div className={styles.high}>最大投注:<i>30000</i></div>
-                              </div>
-                            </div>
-                        }
-                      </div>
-                    </div>
-                    <div className={styles.winMoney}>
-                      <div className={styles['line-box']}>
-                        <div className={styles.line}>
-                          <div className={styles.text}>可赢金额</div>
-                          <div className={styles.money}>20.00</div>
-                        </div>
-                      </div>
-                    </div>
-                    {
-                      dishInfo.code !== '200' && <div className={styles.warning}>
-                        <div className={styles['line-box']}>
-                          <div className={styles.line}>
-                            {dishInfo.message}
-                          </div>
-                        </div>
-                      </div>
-                    }
-                    <div className={styles.bottom}>
-                      <div className={styles.del}>全删除</div>
-                      <div className={styles.setting}/>
-                      <div className={styles.button}>
-                        <div className={styles.text}>0.00</div>
-                        <div className={styles.text}>投注</div>
-                      </div>
-                    </div>
-                  </div> :
-                  <div className={styles['money-wrap']}>
-                    <div className={styles.header}>
-                      <div className={styles['trade-name']}>竞猜单</div>
-                      <div className={styles.balance}>
-                        余额：{balance}
-                      </div>
-                      <div className={styles.close} onClick={this.closeShopCart}>
-                        <Icon type='cross' className={styles.closeBet}/>
-                      </div>
-                    </div>
-                    <div className={styles.content}>
-                      <div className={styles['bet-info']}>
-                        {
-                          mixedDishId.map((val) => (
-                            <Fragment key={val}>
-                              <div className={styles.info}>
-                                <div className={styles.type}>
-                                  <span className={styles.name}>足球</span>
-                                  <span className={styles.score}>（{val.oddName}）</span>
-                                </div>
-                                <div className={styles.competitions}>
-                                  {val.cptName}
-                                </div>
-                                <div className={styles.team}>
-                                  <span className={styles.name}>{val.homeName} vs {val.awayName}</span>
-                                </div>
-                              </div>
-                              <div className={styles.choose}>
-                                {chsDB[val.choiceId] && dishNameMap[chsDB[val.choiceId].name]}
-                                <span className={styles.handicap}>{val.choiceHandicap}</span>
-                                @
-                                <span className={styles.odds}>
-                                {val.choiceId &&
-                                chsDB[val.choiceId].dish}
-                              </span>
-                              </div>
-                            </Fragment>
-                          ))
-                        }
-                      {/*  {
-                          dishInfo.code === '3001' || dishInfo.code === '2111' ?
-                            <div className={styles['bet-input']}>
-                              该投注项当前不可投注：{dishInfo.message}
-                            </div> :
-                            <div className={styles['bet-input']}>
-                              <div className={styles.left}>
-                                <div className={styles.num}>11</div>
-                                <div className={styles.clearNum}/>
-                              </div>
-                              <div className={styles.right}>
-                                <div className={styles.high}>最低投注:<i>50</i></div>
-                                <div className={styles.high}>最大投注:<i>30000</i></div>
-                              </div>
-                            </div>
-                        }*/}
-                      </div>
-                    </div>
-                    <div className={styles.winMoney}>
-                      <div className={styles['line-box']}>
-                        <div className={styles.line}>
-                          <div className={styles.text}>可赢金额</div>
-                          <div className={styles.money}>20.00</div>
-                        </div>
-                      </div>
-                    </div>
-                    {
-                      dishInfo.code !== '200' && <div className={styles.warning}>
-                        <div className={styles['line-box']}>
-                          <div className={styles.line}>
-                            {dishInfo.message}
-                          </div>
-                        </div>
-                      </div>
-                    }
-                    <div className={styles.bottom}>
-                      <div className={styles.del}>全删除</div>
-                      <div className={styles.setting}/>
-                      <div className={styles.button}>
-                        <div className={styles.text}>0.00</div>
-                        <div className={styles.text}>投注</div>
-                      </div>
-                    </div>
-                  </div>
-              }
-
-
+              {showCart?  <ShopCart/> : ''}
             </div>
           </Slide>
         </div>
