@@ -227,7 +227,6 @@ class Home extends PureComponent {
               </ul>
             </div>
           </div>
-
         </div>
       </div>
     );

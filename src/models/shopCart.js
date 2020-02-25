@@ -1,4 +1,5 @@
 import { postBetOrder, checkMatchStatus } from '@/services/api';
+import { Toast } from 'antd-mobile';
 /* 集中保存比赛数据，盘口数据，和竟猜项数据 */
 export default {
   namespace: 'shopCart',
@@ -9,7 +10,9 @@ export default {
   * dishInfo为投注项信息
   * choiceId投注项固定id
   * mixedDishId 为混合过关比赛id
+  * mixedDishInfo 是以matchId为ke的比赛数组
   */
+
   state: {
     showCart: false,
     type: 1,
@@ -20,20 +23,20 @@ export default {
   },
 
   effects: {
-    * openCart(_, { call, put }) {
+    *openCart(_, { call, put }) {
       yield put({
         type: 'changeCartStatus',
         payload: true,
       });
     },
-    * closeCart(_, { call, put }) {
+    *closeCart(_, { call, put }) {
       yield put({
         type: 'changeCartStatus',
         payload: false,
       });
     },
     /* 检查是否有过期比赛 */
-    * checkBetOrder({ payload, callback }, { call, put, select }) {
+    *checkBetOrder({ payload, callback }, { call, put, select }) {
       if (payload.dishId === '') {
         return;
       }
@@ -67,7 +70,7 @@ export default {
       });
     },
     /* 检查混合过关是否有过期比赛 */
-    * checkMixedOrder({ payload, callback }, { call, put, select }) {
+    *checkMixedOrder({ payload, callback }, { call, put, select }) {
       if (payload.dishId === '') {
         return;
       }
@@ -105,26 +108,32 @@ export default {
     },
 
     /* 提交购物车投注单 */
-    * postBetOrder({ payload, callback }, { call, put, select }) {
-      let data = yield call(postBetOrder, payload);
-      const shopCartData = yield select(state => state.betShopCart.shopCart);
+    *postBetOrder({ payload, callback }, { call, put, select }) {
+      const shopCartData = yield select(state => state.shopCart);
+      const {choiceId,} =  shopCartData;
+      const params = {
+        sport: '1',
+        result: [{
+          betType: '1',
+          dishValue: payload,
+          dishId: choiceId
+          }
+        ]
+      };
+      let data = yield call(postBetOrder, params);
       /* 200为投注成功 */
       if (data.code === 200) {
         // 更新赔率
         const chsListObj = {};
         const chsDB = yield select(state => state.chsDB.chsDB);
-
-        let ids = [];
-        const list = {};
+        let choiceId = 1;
+        let dishInfo = {};
         data.data.map((val) => {
           // 不等于208标识错误交给购物车,并更新赔率
           if (val.code !== '208') {
             chsListObj[val.choiceId] = val;
-            ids.push(val.choiceId);
-            list[val.choiceId] = {
-              ...shopCartData.list[val.choiceId],
-              ...val,
-            };
+            choiceId = val.choiceId;
+            dishInfo = val
           }
         });
         const newChsDB = {
@@ -135,15 +144,62 @@ export default {
           type: 'chsDB/saveChsData',
           payload: newChsDB,
         });
+        console.log(choiceId,dishInfo)
         yield put({
           type: 'save',
           payload: {
-            ids,
-            list,
+            type:1,
+            choiceId,
+            dishInfo
           },
         });
         /* 将返回的数据给视图层处理*/
         if (callback) callback(data.data);
+      } else if (data.code === 3002) {
+        Toast.info('余额不足', 2);
+      } else {
+        Toast.info(data.message, 2);
+      }
+    },
+    /* 提交购物车投注单 */
+    *postMixedOrder({ payload, callback }, { call, put, select }) {
+      const chsDB = yield select(state => state.chsDB.chsDB);
+      const shopCartData = yield select(state => state.shopCart);
+      const { mixedDishId, mixedDishInfo} =  shopCartData;
+      if(mixedDishId.length <= 1){
+        return
+      }
+
+      let dishIdArr = [];
+
+      mixedDishId.map((val) => {
+        dishIdArr.push(chsDB[mixedDishInfo[val].choiceId].dishId)
+      });
+
+
+      const params = {
+        sport: '1',
+        result: [{
+          betType: mixedDishId.length + '',
+          dishValue: payload,
+          dishId:dishIdArr.join(',')
+         }
+        ]
+      };
+      let data = yield call(postBetOrder, params);
+      /* 200为投注成功 */
+      if (data.code === 200) {
+        // 更新赔率
+        yield put({
+          type: 'saveMixed',
+          payload: {
+            type:1,
+            mixedDishId: [],
+            mixedDishInfo:{}
+          },
+        });
+        /* 将返回的数据给视图层处理*/
+        if (callback) callback(data);
       } else if (data.code === 3002) {
         Toast.info('余额不足', 2);
       } else {
@@ -214,6 +270,24 @@ export default {
         }
       })
     },
+    *delOneMixedBet({ payload }, { call, put, select }) {
+      const shopCartData = yield select(state => state.shopCart);
+
+      let {mixedDishId,  mixedDishInfo} = shopCartData;
+      let index = mixedDishId.indexOf(payload);
+      if (index > -1) {
+        delete mixedDishInfo[payload];
+        mixedDishId.splice(index, 1);
+      }
+
+      yield put({
+        type: 'saveMixedBetAfterDel',
+        payload:{
+          mixedDishId,
+          mixedDishInfo,
+        }
+      })
+    },
   },
 
   reducers: {
@@ -233,6 +307,13 @@ export default {
         mixedDishInfo: payload.mixedDishInfo,
       };
     },
+    saveMixedBetAfterDel(state, { payload }) {
+      return {
+        ...state,
+        mixedDishId: payload.mixedDishId,
+        mixedDishInfo: payload.mixedDishInfo,
+      };
+    },
     allDel(state, { payload }) {
       return {
         ...state,
@@ -243,6 +324,7 @@ export default {
         mixedDishInfo: payload.mixedDishInfo,
       };
     },
+
     changeCartStatus(state, { payload }) {
       return {
         ...state,
