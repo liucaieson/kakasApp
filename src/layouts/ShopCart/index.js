@@ -143,12 +143,6 @@ class ShopCart extends PureComponent {
     });
   };
 
-  onClose = () => {
-    this.setState({
-      modal: false
-    })
-  };
-
   postBet = () => {
     const { dispatch } = this.props;
     const { money } = this.state;
@@ -161,7 +155,8 @@ class ShopCart extends PureComponent {
             showKeyboard: false,
             money: ''
           });
-          if(data === '208') {
+          if(data[0].code === '208') {
+            this.closeShopCart();
             Toast.info('投注成功', 1.5);
           }
         }
@@ -186,6 +181,7 @@ class ShopCart extends PureComponent {
             money: ''
           });
           if(data.code === 200) {
+            this.closeShopCart();
             Toast.info('投注成功', 1.5);
           }
         }

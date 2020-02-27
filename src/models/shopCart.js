@@ -110,13 +110,14 @@ export default {
     /* 提交购物车投注单 */
     *postBetOrder({ payload, callback }, { call, put, select }) {
       const shopCartData = yield select(state => state.shopCart);
+      const chsDB = yield select(state => state.chsDB.chsDB);
       const {choiceId,} =  shopCartData;
       const params = {
         sport: '1',
         result: [{
           betType: '1',
           dishValue: payload,
-          dishId: choiceId
+          dishId: chsDB[choiceId].dishId
           }
         ]
       };
@@ -125,7 +126,7 @@ export default {
       if (data.code === 200) {
         // 更新赔率
         const chsListObj = {};
-        const chsDB = yield select(state => state.chsDB.chsDB);
+
         let choiceId = 1;
         let dishInfo = {};
         data.data.map((val) => {
@@ -144,7 +145,6 @@ export default {
           type: 'chsDB/saveChsData',
           payload: newChsDB,
         });
-        console.log(choiceId,dishInfo)
         yield put({
           type: 'save',
           payload: {
