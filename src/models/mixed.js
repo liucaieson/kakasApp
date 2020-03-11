@@ -12,7 +12,8 @@ export default {
 
   effects: {
     *fetchMatchOdds({payload, callback}, { call, put, select }) {
-      let data = yield call(getPreMatchOdds, payload);
+      let result = yield call(getPreMatchOdds, payload);
+      const {data} = result;
       let competitionsMatchList = normalizeDataFromCPTID(data, 'cptId');
 
       yield put({

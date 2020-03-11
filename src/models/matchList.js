@@ -11,7 +11,8 @@ export default {
 
   effects: {
     *fetchMatchOdds({payload, callback}, { call, put, select }) {
-      let data = yield call(getPreMatchOdds, payload);
+      let result = yield call(getPreMatchOdds, payload);
+      const {data} = result;
       yield put({
         type: 'saveData/saveData',
         payload: data,

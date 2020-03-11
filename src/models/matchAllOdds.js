@@ -13,7 +13,8 @@ export default {
 
   effects: {
     *fetch({payload, callback}, { call, put, select }) {
-      let data = yield call(getPreMatchOddsAllGG, payload);
+      let result = yield call(getPreMatchOddsAllGG, payload);
+      const {data} = result;
       yield put({
         type: 'save',
         payload: data,
