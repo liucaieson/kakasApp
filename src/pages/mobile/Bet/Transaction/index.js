@@ -119,8 +119,7 @@ class Transaction extends PureComponent {
         <div className={styles['game-tab']}>
           <div className={styles.name}>账户交易记录</div>
           <div className={styles.box}>
-
-          </div>
+        </div>
         </div>
         <div  className={styles.main}>
           <div className={styles['sub-title']}>

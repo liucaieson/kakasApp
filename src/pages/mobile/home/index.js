@@ -4,9 +4,9 @@ import { Carousel } from 'antd-mobile';
 import Link from 'umi/link';
 import styles from './index.scss';
 
-@connect(({  loading, userInfo, betShopCart }) => ({
+@connect(({  loading, userInfo, shopCart }) => ({
   userInfo,
-  betShopCart,
+  shopCart,
 }))
 class Home extends PureComponent {
 
@@ -80,9 +80,18 @@ class Home extends PureComponent {
     })
   };
 
+  openCart = () => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'shopCart/openCart',
+    });
+  };
+
+
   render() {
     const {
       userInfo: { userName, balance},
+      shopCart:{ type, mixedDishId, choiceId },
     } = this.props;
 
     const { showId } = this.state;
@@ -193,9 +202,16 @@ class Home extends PureComponent {
                   <i className={styles.icon + ' ' + styles.live } />
                   <span className={styles.text}>直播表</span>
                 </li>
-                <li className={styles.item}>
-                  <i className={styles.icon + ' ' + styles.home } />
-                  <span className={styles.text}>交易单</span>
+
+                <li
+                  className={(choiceId >110 ? 1 : 0) + mixedDishId.length > 0 ? styles['item-bet'] + ' ' + styles.betActive
+                    : styles['item-bet']}
+                  onClick={this.openCart}
+                >
+                  <span className={styles.cartNum}>{
+                    type === 1 ? (choiceId > 110? '1' : 0) : mixedDishId.length
+                  }</span>
+                  <span className={styles.text2}>交易单</span>
                 </li>
                 <Link to='/bet/accountHistory' className={styles.item}>
                   <i className={styles.icon + ' ' + styles.history } />
