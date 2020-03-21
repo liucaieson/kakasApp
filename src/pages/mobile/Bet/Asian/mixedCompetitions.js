@@ -18,6 +18,7 @@ class Home extends PureComponent {
   state = {
     showMatch: [],
     tab: '1',
+    selectArea:'all'
   };
 
   constructor(props) {
@@ -89,15 +90,22 @@ class Home extends PureComponent {
     });
   };
 
-  gotoTop = () => {
-    window.scrollTo(0, 0);
+  change = () => {
+    let mySelect = document.getElementById('area');
+    let index = mySelect.selectedIndex;
+    let value = mySelect.options[index].value;
+    this.setState({
+      selectArea: value
+    })
   };
+
 
   render() {
     const {
       competitions: { areaId, competitionsObj },
       competitionsLoading
     } = this.props;
+    const { selectArea } = this.state;
     return (
       <div className={styles.box} >
         <div className={styles.main} ref={this.mainRef}>
@@ -123,26 +131,56 @@ class Home extends PureComponent {
           {
             competitionsLoading ? <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :
               <div>
+                <div className={styles.selection}>
+                  <select id='area' name='sports' value={selectArea} className={styles.select} onChange={this.change}>
+                    <option value={'all'} selected={'all' === selectArea}>全部</option>
+                    {
+                      areaId.map((item) => (
+                        <option
+                          value={competitionsObj[item][0].areaId}
+                          selected={competitionsObj[item][0].areaId === selectArea }
+                        >{competitionsObj[item][0].areaName}</option>
+                      ))
+                    }
+                  </select>
+                </div>
+
                 {
-                  areaId.map((item) => (
-                    <div className={styles['area-box']} key={item}>
-                      {
-                        competitionsObj[item].map((val) => (
-                          <Link key={val.competitionId} className={styles['competition-box']}
-                                to={`/bet/asianMixedMatchList?competitionId=${val.competitionId}`}>
-                            <div className={styles['name-box']}>
-                              <div className={styles.name}>
-                                {val.competitionName}
+                  selectArea === 'all' ?
+                    areaId.map((item) => (
+                      <div className={styles['area-box']} key={item}>
+                        {
+                          competitionsObj[item].map((val) => (
+                            <Link key={val.competitionId} className={styles['competition-box']}
+                                  to={`/bet/asianMatchList?competitionId=${val.competitionId}`}>
+                              <div className={styles['name-box']}>
+                                <div className={styles.name}>
+                                  {val.competitionName}
+                                </div>
+                                <div className={styles.count}>
+                                  {val.matches}
+                                </div>
                               </div>
-                              <div className={styles.count}>
-                                {val.matches}
-                              </div>
+                            </Link>
+                          ))
+                        }
+                      </div>
+                    ))
+                    :  competitionsObj[selectArea].map((val) => (
+                      <div className={styles['area-box']} key={val.competitionId} >
+                        <Link key={val.competitionId} className={styles['competition-box']}
+                              to={`/bet/asianMatchList?competitionId=${val.competitionId}`}>
+                          <div className={styles['name-box']}>
+                            <div className={styles.name}>
+                              {val.competitionName}
                             </div>
-                          </Link>
-                        ))
-                      }
-                    </div>
-                  ))
+                            <div className={styles.count}>
+                              {val.matches}
+                            </div>
+                          </div>
+                        </Link>
+                      </div>
+                    ))
                 }
                 <GotoTopFooter/>
               </div>

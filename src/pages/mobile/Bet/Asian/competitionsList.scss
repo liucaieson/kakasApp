@@ -35,6 +35,35 @@
         border-bottom: 2px solid #c58311;
       }
     }
+    .selection{
+      margin:8px 0;
+      width: 100%;
+      height: px2vh(44);
+      line-height: px2vh(44);
+      padding: 0 8px;
+      clear: both;
+      border-radius: 3px;
+      overflow: hidden;
+      background-color: #FFF;
+      box-sizing: border-box;
+      .select{
+        width: 100%;
+        height: px2vh(44);
+        line-height: px2vh(44);
+        padding-left: 17px;
+        display: block;
+        color: rgba(51, 51, 51, 0.6);
+        /* font-size: 14px; */
+        /* font-weight: 900; */
+        background: url(../../../../assets/arrow_godown_b.svg) no-repeat 98%;
+        border: solid 1px rgba(0, 0, 0, 0.4);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        /* opacity: 0.6; */
+        border-radius: 3px;
+      }
+    }
+
     .area-box{
       width: 100%;
       padding-bottom: 1px;

@@ -442,7 +442,8 @@ class ShopCart extends PureComponent {
           </div>
         </div>
         {
-          submitBetLoading || submitMixedLoading || checkBetLoading || checkMixedLoading ?  <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :
+          submitBetLoading || submitMixedLoading || checkBetLoading || checkMixedLoading ?
+            <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :
             (
               (choiceId > 110 ? 1 : 0) + mixedDishId.length > 0 ?
                 this.renderBetOrMixed()
