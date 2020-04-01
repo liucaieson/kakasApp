@@ -144,7 +144,6 @@ class Home extends PureComponent {
                     }
                   </select>
                 </div>
-
                 {
                   selectArea === 'all' ?
                     areaId.map((item) => (

@@ -117,7 +117,8 @@ export default {
         result: [{
           betType: '1',
           dishValue: payload,
-          dishId: chsDB[choiceId].dishId
+          dishId: chsDB[choiceId].dishId,
+          dishRate: chsDB[choiceId].dish,
           }
         ]
       };
@@ -171,9 +172,11 @@ export default {
       }
 
       let dishIdArr = [];
+      let dishRateArr = [];
 
       mixedDishId.map((val) => {
-        dishIdArr.push(chsDB[mixedDishInfo[val].choiceId].dishId)
+        dishIdArr.push(chsDB[mixedDishInfo[val].choiceId].dishId);
+        dishRateArr.push(chsDB[mixedDishInfo[val].choiceId].dish)
       });
 
 
@@ -182,7 +185,8 @@ export default {
         result: [{
           betType: mixedDishId.length + '',
           dishValue: payload,
-          dishId:dishIdArr.join(',')
+          dishId:dishIdArr.join(','),
+          dishRate:dishRateArr.join(','),
          }
         ]
       };

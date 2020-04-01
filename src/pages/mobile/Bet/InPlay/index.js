@@ -3,9 +3,8 @@ import { connect } from 'dva';
 import styles from './index.scss';
 import Link from 'umi/link';
 
-@connect(({  loading, userInfo, betShopCart }) => ({
+@connect(({  loading, userInfo }) => ({
   userInfo,
-  betShopCart,
 }))
 class Inplay extends PureComponent {
 
@@ -60,10 +59,8 @@ class Inplay extends PureComponent {
 
   render() {
     const {
-
     } = this.props;
 
-    const { showId } = this.state;
     return (
       <div className={styles.inplay}>
         <div className={styles['game-tab']}>

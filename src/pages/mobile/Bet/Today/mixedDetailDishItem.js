@@ -3,8 +3,7 @@ import { connect } from 'dva';
 import styles from './deatil.scss';
 import { dishNameMap } from '../../../../utils/utils';
 
-@connect(({ betShopCart, shopCart }) => ({
-  betShopCart,
+@connect(({ shopCart }) => ({
   shopCart
 }))
 class DetailDishItem extends PureComponent {

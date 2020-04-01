@@ -9,9 +9,8 @@ import moment from 'moment';
 import CountDown from '../../../../components/CountDown';
 import GotoTopFooter from '../../../../components/GotoTopFooter';
 
-@connect(({ matchList, betShopCart, userInfo, competitions, loading }) => ({
+@connect(({ matchList, userInfo, competitions, loading }) => ({
   matchList,
-  betShopCart,
   competitions,
   userInfo,
   matchListLoading: loading.effects['matchList/fetchMatchOdds'],

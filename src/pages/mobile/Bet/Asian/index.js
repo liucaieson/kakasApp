@@ -4,9 +4,8 @@ import  { Accordion } from 'antd-mobile';
 import Link from 'umi/link';
 import styles from './index.scss';
 
-@connect(({  loading, userInfo, betShopCart }) => ({
+@connect(({  loading, userInfo, }) => ({
   userInfo,
-  betShopCart,
 }))
 class Home extends PureComponent {
 

@@ -215,7 +215,6 @@ class InPlayDetailPage extends PureComponent {
                   </div>
                   <GotoTopFooter />
                 </div>
-
                 :
                 <div className={styles.main}>
                   <div className={styles['game-tab']}>
