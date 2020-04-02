@@ -64,6 +64,7 @@
           box-sizing: border-box;
           .name {
             opacity: 0.8;
+            @include textOverflow();
           }
           .count {
             width: px2vw(59);
