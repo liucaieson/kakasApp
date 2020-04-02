@@ -130,12 +130,12 @@ class Home extends PureComponent {
               <div>
                 <div className={styles.selection}>
                   <select id='area' name='sports' value={selectArea} className={styles.select} onChange={this.change}>
-                    <option value={'all'} selected={'all' === selectArea}>全部</option>
+                    <option value={'all'}>全部</option>
                     {
                       areaId.map((item) => (
                         <option
                           value={competitionsObj[item][0].areaId}
-                          selected={competitionsObj[item][0].areaId === selectArea }
+                          key={competitionsObj[item][0].areaId}
                         >{competitionsObj[item][0].areaName}</option>
                       ))
                     }
@@ -148,7 +148,8 @@ class Home extends PureComponent {
                     <div className={styles['area-box']} key={item}>
                       {
                         competitionsObj[item].map((val) => (
-                          <Link key={val.competitionId} className={styles['competition-box']}
+                          <Link key={val.competitionId}
+                                className={styles['competition-box']}
                                 to={`/bet/asianMatchList?competitionId=${val.competitionId}`}>
                             <div className={styles['name-box']}>
                               <div className={styles.name}>

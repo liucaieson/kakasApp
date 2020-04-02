@@ -156,7 +156,7 @@ class ShopCart extends PureComponent {
             money: ''
           });
           if(data[0].code === '208') {
-            this.closeShopCart();
+           /* this.closeShopCart();*/
             Toast.info('投注成功', 1.5);
           }
         }
@@ -181,7 +181,7 @@ class ShopCart extends PureComponent {
             money: ''
           });
           if(data.code === 200) {
-            this.closeShopCart();
+           /* this.closeShopCart();*/
             Toast.info('投注成功', 1.5);
           }
         }
@@ -423,7 +423,7 @@ class ShopCart extends PureComponent {
   render() {
     const {
       userInfo: { balance },
-      shopCart: { choiceId, mixedDishId,},
+      shopCart: { choiceId, mixedDishId },
       submitBetLoading,
       submitMixedLoading,
       checkBetLoading,
@@ -450,7 +450,6 @@ class ShopCart extends PureComponent {
                  :
                 (
                   <div>
-
                     <div className={styles.content}>
                       <div className={styles.noBet}>
                         <i className={styles.iconFlag}/>
@@ -463,6 +462,9 @@ class ShopCart extends PureComponent {
                         <div className={styles.text}>0.00</div>
                         <div className={styles.text}>投注</div>
                       </div>
+                    </div>
+                    <div>
+                      1
                     </div>
                   </div>
                 )

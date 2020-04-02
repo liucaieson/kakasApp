@@ -90,7 +90,7 @@ export const calcDate3 = (date) =>{
 };
 
 export const calcDate4 = (date) =>{
-  return date - 45 > 0 ? '下半场 ' + (date - 45) + '\'' : '上半场 ' + date + '\''
+  return date.split(':')[0] * 60 + date.split(':')[0]  - 45 * 60 > 0 ? '下半场 ' + date + '\'' : '上半场 ' + date + '\''
 };
 
 /* 对数组排列组合 */

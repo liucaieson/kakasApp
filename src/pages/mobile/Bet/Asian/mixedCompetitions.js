@@ -99,7 +99,6 @@ class Home extends PureComponent {
     })
   };
 
-
   render() {
     const {
       competitions: { areaId, competitionsObj },
@@ -133,12 +132,12 @@ class Home extends PureComponent {
               <div>
                 <div className={styles.selection}>
                   <select id='area' name='sports' value={selectArea} className={styles.select} onChange={this.change}>
-                    <option value={'all'} selected={'all' === selectArea}>全部</option>
+                    <option value={'all'} >全部</option>
                     {
                       areaId.map((item) => (
                         <option
                           value={competitionsObj[item][0].areaId}
-                          selected={competitionsObj[item][0].areaId === selectArea }
+                          key={competitionsObj[item][0].areaId}
                         >{competitionsObj[item][0].areaName}</option>
                       ))
                     }
