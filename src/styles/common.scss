@@ -159,6 +159,7 @@ $fz-color6: #516375;
       width: px2vw(16);
       height: px2vw(20);
       background: url(@/assets/lock.svg) no-repeat 0 50%;
+      background-size: cover;
     }
   }
   .active {
@@ -212,10 +213,10 @@ $fz-color6: #516375;
     background-color: white;
     position: relative;
     .up {
-      @include up()
+      @include up(40%)
     }
     .down {
-      @include down()
+      @include down(40%)
     }
     .name {
       flex: 1;
@@ -248,10 +249,10 @@ $fz-color6: #516375;
     background-color: white;
     position: relative;
     .up {
-      @include up()
+      @include up(25%)
     }
     .down {
-      @include down()
+      @include down(25%)
     }
     .active {
       background: rgba(244, 200, 123, 0.64)!important;
