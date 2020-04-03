@@ -41,429 +41,177 @@
     }
   }
   /* 比赛详情 */
-  .content {
-    overflow-y: auto;
-    width: 100%;
-    padding: 8px 8px 0 8px;
-    background: #f0f0f0;
-    box-sizing: border-box;
-    .noBet{
+  .betsBox{
+    .content {
+      overflow-y: auto;
       width: 100%;
-      padding: 33px 0 25px 0;
-      text-align: center;
-      font-size: 14px;
-      color: rgba(0, 0, 0, 0.38);
-      box-shadow: none;
-      background: #F0F0F0;
-      z-index: 5;
-      .iconFlag{
-        display: block;
-        width: 48px;
-        height: 48px;
-        margin: 0 auto 18px auto;
-        background: url(../../assets/empty-state-icon.svg) no-repeat center center;
-        background-size: contain;
-      }
-      .text{
-
-      }
-    }
-    .bet-info {
-      width: 100%;
-      max-height: 45vh;
-      padding: 11px 10px 9px 9px;
-      position: relative;
-      display: block;
-      background-color: white;
+      padding: 8px 8px 0 8px;
+      background: #f0f0f0;
       box-sizing: border-box;
-      overflow-y: scroll;
-      .infoBox{
-        position: relative;
-        .delMixed{
-          position: absolute;
-          top: 2px;
-          right: 6px;
-          z-index: 2;
-          display: block;
-          width: 24px;
-          height: 24px;
-          opacity: 0.64;
-          background: url(../../assets/iconClose.svg) no-repeat center center;
-          background-size: 16px;
-        }
-        .info {
-          width: 90%;
-          max-width: calc(100% - 24px);
-          margin-bottom: 4px;
-          padding-bottom: 5px;
-          font-size: px2vw(13);
-          line-height: 1.5;
-          @include border-bottom-1px(#d2d2d2, dashed);
-          .type {
-            line-height: 1.5;
-            .name {
-              display: inline;
-              font-weight: bold;
-              color: #323232;
-            }
-            .score {
-              display: inline-block;
-              font-weight: bold;
-              color: #323232;
-            }
-          }
-
-          .competitions {
-            color: #232323;
-          }
-          .team {
-            .name {
-              color: #232323;
-            }
-          }
-        }
-      }
-      .choose {
-        color: #232323;
-        line-height: 1.8;
-        font-size: px2vw(13);
-        padding-bottom: 10px;
-        .handicap {
-          padding-left: 4px;
-          font-weight: bold;
-          color: #d0021b;
-        }
-        .odds {
-          font-weight: bold;
-          color: #d0021b;
-          padding-left: px2vw(2);
-        }
-      }
-      .bet-input {
-        display: flex;
-        background: #FFF;
-        padding: 7px 9px 4px 0;
-        justify-content: space-between;
-        align-items: center;
-        .message{
-          width: 100%;
-          color: #a21a0d;
-          .error{
-            display: block;
-            width: px2vw(16);
-            height: px2vw(16);
-            margin-right: px2vw(16);
-            background: url(../../assets/iconLoginError.svg) no-repeat center center;
-          }
-        }
-        .left {
-          width: 39%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          color: #777c91;
-          font-size: px2vw(15);
-          height: px2vh(26);
-          padding: px2vw(9);
-          color: rgba(51, 51, 51, 0.56);
-          @include border-1px(rgba(0, 0, 0, 0.38));
-          .num {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #232323;
-          }
-          .clearNum {
-            height: px2vh(24);
-            top: 0;
-            right: 5px;
-            z-index: 1;
-            vertical-align: middle;
-            display: block;
-            width: px2vw(24);
-            opacity: 0.64;
-            background: url(../../assets/iconClose.svg) no-repeat center center;
-            background-size: 16px;
-          }
-        }
-        .right {
-          font-size: px2vw(12);
-          text-align: right;
-          color: rgba(51, 51, 51, 0.56);
-          .high {
-            line-height: 1.8;
-            padding-right: 2px;
-            i {
-              padding-left: 2px;
-              font-size: px2vw(13);
-              font-weight: bold;
-              color: #333;
-            }
-          }
-        }
-      }
-      .error-box {
-        display: flex;
-        background: #FFF;
-        align-items: center;
-        .message {
-          width: 90%;
-          color: #a21a0d;
-        }
-        .error {
-          display: block;
-          width: px2vw(16);
-          height: px2vw(16);
-          margin-right: px2vw(16);
-          background: url(../../assets/iconLoginError.svg) no-repeat center center;
-        }
-      }
-    }
-  }
-
-  .winMoney {
-    box-sizing: border-box;
-    overflow-y: auto;
-    width: 100%;
-    padding: 8px 8px 0 8px;
-    background: #f0f0f0;
-    .line-box {
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.88);
-      line-height: 1.8;
-      margin-bottom: px2vh(8);
-      .line {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: px2vw(13);
-        padding: 0 px2vw(8);
-        .text {
-          display: block;
-          color: #323232;
-          opacity: 0.56;
-          line-height: px2vh(36);
-        }
-        .money {
-          color: #478e6d;
-          font-weight: bold;
-          line-height: px2vh(36);
-        }
-      }
-    }
-  }
-  /* 警告 */
-  .warning {
-    box-sizing: border-box;
-    overflow-y: auto;
-    width: 100%;
-    padding: 4px 8px 0 8px;
-    background: #f0f0f0;
-    .line-box {
-      width: 100%;
-      background-color: rgba(255, 255, 255, 0.88);
-      line-height: 1.8;
-      border: 1px solid #c8250a;
-      margin-bottom: px2vh(8);
-      .line {
-        font-size: px2vw(13);
-        padding: 0 px2vw(8);
-        display: block;
-        color: #c8250a;
-        line-height: px2vh(36);
-      }
-    }
-  }
-  /* 软键盘 */
-  .betKeyboard{
-    display: flex;
-    width: 100%;
-    padding: 8px 7px 0 8px;
-    background: #FFF;
-    box-sizing: border-box;
-    .numBox{
-      display: flex;
-      width: 75%;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      .num{
-        display: inline-block;
-        width: calc(100% / 3);
-        height: px2vh(40);
-        line-height: px2vh(40);
-        font-size: px2vw(22);
-        text-align: center;
-        color: #323232;
-        background: #f3f3f3;
-        margin-right: -3px;
-        margin-bottom: 1px;
-        vertical-align: top;
-        border-right: #FFF solid 1px;
-      }
-      .delNum{
-        display: inline-block;
-        width: calc(100% / 3);
-        height: 40px;
-        line-height: 40px;
-        font-size: 22px;
-        text-align: center;
-        color: #323232;
-        background-color: #f3f3f3;
-        margin-right: -3px;
-        margin-bottom: 1px;
-        vertical-align: top;
-        border-right: #FFF solid 1px;
-        background: url(../../assets/btnDel.svg) no-repeat center center #f3f3f3;
-      }
-    }
-    .quickBox{
-      display: flex;
-      width: 25%;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      .add{
-        display: inline-block;
+      .noBet{
         width: 100%;
-        height: px2vh(40);
-        line-height: px2vh(40);
-        margin-bottom: 1px;
-        margin-right: -4px;
-        font-size: px2vw(14);
+        padding: 33px 0 25px 0;
         text-align: center;
-        color: #FFF;
-        background: rgba(0,0,0,0.48);
-      }
-    }
-  }
-  /* 购物车底部 */
-  .bottom {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: px2vh(66);
-    padding: px2vw(4) px2vw(8);
-    background-color: white;
-    box-sizing: border-box;
-    .del {
-      width: 30%;
-      text-align: center;
-      line-height: px2vh(48);
-      color: #333;
-      font-size: px2vw(13);
-    }
-    .setting {
-      flex: 1;
-      height: px2vh(48);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-image: url(../../assets/iconSetting.svg);
-      background-position: center center;
-      background-repeat: no-repeat;
-      border-radius: 3px;
-      background-color: #e5e0dc;
-    }
-    .button {
-      width: 48%;
-      height: px2vh(48);
-      margin-left: px2vw(6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 3px;
-      background-color: #51a47d;
-      color: white;
-      flex-direction: column;
-      font-weight: bold;
-      .text {
-        font-size: px2vw(13);
-      }
-    }
-  }
-  /* 投注成功够的显示 */
-  .success{
-
-    .bet-info {
-      width: 100%;
-      max-height: 45vh;
-      padding: 11px 10px 9px 9px;
-      position: relative;
-      display: block;
-      background-color: white;
-      box-sizing: border-box;
-      overflow-y: scroll;
-      .infoBox{
-        position: relative;
-        .delMixed{
-          position: absolute;
-          top: 2px;
-          right: 6px;
-          z-index: 2;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.38);
+        box-shadow: none;
+        background: #F0F0F0;
+        z-index: 5;
+        .iconFlag{
           display: block;
-          width: 24px;
-          height: 24px;
-          opacity: 0.64;
-          background: url(../../assets/iconClose.svg) no-repeat center center;
-          background-size: 16px;
+          width: 48px;
+          height: 48px;
+          margin: 0 auto 18px auto;
+          background: url(../../assets/empty-state-icon.svg) no-repeat center center;
+          background-size: contain;
         }
-        .info {
-          width: 90%;
-          max-width: calc(100% - 24px);
-          margin-bottom: 4px;
-          padding-bottom: 5px;
-          font-size: px2vw(13);
-          line-height: 1.5;
-          @include border-bottom-1px(#d2d2d2, dashed);
-          .type {
-            line-height: 1.5;
-            .name {
-              display: inline;
-              font-weight: bold;
-              color: #323232;
-            }
-            .score {
-              display: inline-block;
-              font-weight: bold;
-              color: #323232;
-            }
-          }
+        .text{
 
-          .competitions {
-            color: #232323;
+        }
+      }
+      .bet-info {
+        width: 100%;
+        max-height: 45vh;
+        padding: 11px 10px 9px 9px;
+        position: relative;
+        display: block;
+        background-color: white;
+        box-sizing: border-box;
+        overflow-y: scroll;
+        .infoBox{
+          position: relative;
+          .delMixed{
+            position: absolute;
+            top: 2px;
+            right: 6px;
+            z-index: 2;
+            display: block;
+            width: 24px;
+            height: 24px;
+            opacity: 0.64;
+            background: url(../../assets/iconClose.svg) no-repeat center center;
+            background-size: 16px;
           }
-          .team {
-            .name {
+          .info {
+            width: 90%;
+            max-width: calc(100% - 24px);
+            margin-bottom: 4px;
+            padding-bottom: 5px;
+            font-size: px2vw(13);
+            line-height: 1.5;
+            @include border-bottom-1px(#d2d2d2, dashed);
+            .type {
+              line-height: 1.5;
+              .name {
+                display: inline;
+                font-weight: bold;
+                color: #323232;
+              }
+              .score {
+                display: inline-block;
+                font-weight: bold;
+                color: #323232;
+              }
+            }
+
+            .competitions {
               color: #232323;
             }
+            .team {
+              .name {
+                color: #232323;
+              }
+            }
           }
         }
-      }
-      .choose {
-        color: #232323;
-        line-height: 1.8;
-        font-size: px2vw(13);
-        padding-bottom: 10px;
-        .handicap {
-          padding-left: 4px;
-          font-weight: bold;
-          color: #d0021b;
+        .choose {
+          color: #232323;
+          line-height: 1.8;
+          font-size: px2vw(13);
+          padding-bottom: 10px;
+          .handicap {
+            padding-left: 4px;
+            font-weight: bold;
+            color: #d0021b;
+          }
+          .odds {
+            font-weight: bold;
+            color: #d0021b;
+            padding-left: px2vw(2);
+          }
         }
-        .odds {
-          font-weight: bold;
-          color: #d0021b;
-          padding-left: px2vw(2);
+        .bet-input {
+          display: flex;
+          background: #FFF;
+          padding: 7px 9px 4px 0;
+          justify-content: space-between;
+          align-items: center;
+          .message{
+            width: 100%;
+            color: #a21a0d;
+            .error{
+              display: block;
+              width: px2vw(16);
+              height: px2vw(16);
+              margin-right: px2vw(16);
+              background: url(../../assets/iconLoginError.svg) no-repeat center center;
+            }
+          }
+          .left {
+            width: 39%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #777c91;
+            font-size: px2vw(15);
+            height: px2vh(26);
+            padding: px2vw(9);
+            color: rgba(51, 51, 51, 0.56);
+            @include border-1px(rgba(0, 0, 0, 0.38));
+            .num {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #232323;
+            }
+            .clearNum {
+              height: px2vh(24);
+              top: 0;
+              right: 5px;
+              z-index: 1;
+              vertical-align: middle;
+              display: block;
+              width: px2vw(24);
+              opacity: 0.64;
+              background: url(../../assets/iconClose.svg) no-repeat center center;
+              background-size: 16px;
+            }
+          }
+          .right {
+            font-size: px2vw(12);
+            text-align: right;
+            color: rgba(51, 51, 51, 0.56);
+            .high {
+              line-height: 1.8;
+              padding-right: 2px;
+              i {
+                padding-left: 2px;
+                font-size: px2vw(13);
+                font-weight: bold;
+                color: #333;
+              }
+            }
+          }
         }
-      }
-      .bet-input {
-        display: flex;
-        background: #FFF;
-        padding: 7px 9px 4px 0;
-        justify-content: space-between;
-        align-items: center;
-        .message{
-          width: 100%;
-          color: #a21a0d;
-          .error{
+        .error-box {
+          display: flex;
+          background: #FFF;
+          align-items: center;
+          .message {
+            width: 90%;
+            color: #a21a0d;
+          }
+          .error {
             display: block;
             width: px2vw(16);
             height: px2vw(16);
@@ -471,70 +219,275 @@
             background: url(../../assets/iconLoginError.svg) no-repeat center center;
           }
         }
-        .left {
-          width: 39%;
+      }
+    }
+
+    .winMoney {
+      box-sizing: border-box;
+      overflow-y: auto;
+      width: 100%;
+      padding: 8px 8px 0 8px;
+      background: #f0f0f0;
+      .line-box {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.88);
+        line-height: 1.8;
+        margin-bottom: px2vh(8);
+        .line {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          color: #777c91;
-          font-size: px2vw(15);
-          height: px2vh(26);
-          padding: px2vw(9);
-          color: rgba(51, 51, 51, 0.56);
-          @include border-1px(rgba(0, 0, 0, 0.38));
-          .num {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #232323;
-          }
-          .clearNum {
-            height: px2vh(24);
-            top: 0;
-            right: 5px;
-            z-index: 1;
-            vertical-align: middle;
+          font-size: px2vw(13);
+          padding: 0 px2vw(8);
+          .text {
             display: block;
-            width: px2vw(24);
+            color: #323232;
+            opacity: 0.56;
+            line-height: px2vh(36);
+          }
+          .money {
+            color: #478e6d;
+            font-weight: bold;
+            line-height: px2vh(36);
+          }
+        }
+      }
+    }
+    /* 警告 */
+    .warning {
+      box-sizing: border-box;
+      overflow-y: auto;
+      width: 100%;
+      padding: 4px 8px 0 8px;
+      background: #f0f0f0;
+      .line-box {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.88);
+        line-height: 1.8;
+        border: 1px solid #c8250a;
+        margin-bottom: px2vh(8);
+        .line {
+          font-size: px2vw(13);
+          padding: 0 px2vw(8);
+          display: block;
+          color: #c8250a;
+          line-height: px2vh(36);
+        }
+      }
+    }
+    /* 软键盘 */
+    .betKeyboard{
+      display: flex;
+      width: 100%;
+      padding: 8px 7px 0 8px;
+      background: #FFF;
+      box-sizing: border-box;
+      .numBox{
+        display: flex;
+        width: 75%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .num{
+          display: inline-block;
+          width: calc(100% / 3);
+          height: px2vh(40);
+          line-height: px2vh(40);
+          font-size: px2vw(22);
+          text-align: center;
+          color: #323232;
+          background: #f3f3f3;
+          margin-right: -3px;
+          margin-bottom: 1px;
+          vertical-align: top;
+          border-right: #FFF solid 1px;
+        }
+        .delNum{
+          display: inline-block;
+          width: calc(100% / 3);
+          height: 40px;
+          line-height: 40px;
+          font-size: 22px;
+          text-align: center;
+          color: #323232;
+          background-color: #f3f3f3;
+          margin-right: -3px;
+          margin-bottom: 1px;
+          vertical-align: top;
+          border-right: #FFF solid 1px;
+          background: url(../../assets/btnDel.svg) no-repeat center center #f3f3f3;
+        }
+      }
+      .quickBox{
+        display: flex;
+        width: 25%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .add{
+          display: inline-block;
+          width: 100%;
+          height: px2vh(40);
+          line-height: px2vh(40);
+          margin-bottom: 1px;
+          margin-right: -4px;
+          font-size: px2vw(14);
+          text-align: center;
+          color: #FFF;
+          background: rgba(0,0,0,0.48);
+        }
+      }
+    }
+    /* 购物车底部 */
+    .bottom {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: px2vh(66);
+      padding: px2vw(4) px2vw(8);
+      background-color: white;
+      box-sizing: border-box;
+      .del {
+        width: 30%;
+        text-align: center;
+        line-height: px2vh(48);
+        color: #333;
+        font-size: px2vw(13);
+      }
+      .setting {
+        flex: 1;
+        height: px2vh(48);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url(../../assets/iconSetting.svg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        border-radius: 3px;
+        background-color: #e5e0dc;
+      }
+      .button {
+        width: 48%;
+        height: px2vh(48);
+        margin-left: px2vw(6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+        background-color: #51a47d;
+        color: white;
+        flex-direction: column;
+        font-weight: bold;
+        .text {
+          font-size: px2vw(13);
+        }
+      }
+    }
+    /* 投注成功够的显示 */
+    .success {
+      overflow-y: auto;
+      width: 100%;
+      padding: 8px 8px 0 8px;
+      background: #f0f0f0;
+      box-sizing: border-box;
+      margin-bottom: 8px;
+      .bet-info {
+        width: 100%;
+        max-height: 45vh;
+        padding: 11px 10px 9px 9px;
+        position: relative;
+        display: block;
+        background-color: white;
+        box-sizing: border-box;
+        overflow-y: scroll;
+        .infoBox{
+          position: relative;
+          .delMixed{
+            position: absolute;
+            top: 2px;
+            right: 6px;
+            z-index: 2;
+            display: block;
+            width: 24px;
+            height: 24px;
             opacity: 0.64;
             background: url(../../assets/iconClose.svg) no-repeat center center;
             background-size: 16px;
           }
-        }
-        .right {
-          font-size: px2vw(12);
-          text-align: right;
-          color: rgba(51, 51, 51, 0.56);
-          .high {
-            line-height: 1.8;
-            padding-right: 2px;
-            i {
-              padding-left: 2px;
-              font-size: px2vw(13);
-              font-weight: bold;
-              color: #333;
+          .flag{
+            display: flex;
+            align-items: center;
+            color: #323232;
+            margin-bottom: 3px;
+            .icon{
+              padding-right: 4px;
+              display: inline-block;
+              width: px2vw(16);
+              height: px2vw(16);
+              background-image: image-set(
+                  url('../../assets/xuanzhong@2x.png') 2x,
+                  url('../../assets/xuanzhong@3x.png') 3x
+              );
+              background-size: contain;
+              background-repeat: no-repeat;
+            }
+          }
+          .info {
+            width: 90%;
+            max-width: calc(100% - 24px);
+            margin-bottom: 4px;
+            padding-bottom: 5px;
+            font-size: px2vw(13);
+            line-height: 1.5;
+            @include border-bottom-1px(#d2d2d2, dashed);
+            .type {
+              line-height: 1.5;
+              .name {
+                display: inline;
+                font-weight: bold;
+                color: #323232;
+              }
+              .score {
+                display: inline-block;
+                font-weight: bold;
+                color: #323232;
+              }
+            }
+
+            .competitions {
+              color: #232323;
+            }
+            .team {
+              .name {
+                color: #232323;
+              }
             }
           }
         }
-      }
-      .error-box {
-        display: flex;
-        background: #FFF;
-        align-items: center;
-        .message {
-          width: 90%;
-          color: #a21a0d;
+        .choose {
+          color: #232323;
+          line-height: 1.8;
+          font-size: px2vw(13);
+          padding-bottom: 2px;
+          .handicap {
+            padding-left: 4px;
+            font-weight: bold;
+            color: #d0021b;
+          }
+          .odds {
+            font-weight: bold;
+            color: #d0021b;
+            padding-left: px2vw(2);
+          }
         }
-        .error {
-          display: block;
-          width: px2vw(16);
-          height: px2vw(16);
-          margin-right: px2vw(16);
-          background: url(../../assets/iconLoginError.svg) no-repeat center center;
+        .money{
+          color: #232323;
+          line-height: 1.5;
+          font-size: px2vw(13);
         }
       }
     }
   }
+
+
 }
 
 .box_on {

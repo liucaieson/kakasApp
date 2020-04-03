@@ -145,14 +145,16 @@ class InPlayDetailPage extends PureComponent {
                       <div className={styles.item}>足球</div>
                       <div className={styles.line}>/</div>
                       <div
-                        className={styles.item}>{inPlayAllOdds[0].cptName}</div>
+                        className={styles.item}>
+                          {inPlayAllOdds[0].cptName}
+                        </div>
                       <div className={styles.box}>
                         <span className={styles.time} onClick={this.refreshMatchOdds}>
                           <CountDown
                             onCountDownRef={this.onCountDownRef}
                             time='10'
                             onEnd={this.setTimeFetchMatchList}/>
-                          </span>
+                        </span>
                       </div>
                     </div>
                   </div>

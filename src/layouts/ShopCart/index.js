@@ -23,7 +23,8 @@ class ShopCart extends PureComponent {
     showKeyboard: false,
     money: '',
     modal1: false,
-    result: []
+    resData: [],
+    showFinishBets: false
   };
 
   timer = null;
@@ -73,6 +74,9 @@ class ShopCart extends PureComponent {
     dispatch({
       type: 'shopCart/closeCart',
     });
+    this.setState({
+      showFinishBets: false,
+    })
   };
 
   hideKeyboard = () => {
@@ -158,6 +162,10 @@ class ShopCart extends PureComponent {
           if(data[0].code === '208') {
            /* this.closeShopCart();*/
             Toast.info('投注成功', 1.5);
+            this.setState({
+              showFinishBets: true,
+              resData: data[0]
+            })
           }
         }
       });
@@ -183,6 +191,10 @@ class ShopCart extends PureComponent {
           if(data.code === 200) {
            /* this.closeShopCart();*/
             Toast.info('投注成功', 1.5);
+            this.setState({
+              showFinishBets: true,
+              resData: data.data[0]
+            })
           }
         }
       });
@@ -205,7 +217,7 @@ class ShopCart extends PureComponent {
     });
     if(type ===1){
       return (
-        <div>
+        <div className={styles.betsBox}>
           <div className={styles.content} onClick={this.hideKeyboard}>
             <div className={styles['bet-info']}>
               <div className={styles.infoBox}>
@@ -305,7 +317,7 @@ class ShopCart extends PureComponent {
     }
     else{
       return (
-        <div>
+        <div className={styles.betsBox}>
           <div className={styles.content} onClick={this.hideKeyboard}>
             <div className={styles['bet-info']}>
               {
@@ -430,6 +442,8 @@ class ShopCart extends PureComponent {
       checkMixedLoading,
     } = this.props;
 
+    const { resData,  showFinishBets } = this.state;
+
     return (
       <div className={styles['money-wrap']}>
         <div className={styles.header}>
@@ -449,13 +463,49 @@ class ShopCart extends PureComponent {
                 this.renderBetOrMixed()
                  :
                 (
-                  <div>
-                    <div className={styles.content}>
-                      <div className={styles.noBet}>
-                        <i className={styles.iconFlag}/>
-                        <div className={styles.text}>请把选项加入在您的投注单</div>
+                  <div className={styles.betsBox}>
+                    {
+                      showFinishBets? '' :  <div className={styles.content}>
+                        <div className={styles.noBet}>
+                          <i className={styles.iconFlag}/>
+                          <div className={styles.text}>请把选项加入在您的投注单</div>
+                        </div>
                       </div>
-                    </div>
+                    }
+                    {
+                      showFinishBets ?   <div className={styles.success}>
+                        <div className={styles['bet-info']}>
+                          <div className={styles.infoBox}>
+                            <div className={styles.flag}>
+                              <i className={styles.icon} />
+                              下注成功</div>
+                            <div className={styles.info}>
+                              <div className={styles.type}>
+                                <span className={styles.name}>足球</span>
+                                <span className={styles.score}>（{resData.oddName}）</span>
+                              </div>
+                              <div className={styles.competitions}>
+                                {resData.cptName}
+                              </div>
+                              <div className={styles.team}>
+                                <span className={styles.name}>{resData.homeName} vs {resData.awayName}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className={styles.choose}>
+                            {resData.oddName}
+                            <span className={styles.handicap}>{resData.choiceHandicap}</span>
+                            @
+                            <span className={styles.odds}>
+                            {resData.dish}
+                          </span>
+                          </div>
+                          <div className={styles.money}>
+                            投注额：{resData.money}
+                          </div>
+                        </div>
+                      </div> : ''
+                    }
                     <div className={styles.bottom}>
                       <div className={styles.setting}/>
                       <div className={styles.button}>
@@ -463,9 +513,8 @@ class ShopCart extends PureComponent {
                         <div className={styles.text}>投注</div>
                       </div>
                     </div>
-                    <div>
-                      1
-                    </div>
+
+
                   </div>
                 )
             )
