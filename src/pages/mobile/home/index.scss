@@ -111,6 +111,7 @@
       .bottom-nav{
         width: 100%;
         .nav{
+          width: 100%;
           width: calc(100% - (env(safe-area-inset-left) + env(safe-area-inset-right)));
           margin: 0 env(safe-area-inset-left);
           padding-bottom: constant(safe-area-inset-bottom);

@@ -357,7 +357,7 @@ class ShopCart extends PureComponent {
                 mixedDishId.length > 1 ? (
                   dishInfo.code === '3001' || dishInfo.code === '2111' ?
                     <div className={styles['error-box']}>
-                      该投注项当前不可投注：{dishInfo.message}
+                      注意：{dishInfo.message}
                     </div> :
                     <div className={styles['bet-input']}>
                       <div className={styles.left} onClick={this.openKeyboard}>
@@ -465,7 +465,7 @@ class ShopCart extends PureComponent {
                 (
                   <div className={styles.betsBox}>
                     {
-                      showFinishBets? '' :  <div className={styles.content}>
+                      showFinishBets? '' : <div className={styles.content}>
                         <div className={styles.noBet}>
                           <i className={styles.iconFlag}/>
                           <div className={styles.text}>请把选项加入在您的投注单</div>
@@ -513,8 +513,6 @@ class ShopCart extends PureComponent {
                         <div className={styles.text}>投注</div>
                       </div>
                     </div>
-
-
                   </div>
                 )
             )

@@ -137,6 +137,9 @@ body,
   height: 100%;
 }
 /* iphonex 安全区域 */
+html{
+  /*filter: brightness(0.4);*/
+}
 body {
   -webkit-user-select: none;
   overflow-x: hidden;
