@@ -81,14 +81,13 @@
         line-height: 1.4;
         display: flex;
         flex-wrap: nowrap;
-        vertical-align: top;
         position: relative;
         width: 100%;
+        align-items: center;
         .home-name{
           width: 45%;
           text-align:center;
           float: left;
-          line-height: 1.5;
           color: #fff;
         }
         .vs{
@@ -96,13 +95,11 @@
           left: 45%;
           text-align: center;
           width: 9%;
-          line-height: 1.5;
         }
         .away-name{
           float: right;
           width: 45%;
           text-align: center;
-          line-height: 1.5;
           color: #fff;
         }
       }
