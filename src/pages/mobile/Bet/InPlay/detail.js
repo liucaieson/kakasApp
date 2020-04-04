@@ -18,7 +18,7 @@ class InPlayDetailPage extends PureComponent {
   balanceTimer = null;
   state = {
     showOdds: [],
-    isLoading: true,
+    firstLoading: true,
   };
 
   globalParams = {

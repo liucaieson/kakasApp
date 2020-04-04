@@ -120,7 +120,7 @@ class DetailPage extends PureComponent {
     return (
       <div className={styles.detail} key='matchList'>
         {
-          isLoading ? <Loading bg="rgba(255,255,255.8)" loadingIconSize="40px" color="#30717b"/> :
+          isLoading ? <Loading bg="rgba(255,255,255,.2)" loadingIconSize="40px" color="#30717b"/> :
             <div>
                 <div className={styles['game-tab']}>
                   <div className={styles.item}>足球</div>
