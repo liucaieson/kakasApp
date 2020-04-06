@@ -2,7 +2,8 @@ import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import styles from './index.scss';
 import Link from 'umi/link';
-
+import { Pagination } from 'antd-mobile';
+import Loading from '../../../../components/PCMask';
 
 
 @connect(({ accountStatement, loading }) => ({
@@ -12,7 +13,7 @@ import Link from 'umi/link';
 class Announcement extends PureComponent {
   state = {
     isShowLoading: true,
-    total: 1,
+    total: 10,
     current: 1,
     size: 10,
   };
@@ -20,16 +21,15 @@ class Announcement extends PureComponent {
   /* 请求投注记录 */
   componentDidMount() {
     const { dispatch } = this.props;
-    const { startDate, endDate} = this.state;
     this.setState({
-      isShowLoading: true
+      isShowLoading: true,
     });
     dispatch({
       type: 'accountStatement/fetch',
       payload: {
-        page:1,
-        size:20,
-        sport: '1'
+        page: 1,
+        size: 10,
+        sport: '1',
         /*start_time: +(moment(startDate).valueOf()/1000).toFixed(0),
         end_time: +(moment(moment(endDate).format('YYYY-MM-DD 23:59:59'))/1000).toFixed(0)*/
       },
@@ -39,11 +39,46 @@ class Announcement extends PureComponent {
           isShowLoading: false,
           total: count,
           current,
-          size:20,
+          size: 10,
         });
       },
     });
   }
+
+  togglePage = (flag) => {
+    const { dispatch, loading } = this.props;
+    let { current } = this.state;
+    if (loading) {
+      return false;
+    }
+    if (flag === 'next') {
+      current = current + 1;
+    } else {
+      current = current - 1;
+    }
+    this.setState({
+      isShowLoading: true,
+    });
+    dispatch({
+      type: 'accountStatement/fetch',
+      payload: {
+        page: current,
+        size: 10,
+        sport: '1',
+      },
+      callback: response => {
+        const { count, current } = response;
+        this.setState({
+          isShowLoading: false,
+          total: count,
+          current,
+          size: 10,
+        });
+      },
+    });
+
+  };
+
 
   /* 返回首页*/
   goBack = () => {
@@ -53,7 +88,8 @@ class Announcement extends PureComponent {
 
 
   render() {
-    const { accountStatement: {data} , loading } = this.props;
+    const { accountStatement: { data } } = this.props;
+    const { total, current, size, isShowLoading } = this.state;
     return (
       <div className={styles.accountHistory}>
 
@@ -61,43 +97,47 @@ class Announcement extends PureComponent {
           <Link to='/bet/transaction' className={styles.tab}
           >交易状况
           </Link>
-          <div  className={styles.tab + ' ' + styles.active}
-          >账户历史</div>
+          <div className={styles.tab + ' ' + styles.active}
+          >账户历史
+          </div>
         </div>
         <div className={styles['game-tab']}>
           <div className={styles.name}>账户历史摘要</div>
           <div className={styles.box}>
-
           </div>
         </div>
-        <div  className={styles.main}>
+        <div className={styles.main}>
           <table width="100%" border="0" cellSpacing="0" cellPadding="0" className={styles.table}>
             <tbody>
             <tr className={styles.title}>
-              <td >日期</td>
-              <td >账变金额</td>
-              <td >余额</td>
-              <td >账变来源</td>
+              <td>日期</td>
+              <td>账变金额</td>
+              <td>余额</td>
+              <td>账变来源</td>
             </tr>
             {
               data.length > 0 ?
                 (
-                  <Fragment>
-                    {
-                      data.map((val) => (
-                        <tr  className={styles.line} key={val.balance}>
-                          <td className="his_date">
-                            {val.date}
-                          </td>
-                          <td >{val.money}</td>
-                          <td >{val.balance}</td>
-                          <td >
-                           {val.type}
-                          </td>
-                        </tr>
-                      ))
-                    }
-                  </Fragment>
+                  isShowLoading ?
+                    <div className={styles.loadingBox}>
+                      <Loading bg="rgba(255,255,255,.2)"  loadingIconSize="40px" color="#30717b"/>
+                    </div>:
+                    <Fragment>
+                      {
+                        data.map((val, index) => (
+                          <tr className={styles.line} key={index}>
+                            <td className="his_date">
+                              {val.date}
+                            </td>
+                            <td>{val.money}</td>
+                            <td>{val.balance}</td>
+                            <td>
+                              {val.type}
+                            </td>
+                          </tr>
+                        ))
+                      }
+                    </Fragment>
                 )
                 :
                 <div className={styles['no-data']}>
@@ -106,6 +146,18 @@ class Announcement extends PureComponent {
             }
             </tbody>
           </table>
+          {
+            data.length > 0 ?
+              <Pagination total={Math.ceil(total / size)}
+                          className={styles.pagination}
+                          current={current}
+                          locale={{
+                            prevText: (<span onClick={() => this.togglePage('prev')}>上一页</span>),
+                            nextText: (<span onClick={() => this.togglePage('next')}>下一页</span>),
+                          }}
+              /> : ''
+          }
+
         </div>
       </div>
 

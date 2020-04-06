@@ -44,6 +44,10 @@
       border-collapse: collapse;
       border-spacing: 0;
       color: #1f1c18;
+      .loadingBox{
+        width: 100%;
+        height: px2vw(480);
+      }
       .title{
         width: 100%;
         text-align: center;
@@ -67,6 +71,10 @@
           background-color: #f9f7f6;
         }
       }
+    }
+    .pagination{
+      width: 80%;
+      margin: 0 auto;
     }
   }
 

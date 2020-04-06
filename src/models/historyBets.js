@@ -14,30 +14,15 @@ export default {
   effects: {
     *fetch({payload, callback}, { call, put, select }) {
       let data = yield call(queryHistory, payload);
-      const betData = yield select( state => state.historyBets);
-      if(data.current === 1){
-        yield put({
-          type: 'save',
-          payload: {
-            data: data.data,
-            count:data.count,
-            current:data.current
-          },
-        });
-      }else{
-          if(data.data.length === 0){
-            Toast.info('暂无更多数据',1);
-            return
-          }
           yield put({
             type: 'save',
             payload: {
-              data: betData.data.concat(data.data),
+              data: data.data,
               count:data.count,
               current:data.current
             },
           });
-      }
+
 
       if(callback) callback(data)
     }
