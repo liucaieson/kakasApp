@@ -478,7 +478,10 @@ class ShopCart extends PureComponent {
                           <div className={styles.infoBox}>
                             <div className={styles.flag}>
                               <i className={styles.icon} />
-                              下注成功</div>
+                              {
+                                resData.typeFlag === 2 ? '下注完毕（滚球请到交易记录确认是否下注成功）':'下注成功'
+                            }
+                            </div>
                             <div className={styles.info}>
                               <div className={styles.type}>
                                 <span className={styles.name}>足球</span>
