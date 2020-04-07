@@ -12,7 +12,7 @@ class IndexDishItem extends PureComponent {
     prevDish: 0,
   };
 
-  static getDerivedStateFromProps(props, state) {
+  /*static getDerivedStateFromProps(props, state) {
     if (state.prevDish === 0) {
       return {
         up: 0,
@@ -32,7 +32,7 @@ class IndexDishItem extends PureComponent {
       };
     }
     return null;
-  }
+  }*/
 
   /* 添加投注单到购物车
    * type =1 为单注， 2位混合过关
@@ -55,7 +55,7 @@ class IndexDishItem extends PureComponent {
     });
   };
 
-  renderUp() {
+ /* renderUp() {
     const { up } = this.state;
     if (up === 0) {
       return '';
@@ -66,7 +66,7 @@ class IndexDishItem extends PureComponent {
     if (up === -1) {
       return <div className={styles.down}/>;
     }
-  }
+  }*/
 
   renderHandicap() {
     const {
@@ -108,7 +108,7 @@ class IndexDishItem extends PureComponent {
             {dish}
           </span>
           </span>
-        {this.renderUp()}
+    {/*    {this.renderUp()}*/}
       </div>
     );
   }

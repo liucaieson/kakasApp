@@ -19,6 +19,8 @@ class InPlayDetailPage extends PureComponent {
   state = {
     showOdds: [],
     firstLoading: true,
+    prevPeriod: '1:00',
+    calcPeriod: '1:00',
   };
 
   globalParams = {
@@ -32,11 +34,22 @@ class InPlayDetailPage extends PureComponent {
     this.mainRef = React.createRef();
   }
 
+  static getDerivedStateFromProps (props, state) {
+    if (props.inPlay.inPlayAllOdds && props.inPlay.inPlayAllOdds[0] && props.inPlay.inPlayAllOdds[0].period !== state.calcPeriod) {
+      return {
+        prevPeriod: props.inPlay.inPlayAllOdds[0].period,
+        calcPeriod: props.inPlay.inPlayAllOdds[0].period
+      }
+    }
+    return null
+  }
+
   /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
   componentDidMount() {
     const { dispatch, location } = this.props;
     const { query } = location;
     const { matchId } = query;
+
     this.globalParams = {
       ...this.globalParams,
       match: matchId
@@ -50,6 +63,31 @@ class InPlayDetailPage extends PureComponent {
         });
       },
     });
+
+    this.timer = setInterval(() => {
+      const { prevPeriod} = this.state;
+      let minute = prevPeriod.split(':')[0];
+      let second = prevPeriod.split(':')[1];
+      if(minute === '45' ){
+        this.setState({
+          prevPeriod: '45:00'
+        })
+      }else if(minute === '90'){
+        this.setState({
+          prevPeriod: '45:00'
+        })
+      }else {
+        second = +second + 1;
+        if(second >= 59){
+          minute = +minute + 1;
+          second = 0
+        }
+        const newPeriod = minute + ':' + second.toString().padStart(2, '0');
+        this.setState({
+          prevPeriod: newPeriod
+        })
+      }
+    },1000)
   }
 
   setTimeFetchMatchList = () => {
@@ -126,13 +164,14 @@ class InPlayDetailPage extends PureComponent {
     });
   };
 
+
   render() {
     const {
       inPlay: {
         inPlayAllOdds,
       },
     } = this.props;
-    const { showOdds, firstLoading } = this.state;
+    const { showOdds, firstLoading,  prevPeriod } = this.state;
     return (
       <div className={styles.detail} key='matchList'>
         {
@@ -161,7 +200,7 @@ class InPlayDetailPage extends PureComponent {
                   <div className={styles.main} ref={this.mainRef}>
                     <div className={styles.content}>
                       <div className={styles.date}>
-                        {inPlayAllOdds[0].period && calcDate4(inPlayAllOdds[0].period)}
+                        { prevPeriod}
                       </div>
                       <div className={styles.score}>
                         <div className={styles['home-score']}>{inPlayAllOdds[0].soccer && inPlayAllOdds[0].soccer.split('-')[0]}</div>

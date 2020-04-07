@@ -121,7 +121,8 @@ class Announcement extends PureComponent {
                   isShowLoading ?
                     <div className={styles.loadingBox}>
                       <Loading bg="rgba(255,255,255,.2)"  loadingIconSize="40px" color="#30717b"/>
-                    </div>:
+                    </div>
+                    :
                     <Fragment>
                       {
                         data.map((val, index) => (

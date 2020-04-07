@@ -102,8 +102,6 @@ class Transaction extends PureComponent {
     }
   };
 
-
-
   render() {
     const { historyBets: { data }, loading } = this.props;
     const { isShowLoading, betStatus} = this.state;
@@ -124,7 +122,7 @@ class Transaction extends PureComponent {
         <div  className={styles.main}>
           <div className={styles['sub-title']}>
             <div className={styles['tab-box']}>
-              <div className={betStatus === '' ? `${styles.tab1} ${styles.active}` : `${styles.tab1}` } onClick={() => this.onChange('')}>全部</div>
+              <div className={betStatus === '' ? `${styles.tab1} ${styles.active}` : `${styles.tab1}`} onClick={() => this.onChange('')}>全部</div>
               <div className={betStatus === '0' ? `${styles.tab2} ${styles.active}` : `${styles.tab2}`} onClick={() => this.onChange('0')}>未结算</div>
               <div className={betStatus === '1' ? `${styles.tab3} ${styles.active}` : `${styles.tab3}`} onClick={() => this.onChange('1')}>已结算</div>
             </div>
@@ -167,15 +165,14 @@ class Transaction extends PureComponent {
                                               className={styles['dish-name']}>{dishNameMap[item.choiceContent]}{item.choiceHandicap}</div>
                                             <div className={styles['odds-name']}>{item.oddName}</div>
                                             <div className={styles.match}>{item.hostName}---{item.awayName}</div>
-                                            <div
-                                              className={styles.time}>{item.matchTime && item.matchTime.substring(0, 19)}</div>
                                           </div>
                                           <div className={styles.right}>
                                             <div className={styles.dish}>
                                               {item.dishRate}
                                             </div>
                                             <div className={styles.win}>
-                                              {item.resultFlag === '胜' ?
+                                              {
+                                                item.resultFlag === '胜' ?
                                                 <span className={styles.red}>{item.resultFlag}</span> :
                                                 <span className={styles.green}> {item.resultFlag}</span>
                                               }
@@ -184,6 +181,8 @@ class Transaction extends PureComponent {
                                         </div>
                                       ))
                                     }
+                                    <div className={styles.orderNum}>订单号：{val.betId}</div>
+                                    <div className={styles.betTime}>下注时间：{val.betTime}</div>
                                     <div className={styles.money}>
                                       <div className={styles.left}>
                                         <span className={styles.text}>本金：</span>

@@ -204,29 +204,42 @@
               }
             }
           }
+          .betTime{
+            width: 100%;
+            padding: 0 8px;
+            font-size: px2vw(12);
+            line-height: 1.5;
+          }
+          .orderNum{
+            width: 100%;
+            padding: 0 8px;
+            font-size: px2vw(12);
+            line-height: 1.5;
+            margin-top: 4px;
+          }
           .money{
             width: 100%;
             display: flex;
-            padding: px2vh(4) px2vw(10);
+            flex-direction: column;
+            padding: 0 px2vw(10);
             .left{
               width: 50%;
               .text{
                 font-size: px2vw(12);
                 color: #000;
               }
-              .mun{
-                font-size: px2vw(16);
+              .num{
+                font-size: px2vw(13);
               }
             }
             .right{
               width: 50%;
-              padding-left: px2vw(10);
               .text{
                 font-size: px2vw(12);
                 color: #000000;
               }
               .num{
-                font-size: px2vw(16);
+                font-size: px2vw(13);
               }
             }
           }
