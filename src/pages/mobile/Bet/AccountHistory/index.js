@@ -47,7 +47,7 @@ class Announcement extends PureComponent {
 
   togglePage = (flag) => {
     const { dispatch, loading } = this.props;
-    let { current } = this.state;
+    let { current,size ,total } = this.state;
     if (loading) {
       return false;
     }
@@ -55,6 +55,10 @@ class Announcement extends PureComponent {
       current = current + 1;
     } else {
       current = current - 1;
+    }
+    /* 边界处理 */
+    if(current < 1 || current > Math.ceil(total / size) ){
+      return false
     }
     this.setState({
       isShowLoading: true,
