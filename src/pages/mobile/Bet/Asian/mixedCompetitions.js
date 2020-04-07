@@ -150,7 +150,7 @@ class Home extends PureComponent {
                         {
                           competitionsObj[item].map((val) => (
                             <Link key={val.competitionId} className={styles['competition-box']}
-                                  to={`/bet/asianMatchList?competitionId=${val.competitionId}`}>
+                                  to={`/bet/asianMixedMatchList?competitionId=${val.competitionId}`}>
                               <div className={styles['name-box']}>
                                 <div className={styles.name}>
                                   {val.competitionName}

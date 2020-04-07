@@ -137,7 +137,7 @@ class BetPage extends PureComponent {
                         <div className={styles['match-item']} key={val.matchId}>
                           <div className={styles['match-date']}>
                             <div className={styles.content}>
-                              <div className={styles.inplay}>滚球</div>
+                              <div className={styles.inplay}>早盘</div>
                               <div className={styles.time}>{calcDate3(val.time)}</div>
                             </div>
                             <div className={styles.text}>让球</div>

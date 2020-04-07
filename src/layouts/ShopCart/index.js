@@ -371,7 +371,7 @@ class ShopCart extends PureComponent {
                     </div>) : <div className={styles['error-box']}>
                   <div className={styles.error}/>
                   <div className={styles.message}>
-                    您需要选择最少2个投注
+                    混合过关-需要选择最少2个投注
                   </div>
                 </div>
               }
