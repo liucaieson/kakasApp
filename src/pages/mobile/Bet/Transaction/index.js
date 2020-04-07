@@ -4,6 +4,8 @@ import styles from './index.scss';
 import Link from 'umi/link';
 import { dishNameMap } from '../../../../utils/utils';
 import MbPageLoading from '../../../../components/MbPageLoading';
+import { Pagination } from 'antd-mobile';
+import Loading from '../../../../components/PCMask';
 
 
 const betTypeMap = {
@@ -40,7 +42,7 @@ class Transaction extends PureComponent {
       type: 'historyBets/fetch',
       payload: {
         page:1,
-        size:20,
+        size:10,
         betStatus:'',
         sport: '1'
         /*start_time: +(moment(startDate).valueOf()/1000).toFixed(0),
@@ -52,7 +54,7 @@ class Transaction extends PureComponent {
           isShowLoading: false,
           total: count,
           current,
-          size:20,
+          size:10,
         });
       },
     });
@@ -68,7 +70,7 @@ class Transaction extends PureComponent {
       type: 'historyBets/fetch',
       payload: {
         page:1,
-        size:20,
+        size:10,
         betStatus: e,
         sport: '1'
       },
@@ -78,7 +80,7 @@ class Transaction extends PureComponent {
           isShowLoading: false,
           total: count,
           current,
-          size:20,
+          size:10,
         });
       },
     });
@@ -102,9 +104,44 @@ class Transaction extends PureComponent {
     }
   };
 
+  togglePage = (flag) => {
+    const { dispatch, loading } = this.props;
+    let { current, betStatus } = this.state;
+    if (loading) {
+      return false;
+    }
+    if (flag === 'next') {
+      current = current + 1;
+    } else {
+      current = current - 1;
+    }
+    this.setState({
+      isShowLoading: true,
+    });
+    dispatch({
+      type: 'historyBets/fetch',
+      payload: {
+        page: current,
+        size: 10,
+        sport: '1',
+        betStatus
+      },
+      callback: response => {
+        const { count, current } = response;
+        this.setState({
+          isShowLoading: false,
+          total: count,
+          current,
+          size: 10,
+        });
+      },
+    });
+
+  };
+
   render() {
     const { historyBets: { data }, loading } = this.props;
-    const { isShowLoading, betStatus} = this.state;
+    const { isShowLoading, betStatus, total, current, size} = this.state;
     return (
       <div className={styles.transaction}>
         <div className={styles['play-tab']}>
@@ -129,7 +166,9 @@ class Transaction extends PureComponent {
           </div>
           <div className={styles.main}>
               {
-                isShowLoading  ? <MbPageLoading /> :
+                isShowLoading  ? <div className={styles.loadingBox}>
+                    <Loading bg="rgba(255,255,255,.2)"  loadingIconSize="40px" color="#30717b"/>
+                  </div> :
                   (
                     data.length > 0 ?
                       <ul className={styles['list-box']}>
@@ -205,6 +244,17 @@ class Transaction extends PureComponent {
                       </div>
                   )
               }
+            {
+              total > 9 ?
+                <Pagination total={Math.ceil(total / size)}
+                            className={styles.pagination}
+                            current={current}
+                            locale={{
+                              prevText: (<span onClick={() => this.togglePage('prev')}>上一页</span>),
+                              nextText: (<span onClick={() => this.togglePage('next')}>下一页</span>),
+                            }}
+                /> : ''
+            }
           </div>
         </div>
       </div>

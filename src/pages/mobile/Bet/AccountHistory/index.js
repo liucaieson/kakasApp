@@ -148,7 +148,7 @@ class Announcement extends PureComponent {
             </tbody>
           </table>
           {
-            data.length > 0 ?
+            total > 9 ?
               <Pagination total={Math.ceil(total / size)}
                           className={styles.pagination}
                           current={current}
