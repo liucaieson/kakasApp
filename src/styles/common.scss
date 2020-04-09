@@ -308,10 +308,12 @@ $fz-color6: #516375;
   display: flex;
   align-items: center;
   padding-left: 3%;
+  flex-wrap: nowrap;
   .item {
     font-size: px2vw(13);
     line-height: 6vh;
     padding: 0 px2vw(6);
+    @include textOverflow();
   }
   .line {
     font-size: px2vw(13);

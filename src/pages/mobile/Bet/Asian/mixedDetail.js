@@ -123,7 +123,6 @@ class DetailPage extends PureComponent {
           isLoading ? <Loading bg="rgba(0,0,0,.2)" loadingIconSize="40px" color="#30717b"/> :
             <div>
               <div className={styles['game-tab']}>
-                <div className={styles['game-tab']}>
                   <div className={styles.item}>足球</div>
                   <div className={styles.line}>/</div>
                   <div className={styles.item}>混合过关</div>
@@ -139,7 +138,7 @@ class DetailPage extends PureComponent {
                           onEnd={this.setTimeFetchMatchList}/>
                     </span>
                   </div>
-                </div>
+
               </div>
               <div className={styles.main} ref={this.mainRef}>
                 <div className={styles.content}>
