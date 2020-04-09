@@ -24,7 +24,8 @@ class ShopCart extends PureComponent {
     money: '',
     modal1: false,
     resData: [],
-    showFinishBets: false
+    showFinishBets: false,
+    showSetting: false
   };
 
   timer = null;
@@ -147,6 +148,12 @@ class ShopCart extends PureComponent {
     });
   };
 
+  toggleSetting = () => {
+    this.setState({
+      showSetting : !this.state.showSetting
+    })
+  };
+
   postBet = () => {
     const { dispatch } = this.props;
     const { money } = this.state;
@@ -164,7 +171,7 @@ class ShopCart extends PureComponent {
             Toast.info('投注成功', 1.5);
             this.setState({
               showFinishBets: true,
-              resData: data[0]
+              resData: data
             })
           }
         }
@@ -193,7 +200,7 @@ class ShopCart extends PureComponent {
             Toast.info('投注成功', 1.5);
             this.setState({
               showFinishBets: true,
-              resData: data.data[0]
+              resData: data.data
             })
           }
         }
@@ -205,12 +212,20 @@ class ShopCart extends PureComponent {
     }
   };
 
+  renderSetting(){
+    return (
+      <div className={styles.setting}>
+        <div className={styles.icon} />系统将接受服务器最新赔率
+      </div>
+    )
+  }
+
   renderBetOrMixed(){
     const {
       shopCart: { mixedDishId, mixedDishInfo, type, dishInfo },
       chsDB: { chsDB },
     } = this.props;
-    const { showKeyboard, money } = this.state;
+    const { showKeyboard, money, showSetting } = this.state;
     let mixedAllOdds = 0;
     mixedDishId.map((val) => {
       mixedAllOdds += +chsDB[mixedDishInfo[val].choiceId].dish
@@ -275,7 +290,7 @@ class ShopCart extends PureComponent {
             dishInfo.code !== '200' && <div className={styles.warning}>
               <div className={styles['line-box']}>
                 <div className={styles.line}>
-                  当前不可投注：{dishInfo.message}
+                  注意：{dishInfo.message}
                 </div>
               </div>
             </div>
@@ -292,7 +307,7 @@ class ShopCart extends PureComponent {
                 <div className={styles.num} onClick={() => this.addMoney(7)}>7</div>
                 <div className={styles.num} onClick={() => this.addMoney(8)}>8</div>
                 <div className={styles.num} onClick={() => this.addMoney(9)}>9</div>
-                <div className={styles.num}/>
+                <div className={styles.num} />
                 <div className={styles.num} onClick={() => this.addMoney(0)}>0</div>
                 <div className={styles.delNum} onClick={this.backMoney}/>
               </div>
@@ -304,9 +319,14 @@ class ShopCart extends PureComponent {
               </div>
             </div> : ''
           }
+          {
+            showSetting ?
+              this.renderSetting()
+              : ''
+          }
           <div className={styles.bottom}>
             <div className={styles.del} onClick={this.allDel}>全删除</div>
-            <div className={styles.setting}/>
+            <div className={styles.setting} onClick={this.toggleSetting}/>
             <div className={styles.button} onClick={this.postBet}>
               <div className={styles.text}>{money}</div>
               <div className={styles.text}>投注</div>
@@ -419,9 +439,12 @@ class ShopCart extends PureComponent {
                         </div>
                       </div>
                     }*/}
+          {
+            showSetting ? this.renderSetting() : ''
+          }
           <div className={styles.bottom}>
             <div className={styles.del} onClick={this.allDel}>全删除</div>
-            <div className={styles.setting}/>
+            <div className={styles.setting} onClick={this.toggleSetting}/>
             <div className={styles.button} onClick={this.postMixedBet}>
               <div className={styles.text}>{money}</div>
               <div className={styles.text}>投注</div>
@@ -457,7 +480,9 @@ class ShopCart extends PureComponent {
         </div>
         {
           submitBetLoading || submitMixedLoading || checkBetLoading || checkMixedLoading ?
-            <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :
+            <div style={{width:'100%',height: '40vh'}}>
+              <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/>
+            </div>:
             (
               (choiceId > 110 ? 1 : 0) + mixedDishId.length > 0 ?
                 this.renderBetOrMixed()
@@ -472,49 +497,48 @@ class ShopCart extends PureComponent {
                         </div>
                       </div>
                     }
+                    <div className={styles.success}>
                     {
-                      showFinishBets ?   <div className={styles.success}>
-                        <div className={styles['bet-info']}>
-                          <div className={styles.infoBox}>
-                            <div className={styles.flag}>
-                              <i className={styles.icon} />
-                              {
-                                resData.typeFlag === 2 ? '下注完毕（滚球请到交易记录确认是否下注成功）':'下注成功'
-                            }
-                            </div>
-                            <div className={styles.info}>
-                              <div className={styles.type}>
-                                <span className={styles.name}>足球</span>
-                                <span className={styles.score}>（{resData.oddName}）</span>
+                      showFinishBets ?
+                       resData && resData.map((val) => (
+
+                              <div className={styles['bet-info']}>
+                                <div className={styles.infoBox}>
+                                  <div className={styles.flag}>
+                                    <i className={styles.icon} />
+                                    {
+                                      val.typeFlag === 2 ? '注单待确认（滚球请到交易记录确认是否下注成功）':'下注成功'
+                                    }
+                                  </div>
+                                  <div className={styles.info}>
+                                    <div className={styles.type}>
+                                      <span className={styles.name}>足球</span>
+                                      <span className={styles.score}>（{val.oddName}）</span>
+                                    </div>
+                                    <div className={styles.competitions}>
+                                      {val.cptName}
+                                    </div>
+                                    <div className={styles.team}>
+                                      <span className={styles.name}>{val.homeName} vs {val.awayName}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className={styles.choose}>
+                                  <span className={styles.handicap}>{val.choiceHandicap}</span>
+                                  @
+                                  <span className={styles.odds}>
+                                   {val.dish}
+                                 </span>
+                                </div>
+                                <div className={styles.money}>
+                                  投注额：{val.money}
+                                </div>
                               </div>
-                              <div className={styles.competitions}>
-                                {resData.cptName}
-                              </div>
-                              <div className={styles.team}>
-                                <span className={styles.name}>{resData.homeName} vs {resData.awayName}</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className={styles.choose}>
-                            {resData.oddName}
-                            <span className={styles.handicap}>{resData.choiceHandicap}</span>
-                            @
-                            <span className={styles.odds}>
-                            {resData.dish}
-                          </span>
-                          </div>
-                          <div className={styles.money}>
-                            投注额：{resData.money}
-                          </div>
-                        </div>
-                      </div> : ''
+
+                          )
+                        )
+                       : ''
                     }
-                    <div className={styles.bottom}>
-                      <div className={styles.setting}/>
-                      <div className={styles.button}>
-                        <div className={styles.text}>0.00</div>
-                        <div className={styles.text}>投注</div>
-                      </div>
                     </div>
                   </div>
                 )

@@ -10,7 +10,7 @@ export default {
   * dishInfo为投注项信息
   * choiceId投注项固定id
   * mixedDishId 为混合过关比赛id
-  * mixedDishInfo 是以matchId为ke的比赛数组
+  * mixedDishInfo 是以matchId为key的比赛数组
   */
 
   state: {
@@ -228,6 +228,14 @@ export default {
           },
         },
       });
+      yield put({
+        type: 'saveMixed',
+        payload: {
+          type: 1,
+          mixedDishId: [],
+          mixedDishInfo: {},
+        },
+      });
     },
     *addMixedBetShopCart({ payload, callback }, { call, put, select }) {
       if (payload.dishId === '') {
@@ -259,6 +267,14 @@ export default {
           type: payload.type,
           mixedDishId,
           mixedDishInfo,
+        },
+      });
+      yield put({
+        type: 'save',
+        payload: {
+          type: payload.type,
+          choiceId: 1,
+          dishInfo: {},
         },
       });
     },

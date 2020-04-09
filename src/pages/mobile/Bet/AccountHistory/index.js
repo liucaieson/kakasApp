@@ -96,7 +96,6 @@ class Announcement extends PureComponent {
     const { total, current, size, isShowLoading } = this.state;
     return (
       <div className={styles.accountHistory}>
-
         <div className={styles['play-tab']}>
           <Link to='/bet/transaction' className={styles.tab}
           >交易状况
