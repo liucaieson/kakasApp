@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './matchList.scss';
+import { MixedDishItemHoc } from '../Hoc/mixedDishItemHoc';
 
+
+@MixedDishItemHoc
 @connect(({ shopCart }) => ({
   shopCart,
 }))
@@ -37,20 +40,27 @@ class IndexDishItem extends PureComponent {
   /* 添加投注单到购物车
    * type =1 为单注， 2位混合过关
     * */
-  addMixedShopCart = (type, matchId, gamblingId, choiceId, id) => {
-    const { dispatch,  } = this.props;
-    dispatch({
-      type: 'shopCart/addMixedBetShopCart',
-      payload: {
-        type,
-        sport: '1',
-        dishId: id,
-        matchId,
-        gamblingId,
-        choiceId,
-      },
-    });
-  };
+ /* addMixedShopCart = (type, matchId, gamblingId, choiceId, id) => {
+    const { dispatch, shopCart : { mixedDishId, mixedDishInfo }  } = this.props;
+    if (mixedDishId.includes(matchId) && mixedDishInfo[matchId].choiceId === choiceId ) {
+      dispatch({
+        type: 'shopCart/delOneMixedBet',
+        payload: matchId
+      });
+    }else{
+      dispatch({
+        type: 'shopCart/addMixedBetShopCart',
+        payload: {
+          type,
+          sport: '1',
+          dishId: id,
+          matchId,
+          gamblingId,
+          choiceId,
+        },
+      });
+    }
+  };*/
 
  /* renderUp() {
     const { up } = this.state;
@@ -89,13 +99,13 @@ class IndexDishItem extends PureComponent {
       dish,
     } = this.props;
 
-    const {shopCart : { mixedDishId, mixedDishInfo } } = this.props;
+    const {shopCart : { mixedDishId, mixedDishInfo }, addShopCart } = this.props;
 
     return (
       <div
         className={styles.item}
         key={choiceId}
-        onClick={() => this.addMixedShopCart( 2 , matchId, gamblingId, choiceId, dishId)}
+        onClick={() => addShopCart( 2 , matchId, gamblingId, choiceId, dishId)}
       >
         <span
           className={( mixedDishInfo[matchId] &&  mixedDishInfo[matchId].choiceId === choiceId) ? `${styles.price} ${styles.active}` : styles.price}

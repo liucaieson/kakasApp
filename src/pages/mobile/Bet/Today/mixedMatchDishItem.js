@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './matchList.scss';
+import { MixedDishItemHoc } from '../Hoc/mixedDishItemHoc';
 
+
+@MixedDishItemHoc
 @connect(({ shopCart }) => ({
   shopCart,
 }))
@@ -37,7 +40,7 @@ class IndexDishItem extends PureComponent {
   /* 添加投注单到购物车
    * type =1 为单注， 2位混合过关
     * */
-  addMixedShopCart = (type, matchId, gamblingId, choiceId, id) => {
+  /*addMixedShopCart = (type, matchId, gamblingId, choiceId, id) => {
     const { dispatch,  } = this.props;
     dispatch({
       type: 'shopCart/addMixedBetShopCart',
@@ -50,7 +53,7 @@ class IndexDishItem extends PureComponent {
         choiceId,
       },
     });
-  };
+  };*/
 /*
 
   renderUp() {
@@ -91,13 +94,13 @@ class IndexDishItem extends PureComponent {
       dish,
     } = this.props;
 
-    const {shopCart : { mixedDishId, mixedDishInfo } } = this.props;
+    const {shopCart : { mixedDishId, mixedDishInfo }, addShopCart } = this.props;
 
     return (
       <div
         className={styles.item}
         key={choiceId}
-        onClick={() => this.addMixedShopCart( 2 , matchId, gamblingId, choiceId, dishId)}
+        onClick={() => addShopCart( 2 , matchId, gamblingId, choiceId, dishId)}
       >
         <span
           className={( mixedDishInfo[matchId] &&  mixedDishInfo[matchId].choiceId === choiceId) ? `${styles.price} ${styles.active}` : styles.price}

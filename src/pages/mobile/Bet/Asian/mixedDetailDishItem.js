@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './deatil.scss';
 import { dishNameMap } from '../../../../utils/utils';
+import { MixedDishItemHoc } from '../Hoc/mixedDishItemHoc'
 
+@MixedDishItemHoc
 @connect(({ shopCart }) => ({
   shopCart
 }))
@@ -35,22 +37,28 @@ class DetailDishItem extends PureComponent {
     return null;
   }
 
-
-  /* 添加投注单到购物车 */
+  /*/!* 添加投注单到购物车 *!/
   addMixedShopCart = (type, matchId, gamblingId, choiceId, id) => {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'shopCart/addMixedBetShopCart',
-      payload: {
-        type,
-        sport: '1',
-        dishId: id,
-        matchId,
-        gamblingId,
-        choiceId,
-      },
-    });
-  };
+    const { dispatch, shopCart : { mixedDishId, mixedDishInfo }  } = this.props;
+    if (mixedDishId.includes(matchId) && mixedDishInfo[matchId].choiceId === choiceId ) {
+      dispatch({
+        type: 'shopCart/delOneMixedBet',
+        payload: matchId
+      });
+    }else {
+      dispatch({
+        type: 'shopCart/addMixedBetShopCart',
+        payload: {
+          type,
+          sport: '1',
+          dishId: id,
+          matchId,
+          gamblingId,
+          choiceId,
+        },
+      });
+    }
+  };*/
 
   renderUp() {
     const { up } = this.state;
@@ -92,13 +100,13 @@ class DetailDishItem extends PureComponent {
       name
     } = this.props;
 
-    const {shopCart : { mixedDishId, mixedDishInfo } } = this.props;
+    const {shopCart : { mixedDishId, mixedDishInfo }, addShopCart } = this.props;
 
     if(oddId === '15' || oddId === '16' || oddId === '3'){
       return (
         <div key={choiceId}
              className={styles.item1}
-             onClick={() => this.addMixedShopCart( 2, matchId, gamblingId, choiceId, dishId)}
+             onClick={() => addShopCart( 2, matchId, gamblingId, choiceId, dishId)}
         >
           <div className={styles.name}>
             {
@@ -122,7 +130,7 @@ class DetailDishItem extends PureComponent {
       return (
         <div key={choiceId}
              className={styles.item2}
-             onClick={() => this.addMixedShopCart( 2 , matchId, gamblingId, choiceId, dishId)}
+             onClick={() => addShopCart( 2 , matchId, gamblingId, choiceId, dishId)}
         >
 
           <div  className={( mixedDishInfo[matchId] &&  mixedDishInfo[matchId].choiceId === choiceId)  ? `${styles.dish} ${styles.active}` : styles.dish}
@@ -141,7 +149,7 @@ class DetailDishItem extends PureComponent {
       return (
         <div key={choiceId}
              className={styles.item3}
-             onClick={() => this.addMixedShopCart( 2 , matchId, gamblingId, choiceId, dishId)}
+             onClick={() => addShopCart( 2 , matchId, gamblingId, choiceId, dishId)}
         >
           <div className={styles.name}>
             {
