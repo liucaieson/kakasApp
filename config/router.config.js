@@ -51,12 +51,13 @@ export default [
           { path: '/bet/announcement', component: './mobile/Bet/Announcement', title: '公告'},
           { path: '/bet/help', component: './mobile/Bet/Help', title: '帮助'},
           { path: '/bet/enactment', component: './mobile/Bet/Help/enactment', title: '详细设定'},
+          { path: '/bet/SportsRules', component: './mobile/Bet/Help/sportRules', title: '体育规则'},
           { path: '/bet/terms', component: './mobile/Bet/Help/terms', title: '规则与条款'},
           { path: '/bet/oddsCalc', component: './mobile/Bet/Help/oddsCalc', title: '赔率计算列表'},
           { path: '/bet/onlineService', component: './mobile/Bet/Help/onlineService', title: '在线客服24/7'},
           { path: '/bet/mixedTradeGuide', component: './mobile/Bet/Help/mixedTradeGuide', title: '混合过关交易指南'},
           { path: '/bet/accountHistory', component: './mobile/Bet/AccountHistory', title: '账户历史'},
-          { path: '/bet/Transaction', component: './mobile/Bet/Transaction', title: '账户历史'},
+          { path: '/bet/Transaction', component: './mobile/Bet/Transaction', title: '交易记录'},
         ]
       },
       { component: '404', title: '亚冠体育-页面没找到' }

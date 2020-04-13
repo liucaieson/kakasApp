@@ -37,7 +37,6 @@
   }
   .main{
     width: 100%;
-    padding-top: px2vh(14);
     .selection{
       margin:8px 0;
       width: 100%;
@@ -65,6 +64,23 @@
         /* opacity: 0.6; */
         border-radius: 3px;
       }
+    }
+    .title{
+      width: 100%;
+      line-height: 2.4;
+      font-size: px2vw(15);
+      padding-left: 2%;
+      color: white;
+      background-color: #8c7769;
+      @include border-bottom-1px(#fff);
+    }
+    .content{
+      box-sizing: border-box;
+      padding: 2px 8px;
+      text-indent: 8px;
+      width: 100%;
+      line-height: 1.5;
+      font-size: px2vw(13);
     }
 
     .table{
