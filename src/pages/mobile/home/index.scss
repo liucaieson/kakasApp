@@ -86,6 +86,14 @@
       height: px2vh(40);
       font-size: px2vw(13);
       @include border-bottom-1px(rgba(255,255,255,0.72));
+      .name{
+        width: 100%;
+        height: px2vh(40);
+        background-color: #503f32;
+        color: white;
+        line-height: px2vh(40);
+        padding-left: 2%;
+      }
       .item{
         padding-left: px2vw(6);
         background-color:#503F32;

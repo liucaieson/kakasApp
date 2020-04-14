@@ -181,6 +181,13 @@ class Home extends PureComponent {
           }
         </div>
         <div className={styles['line-box']}>
+          <Link to='/bet/gameResult'>
+            <div className={styles.line}>
+              <div className={styles.name}>
+                赛果
+              </div>
+            </div>
+          </Link>
           <div className={styles.line}>
             <div className={styles.item}>亚洲盘</div>
             <Link to='/bet/announcement' className={styles.item}>公告</Link>
@@ -198,10 +205,10 @@ class Home extends PureComponent {
                   <i className={styles['icon-active'] + ' ' + styles.home} />
                   <span className={styles['text-active']} >首页</span>
                 </Link>
-                <li className={styles.item}>
+                <Link to='/bet/live' className={styles.item}>
                   <i className={styles.icon + ' ' + styles.live } />
                   <span className={styles.text}>直播表</span>
-                </li>
+                </Link>
 
                 <li
                   className={(choiceId >110 ? 1 : 0) + mixedDishId.length > 0 ? styles['item-bet'] + ' ' + styles.betActive

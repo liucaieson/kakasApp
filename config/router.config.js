@@ -58,6 +58,8 @@ export default [
           { path: '/bet/mixedTradeGuide', component: './mobile/Bet/Help/mixedTradeGuide', title: '混合过关交易指南'},
           { path: '/bet/accountHistory', component: './mobile/Bet/AccountHistory', title: '账户历史'},
           { path: '/bet/Transaction', component: './mobile/Bet/Transaction', title: '交易记录'},
+          { path: '/bet/live', component: './mobile/Bet/Live', title: '直播表'},
+          { path: '/bet/gameResult', component: './mobile/Bet/GameResult', title: '赛果'},
         ]
       },
       { component: '404', title: '亚冠体育-页面没找到' }

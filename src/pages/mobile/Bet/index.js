@@ -54,6 +54,11 @@ class Home extends PureComponent {
         tab: 'transaction'
       })
     }
+    if(pathname.includes('transaction')){
+      this.setState({
+        tab: 'live'
+      })
+    }
 
     history.listen((location, action) => {
       const {pathname} = location;
@@ -80,6 +85,11 @@ class Home extends PureComponent {
       if(pathname.includes('transaction')){
         this.setState({
           tab: 'transaction'
+        })
+      }
+      if(pathname.includes('live')){
+        this.setState({
+          tab: 'live'
         })
       }
     });
@@ -200,11 +210,10 @@ class Home extends PureComponent {
                   <i className={styles.icon + ' ' + styles.home } />
                   <span className={styles.text} >首页</span>
                 </Link>
-                <li className={styles.item}>
-                  <i className={styles.icon + ' ' + styles.live } />
-                  <span className={styles.text}>直播表</span>
-                </li>
-
+                <Link to='/bet/live' className={styles.item}>
+                  <i className={tab === 'live' ? `${styles.live} ${styles.icon} ${styles.active}` : styles.icon + ' ' + styles.live } />
+                  <span className={ tab === 'live' ? styles.text + ' ' + styles.active : styles.text}>直播表</span>
+                </Link>
                 <li
                   className={(choiceId >110 ? 1 : 0) + mixedDishId.length > 0 ? styles['item-bet'] + ' ' + styles.betActive
                     : styles['item-bet']}

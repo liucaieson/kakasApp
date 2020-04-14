@@ -1,0 +1,43 @@
+@import "../../../../styles/utils";
+@import "../../../../styles/common";
+
+.help {
+  width: 100%;
+  position: relative;
+  padding-bottom: px2vh(70);
+  .game-tab {
+    @include game-tab-layout();
+  }
+  .list-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    .item {
+      width: calc(100% - 16px);
+      margin: 0 auto;
+      padding-left: px2vw(15);
+      margin-bottom: px2vh(8);
+      border-radius: 3px;
+      background: #f5f2f0;
+      .title {
+        color: #222;
+        position: relative;
+        height: px2vh(44);
+        word-wrap: break-word;
+        display: table-cell;
+        vertical-align: middle;
+        padding-right: 5px;
+        opacity: 0.8;
+      }
+    }
+  }
+  .main {
+    width: 100%;
+  }
+}
+
+

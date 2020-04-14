@@ -8,7 +8,7 @@ export default class SportRules extends PureComponent {
     return (
       <div className={styles.help}>
         <div className={styles['game-tab']}>
-          <div className={styles.name}>规则与条款</div>
+          <div className={styles.name}>体育规则</div>
         </div>
         <div  className={styles.main}>
           <Accordion>

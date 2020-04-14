@@ -5,15 +5,22 @@ export default {
 
   state: {
     data:[],
+    current:1,
+    count: 1,
     competitions:[]
   },
 
   effects: {
     *fetch({payload, callback}, { call, put, select }) {
-      let data = yield call(matchQuery, payload);
+      let res = yield call(matchQuery, payload);
+      const { data , current, count} = res;
       yield put({
         type: 'save',
-        payload: data,
+        payload: {
+          data,
+          current,
+          count
+        },
       });
       if(callback) callback(data)
     },
@@ -31,7 +38,9 @@ export default {
     save(state, { payload }) {
       return {
         ...state,
-        data: payload
+        data: payload.data,
+        current:payload.current,
+        count: payload.count
       };
     },
     saveCompetitions(state, { payload }) {
