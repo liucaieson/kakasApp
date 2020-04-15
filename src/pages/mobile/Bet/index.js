@@ -24,7 +24,6 @@ class Home extends PureComponent {
 
   /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
   componentDidMount() {
-    const toTop =  document.getElementById('to-top');
 
     this.fetchArea();
     const { location, history } = this.props;

@@ -89,9 +89,9 @@ class Announcement extends PureComponent {
         <div className={styles['game-tab']}>
           <div className={styles.name}>公告</div>
           <div className={styles.box}>
-              <span className={styles.search} >
+             {/* <span className={styles.search} >
 
-                </span>
+                </span>*/}
           </div>
         </div>
         {
