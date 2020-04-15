@@ -7,6 +7,8 @@ import CountDown from '../../../../components/CountDown';
 import GotoTopFooter from '../../../../components/GotoTopFooter';
 import Loading from '../../../../components/PCMask';
 
+
+
 @connect(({ competitions, loading }) => ({
   competitions,
   competitionsLoading: loading.models.competitions,

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import styles from './index.scss';
 import Link from 'umi/link';
 
-export default class passwordRecovery extends PureComponent {
+export default class Terms extends PureComponent {
 
   render() {
     return (

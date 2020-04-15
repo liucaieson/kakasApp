@@ -90,12 +90,9 @@ class Home extends PureComponent {
     });
   };
 
-  change = () => {
-    let mySelect = document.getElementById('area');
-    let index = mySelect.selectedIndex;
-    let value = mySelect.options[index].value;
+  change = (e) => {
     this.setState({
-      selectArea: value
+      selectArea: e.target.value
     })
   };
 
@@ -131,7 +128,7 @@ class Home extends PureComponent {
             competitionsLoading ? <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :
               <div>
                 <div className={styles.selection}>
-                  <select id='area' name='sports' value={selectArea} className={styles.select} onChange={this.change}>
+                  <select value={selectArea} className={styles.select} onChange={this.change}>
                     <option value={'all'} >全部</option>
                     {
                       areaId.map((item) => (

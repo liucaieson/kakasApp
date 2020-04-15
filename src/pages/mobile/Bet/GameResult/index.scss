@@ -37,6 +37,45 @@
   }
   .main{
     width: 100%;
+    .selection{
+      margin:8px 0;
+      width: 100%;
+      height: px2vh(30);
+      line-height: px2vh(30);
+      padding: 0 8px;
+      clear: both;
+      border-radius: 3px;
+      overflow: hidden;
+      background-color: #FFF;
+      box-sizing: border-box;
+      display: flex;
+      .select{
+        margin-right: px2vw(6);
+        width: 40%;
+        height: px2vh(30);
+        line-height: px2vh(30);
+        padding-left: 3px;
+        display: block;
+        color: rgba(51, 51, 51, 0.6);
+        /* font-size: 14px; */
+        /* font-weight: 900; */
+        background: url(../../../../assets/arrow_godown_b.svg) no-repeat 98%;
+        border: solid 1px rgba(0, 0, 0, 0.4);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        /* opacity: 0.6; */
+        border-radius: 3px;
+      }
+      .search{
+        width: 15%;
+        height: px2vh(30);
+        text-align: center;
+        color: #fff;
+        background-color: #725945;
+        border-radius: 4px;
+        @include border-1px(#fff,4px)
+      }
+    }
     .title{
       display: flex;
       align-items: center;
@@ -63,7 +102,6 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-
         .cptName {
           width: 100%;
           background-color: #e4e2dd;

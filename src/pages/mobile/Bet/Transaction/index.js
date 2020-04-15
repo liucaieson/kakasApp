@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import styles from './index.scss';
 import Link from 'umi/link';
 import { dishNameMap } from '../../../../utils/utils';
-import MbPageLoading from '../../../../components/MbPageLoading';
 import { Pagination } from 'antd-mobile';
 import Loading from '../../../../components/PCMask';
 
