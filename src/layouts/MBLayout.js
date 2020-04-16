@@ -92,13 +92,9 @@ class BasicLayout extends PureComponent {
 
     return (
       <LocaleProvider locale={zh_CN}>
-        <div className={styles.index} >
-          <div className={styles.topUnderContent}>
-            <div className={styles.main}>
-              <div style={{ overflowX: 'hidden', height: '100%' }}>
-                {children}
-              </div>
-            </div>
+        <div className={styles.index}>
+          <div className={styles.main}>
+            {children}
           </div>
           {
             showCart ? (<div className={styles['mask-layer']}/>) : ''
@@ -107,7 +103,7 @@ class BasicLayout extends PureComponent {
                  clsName="downSlides"
           >
             <div className={styles['bet-order']}>
-              {showCart?  <ShopCart/> : ''}
+              {showCart ? <ShopCart/> : ''}
             </div>
           </Slide>
         </div>

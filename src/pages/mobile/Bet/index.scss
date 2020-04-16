@@ -10,15 +10,15 @@
     display: flex;
     justify-content: space-between;
     background-color: #503f32;
-    height: px2vh(64);
+    height: 8vh;
     width: 100%;
     .back{
       width: 15.5%;
-      height: px2vh(64);
+      height: 8vh;
       float: left;
       position: relative;
       text-align: center;
-      line-height: px2vh(64);
+      line-height: 8vh;
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
       box-sizing: border-box;
@@ -33,8 +33,8 @@
       color: rgba(255,255,255,0.72);
       width: 23%;
       font-size: px2vw(15);
-      line-height: px2vh(64);
-      height: 64px;
+      line-height: 8vh;
+      height: 8vh;
       float: left;
       position: relative;
       text-align: center;
@@ -47,11 +47,11 @@
     }
     .header-menu{
       width: 15.5%;
-      height: px2vh(64);
+      height: 8vh;
       float: left;
       position: relative;
       text-align: center;
-      line-height: px2vh(64);
+      line-height: 8vh;
       cursor: pointer;
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;

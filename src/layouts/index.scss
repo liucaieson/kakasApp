@@ -13,20 +13,17 @@
   min-width: 100%;
   color: #ffffff;
   background: #fff;
-  .topUnderContent {
+  .main {
     width: 100%;
+    height: 100%;
     position: relative;
-    .main {
-      width: 100%;
-      height: 100%;
+    overflow-x: hidden;
+    .event-loading {
       position: relative;
-      .event-loading {
-        position: relative;
-        width: 100%;
-        height: 50px;
-        text-align: center;
-        font-size: 16px;
-      }
+      width: 100%;
+      height: 50px;
+      text-align: center;
+      font-size: 16px;
     }
   }
 }

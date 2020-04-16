@@ -7,12 +7,9 @@ export default class enactment extends PureComponent {
     type: '1'
   };
 
-  change  = () => {
-    let mySelect = document.getElementById('sports');
-    let index = mySelect.selectedIndex;
-    let value = mySelect.options[index].value;
+  change  = (e) => {
     this.setState({
-      type: value
+      type: e.target.value
     })
   };
 
@@ -161,7 +158,7 @@ export default class enactment extends PureComponent {
         </div>
         <div className={styles.main}>
           <div className={styles.selection}>
-          <select id='sports' name='sports' className={styles.select} onChange={this.change}>
+          <select value={this.state.type} className={styles.select} onChange={this.change}>
             <option value='1'>足球</option>
             <option value='2'>篮球/美式足球</option>
             <option value='3'>其他</option>

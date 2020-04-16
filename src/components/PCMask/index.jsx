@@ -6,7 +6,7 @@ export default ({bg, loadingIconSize, loadingFontSize, color, text} ) => (
       <div
         style={{
           position:'fixed',
-          top:0,
+          top:'8vh',
           right:0,
           width: '100%',
           height: '100%',
