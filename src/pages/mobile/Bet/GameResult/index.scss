@@ -133,6 +133,8 @@
               display: flex;
               align-items: center;
               height: px2vh(36);
+              overflow-wrap: break-word;
+              word-break: break-all;
             }
           }
           .all {

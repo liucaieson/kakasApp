@@ -37,12 +37,6 @@ export default {
       });
       if(callback) callback(data)
     },
-    *toggle({payload, callback}, { call, put, select }) {
-      yield put({
-        type: 'save',
-        payload: payload,
-      });
-    },
   },
 
   reducers: {

@@ -31,9 +31,8 @@ class GameResult extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'gameResult/fetchCompetitions',
+      type: 'gameResult/fetchAllCompetitions',
       payload: {
-        gg:'1',
         ...this.defaultParams,
       }
     });
