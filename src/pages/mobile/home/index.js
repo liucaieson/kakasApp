@@ -199,7 +199,6 @@ class Home extends PureComponent {
         </div>
 
         <div className={styles.menu}>
-
           <div className={styles.nav}>
             <ul>
               <Link to='/' className={styles.item}>
@@ -231,7 +230,6 @@ class Home extends PureComponent {
               </Link>
             </ul>
           </div>
-
         </div>
       </div>
     );

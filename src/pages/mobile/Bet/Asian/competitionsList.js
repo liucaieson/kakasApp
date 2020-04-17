@@ -61,6 +61,10 @@ class Home extends PureComponent {
     this.countRef = ref;
   };
 
+  /**
+   * 60s刷新比赛赔率列表
+   * @returns {boolean}
+   */
   refreshMatchOdds = () => {
     const { dispatch, competitionsLoading } = this.props;
     /* 需要节流 */
@@ -79,6 +83,9 @@ class Home extends PureComponent {
     });
   };
 
+  /**
+   * 请求联赛列表
+   */
   fetchMatchOdds = () => {
     const { dispatch } = this.props;
     dispatch({
@@ -90,6 +97,10 @@ class Home extends PureComponent {
     });
   };
 
+  /**
+   * 切换选择国家区域触发state切换联赛列表
+   * @param e
+   */
   change = (e) => {
     this.setState({
       selectArea: e.target.value

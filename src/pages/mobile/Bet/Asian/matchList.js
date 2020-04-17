@@ -14,7 +14,7 @@ import GotoTopFooter from '../../../../components/GotoTopFooter';
   userInfo,
   matchListLoading: loading.effects['matchList/fetchMatchOdds'],
 }))
-class BetPage extends PureComponent {
+class MatchList extends PureComponent {
 
   timer = null;
   state = {
@@ -27,8 +27,19 @@ class BetPage extends PureComponent {
     this.mainRef = React.createRef();
   }
 
-  /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
+  /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表
+  * 页面初始化需要请求一次联赛
+  * */
+
   componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'competitions/fetch',
+      payload: {
+        sport: '1',
+        gg: '1',
+      },
+    });
     this.fetchMatchOdds();
   }
 
@@ -67,13 +78,6 @@ class BetPage extends PureComponent {
     const { query } = location;
     const { competitionId } = query;
     dispatch({
-      type: 'competitions/fetch',
-      payload: {
-        sport: '1',
-        gg: '1',
-      },
-    });
-    dispatch({
       type: 'matchList/fetchMatchOdds',
       payload: {
         sport: '1',
@@ -86,11 +90,6 @@ class BetPage extends PureComponent {
         });
       },
     });
-  };
-
-  goBack = () => {
-    const { history } = this.props;
-    history.go(-1);
   };
 
   render() {
@@ -229,4 +228,4 @@ class BetPage extends PureComponent {
   }
 }
 
-export default BetPage;
+export default MatchList;

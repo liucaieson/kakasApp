@@ -12,6 +12,7 @@ class IndexDishItem extends PureComponent {
     prevDish: 0,
   };
 
+  /* 根据传入的dish判断赔率变化 */
   static getDerivedStateFromProps(props, state) {
     if (state.prevDish === 0) {
       return {
@@ -34,9 +35,15 @@ class IndexDishItem extends PureComponent {
     return null;
   }
 
-  /* 添加投注单到购物车
-   * type =1 为单注， 2位混合过关
-    * */
+
+  /**
+   * 添加投注单到购物车
+   * @param type type 1为单注 type2位混个过关
+   * @param matchId 比赛id
+   * @param gamblingId 盘口id
+   * @param choiceId 竟猜项id
+   * @param id 赔率id
+   */
   addShopCart = (type, matchId, gamblingId, choiceId, id) => {
     const { dispatch } = this.props;
     dispatch({
@@ -55,6 +62,10 @@ class IndexDishItem extends PureComponent {
     });
   };
 
+  /**
+   * 渲染赔率变化
+   * @returns {*}
+   */
   renderUp() {
     const { up } = this.state;
     if (up === 0) {
@@ -68,6 +79,10 @@ class IndexDishItem extends PureComponent {
     }
   }
 
+  /**
+   * 对于大小盘口的名称做额外处理
+   * @returns {*}
+   */
   renderHandicap() {
     const {
       choiceHandicap,

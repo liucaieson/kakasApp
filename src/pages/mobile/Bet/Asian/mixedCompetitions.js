@@ -90,6 +90,7 @@ class Home extends PureComponent {
     });
   };
 
+  /* 选择联赛的区域 */
   change = (e) => {
     this.setState({
       selectArea: e.target.value

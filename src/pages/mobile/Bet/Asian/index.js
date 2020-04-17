@@ -40,6 +40,9 @@ class Home extends PureComponent {
     clearInterval(this.balanceTimer);
   }
 
+  /**
+   * 请求联赛区域接口
+   */
   fetchArea = () => {
     let params = {
       sport: '1',
@@ -52,34 +55,7 @@ class Home extends PureComponent {
     });
   };
 
-  /*获取better-scroll的this，赋值给scrollWrapChild
-  * */
-  onScrollWrapRef = (ref) => {
-    this.scrollWrapChild = ref;
-  };
-
-  /* 控制盘口显示隐藏 */
-  showArea = (id) => {
-    const { showOdds } = this.state;
-    showOdds.push(id);
-    const arr = showOdds.concat();
-    this.setState({
-      showArea: arr
-    })
-  };
-
-  toggleGame = (id) => {
-    this.setState({
-      showId : id
-    })
-  };
-
   render() {
-    const {
-      userInfo: { userName, balance}, children
-    } = this.props;
-
-    const { showId } = this.state;
     return (
       <div className={styles.asian}>
         <div className={styles['game-tab']}>

@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './deatil.scss';
-import { Icon } from 'antd-mobile';
 import { calcDate2 } from '@/utils/utils';
 import Loading from '../../../../components/PCMask';
 import DishItem from './mixedDetailDishItem';
 import CountDown from '../../../../components/CountDown';
 import GotoTopFooter from '../../../../components/GotoTopFooter';
+import CollapseList from '../../../../components/CollapseList';
 
 @connect(({ matchDetail, matchAllOdds, competitions, userInfo, loading }) => ({
   matchDetail,
@@ -85,38 +85,13 @@ class DetailPage extends PureComponent {
     });
   };
 
-  goBack = () => {
-    const { history } = this.props;
-    history.go(-1);
-  };
-
-  /* 控制盘口显示隐藏 */
-  showArea = (id) => {
-    const { showOdds } = this.state;
-    showOdds.push(id);
-    const arr = showOdds.concat();
-    this.setState({
-      showArea: arr,
-    });
-  };
-
-  closeArea = (id) => {
-    const { showOdds } = this.state;
-    const index = showOdds.indexOf(id);
-    showOdds.splice(index, 1);
-    const arr = showOdds.concat();
-    this.setState({
-      showArea: arr,
-    });
-  };
-
   render() {
     const {
       matchDetail: {
         matchDetail,
       },
     } = this.props;
-    const { showOdds, isLoading } = this.state;
+    const { isLoading } = this.state;
     return (
       <div className={styles.detail} key='matchList'>
         {
@@ -154,23 +129,19 @@ class DetailPage extends PureComponent {
                 <div className={styles['all-odds']}>
                   {
                     matchDetail.odds && matchDetail.odds.map((val) => (
-                      <div className={styles['odds-box']} key={val.oddId}>
-                        <div className={styles['odds-name']}>
-                          {
-                            showOdds.includes(val.oddId) ?
-                              <div className={styles.arrow} onClick={() => this.closeArea(val.oddId)}>
-                                <Icon type="down"/>
-                              </div> :
-                              <div className={styles.arrow} onClick={() => this.showArea(val.oddId)}>
-                                <Icon type="up"/>
-                              </div>
-                          }
-                          <div className={styles.name}>{val.oddName}</div>
-                        </div>
+                      <CollapseList
+                        key={val.oddId}
+                        title={val.oddName}
+                        isArrow={true}
+                        titleStyle={{
+                          height: '6vh',
+                          lineHeight: '6vh',
+                          fontSize: '3.4vw'
+                        }}
+                      >
                         <div className={styles['odds-item']}>
                           {
-                            showOdds.includes(val.oddId) ? ''
-                              : val.chs.map((item) => (
+                             val.chs.map((item) => (
                                 <DishItem
                                   key={item.choiceId}
                                   choiceId={item.choiceId}
@@ -187,7 +158,7 @@ class DetailPage extends PureComponent {
                               ))
                           }
                         </div>
-                      </div>
+                      </CollapseList>
                     ))
                   }
                 </div>

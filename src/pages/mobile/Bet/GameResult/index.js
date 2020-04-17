@@ -10,8 +10,13 @@ let date = '';
 
 for (let i = 0; i < 7; i++) {
   date = moment().subtract(i, 'day').format('YYYY-MM-DD');
-  timeList.push(date)
+  timeList.push({
+      name:date,
+      value: date
+    }
+  )
 }
+
 
 @connect(({ gameResult, loading }) => ({
   gameResult,
@@ -20,8 +25,8 @@ for (let i = 0; i < 7; i++) {
 class GameResult extends PureComponent {
 
   state = {
-    selectCpt: '',
-    selectTime: moment().format('YYYY-MM-DD'),
+    selectCpt: null,
+    selectTime: moment().format('YYYY-MM-DD')
   };
 
   defaultParams = {
@@ -30,6 +35,7 @@ class GameResult extends PureComponent {
 
   componentDidMount() {
     const { dispatch } = this.props;
+    const { selectTime } = this.state;
     dispatch({
       type: 'gameResult/fetchAllCompetitions',
       payload: {
@@ -42,14 +48,20 @@ class GameResult extends PureComponent {
         ...this.defaultParams,
         page:1,
         size:10,
-        /*start:this.start,
-        end:this.end*/
+        start:selectTime,
+        end:selectTime
       },
     });
   }
 
+  /**
+   * 赛果分页切换
+   * @param flag 为上一个或者下一页 标记
+   * @returns {boolean}
+   */
   togglePage = (flag) => {
     const { dispatch, loading, gameResult: { count, current } } = this.props;
+    const { selectTime, selectCpt } = this.state;
     let newCurrent = 1;
     if (loading) {
       return false;
@@ -69,16 +81,27 @@ class GameResult extends PureComponent {
         page: newCurrent,
         size: 10,
         sport: '1',
+        competitions: selectCpt,
+        start: selectTime,
+        end: selectTime
       },
     });
   };
 
+  /**
+   *  切换select中的联赛
+   *  @param e
+   */
   changeCpt = (e) => {
     this.setState({
       selectCpt: e.target.value
     })
   };
 
+  /**
+   * 切换select中时间
+   * @param e
+   */
   changeTime = (e) => {
     this.setState({
       selectTime: e.target.value
@@ -114,7 +137,7 @@ class GameResult extends PureComponent {
         <div  className={styles.main}>
           <div className={styles.selection}>
             <select  value={selectCpt} className={styles.select} onChange={this.changeCpt}>
-              <option value=''>全部</option>
+              <option value='null' >全部</option>
               {
                 competitions.map((item) => (
                   <option
@@ -130,10 +153,10 @@ class GameResult extends PureComponent {
               {
                 timeList.map((item) => (
                   <option
-                    value={item}
-                    key={item}
+                    value={item.value}
+                    key={item.value}
                   >
-                    {item}
+                    {item.name}
                   </option>
                 ))
               }

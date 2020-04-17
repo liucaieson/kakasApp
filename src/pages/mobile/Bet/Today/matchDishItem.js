@@ -55,18 +55,6 @@ class IndexDishItem extends PureComponent {
     });
   };
 
-  renderUp() {
-    const { up } = this.state;
-    if (up === 0) {
-      return '';
-    }
-    if (up === 1) {
-      return <div className={styles.up}/>;
-    }
-    if (up === -1) {
-      return <div className={styles.down}/>;
-    }
-  }
 
   renderHandicap() {
     const {
@@ -108,7 +96,6 @@ class IndexDishItem extends PureComponent {
             {dish}
           </span>
           </span>
-        {this.renderUp()}
       </div>
     );
   }

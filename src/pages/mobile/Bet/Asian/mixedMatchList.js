@@ -18,7 +18,6 @@ class BetPage extends PureComponent {
 
   timer = null;
   state = {
-    showOdds: [],
     isLoading: true,
   };
 
@@ -30,13 +29,7 @@ class BetPage extends PureComponent {
 
   /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
   componentDidMount() {
-    this.fetchMatchOdds();
-  }
-
-  fetchMatchOdds = () => {
-    const { dispatch, location } = this.props;
-    const { query } = location;
-    const { competitionId } = query;
+    const { dispatch } = this.props;
     dispatch({
       type: 'competitions/fetch',
       payload: {
@@ -44,6 +37,13 @@ class BetPage extends PureComponent {
         gg: '1',
       },
     });
+    this.fetchMatchOdds();
+  }
+
+  fetchMatchOdds = () => {
+    const { dispatch, location } = this.props;
+    const { query } = location;
+    const { competitionId } = query;
     dispatch({
       type: 'matchList/fetchMatchOdds',
       payload: {
@@ -68,6 +68,10 @@ class BetPage extends PureComponent {
     this.countRef = ref;
   };
 
+  /**
+   * 60s刷新比赛列表
+   * @returns {boolean}
+   */
   refreshMatchOdds = () => {
     const { dispatch, location, matchListLoading } = this.props;
     /* 需要节流 */
@@ -87,11 +91,6 @@ class BetPage extends PureComponent {
         this.countRef.reset();
       },
     });
-  };
-
-  goBack = () => {
-    const { history } = this.props;
-    history.go(-1);
   };
 
   render() {

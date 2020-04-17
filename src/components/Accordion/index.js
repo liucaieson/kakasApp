@@ -7,16 +7,14 @@ export default class Accordion extends Component {
     isShow: false,
   };
 
- /* constructor(props) {
-    super(props);
+  componentDidMount(){
     const { defaultShow } = this.props;
-    if(defaultShow) {
+    if(defaultShow){
       this.setState({
-        isShow: defaultShow,
-      });
+        isShow: defaultShow
+      })
     }
   }
-*/
 
   toggle = () => {
     const { isShow } = this.state;
