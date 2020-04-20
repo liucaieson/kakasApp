@@ -157,7 +157,7 @@ class ShopCart extends PureComponent {
   postBet = () => {
     const { dispatch } = this.props;
     const { money } = this.state;
-    if( money > 50 && money <= 30000){
+    if( money >= 50 && money <= 30000){
       dispatch({
         type: 'shopCart/postBetOrder',
         payload: money,
@@ -500,13 +500,15 @@ class ShopCart extends PureComponent {
                     <div className={styles.success}>
                     {
                       showFinishBets ?
-                       resData && resData.map((val) => (
+                        <Fragment>{
+                          resData && resData.map((val) => (
+
                               <div className={styles['bet-info']}>
                                 <div className={styles.infoBox}>
                                   <div className={styles.flag}>
-                                    <i className={styles.icon} />
+                                    <i className={styles.icon}/>
                                     {
-                                      val.typeFlag === 2 ? '注单待确认（滚球请到交易记录确认是否下注成功）':'下注成功'
+                                      val.typeFlag === 2 ? '注单待确认（滚球请到交易记录确认是否下注成功）' : '下注成功'
                                     }
                                   </div>
                                   <div className={styles.info}>
@@ -533,8 +535,14 @@ class ShopCart extends PureComponent {
                                   投注额：{val.money}
                                 </div>
                               </div>
+
+                            )
                           )
-                        )
+                        }
+                        <div className={styles.button} onClick={this.closeShopCart}>
+                          继续投注
+                        </div>
+                        </Fragment>
                        : ''
                     }
                     </div>

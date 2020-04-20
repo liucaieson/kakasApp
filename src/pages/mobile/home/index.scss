@@ -59,7 +59,7 @@
         padding-left: 16px;
         line-height: px2vh(48);
         height: px2vh(48);
-        margin: 8px 8px 4px;
+        margin: 8px 8px;
         background-color: #f5f2f0;
         border-radius: 3px;
         width: calc(100% - 16px);
@@ -131,45 +131,45 @@
         margin: 0 !important;
         padding: 0 !important;
         display: flex;
-        .item-bet {
+        .item-bet{
           position: relative;
           width: 20%;
-          height: 6.29685vh;
+          height: px2vh(42);
           margin-right: -4px;
-          padding: 4px 0 2px 0;
+          padding: px2vh(4) 0;
           text-align: center;
           vertical-align: bottom;
           display: flex;
           align-items: center;
           flex-direction: column;
           justify-content: center;
-          background-color: #443b34;
-          .text2 {
+          background-color:#443b34;
+          .text2{
             display: block;
-            height: px2vh(14);
             width: 100%;
             font-size: px2vw(11);
             text-align: center;
             color: #FFF;
-          }
-          .cartNum {
             position: relative;
-            top: -5px;
+            bottom: px2vh(3);
+          }
+          .cartNum{
+            position: relative;
+            top: px2vh(-1);
             font-size: px2vw(22);
-            height: px2vh(22);
             font-weight: bold;
             color: white;
           }
         }
-        .betActive {
+        .betActive{
           background-color: #bc7d10;
         }
-        .item {
+        .item{
           position: relative;
           width: 20%;
-          height: 6.29685vh;
+          height: px2vh(42);
           margin-right: -4px;
-          padding: 4px 0 2px 0;
+          padding: px2vh(4) 0 px2vh(4) 0;
           text-align: center;
           background: #4b4339;
           vertical-align: bottom;
@@ -177,52 +177,29 @@
           align-items: center;
           flex-direction: column;
           justify-content: center;
-          .text-active {
+          .icon{
             display: block;
-            height: px2vh(12);
-            width: 100%;
-            font-size: px2vw(11);
-            text-align: center;
-            color: #FFF;
-          }
-          .icon-active {
-            display: block;
-            width: 100%;
-            height: px2vh(22);
-          }
-          .icon {
-            display: block;
-            width: 100%;
-            height: px2vh(22);
+            width: px2vw(18);
+            height: px2vw(18);
             opacity: 0.56;
+            background-size: contain;
           }
-          .text {
-            display: block;
-            height: px2vh(12);
-            width: 100%;
-            font-size: px2vw(11);
-            text-align: center;
-            color: #FFF;
-            opacity: 0.56;
+          .active{
+            opacity: 1!important;
           }
-          .home {
-            background: url(../../../assets/btnHome.svg) no-repeat top center
+          .home{
+            background: url(../../../assets/btnHome.svg) no-repeat
           }
-          .live {
-            background: url(../../../assets/btnSchedule.svg) no-repeat top center
+          .live{
+            background: url(../../../assets/btnSchedule.svg) no-repeat
           }
-          .bill {
-
+          .history{
+            background: url(../../../assets/btnStatement.svg) no-repeat
           }
-          .history {
-            background: url(../../../assets/btnStatement.svg) no-repeat top center
-
+          .accountRunning{
+            background: url(../../../assets/btnOpenbet.svg) no-repeat
           }
-          .accountRunning {
-            background: url(../../../assets/btnOpenbet.svg) no-repeat top center
-
-          }
-          .text {
+          .text{
             opacity: 0.56;
             display: block;
             height: px2vh(14);
@@ -230,6 +207,7 @@
             font-size: px2vw(11);
             text-align: center;
             color: #FFF;
+            margin-top: px2vh(2);
           }
         }
       }

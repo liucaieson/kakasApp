@@ -190,7 +190,7 @@
             width: 20%;
             height: px2vh(42);
             margin-right: -4px;
-            padding: 4px 0 2px 0;
+            padding: px2vh(4) 0;
             text-align: center;
             vertical-align: bottom;
             display: flex;
@@ -200,17 +200,17 @@
             background-color:#443b34;
             .text2{
               display: block;
-              height: px2vh(14);
               width: 100%;
               font-size: px2vw(11);
               text-align: center;
               color: #FFF;
+              position: relative;
+              bottom: px2vh(3);
             }
             .cartNum{
               position: relative;
-              top: -5px;
+              top: px2vh(-1);
               font-size: px2vw(22);
-              height: px2vh(22);
               font-weight: bold;
               color: white;
             }
@@ -223,7 +223,7 @@
             width: 20%;
             height: px2vh(42);
             margin-right: -4px;
-            padding: 4px 0 2px 0;
+            padding: px2vh(4) 0 px2vh(4) 0;
             text-align: center;
             background: #4b4339;
             vertical-align: bottom;
@@ -233,34 +233,25 @@
             justify-content: center;
             .icon{
               display: block;
-              width: 100%;
-              height: px2vh(22);
+              width: px2vw(18);
+              height: px2vw(18);
               opacity: 0.56;
               background-size: contain;
             }
             .active{
               opacity: 1!important;
             }
-            .text{
-              display: block;
-              height: px2vh(12);
-              width: 100%;
-              font-size: px2vw(11);
-              text-align: center;
-              color: #FFF;
-              opacity: 0.56;
-            }
             .home{
-              background: url(../../../assets/btnHome.svg) no-repeat top center
+              background: url(../../../assets/btnHome.svg) no-repeat
             }
             .live{
-              background: url(../../../assets/btnSchedule.svg) no-repeat top center
+              background: url(../../../assets/btnSchedule.svg) no-repeat
             }
             .history{
-              background: url(../../../assets/btnStatement.svg) no-repeat top center
+              background: url(../../../assets/btnStatement.svg) no-repeat
             }
             .accountRunning{
-              background: url(../../../assets/btnOpenbet.svg) no-repeat top center
+              background: url(../../../assets/btnOpenbet.svg) no-repeat
             }
             .text{
               opacity: 0.56;
@@ -270,6 +261,7 @@
               font-size: px2vw(11);
               text-align: center;
               color: #FFF;
+              margin-top: px2vh(2);
             }
           }
 

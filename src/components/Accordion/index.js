@@ -27,7 +27,7 @@ export default class Accordion extends Component {
     const { isShow } = this.state;
 
     return (
-      <div>
+      <div style={{width: '100%'}}>
         <div className={styles.title} onClick={this.toggle}>
           {this.props.children[0]}
         </div>

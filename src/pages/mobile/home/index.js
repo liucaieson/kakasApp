@@ -202,8 +202,8 @@ class Home extends PureComponent {
           <div className={styles.nav}>
             <ul>
               <Link to='/' className={styles.item}>
-                <i className={styles['icon-active'] + ' ' + styles.home}/>
-                <span className={styles['text-active']}>首页</span>
+                <i className={styles.active + ' ' + styles.icon + ' ' + styles.home}/>
+                <span className={styles.text + ' ' + styles.active}>首页</span>
               </Link>
               <Link to='/bet/live' className={styles.item}>
                 <i className={styles.icon + ' ' + styles.live}/>
