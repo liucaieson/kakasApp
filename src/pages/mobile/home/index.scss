@@ -183,21 +183,22 @@
             height: px2vw(18);
             opacity: 0.56;
             background-size: contain;
+            background-repeat: no-repeat;
           }
           .active{
             opacity: 1!important;
           }
           .home{
-            background: url(../../../assets/btnHome.svg) no-repeat
+            background-image: url(../../../assets/btnHome.svg);
           }
           .live{
-            background: url(../../../assets/btnSchedule.svg) no-repeat
+            background-image: url(../../../assets/btnSchedule.svg);
           }
           .history{
-            background: url(../../../assets/btnStatement.svg) no-repeat
+            background-image: url(../../../assets/btnStatement.svg);
           }
           .accountRunning{
-            background: url(../../../assets/btnOpenbet.svg) no-repeat
+            background-image: url(../../../assets/btnOpenbet.svg);
           }
           .text{
             opacity: 0.56;

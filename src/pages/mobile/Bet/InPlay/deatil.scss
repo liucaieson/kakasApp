@@ -13,6 +13,7 @@
     width: 100%;
     position: relative;
     background-color: #fff;
+    padding-bottom: 6.3vh;
     .content{
       height: px2vh(120);
       background-image: linear-gradient(to bottom, #3d7e61, #21241e);
@@ -104,6 +105,14 @@
         }
       }
     }
+    .liveBox{
+      width: 100%;
+      height: 60vw;
+      background-color: #232323;
+      .iframe{
+        display: inline-block;
+      }
+    }
     .all-odds{
       width: 100%;
       .odds-box{
@@ -148,6 +157,20 @@
           box-sizing: border-box;
           @include match-bet-layout();
         }
+      }
+      .info{
+        width: 100%;
+        height: 156px;
+        padding: 100px 10px 10px;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.38);
+        background: url(../../../../assets/empty-state-icon.svg) no-repeat 50% 27px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+
       }
     }
     .event-loading {

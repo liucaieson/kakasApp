@@ -34,6 +34,7 @@ export default [
           { path: '/bet/inPlay', component: './mobile/Bet/InPlay/index', title: '亚冠体育-滚球'},
           { path: '/bet/inPlayMatchList', component: './mobile/Bet/InPlay/matchList', title: '亚冠体育-滚球'},
           { path: '/bet/inPlayDetail', component: './mobile/Bet/InPlay/detail', title: '亚冠体育-滚球'},
+          { path: '/bet/inPlayLive', component: './mobile/Bet/InPlay/detailLive', title: '亚冠体育-滚球直播'},
           { path: '/bet/today', component: './mobile/Bet/Today/index', title: '亚冠体育-今日赛事'},
           { path: '/bet/todayCompetitionsList', component: './mobile/Bet/Today/competitionsList', title: '亚冠体育-今日'},
           { path: '/bet/todayMixedCompetitionsList', component: './mobile/Bet/Today/mixedCompetitions.js', title: '亚冠体育-今日混合过关'},

@@ -64,64 +64,6 @@
       }
     }
   }
-  .header-menu{
-    background-color: #503f32;
-    width: 100%;
-    @include clearfix();
-    .info{
-      background-color:#8c7769;
-      width: 100%;
-      height: px2vh(40);
-      line-height: px2vh(40);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: white;
-      @include border-bottom-1px(rgba(255,255,255,0.72));
-      .left{
-        font-size: px2vw(12);
-        padding-left: px2vw(4);
-      }
-      .right{
-        display: flex;
-        align-items: center;
-        padding-right: px2vw(4);
-        font-size: px2vw(12);
-        .rmb{
-          padding-right: px2vw(4);
-        }
-        .balance{
-          color: #f5ad35;
-        }
-        .icon{
-          padding-left: px2vw(6);
-          display: block;
-          background: url(../../../assets/reload_curr.svg) no-repeat 50% 50%;
-          width: px2vw(14);
-          height: px2vw(14);
-        }
-      }
-    }
-    .line{
-      background-color:#8c7769;
-      width: 100%;
-      height: px2vh(40);
-      font-size: px2vw(13);
-      @include border-bottom-1px(rgba(255,255,255,0.72));
-      .item{
-        padding-left: px2vw(6);
-        background-color:#8c7769;
-        float: left;
-        box-sizing: border-box;
-        width: 50%;
-        height: px2vh(40);
-        text-align: left;
-        line-height: px2vh(40);
-        color:rgba(255,255,255,0.72);
-        @include border-right-1px(rgba(255,255,255,0.72))
-      }
-    }
-  }
   .main{
     .game-tab{
       width: 100%;
@@ -237,21 +179,22 @@
               height: px2vw(18);
               opacity: 0.56;
               background-size: contain;
+              background-repeat: no-repeat;
             }
             .active{
               opacity: 1!important;
             }
             .home{
-              background: url(../../../assets/btnHome.svg) no-repeat
+              background-image: url(../../../assets/btnHome.svg);
             }
             .live{
-              background: url(../../../assets/btnSchedule.svg) no-repeat
+              background-image: url(../../../assets/btnSchedule.svg);
             }
             .history{
-              background: url(../../../assets/btnStatement.svg) no-repeat
+              background-image: url(../../../assets/btnStatement.svg);
             }
             .accountRunning{
-              background: url(../../../assets/btnOpenbet.svg) no-repeat
+              background-image: url(../../../assets/btnOpenbet.svg);
             }
             .text{
               opacity: 0.56;
