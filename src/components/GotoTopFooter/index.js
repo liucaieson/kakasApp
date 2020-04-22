@@ -3,20 +3,43 @@ import React, { PureComponent } from 'react';
 import styles from './index.scss';
 
 export default class GotoTopFooter extends PureComponent {
-  componentDidMount() {
+  state = {
+    show: true,
+  };
 
+  constructor(props) {
+    super(props);
+    this.tRef = React.createRef();
+  }
+
+  componentDidMount() {
+    if (this.tRef.current.offsetTop > 730) {
+      this.setState({
+        show: true,
+      });
+    }else{
+      this.setState({
+        show: false,
+      });
+    }
   }
 
 
-  gotoTop =  () => {
-    window.scrollTo(0,1)
+  gotoTop = () => {
+    const container = document.getElementById('betContainer');
+    container.scrollIntoView();
   };
+
   render() {
+    const { show } = this.state;
     return (
-      <div id='to-top' className={styles['to-top']} onClick={this.gotoTop}>
+
+      show &&
+      <div id='to-top' ref={this.tRef} className={styles['to-top']} onClick={this.gotoTop}>
         回到顶部
       </div>
-    )
+
+    );
   }
 }
 

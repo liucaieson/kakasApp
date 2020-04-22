@@ -148,7 +148,7 @@ class Home extends PureComponent {
       children
     } = this.props;
     return (
-      <div className={styles.bet}>
+      <div className={styles.bet} id='betContainer'>
         <div className={styles.header}>
           <div className={styles.back}
             onClick={this.goBack}
@@ -170,7 +170,7 @@ class Home extends PureComponent {
           >
             早盘
           </Link>
-          <div className={styles['header-menu']} onClick={this.toggleMenu}>
+          <div className={styles['header-menu-icon']} onClick={this.toggleMenu}>
             <span className={styles['menu-icon']} />
           </div>
         </div>
