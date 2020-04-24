@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
-
 import styles from './index.scss';
 
 export default class GotoTopFooter extends PureComponent {
+
   state = {
     show: true,
   };
@@ -23,7 +23,6 @@ export default class GotoTopFooter extends PureComponent {
       });
     }
   }
-
 
   gotoTop = () => {
     const container = document.getElementById('betContainer');
