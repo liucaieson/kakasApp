@@ -15,7 +15,7 @@
   background: #fff;
   .main {
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 7.3vh);
     position: relative;
     overflow-x: hidden;
     .event-loading {

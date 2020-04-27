@@ -13,7 +13,7 @@ export default class GotoTopFooter extends PureComponent {
   }
 
   componentDidMount() {
-    if (this.tRef.current.offsetTop > 730) {
+    if (this.tRef.current.offsetTop > 667) {
       this.setState({
         show: true,
       });
@@ -32,12 +32,10 @@ export default class GotoTopFooter extends PureComponent {
   render() {
     const { show } = this.state;
     return (
-
       show &&
       <div id='to-top' ref={this.tRef} className={styles['to-top']} onClick={this.gotoTop}>
         回到顶部
       </div>
-
     );
   }
 }

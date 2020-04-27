@@ -502,8 +502,7 @@ class ShopCart extends PureComponent {
                       showFinishBets ?
                         <Fragment>{
                           resData && resData.map((val) => (
-
-                              <div className={styles['bet-info']}>
+                              <div className={styles['bet-info']} key={val.dishId}>
                                 <div className={styles.infoBox}>
                                   <div className={styles.flag}>
                                     <i className={styles.icon}/>
@@ -535,7 +534,6 @@ class ShopCart extends PureComponent {
                                   投注额：{val.money}
                                 </div>
                               </div>
-
                             )
                           )
                         }

@@ -36,6 +36,7 @@
       .balance {
         color: #f4cd8a;
         float: left;
+        margin-right: 2px;
       }
     }
   }
@@ -134,8 +135,8 @@
         .item-bet{
           position: relative;
           width: 20%;
-          height: px2vh(42);
-          margin-right: -4px;
+          box-sizing: border-box;
+          height: 7.3vh;
           padding: px2vh(4) 0;
           text-align: center;
           vertical-align: bottom;

@@ -202,8 +202,7 @@ class Home extends PureComponent {
           {children}
         </div>
         <div className={styles.menu}>
-          <div className={styles['bottom-nav']}>
-            <div className={styles.nav}>
+          <div className={styles.nav}>
               <ul>
                 <Link to='/' className={styles.item} >
                   <i className={styles.icon + ' ' + styles.home } />
@@ -234,7 +233,6 @@ class Home extends PureComponent {
                 </Link>
               </ul>
             </div>
-          </div>
         </div>
       </div>
     );

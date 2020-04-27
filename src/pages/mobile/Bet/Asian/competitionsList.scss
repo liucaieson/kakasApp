@@ -7,7 +7,7 @@
     width: 100%;
     position: relative;
     background-color: $bg-color4;
-    padding-bottom: px2vh(64);
+    padding-bottom: px2vh(8);
     .game-tab {
       @include game-tab-layout();
     }

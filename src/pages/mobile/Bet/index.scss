@@ -1,18 +1,17 @@
 @import "../../../styles/utils";
 @import "../../../styles/common";
 @import "../../../styles/bilnk";
-.bet{
-  width: 100%;
-  height: 100%;
+
+.bet {
   color: #0b1422;
   background: #fff;
-  .header{
+  .header {
     display: flex;
     justify-content: space-between;
     background-color: #503f32;
     height: 8vh;
     width: 100%;
-    .back{
+    .back {
       width: 15.5%;
       height: 8vh;
       float: left;
@@ -22,15 +21,15 @@
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
       box-sizing: border-box;
-      .back-icon{
+      .back-icon {
         background: url(../../../assets/back_arrow.svg) no-repeat 50% 50%;
         width: 100%;
         height: 100%;
         opacity: 0.8;
       }
     }
-    .header-tab{
-      color: rgba(255,255,255,0.72);
+    .header-tab {
+      color: rgba(255, 255, 255, 0.72);
       width: 23%;
       font-size: px2vw(15);
       line-height: 8vh;
@@ -42,10 +41,10 @@
       -moz-box-sizing: border-box;
       box-sizing: border-box;
     }
-    .active{
+    .active {
       color: #eba01e;
     }
-    .header-menu-icon{
+    .header-menu-icon {
       width: 15.5%;
       height: 8vh;
       float: left;
@@ -56,7 +55,7 @@
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
       box-sizing: border-box;
-      .menu-icon{
+      .menu-icon {
         display: block;
         background: url(../../../assets/menu_icon.svg) no-repeat 50% 50%;
         width: 100%;
@@ -64,12 +63,12 @@
       }
     }
   }
-  .header-menu{
+  .header-menu {
     background-color: #503f32;
     width: 100%;
     @include clearfix();
-    .info{
-      background-color:#8c7769;
+    .info {
+      background-color: #8c7769;
       width: 100%;
       height: px2vh(40);
       line-height: px2vh(40);
@@ -77,23 +76,23 @@
       align-items: center;
       justify-content: space-between;
       color: white;
-      @include border-bottom-1px(rgba(255,255,255,0.72));
-      .left{
+      @include border-bottom-1px(rgba(255, 255, 255, 0.72));
+      .left {
         font-size: px2vw(12);
         padding-left: px2vw(4);
       }
-      .right{
+      .right {
         display: flex;
         align-items: center;
         padding-right: px2vw(4);
         font-size: px2vw(12);
-        .rmb{
+        .rmb {
           padding-right: px2vw(4);
         }
-        .balance{
+        .balance {
           color: #f5ad35;
         }
-        .icon{
+        .icon {
           padding-left: px2vw(6);
           display: block;
           background: url(../../../assets/reload_curr.svg) no-repeat 50% 50%;
@@ -102,32 +101,32 @@
         }
       }
     }
-    .line{
-      background-color:#8c7769;
+    .line {
+      background-color: #8c7769;
       width: 100%;
       height: px2vh(40);
       font-size: px2vw(13);
-      @include border-bottom-1px(rgba(255,255,255,0.72));
-      .item{
+      @include border-bottom-1px(rgba(255, 255, 255, 0.72));
+      .item {
         padding-left: px2vw(6);
-        background-color:#8c7769;
+        background-color: #8c7769;
         float: left;
         box-sizing: border-box;
         width: 50%;
         height: px2vh(40);
         text-align: left;
         line-height: px2vh(40);
-        color:rgba(255,255,255,0.72);
-        @include border-right-1px(rgba(255,255,255,0.72))
+        color: rgba(255, 255, 255, 0.72);
+        @include border-right-1px(rgba(255, 255, 255, 0.72))
       }
     }
   }
-  .main{
-    .game-tab{
+  .main {
+    .game-tab {
       width: 100%;
       height: px2vh(40);
       background-color: #503f32;
-      .name{
+      .name {
         color: white;
         font-size: px2vw(14);
         padding-left: px2vw(8);
@@ -135,10 +134,10 @@
         @include border-bottom-1px(#8e8a87);
       }
     }
-    .game-list{
+    .game-list {
       width: 100%;
-      padding-bottom:8px;
-      .item{
+      padding-bottom: 8px;
+      .item {
         padding-left: 16px;
         line-height: px2vh(48);
         height: px2vh(48);
@@ -148,127 +147,125 @@
         width: calc(100% - 16px);
         color: #453c35;
         box-sizing: border-box;
-        .ball{
-          background:url(../../../assets/soccer.svg) no-repeat 0 50%;
+        .ball {
+          background: url(../../../assets/soccer.svg) no-repeat 0 50%;
         }
-        .icon{
+        .icon {
           height: px2vh(46);
           width: px2vh(46);
           float: left;
           opacity: 0.9;
         }
-        .name{
+        .name {
           float: left;
           opacity: 0.8;
         }
       }
     }
   }
-  .menu{
+  .menu {
     position: fixed;
     bottom: 0;
     width: 100%;
     max-height: 100%;
     z-index: 3;
-    .bottom-nav{
+    .nav {
       width: 100%;
-      .nav{
-        width: 100%;
-        width: calc(100% - (env(safe-area-inset-left) + env(safe-area-inset-right)));
-        margin: 0 env(safe-area-inset-left);
-        padding-bottom: constant(safe-area-inset-bottom);
-        padding-bottom: env(safe-area-inset-bottom);
-        position: fixed;
-        bottom: 0;
-        background: #4b4339;
-        ul{
-          margin: 0!important;
-          padding: 0!important;
+      width: calc(100% - (env(safe-area-inset-left) + env(safe-area-inset-right)));
+      margin: 0 env(safe-area-inset-left);
+      padding-bottom: constant(safe-area-inset-bottom);
+      padding-bottom: env(safe-area-inset-bottom);
+      position: fixed;
+      bottom: 0;
+      background: #4b4339;
+      ul {
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex;
+        .item-bet {
+          position: relative;
+          width: 20%;
+          box-sizing: border-box;
+          height: 7.3vh;
+          padding: px2vh(4) 0;
+          text-align: center;
+          vertical-align: bottom;
           display: flex;
-          .item-bet{
-            position: relative;
-            width: 20%;
-            height: px2vh(42);
-            margin-right: -4px;
-            padding: px2vh(4) 0;
+          align-items: center;
+          flex-direction: column;
+          justify-content: center;
+          background-color: #443b34;
+          .text2 {
+            display: block;
+            width: 100%;
+            font-size: px2vw(11);
             text-align: center;
-            vertical-align: bottom;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            justify-content: center;
-            background-color:#443b34;
-            .text2{
-              display: block;
-              width: 100%;
-              font-size: px2vw(11);
-              text-align: center;
-              color: #FFF;
-              position: relative;
-              bottom: px2vh(3);
-            }
-            .cartNum{
-              position: relative;
-              top: px2vh(-1);
-              font-size: px2vw(22);
-              font-weight: bold;
-              color: white;
-            }
-          }
-          .betActive{
-            background-color: #bc7d10;
-          }
-          .item{
+            color: #FFF;
             position: relative;
-            width: 20%;
-            height: px2vh(42);
-            margin-right: -4px;
-            padding: px2vh(4) 0 px2vh(4) 0;
-            text-align: center;
-            background: #4b4339;
-            vertical-align: bottom;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            justify-content: center;
-            .icon{
-              display: block;
-              width: px2vw(18);
-              height: px2vw(18);
-              opacity: 0.56;
-              background-size: contain;
-              background-repeat: no-repeat;
-            }
-            .active{
-              opacity: 1!important;
-            }
-            .home{
-              background-image: url(../../../assets/btnHome.svg);
-            }
-            .live{
-              background-image: url(../../../assets/btnSchedule.svg);
-            }
-            .history{
-              background-image: url(../../../assets/btnStatement.svg);
-            }
-            .accountRunning{
-              background-image: url(../../../assets/btnOpenbet.svg);
-            }
-            .text{
-              opacity: 0.56;
-              display: block;
-              height: px2vh(14);
-              width: 100%;
-              font-size: px2vw(11);
-              text-align: center;
-              color: #FFF;
-              margin-top: px2vh(2);
-            }
+            bottom: px2vh(3);
           }
-
+          .cartNum {
+            position: relative;
+            top: px2vh(-1);
+            font-size: px2vw(22);
+            font-weight: bold;
+            color: white;
+          }
         }
+        .betActive {
+          background-color: #bc7d10;
+        }
+        .item {
+          position: relative;
+          width: 20%;
+          height: px2vh(42);
+          margin-right: -4px;
+          padding: px2vh(4) 0 px2vh(4) 0;
+          text-align: center;
+          background: #4b4339;
+          vertical-align: bottom;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: center;
+          .icon {
+            display: block;
+            width: px2vw(18);
+            height: px2vw(18);
+            opacity: 0.56;
+            background-size: contain;
+            background-repeat: no-repeat;
+          }
+          .active {
+            opacity: 1 !important;
+          }
+          .home {
+            background-image: url(../../../assets/btnHome.svg);
+          }
+          .live {
+            background-image: url(../../../assets/btnSchedule.svg);
+          }
+          .history {
+            background-image: url(../../../assets/btnStatement.svg);
+          }
+          .accountRunning {
+            background-image: url(../../../assets/btnOpenbet.svg);
+          }
+          .text {
+            opacity: 0.56;
+            display: block;
+            height: px2vh(14);
+            width: 100%;
+            font-size: px2vw(11);
+            text-align: center;
+            color: #FFF;
+            margin-top: px2vh(2);
+          }
+        }
+
       }
     }
+
   }
 
 }
