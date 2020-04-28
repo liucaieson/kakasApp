@@ -8,6 +8,7 @@ import DishItem from './mixedDetailDishItem';
 import CountDown from '../../../../components/CountDown';
 import GotoTopFooter from '../../../../components/GotoTopFooter';
 import CollapseList from '../../../../components/CollapseList';
+import Breadcrumbs from '../../../../components/Breadcrumbs';
 
 @connect(({ matchDetail, matchAllOdds, competitions, userInfo, loading }) => ({
   matchDetail,
@@ -86,11 +87,6 @@ class DetailPage extends PureComponent {
     });
   };
 
-  goBack = () => {
-    const { history } = this.props;
-    history.go(-1);
-  };
-
   render() {
     const {
       matchDetail: {
@@ -104,13 +100,15 @@ class DetailPage extends PureComponent {
           isLoading ? <Loading bg="rgba(0,0,0,.2)" loadingIconSize="40px" color="#30717b"/> :
             <div>
               <div className={styles['game-tab']}>
-                <div className={styles['game-tab']}>
-                  <div className={styles.item}>足球</div>
-                  <div className={styles.line}>/</div>
+                <Breadcrumbs
+                  separator='/'
+                >
+                  <span>足球</span>
                   <div className={styles.item}>混合过关</div>
-                  <div className={styles.line}>/</div>
-                  <div
-                    className={styles.item}>{matchDetail.cptName}</div>
+                  <div className={styles.item}>
+                    {matchDetail.cptName}
+                    </div>
+                </Breadcrumbs>
                   <div className={styles.box}>
                     <span className={styles.time} onClick={this.refreshMatchOdds}>
                         <CountDown
@@ -119,7 +117,6 @@ class DetailPage extends PureComponent {
                           onEnd={this.setTimeFetchMatchList}/>
                       </span>
                   </div>
-                </div>
               </div>
               <div className={styles.main} ref={this.mainRef}>
                 <div className={styles.content}>

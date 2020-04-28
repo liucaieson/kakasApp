@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './deatil.scss';
-import { Icon } from 'antd-mobile';
 import { calcDate2 } from '@/utils/utils';
 import Loading from '../../../../components/PCMask';
 import DishItem from './detailDishItem';
 import CountDown from '../../../../components/CountDown';
 import GotoTopFooter from '../../../../components/GotoTopFooter';
 import CollapseList from '../../../../components/CollapseList';
+import Breadcrumbs from '../../../../components/Breadcrumbs';
 
 @connect(({ matchDetail, matchAllOdds, competitions, userInfo, loading }) => ({
   matchDetail,
@@ -21,7 +21,6 @@ class DetailPage extends PureComponent {
   timer = null;
   balanceTimer = null;
   state = {
-    showOdds: [],
     isLoading: true,
   };
 
@@ -86,35 +85,32 @@ class DetailPage extends PureComponent {
     });
   };
 
-  goBack = () => {
-    const { history } = this.props;
-    history.go(-1);
-  };
-
   render() {
     const {
       matchDetail: {
         matchDetail,
       },
     } = this.props;
-    const { showOdds, isLoading } = this.state;
+    const {  isLoading } = this.state;
     return (
       <div className={styles.detail} key='matchList'>
         {
           isLoading ? <Loading bg="rgba(255,255,255,.2)" loadingIconSize="40px" color="#30717b"/> :
             <div>
                 <div className={styles['game-tab']}>
-                  <div className={styles.item}>足球</div>
-                  <div className={styles.line}>/</div>
-                  <div
-                    className={styles.item}>{matchDetail.cptName}</div>
+                  <Breadcrumbs
+                    separator='/'
+                  >
+                    <span>足球</span>
+                    <span className={styles.item}>{matchDetail.cptName}</span>
+                  </Breadcrumbs>
                   <div className={styles.box}>
                     <span className={styles.time} onClick={this.refreshMatchOdds}>
-                        <CountDown
-                          onCountDownRef={this.onCountDownRef}
-                          time='60'
-                          onEnd={this.setTimeFetchMatchList}/>
-                      </span>
+                       <CountDown
+                         onCountDownRef={this.onCountDownRef}
+                         time='60'
+                         onEnd={this.setTimeFetchMatchList} />
+                   </span>
                   </div>
                 </div>
               <div className={styles.main} ref={this.mainRef}>

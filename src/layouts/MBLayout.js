@@ -8,6 +8,7 @@ import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import styles from './index.scss';
 import Slide from '../components/slideAnimate';
 import ShopCart from './ShopCart/index';
+import WithErrorHandler from '../components/ErrorHandler';
 
 NProgress.configure({ showSpinner: false });
 
@@ -92,24 +93,24 @@ class BasicLayout extends PureComponent {
 
     return (
       <LocaleProvider locale={zh_CN}>
-        <div className={styles.index}>
-          <div className={styles.main}>
-            {children}
-          </div>
-          {
-            showCart ? (<div className={styles['mask-layer']}/>) : ''
-          }
-          <Slide come={showCart}
-                 clsName="downSlides"
-          >
-            <div className={styles['bet-order']}>
-              {showCart ? <ShopCart/> : ''}
+          <div className={styles.index}>
+            <div className={styles.main}>
+              {children}
             </div>
-          </Slide>
-        </div>
+            {
+              showCart ? (<div className={styles['mask-layer']}/>) : ''
+            }
+            <Slide come={showCart}
+                   clsName="downSlides"
+            >
+              <div className={styles['bet-order']}>
+                {showCart ? <ShopCart/> : ''}
+              </div>
+            </Slide>
+          </div>
       </LocaleProvider>
     );
   }
 }
 
-export default withRouter(connect(({ app, loading }) => ({ app, loading }))(BasicLayout));
+export default withRouter(connect(({ app, loading }) => ({ app, loading }))(WithErrorHandler(BasicLayout)));

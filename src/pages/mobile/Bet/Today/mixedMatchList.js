@@ -8,6 +8,7 @@ import DishItem from './mixedMatchDishItem';
 import moment from 'moment';
 import CountDown from '../../../../components/CountDown';
 import GotoTopFooter from '../../../../components/GotoTopFooter';
+import Breadcrumbs from '../../../../components/Breadcrumbs';
 
 @connect(({ matchList, userInfo, competitions, loading }) => ({
   matchList,
@@ -93,11 +94,6 @@ class BetPage extends PureComponent {
     });
   };
 
-  goBack = () => {
-    const { history } = this.props;
-    history.go(-1)
-  };
-
   render() {
     const {
       location,
@@ -111,15 +107,20 @@ class BetPage extends PureComponent {
     return (
       <div className={styles.matchList}>
         <div className={styles['game-tab']}>
-          <div className={styles.item}>足球</div>
-          <div className={styles.line}>/</div>
-          <div className={styles.item}>{competitionsMap[competitionId] && competitionsMap[competitionId].competitionName}</div>
+          <Breadcrumbs
+            separator='/'
+          >
+            <span>足球</span>
+            <span>
+              {competitionsMap[competitionId] && competitionsMap[competitionId].competitionName}
+            </span>
+          </Breadcrumbs>
           <div className={styles.box}>
             <span className={styles.time} onClick={this.refreshMatchOdds}>
               <CountDown
                 onCountDownRef={this.onCountDownRef}
                 time='60'
-                onEnd={this.setTimeFetchMatchList}/>
+                onEnd={this.setTimeFetchMatchList} />
             </span>
           </div>
         </div>
@@ -136,7 +137,6 @@ class BetPage extends PureComponent {
         {
           isLoading ?  <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b" />  :
         <div className={styles.main} ref={this.mainRef}>
-          <div>
             {
               times.map((val) => (
                 <div key={val}>
@@ -231,7 +231,6 @@ class BetPage extends PureComponent {
               ))
             }
             <GotoTopFooter/>
-          </div>
         </div>
         }
       </div>

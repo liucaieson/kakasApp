@@ -8,7 +8,7 @@
     position: relative;
     background-color: $bg-color4;
     .game-tab {
-      @include game-tab-layout();
+      @include breadcrumbs-layout();
     }
     .play-tab{
       width: 100%;

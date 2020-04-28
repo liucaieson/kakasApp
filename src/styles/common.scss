@@ -42,23 +42,6 @@ $fz-color6: #516375;
   z-index: 10;
 }
 
-@mixin betBtn {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  transition: all .5s;
-  cursor: pointer;
-  background: transparent;
-  position: absolute;
-  color: white;
-  font-size: 12px;
-  text-align: center;
-  line-height: 20px;
-  border-radius: 10%;
-}
 
 @mixin up($right:20% , $top: 50%) {
   width: 13px;
@@ -92,6 +75,7 @@ $fz-color6: #516375;
   transform: translateY(-55%);
 }
 
+/* 比赛列表页面比赛信息的公共样式 */
 @mixin match-info-layout {
   color: #0b1422;
   width: 46%;
@@ -168,6 +152,7 @@ $fz-color6: #516375;
   }
 }
 
+/* 每个投注项目的布局 */
 @mixin dish-box($width: 64) {
   width: px2vw($width);
   font-weight: 700;
@@ -195,7 +180,7 @@ $fz-color6: #516375;
 
 }
 
-/* 比赛赔率表格的公共css */
+/* detail页面比赛玩法的公共css */
 @mixin match-bet-layout {
   .item1 {
     width: 50%;
@@ -300,7 +285,8 @@ $fz-color6: #516375;
 
 }
 
-@mixin game-tab-layout{
+/* 每个页面页头的面包屑的布局 */
+@mixin breadcrumbs-layout{
   width: 100%;
   height: px2vh(40);
   background-color: #503f32;
@@ -309,18 +295,6 @@ $fz-color6: #516375;
   align-items: center;
   padding-left: 3%;
   flex-wrap: nowrap;
-  .item {
-    font-size: px2vw(13);
-    line-height: 6vh;
-    padding: 0 px2vw(6);
-    @include textOverflow();
-  }
-  .line {
-    font-size: px2vw(13);
-    line-height: 6vh;
-    padding: 0 px2vw(6);
-    color: #abd492;
-  }
   .box{
     flex: 1;
     .time{

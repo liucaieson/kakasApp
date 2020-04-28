@@ -4,6 +4,7 @@ import ErrorFallBackComponent from '../ErrorFallBackComponent/index'
 
 export default function withErrorHandler (Component) {
   class WithErrorHandler extends React.Component {
+
     constructor () {
       super();
       // Construct the initial state
@@ -46,6 +47,6 @@ export default function withErrorHandler (Component) {
     }
   }
 
-  WithErrorHandler.displayName = `withErrorHandler(${Component.displayName || Component.name || "Component"})`
+  WithErrorHandler.displayName = `withErrorHandler(${Component.displayName || Component.name || "Component"})`;
   return WithErrorHandler
 }

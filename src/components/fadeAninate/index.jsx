@@ -12,7 +12,7 @@ import { TransitionGroup, CSSTransition,Transition } from "react-transition-grou
 
 class Fade extends    PureComponent {
 
-  done =() => {
+  done = () => {
 
   };
   addaddEndListener = (node) => { //原生时间transition运动的事件

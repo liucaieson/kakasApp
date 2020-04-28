@@ -8,7 +8,7 @@
   color: #0b1422;
   background: #fff;
   .game-tab {
-    @include game-tab-layout();
+    @include breadcrumbs-layout();
   }
   .main {
     width: 100%;

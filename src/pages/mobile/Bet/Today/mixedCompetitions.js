@@ -6,6 +6,7 @@ import moment from 'moment';
 import CountDown from '../../../../components/CountDown';
 import Loading from '../../../../components/PCMask';
 import GotoTopFooter from '../../../../components/GotoTopFooter';
+import Breadcrumbs from '../../../../components/Breadcrumbs';
 
 @connect(({ area, matchAllOdds, competitions, loading }) => ({
   matchAllOdds,
@@ -101,7 +102,11 @@ class Home extends PureComponent {
       <div className={styles.box} key='home'>
         <div className={styles.main} ref={this.mainRef}>
           <div className={styles['game-tab']}>
-            <div className={styles.name}>足球</div>
+            <Breadcrumbs
+              separator='/'
+            >
+              <span>足球</span>
+            </Breadcrumbs>
             <div className={styles.box}>
               <span className={styles.time} onClick={this.refreshMatchOdds}>
                   <CountDown

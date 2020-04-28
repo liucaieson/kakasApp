@@ -9,7 +9,7 @@
     background-color: $bg-color4;
     padding-bottom: px2vh(8);
     .game-tab {
-      @include game-tab-layout();
+      @include breadcrumbs-layout();
     }
     .play-tab{
       width: 100%;

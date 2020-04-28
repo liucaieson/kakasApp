@@ -8,6 +8,7 @@ import DishItem from './matchDishItem';
 import moment from 'moment';
 import CountDown from '../../../../components/CountDown';
 import GotoTopFooter from '../../../../components/GotoTopFooter';
+import Breadcrumbs from '../../../../components/Breadcrumbs';
 
 @connect(({ matchList, userInfo, competitions, loading }) => ({
   matchList,
@@ -114,11 +115,14 @@ class BetPage extends PureComponent {
     return (
       <div className={styles.matchList} key='matchList'>
         <div className={styles['game-tab']}>
-          <div className={styles.item}>足球</div>
-          <div className={styles.line}>/</div>
-          <div
-            className={styles.item}>{competitionsMap[competitionId] && competitionsMap[competitionId].competitionName}
-          </div>
+          <Breadcrumbs
+            separator='/'
+          >
+            <span>足球</span>
+            <span className={styles.item}>
+              {competitionsMap[competitionId] && competitionsMap[competitionId].competitionName}
+            </span>
+          </Breadcrumbs>
           <div className={styles.box}>
             <span className={styles.time} onClick={this.refreshMatchOdds}>
               <CountDown

@@ -1,0 +1,44 @@
+@import "../../styles/common";
+@import "../../styles/utils";
+
+
+/* 每个页面页头的面包屑的布局 */
+.breadcrumbs{
+  width: 100%;
+  height: px2vh(40);
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  .item {
+    font-size: px2vw(13);
+    line-height: 6vh;
+    padding: 0 px2vw(6);
+    @include textOverflow();
+  }
+  .line {
+    font-size: px2vw(13);
+    line-height: 6vh;
+    padding: 0 px2vw(6);
+    color: #abd492;
+    &:last-child{
+      display: none;
+    }
+  }
+  .box{
+    flex: 1;
+    .time{
+      float: right;
+      margin-right: px2vw(10);
+      background: url(../../assets/button_login.svg) no-repeat 50%;
+      background-size: 30px 32px;
+      height: 48px;
+      width: 48px;
+      text-align: center;
+      vertical-align: middle;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: px2vw(10);
+    }
+  }
+}

@@ -14,7 +14,7 @@
       background-size: cover;
       margin-right: 4px;
     }
-    @include game-tab-layout();
+    @include breadcrumbs-layout();
   }
   .list-box {
     display: flex;

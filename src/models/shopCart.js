@@ -243,6 +243,10 @@ export default {
       }
       let mixedDishId = yield select(state => state.shopCart.mixedDishId);
       let mixedDishInfo = yield select(state => state.shopCart.mixedDishInfo);
+      if(mixedDishId.length >= 6 ){
+        Toast.info('混合过关最多选择6注', 2);
+        return;
+      }
       /* 储存以choiceId为key的盘口竟猜项数据 */
       if (mixedDishId.includes(payload.matchId)) {
         mixedDishInfo[payload.matchId] = {

@@ -6,7 +6,7 @@
   position: relative;
   padding-bottom: px2vh(70);
   .game-tab {
-    @include game-tab-layout();
+    @include breadcrumbs-layout();
   }
   .main{
     width: 100%;

@@ -500,7 +500,8 @@ class ShopCart extends PureComponent {
                     <div className={styles.success}>
                     {
                       showFinishBets ?
-                        <Fragment>{
+                        <Fragment>
+                          {
                           resData && resData.map((val) => (
                               <div className={styles['bet-info']} key={val.dishId}>
                                 <div className={styles.infoBox}>
@@ -530,13 +531,13 @@ class ShopCart extends PureComponent {
                                    {val.dish}
                                  </span>
                                 </div>
-                                <div className={styles.money}>
-                                  投注额：{val.money}
-                                </div>
                               </div>
                             )
                           )
                         }
+                          <div className={styles['bet-amount']}>
+                            总投注额：{resData[0].money}
+                          </div>
                         <div className={styles.button} onClick={this.closeShopCart}>
                           继续投注
                         </div>

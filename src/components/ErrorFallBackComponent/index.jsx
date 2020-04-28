@@ -6,7 +6,7 @@ class Page extends PureComponent {
     const  { error, errorInfo } = this.props;
     return (
       <div style={{textAlign: 'center'}}>
-        <span>请告诉我们的程序员，你丫的程序出bug啦！！！！</span>
+        <span>页面崩了</span>
         <span>{error}</span>
         <span>{errorInfo}</span>
       </div>
