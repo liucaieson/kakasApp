@@ -195,6 +195,7 @@
           flex-direction: column;
           justify-content: center;
           background-color: #443b34;
+          overflow: hidden;
           .text2 {
             display: block;
             width: 100%;
@@ -211,6 +212,37 @@
             font-weight: bold;
             color: white;
           }
+          .item-bet-animate{
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 1;
+            .circle1{
+              position: absolute;
+              display: block;
+              top: 0;
+              left: 0;
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              background-color: rgba(255,255,255,0.8);
+              opacity: 0;
+            }
+            .circle2{
+              position: absolute;
+              display: block;
+              top: 0;
+              left: 0;
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              background-color: rgba(255,255,255,0.8);
+              opacity: 0;
+            }
+          }
         }
         .betActive {
           background-color: #bc7d10;
@@ -218,16 +250,16 @@
         .item {
           position: relative;
           width: 20%;
-          height: px2vh(42);
-          margin-right: -4px;
-          padding: px2vh(4) 0 px2vh(4) 0;
+          box-sizing: border-box;
+          height: 7.3vh;
+          padding: px2vh(4) 0;
           text-align: center;
-          background: #4b4339;
           vertical-align: bottom;
           display: flex;
           align-items: center;
           flex-direction: column;
           justify-content: center;
+          background-color:#443b34;
           .icon {
             display: block;
             width: px2vw(18);
@@ -262,10 +294,23 @@
             margin-top: px2vh(2);
           }
         }
-
       }
     }
 
   }
 
+}
+
+@keyframes bet-animate {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
 }

@@ -33,9 +33,11 @@ class Home extends PureComponent {
     });
     setTimeout(() => {
       this.setState({
-        data: ['https://res.cloudinary.com/dwgybue2t/image/upload/v1581682664/ad_pw_05_cn_vdndya.jpg',
+        data: [
+          'https://res.cloudinary.com/dwgybue2t/image/upload/v1581682664/ad_pw_05_cn_vdndya.jpg',
           'https://res.cloudinary.com/dwgybue2t/image/upload/v1581682659/ad_pw_03_cn_nr7gir.jpg',
-          'https://res.cloudinary.com/dwgybue2t/image/upload/v1581682651/ad_pw_01_cn_svn8qh.jpg'],
+          'https://res.cloudinary.com/dwgybue2t/image/upload/v1581682651/ad_pw_01_cn_svn8qh.jpg'
+        ],
       });
     }, 100);
   }

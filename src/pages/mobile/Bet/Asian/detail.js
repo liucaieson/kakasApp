@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './deatil.scss';
-import { Icon } from 'antd-mobile';
 import { calcDate2 } from '@/utils/utils';
 import Loading from '../../../../components/PCMask';
 import DishItem from './detailDishItem';
@@ -22,7 +21,6 @@ class DetailPage extends PureComponent {
   timer = null;
   balanceTimer = null;
   state = {
-    showOdds: [],
     isLoading: true,
   };
 
@@ -125,7 +123,6 @@ class DetailPage extends PureComponent {
                   <span>足球</span>
                   <span>{matchDetail.cptName}</span>
                 </Breadcrumbs>
-
                   <div className={styles.box}>
                     <span className={styles.time} onClick={this.refreshMatchOdds}>
                         <CountDown
@@ -134,7 +131,6 @@ class DetailPage extends PureComponent {
                           onEnd={this.setTimeFetchMatchList}/>
                     </span>
                   </div>
-
               </div>
               <div className={styles.main} ref={this.mainRef}>
                 <div className={styles.content}>

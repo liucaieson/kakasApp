@@ -94,6 +94,40 @@ $fz-color6: #516375;
   }
 }
 
+/* 联赛列表的联赛名称布局 */
+@mixin competitions-name-layout{
+  font-size: px2vw(15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 16px;
+  line-height: px2vh(48);
+  height: px2vh(48);
+  margin: 8px 8px 0;
+  background-color: #f5f2f0;
+  border-radius: 3px;
+  width: calc(100% - 16px);
+  color: #453c35;
+  box-sizing: border-box;
+  .name {
+    opacity: 0.8;
+    @include textOverflow();
+  }
+  .count {
+    width: px2vw(59);
+    height: px2vh(48);
+    color: #453c35;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    border-radius: 0 3px 3px 0;
+    background: rgba(233, 228, 226, 0.4);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+
 /* 比赛列表页面的投注项布局 */
 @mixin match-list-page-dish-layout {
   width: 27%;
@@ -177,7 +211,6 @@ $fz-color6: #516375;
     font-size: px2vw(13);
     line-height: 1.5;
   }
-
 }
 
 /* detail页面比赛玩法的公共css */

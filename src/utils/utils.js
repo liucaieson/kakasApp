@@ -112,4 +112,17 @@ export const  groupSplit =  (arr, size) => {
   return r;
 }
 
+export function getTimeout(delays, durations) {                                      //从Vue源码里拷贝出来的代码的，获取动画完成的总时间，返回ms格式
+  while (delays.length < durations.length) {
+    delays = delays.concat(delays);
+  }
+  return Math.max.apply(null, durations.map(function (d, i) {
+    return toMs(d) + toMs(delays[i])
+  }))
+}
+
+export function toMs(s) {
+  return Number(s.slice(0, -1)) * 1000
+}
+
 

@@ -93,21 +93,21 @@ class BasicLayout extends PureComponent {
 
     return (
       <LocaleProvider locale={zh_CN}>
-          <div className={styles.index}>
-            <div className={styles.main}>
-              {children}
-            </div>
-            {
-              showCart ? (<div className={styles['mask-layer']}/>) : ''
-            }
-            <Slide come={showCart}
-                   clsName="downSlides"
-            >
-              <div className={styles['bet-order']}>
-                {showCart ? <ShopCart/> : ''}
-              </div>
-            </Slide>
-          </div>
+         <div className={styles.index}>
+           <div className={styles.main}>
+             {children}
+           </div>
+           {
+             showCart ? (<div className={styles['mask-layer']}/>) : ''
+           }
+           <Slide come={showCart}
+                  clsName="downSlides"
+           >
+             <div className={styles['bet-order']}>
+               {showCart ? <ShopCart/> : ''}
+             </div>
+           </Slide>
+         </div>
       </LocaleProvider>
     );
   }

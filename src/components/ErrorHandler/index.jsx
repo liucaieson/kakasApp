@@ -42,7 +42,6 @@ export default function withErrorHandler (Component) {
           />
         )
       }
-
       return <Component {...this.props} />
     }
   }

@@ -360,6 +360,19 @@ td{
   transform: translateY(0);
 }
 
+/* 购物车数据增加动画*/
+.wave-enter {
+  transform: scale(0.5);
+  opacity: 0;
+}
+.wave-enter-active {
+  opacity: 1;
+}
+.wave-enter-done {
+  transform: scale(3);
+  opacity: 0;
+}
+
 /*由下至上滑动*/
 .downSlides-enter {
   transform: translateY(100%)!important;
@@ -541,5 +554,28 @@ td{
   margin-top: 1vh;
 }
 */
+
+/* 水波动画的css */
+.bet-wave-animate1{
+  animation: bet-animate .8s 0s forwards;
+}
+.bet-wave-animate2{
+  animation: bet-animate .8s .2s forwards;
+}
+
+
+@keyframes bet-animate {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
 
 
