@@ -22,12 +22,20 @@ const betTypeMap = {
   loading: loading.models.historyBets,
 }))
 class Transaction extends PureComponent {
+
+  /**
+   *
+   * @type {{isShowLoading: boolean 请求接口的loading效果 ,
+   * total: number 请求数据的总数,
+   * current: number 当前页码,
+   * size: number 每页条数,
+   * betStatus: string 请求的历史记录的状态结算或者未结算}}
+   */
   state = {
     isShowLoading: true,
     total: 1,
     current: 1,
     size: 10,
-    showMatch: [],
     betStatus: '',
   };
 

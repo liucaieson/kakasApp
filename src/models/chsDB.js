@@ -1,4 +1,4 @@
-// 保存比赛信息
+// 保存比赛赔率信息
 export default {
   namespace: 'chsDB',
 
@@ -14,7 +14,6 @@ export default {
         payload: payload,
       });
     },
-
   },
 
   reducers: {

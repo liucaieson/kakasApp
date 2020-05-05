@@ -64,6 +64,7 @@ class Home extends PureComponent {
 
   refreshMatchOdds = () => {
     const { dispatch, competitionsLoading } = this.props;
+    console.log(competitionsLoading,this.props)
     /* 需要节流 */
     if(competitionsLoading){
       return false

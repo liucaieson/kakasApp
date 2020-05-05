@@ -104,7 +104,7 @@ class BasicLayout extends PureComponent {
                   clsName="downSlides"
            >
              <div className={styles['bet-order']}>
-               {showCart ? <ShopCart/> : ''}
+               { showCart && <ShopCart />}
              </div>
            </Slide>
          </div>

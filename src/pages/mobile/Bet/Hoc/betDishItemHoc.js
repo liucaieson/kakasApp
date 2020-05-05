@@ -22,7 +22,7 @@ export const BetDishItemHoc = (Wrapper) => {
           matchId,
           gamblingId,
           choiceId,
-        },
+        }
       });
     };
 

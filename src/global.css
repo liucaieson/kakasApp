@@ -375,7 +375,7 @@ td{
 
 /*由下至上滑动*/
 .downSlides-enter {
-  transform: translateY(100%)!important;
+ transform: translateY(100%)!important;
 }
 .downSlides-enter-active {
   transform: translateY(0)!important;
@@ -386,15 +386,17 @@ td{
   transition: all 400ms;
 }
 .downSlides-exit {
-  transform: translateY(0)!important;
+ transform: translateY(0)!important;
 }
 .downSlides-exit-active {
   transform: translateY(100%)!important;
   transition: all 400ms;
 }
+
 .downSlides-exit-done {
   transform: translateY(100%)!important;
 }
+
 
 
 /* 路由前进时的入场/离场动画 */

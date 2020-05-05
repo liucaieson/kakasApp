@@ -15,7 +15,6 @@ export default {
     *fetch({payload, callback}, { call, put, select }) {
       let data = yield call(getMessage, payload);
       const annData = yield select( state => state.announcement);
-
       if(data.current === 1){
         yield put({
           type: 'save',

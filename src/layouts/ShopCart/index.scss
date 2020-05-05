@@ -4,6 +4,7 @@
 .money-wrap {
   width: 100%;
   min-height: 35vh;
+  max-height: 100vh;
   .header {
     width: 100%;
     display: flex;
@@ -11,7 +12,7 @@
     justify-content: center;
     font-size: px2vw(13);
     background-color: #bc7d10;
-    height: px2vh(48);
+    height: 7vh;
     .trade-name {
       width: 40%;
       padding: 0 px2vw(15);
@@ -44,7 +45,9 @@
   .betsBox{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    width: 100%;
+    max-height: 93vh;
+    overflow-y: auto;
     .content {
       overflow-y: auto;
       width: 100%;
@@ -74,7 +77,7 @@
       }
       .bet-info {
         width: 100%;
-        max-height: 45vh;
+        max-height: 65vh;
         padding: 11px 10px 9px 9px;
         position: relative;
         display: block;
@@ -226,7 +229,6 @@
     }
     .winMoney {
       box-sizing: border-box;
-      overflow-y: auto;
       width: 100%;
       padding: 8px 8px 0 8px;
       background: #f0f0f0;
@@ -533,44 +535,6 @@
     }
   }
 }
-
-@keyframes boxon-animate {
-  0% {
-    transform: translate3d(0, 100%, 0);
-  }
-  100% {
-    transform: translate3d(0, 0%, 0);
-  }
-}
-
-@-webkit-keyframes boxon-animate {
-  0% {
-    -webkit-transform: translate3d(0, 100%, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(0, 0%, 0);
-  }
-}
-
-@keyframes boxoff-animate {
-  0% {
-    transform: translate3d(0, 0%, 0);
-  }
-  100% {
-    transform: translate3d(0, 100%, 0);
-  }
-}
-
-@-webkit-keyframes boxoff-animate {
-  0% {
-    -webkit-transform: translate3d(0, 0%, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(0, 100%, 0);
-  }
-}
-
-
 
 @-webkit-keyframes bet-animate {
   0% {

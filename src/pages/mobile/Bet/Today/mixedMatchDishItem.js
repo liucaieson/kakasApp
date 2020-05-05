@@ -105,7 +105,7 @@ class IndexDishItem extends PureComponent {
         <span
           className={( mixedDishInfo[matchId] &&  mixedDishInfo[matchId].choiceId === choiceId) ? `${styles.price} ${styles.active}` : styles.price}
         >
-          {choiceHandicap ? this.renderHandicap() : ''}
+          { choiceHandicap ? this.renderHandicap() : '' }
           <span className={styles.mun}>
             {dish}
           </span>

@@ -232,12 +232,12 @@ class Home extends PureComponent {
                 {
                   tab === 'live' ?
                     <Fragment>
-                      <i className={`${styles.live} ${styles.icon} ${styles.active}`}/>
+                      <i className={`${styles.live} ${styles.icon} ${styles.active}`} />
                       <span className={styles.text + ' ' + styles.active}>直播表</span>
                     </Fragment>
                     :
                     <Fragment>
-                      <i className={`${styles.icon} ${styles.live}`}/>
+                      <i className={`${styles.icon} ${styles.live}`} />
                       <span className={styles.text}>直播表</span>
                     </Fragment>
                 }

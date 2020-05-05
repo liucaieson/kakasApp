@@ -64,30 +64,36 @@ class InPlayDetailPage extends PureComponent {
       },
     });
 
-    this.timer = setInterval(() => {
-      const { prevPeriod} = this.state;
-      let minute = prevPeriod.split(':')[0];
-      let second = prevPeriod.split(':')[1];
-      if(minute === '45' ){
-        this.setState({
-          prevPeriod: '45:00'
-        })
-      }else if(minute === '90'){
-        this.setState({
-          prevPeriod: '45:00'
-        })
-      }else {
-        second = +second + 1;
-        if(second >= 59){
-          minute = +minute + 1;
-          second = 0
+    /* 后端没有传数据，prevPeriod则不存在 则不能进行倒计时 */
+    const { prevPeriod} = this.state;
+    if(prevPeriod){
+      this.timer = setInterval(() => {
+        const { prevPeriod} = this.state;
+        console.log(prevPeriod)
+        let minute = prevPeriod.split(':')[0];
+        let second = prevPeriod.split(':')[1];
+        if(minute === '45' ){
+          this.setState({
+            prevPeriod: '45:00'
+          })
+        }else if(minute === '90'){
+          this.setState({
+            prevPeriod: '45:00'
+          })
+        }else {
+          second = +second + 1;
+          if(second >= 59){
+            minute = +minute + 1;
+            second = 0
+          }
+          const newPeriod = minute + ':' + second.toString().padStart(2, '0');
+          this.setState({
+            prevPeriod: newPeriod
+          })
         }
-        const newPeriod = minute + ':' + second.toString().padStart(2, '0');
-        this.setState({
-          prevPeriod: newPeriod
-        })
-      }
-    },1000)
+      },1000)
+    }
+
   }
 
   setTimeFetchMatchList = () => {

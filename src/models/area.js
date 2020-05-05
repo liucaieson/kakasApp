@@ -1,3 +1,4 @@
+/* 请求区域 */
 import { getArea } from '@/services/api';
 
 export default {

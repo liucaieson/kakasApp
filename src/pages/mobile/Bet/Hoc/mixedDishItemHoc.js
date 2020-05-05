@@ -38,7 +38,7 @@ export const MixedDishItemHoc = (Wrapper) => {
             matchId,
             gamblingId,
             choiceId,
-          },
+          }
         });
       }
     };
