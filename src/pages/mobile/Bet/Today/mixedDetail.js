@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './deatil.scss';
-import { Icon } from 'antd-mobile';
 import { calcDate2 } from '@/utils/utils';
-import Loading from '../../../../components/PCMask';
+import Loading from '@/components/PCMask';
 import DishItem from './mixedDetailDishItem';
-import CountDown from '../../../../components/CountDown';
-import GotoTopFooter from '../../../../components/GotoTopFooter';
-import CollapseList from '../../../../components/CollapseList';
-import Breadcrumbs from '../../../../components/Breadcrumbs';
+import CountDown from '@/components/CountDown';
+import GotoTopFooter from '@/components/GotoTopFooter';
+import CollapseList from '@/components/CollapseList';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 @connect(({ matchDetail, matchAllOdds, competitions, userInfo, loading }) => ({
   matchDetail,
@@ -18,11 +17,11 @@ import Breadcrumbs from '../../../../components/Breadcrumbs';
   matchDetailLoading: loading.effects['matchDetail/fetchMatchOdds'],
 }))
 class DetailPage extends PureComponent {
-
   timer = null;
+
   balanceTimer = null;
+
   state = {
-    showOdds: [],
     isLoading: true,
   };
 
@@ -32,7 +31,7 @@ class DetailPage extends PureComponent {
     this.mainRef = React.createRef();
   }
 
-  /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
+  /* 10s轮询余额，60s轮询比赛列表，首次请求赔率列表 */
   componentDidMount() {
     this.fetchMatchOdds();
   }
@@ -70,7 +69,7 @@ class DetailPage extends PureComponent {
     const { dispatch, location, matchDetailLoading } = this.props;
     /* 需要节流 */
     if (matchDetailLoading) {
-      return false;
+      return
     }
     const { query } = location;
     const { matchId } = query;
@@ -95,13 +94,18 @@ class DetailPage extends PureComponent {
     } = this.props;
     const { isLoading } = this.state;
     return (
-      <div className={styles.detail} key='matchList'>
+      <div className={styles.detail} key="matchList">
         {
-          isLoading ? <Loading bg="rgba(0,0,0,.2)" loadingIconSize="40px" color="#30717b"/> :
+          isLoading ?
+            <Loading
+              bg="rgba(0,0,0,.2)"
+              loadingIconSize="40px"
+              color="#30717b"/>
+            :
             <div>
               <div className={styles['game-tab']}>
                 <Breadcrumbs
-                  separator='/'
+                  separator="/"
                 >
                   <span>足球</span>
                   <div className={styles.item}>混合过关</div>
@@ -113,7 +117,7 @@ class DetailPage extends PureComponent {
                     <span className={styles.time} onClick={this.refreshMatchOdds}>
                         <CountDown
                           onCountDownRef={this.onCountDownRef}
-                          time='60'
+                          time="60"
                           onEnd={this.setTimeFetchMatchList}/>
                       </span>
                   </div>
@@ -135,7 +139,7 @@ class DetailPage extends PureComponent {
                       <CollapseList
                         key={val.oddId}
                         title={val.oddName}
-                        isArrow={true}
+                        isArrow
                         titleStyle={{
                           height: '6vh',
                           lineHeight: '6vh',
@@ -169,7 +173,6 @@ class DetailPage extends PureComponent {
               <GotoTopFooter/>
             </div>
         }
-
       </div>
     );
   }

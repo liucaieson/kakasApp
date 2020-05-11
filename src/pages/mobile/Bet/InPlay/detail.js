@@ -1,22 +1,21 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './deatil.scss';
-import { Icon } from 'antd-mobile';
-import { calcDate4 } from '@/utils/utils';
-import Loading from '../../../../components/PCMask';
+import Loading from '@/components/PCMask';
 import DishItem from './detailDishItem';
-import CountDown from '../../../../components/CountDown';
-import GotoTopFooter from '../../../../components/GotoTopFooter';
-import CollapseList from '../../../../components/CollapseList';
+import CountDown from '@/components/CountDown';
+import GotoTopFooter from '@/components/GotoTopFooter';
+import CollapseList from '@/components/CollapseList';
 
 @connect(({ inPlay, loading }) => ({
   inPlay,
   oddsLoading: loading.effects['inPlay/fetchMatchAllOdds'],
 }))
 class InPlayDetailPage extends PureComponent {
-
   timer = null;
+
   balanceTimer = null;
+
   state = {
     firstLoading: true,
     prevPeriod: '1:00',
@@ -35,7 +34,9 @@ class InPlayDetailPage extends PureComponent {
   }
 
   static getDerivedStateFromProps (props, state) {
-    if (props.inPlay.inPlayAllOdds && props.inPlay.inPlayAllOdds[0] && props.inPlay.inPlayAllOdds[0].period !== state.calcPeriod) {
+    if (props.inPlay.inPlayAllOdds &&
+      props.inPlay.inPlayAllOdds[0] &&
+      props.inPlay.inPlayAllOdds[0].period !== state.calcPeriod) {
       return {
         prevPeriod: props.inPlay.inPlayAllOdds[0].period,
         calcPeriod: props.inPlay.inPlayAllOdds[0].period
@@ -44,7 +45,7 @@ class InPlayDetailPage extends PureComponent {
     return null
   }
 
-  /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
+  /* 10s轮询余额，60s轮询比赛列表，首次请求赔率列表 */
   componentDidMount() {
     const { dispatch, location } = this.props;
     const { query } = location;
@@ -65,35 +66,39 @@ class InPlayDetailPage extends PureComponent {
     });
 
     /* 后端没有传数据，prevPeriod则不存在 则不能进行倒计时 */
-    const { prevPeriod} = this.state;
-    if(prevPeriod){
+    const { prevPeriod } = this.state;
+    if (prevPeriod) {
       this.timer = setInterval(() => {
-        const { prevPeriod} = this.state;
+        const { prevPeriod } = this.state;
         console.log(prevPeriod)
         let minute = prevPeriod.split(':')[0];
         let second = prevPeriod.split(':')[1];
-        if(minute === '45' ){
+        if (minute === '45') {
           this.setState({
             prevPeriod: '45:00'
           })
-        }else if(minute === '90'){
+        } else if (minute === '90') {
           this.setState({
             prevPeriod: '45:00'
           })
-        }else {
+        } else {
           second = +second + 1;
-          if(second >= 59){
+          if (second >= 59) {
             minute = +minute + 1;
             second = 0
           }
-          const newPeriod = minute + ':' + second.toString().padStart(2, '0');
+          const newPeriod = `${minute}:${second.toString().padStart(2, '0')}`;
           this.setState({
             prevPeriod: newPeriod
           })
         }
-      },1000)
+      }, 1000)
     }
+  }
 
+  // 清除定时器
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   setTimeFetchMatchList = () => {
@@ -103,12 +108,12 @@ class InPlayDetailPage extends PureComponent {
   refreshMatchOdds = () => {
     const { dispatch, oddsLoading } = this.props;
     /* 需要节流 */
-    if(oddsLoading){
-      return false
+    if (oddsLoading) {
+      return
     }
     dispatch({
       type: 'inPlay/fetchMatchAllOdds',
-      payload: {...this.globalParams},
+      payload: { ...this.globalParams },
       callback: () => {
         this.countRef.reset();
       },
@@ -119,11 +124,6 @@ class InPlayDetailPage extends PureComponent {
   onCountDownRef = (ref) => {
     this.countRef = ref;
   };
-
-  // 清除定时器
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
 
   /* 请求比赛所有玩法的赔率赔率 */
   fetchMatchOdds = () => {
@@ -145,9 +145,9 @@ class InPlayDetailPage extends PureComponent {
         inPlayAllOdds,
       },
     } = this.props;
-    const {  firstLoading,  prevPeriod } = this.state;
+    const { firstLoading, prevPeriod } = this.state;
     return (
-      <div className={styles.detail} key='matchList'>
+      <div className={styles.detail} key="matchList">
         {
           firstLoading ? <Loading bg="rgba(0,0,0,.2)" loadingIconSize="40px" color="#30717b"/> :
             (
@@ -165,7 +165,7 @@ class InPlayDetailPage extends PureComponent {
                         <span className={styles.time} onClick={this.refreshMatchOdds}>
                           <CountDown
                             onCountDownRef={this.onCountDownRef}
-                            time='10'
+                            time="10"
                             onEnd={this.setTimeFetchMatchList}/>
                         </span>
                       </div>
@@ -193,7 +193,7 @@ class InPlayDetailPage extends PureComponent {
                           <CollapseList
                             key={val.oddId}
                             title={val.oddName}
-                            isArrow={true}
+                            isArrow
                             titleStyle={{
                               height: '6vh',
                               lineHeight: '6vh',

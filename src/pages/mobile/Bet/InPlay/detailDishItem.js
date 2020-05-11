@@ -7,7 +7,6 @@ import { dishNameMap } from '../../../../utils/utils';
   shopCart
 }))
 class DetailDishItem extends PureComponent {
-
   state = {
     up: 0,
     prevDish: 0,
@@ -57,15 +56,13 @@ class DetailDishItem extends PureComponent {
 
   renderUp() {
     const { up } = this.state;
-    if (up === 0) {
-      return '';
-    }
     if (up === 1) {
       return <div className={styles.up}/>;
     }
     if (up === -1) {
       return <div className={styles.down}/>;
     }
+    return null
   }
 
   renderTeamName() {
@@ -74,13 +71,12 @@ class DetailDishItem extends PureComponent {
       homeName,
       awayName
     } = this.props;
-    if(name === '1'){
+    if (name === '1') {
       return homeName
-    }else if( name === '2'){
+    } if (name === '2') {
       return awayName
-    }else{
-      return dishNameMap[name]
     }
+      return dishNameMap[name]
   }
 
   render() {
@@ -97,7 +93,7 @@ class DetailDishItem extends PureComponent {
 
     const cartChoiceId = this.props.shopCart.choiceId;
 
-    if(oddId === '15' || oddId === '16' || oddId === '3'){
+    if (oddId === '15' || oddId === '16' || oddId === '3') {
       return (
         <div key={choiceId}
              className={styles.item1}
@@ -109,11 +105,11 @@ class DetailDishItem extends PureComponent {
             }
           </div>
           <div
-            className={choiceId === cartChoiceId  ? `${styles.dish} ${styles.active}` : styles.dish}
+            className={choiceId === cartChoiceId ? `${styles.dish} ${styles.active}` : styles.dish}
           >
              <span className={styles.handicap}>
-            {choiceHandicap && `${choiceHandicap}`}
-          </span>
+              {choiceHandicap && `${choiceHandicap}`}
+             </span>
             <span className={styles.mun}>
               {dish}
             </span>
@@ -121,14 +117,14 @@ class DetailDishItem extends PureComponent {
           {this.renderUp()}
         </div>
       );
-    }else if(oddId === '2' || oddId === '6'){
+    } if (oddId === '2' || oddId === '6') {
       return (
         <div key={choiceId}
              className={styles.item2}
              onClick={() => this.addShopCart(1, matchId, gamblingId, choiceId, dishId)}
         >
 
-          <div  className={choiceId === cartChoiceId ? `${styles.dish} ${styles.active}` : styles.dish}
+          <div className={choiceId === cartChoiceId ? `${styles.dish} ${styles.active}` : styles.dish}
           >
             <div className={styles.handicap}>
               {name}
@@ -140,7 +136,7 @@ class DetailDishItem extends PureComponent {
           {this.renderUp()}
         </div>
       );
-    }else {
+    }
       return (
         <div key={choiceId}
              className={styles.item3}
@@ -163,9 +159,6 @@ class DetailDishItem extends PureComponent {
           {this.renderUp()}
         </div>
       );
-    }
-
-
   }
 }
 

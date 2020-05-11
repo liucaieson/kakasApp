@@ -6,7 +6,6 @@ import styles from './matchList.scss';
   shopCart,
 }))
 class IndexDishItem extends PureComponent {
-
   state = {
     up: 0,
     prevDish: 0,
@@ -62,12 +61,23 @@ class IndexDishItem extends PureComponent {
       name,
     } = this.props;
     if (name === 'Over') {
-      return (<span className={styles.handicap}> <i className={styles.i}>大</i>{choiceHandicap}</span>);
-    } else if (name === 'Under') {
-      return (<span className={styles.handicap}> <i className={styles.i}>小</i>{choiceHandicap}</span>);
-    } else {
-      return (<span className={styles.handicap}> {choiceHandicap}</span>);
+      return (
+        <span className={styles.handicap}>
+          <i className={styles.i}>大</i>{choiceHandicap}
+        </span>
+      );
+    } if (name === 'Under') {
+      return (
+        <span className={styles.handicap}>
+          <i className={styles.i}>小</i>{choiceHandicap}
+        </span>
+      );
     }
+      return (
+        <span className={styles.handicap}>
+          {choiceHandicap}
+        </span>
+      );
   }
 
   render() {

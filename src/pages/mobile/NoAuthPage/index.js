@@ -1,20 +1,18 @@
 import React, { PureComponent } from 'react';
-class NoAuth extends PureComponent {
 
+class NoAuth extends PureComponent {
   render() {
     return (
       <div style={{
-        width:'100%',
-        height:'100%',
-        display:'flex',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
         color: '#fff',
-        justifyContent:'center',
+        justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column'
       }}>
-        <div className='no-auth-page'>
-
-        </div>
+        <div className="no-auth-page" />
         您的认证已过期，请从平台重新登录
       </div>
     );
@@ -22,5 +20,3 @@ class NoAuth extends PureComponent {
 }
 
 export default NoAuth;
-
-

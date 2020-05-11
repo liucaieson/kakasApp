@@ -4,22 +4,22 @@ export default {
   namespace: 'competitions',
 
   state: {
-    competitions:[],
-    areaId:[],
-    competitionsObj:{},
-    competitionsMap:{}
+    competitions: [],
+    areaId: [],
+    competitionsObj: {},
+    competitionsMap: {}
   },
 
   effects: {
-    *fetch({payload, callback}, { call, put, select }) {
-      let data = yield call(getCompetitions, payload);
-      let  competitionsObj= {};
-      let  competitionsMap= {};
-      let areaId = [];
+    *fetch({ payload, callback }, { call, put }) {
+      const data = yield call(getCompetitions, payload);
+      const competitionsObj = {};
+      const competitionsMap = {};
+      const areaId = [];
       data.forEach((val) => {
-        if(areaId.includes(val.areaId)){
+        if (areaId.includes(val.areaId)) {
           competitionsObj[val.areaId].push(val)
-        }else{
+        } else {
           areaId.push(val.areaId);
           competitionsObj[val.areaId] = [];
           competitionsObj[val.areaId].push(val)
@@ -35,7 +35,7 @@ export default {
           competitionsMap
         },
       });
-      if(callback) callback(data)
+      if (callback) callback(data)
     },
   },
 

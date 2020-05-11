@@ -16,7 +16,7 @@ export default class SportRules extends PureComponent {
   renderList() {
     const { showList } = this.state;
     switch (showList) {
-      case '1' :
+      case '1':
         return (
           <div>
             <div className={styles.h1}>90分钟赛事 </div>
@@ -941,19 +941,19 @@ export default class SportRules extends PureComponent {
         <div className={styles.main}>
           <div className={styles.selection}>
             <select value={showList} className={styles.select} onChange={this.change}>
-              <option value='1' key={1}>
+              <option value="1" key={1}>
                 90分钟赛事规则
               </option>
-              <option value='2' key={2}>
+              <option value="2" key={2}>
                 亚洲让分盘
               </option>
-              <option value='3' key={3}>
+              <option value="3" key={3}>
                 锦标赛投注
               </option>
-              <option value='4' key={4}>
+              <option value="4" key={4}>
                 早期投注
               </option>
-              <option value='5' key={5}>
+              <option value="5" key={5}>
                 球赛数据投注
               </option>
             </select>
@@ -968,5 +968,3 @@ export default class SportRules extends PureComponent {
     );
   }
 }
-
-

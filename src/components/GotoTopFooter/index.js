@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import styles from './index.scss';
 
 export default class GotoTopFooter extends PureComponent {
-
   state = {
     show: true,
   };
@@ -17,7 +16,7 @@ export default class GotoTopFooter extends PureComponent {
       this.setState({
         show: true,
       });
-    }else{
+    } else {
       this.setState({
         show: false,
       });
@@ -33,10 +32,9 @@ export default class GotoTopFooter extends PureComponent {
     const { show } = this.state;
     return (
       show &&
-      <div id='to-top' ref={this.tRef} className={styles['to-top']} onClick={this.gotoTop}>
+      <div id="to-top" ref={this.tRef} className={styles['to-top']} onClick={this.gotoTop}>
         回到顶部
       </div>
     );
   }
 }
-

@@ -5,7 +5,6 @@ export default {
   namespace: 'login',
 
   state: {
-    isLogin:false,
     token: {
     },
   },
@@ -17,14 +16,6 @@ export default {
         payload: data,
       });
       if (callback) callback(data);
-    },
-    /*改变登录状态*/
-    *changeLoginStatus({ payload }, { call, put }) {
-      const { isLogin } = payload;
-      yield put({
-        type: 'change',
-        payload: isLogin,
-      });
     },
   },
 

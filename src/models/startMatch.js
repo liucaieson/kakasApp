@@ -4,12 +4,12 @@ export default {
   namespace: 'startMatch',
 
   state: {
-    matchList:[]
+    matchList: []
   },
 
   effects: {
-    *fetchMatchOdds({payload, callback}, { call, put, select }) {
-      let data = yield call(getPreStartMatch, payload);
+    *fetchMatchOdds({ payload, callback }, { call, put }) {
+      const data = yield call(getPreStartMatch, payload);
       yield put({
         type: 'saveData/saveData',
         payload: data,
@@ -18,7 +18,7 @@ export default {
         type: 'save',
         payload: data,
       });
-      if(callback) callback()
+      if (callback) callback()
     },
   },
 
@@ -26,7 +26,7 @@ export default {
     save(state, { payload }) {
       return {
         ...state,
-        matchList:payload
+        matchList: payload
       };
     },
   },

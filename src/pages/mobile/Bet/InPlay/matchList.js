@@ -3,18 +3,18 @@ import { connect } from 'dva';
 import Link from 'umi/link';
 import { calcDate4 } from '@/utils/utils';
 import styles from './matchList.scss';
-import Loading from '../../../../components/PCMask';
-import CountDown from '../../../../components/CountDown/index';
+import Loading from '@/components/PCMask';
+import CountDown from '@/components/CountDown/index';
 import DishItem from './matchListDishItem';
-import GotoTopFooter from '../../../../components/GotoTopFooter';
+import GotoTopFooter from '@/components/GotoTopFooter';
 
 @connect(({ inPlay, loading }) => ({
   inPlay,
   oddsLoading: loading.effects['inPlay/fetchMatchOdds'],
 }))
 class RoundPage extends PureComponent {
-
   timer = null;
+
   state = {
     firstLoading: true,
   };
@@ -31,7 +31,7 @@ class RoundPage extends PureComponent {
     this.mainRef = React.createRef();
   }
 
-  /*10s轮询余额，10s轮询比赛列表，首次请求赔率列表*/
+  /* 10s轮询余额，10s轮询比赛列表，首次请求赔率列表 */
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -104,13 +104,17 @@ class RoundPage extends PureComponent {
           <span className={styles.time} onClick={this.refreshMatchOdds}>
             <CountDown
               onCountDownRef={this.onCountDownRef}
-              time='10'
+              time="10"
               onEnd={this.setTimeFetchMatchList}/>
           </span>
           </div>
         </div>
         {
-          firstLoading ? <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :
+          firstLoading ? <Loading
+              bg="rgba(0,0,0,0.1)"
+              loadingIconSize="40px"
+              color="#30717b"
+            /> :
             <div className={styles.main} ref={this.mainRef}>
               {
                 cptIds.length === 0 ?
@@ -151,7 +155,7 @@ class RoundPage extends PureComponent {
                               </div>
                               <div className={styles.text}>让球</div>
                               <div className={styles.text}>大/小</div>
-                              <div></div>
+                              <div />
                             </div>
                             <div className={styles['match-odds']}>
                               <div className={styles['match-info']}>
@@ -251,7 +255,7 @@ class RoundPage extends PureComponent {
                             <Link to={`/bet/inPlayDetail?matchId=${val.matchId}`} className={styles['match-play']}>
                               <div className={styles.text}>{val.amount}</div>
                               <div className={styles.text}>玩法</div>
-                              <div className={styles.arrow}></div>
+                              <div className={styles.arrow} />
                             </Link>
 
                           </div>

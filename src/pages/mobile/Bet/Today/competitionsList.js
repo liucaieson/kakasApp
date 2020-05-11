@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import Link from 'umi/link';
-import styles from './competitionsList.scss';
 import moment from 'moment';
+import styles from './competitionsList.scss';
 import CountDown from '../../../../components/CountDown';
 import GotoTopFooter from '../../../../components/GotoTopFooter';
 import Loading from '../../../../components/PCMask';
@@ -13,12 +13,9 @@ import Breadcrumbs from '../../../../components/Breadcrumbs';
   competitionsLoading: loading.models.competitions,
 }))
 class Home extends PureComponent {
-
   timer = null;
+
   balanceTimer = null;
-  state = {
-    showMatch: [],
-  };
 
   globalParams = {
     sport: '1',
@@ -32,7 +29,7 @@ class Home extends PureComponent {
     this.mainRef = React.createRef();
   }
 
-  /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
+  /* 10s轮询余额，60s轮询比赛列表，首次请求赔率列表 */
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -64,7 +61,7 @@ class Home extends PureComponent {
     const { dispatch, oddsLoading } = this.props;
     /* 需要节流 */
     if (oddsLoading) {
-      return false;
+      return
     }
     dispatch({
       type: 'competitions/fetch',
@@ -95,13 +92,12 @@ class Home extends PureComponent {
       competitions: { areaId, competitionsObj },
       competitionsLoading,
     } = this.props;
-    const { tab } = this.state;
     return (
-      <div className={styles.box} key='home'>
+      <div className={styles.box} key="home">
         <div className={styles.main} ref={this.mainRef}>
           <div className={styles['game-tab']}>
             <Breadcrumbs
-              separator='/'
+              separator="/"
             >
               <span>足球</span>
             </Breadcrumbs>
@@ -109,20 +105,25 @@ class Home extends PureComponent {
               <span className={styles.time} onClick={this.refreshMatchOdds}>
                 <CountDown
                   onCountDownRef={this.onCountDownRef}
-                  time='60'
+                  time="60"
                   onEnd={this.setTimeFetchMatchList}/>
                 </span>
             </div>
           </div>
           <div className={styles['play-tab']}>
-            <div className={styles.tab + ' ' + styles.active}
+            <div className={`${styles.tab} ${styles.active}`}
             >让球&大小
             </div>
-            <Link to='/bet/todayMixedCompetitionsList' className={styles.tab}
+            <Link to="/bet/todayMixedCompetitionsList" className={styles.tab}
             >混合过关</Link>
           </div>
           {
-            competitionsLoading ? <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :
+            competitionsLoading ?
+              <Loading
+                bg="rgba(0,0,0,0.1)"
+                loadingIconSize="40px"
+                color="#30717b"
+              /> :
               <div>
                 {
                   areaId.map((item) => (

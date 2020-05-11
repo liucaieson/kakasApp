@@ -4,15 +4,15 @@ export default {
   namespace: 'matchDetail',
 
   state: {
-    matchDetail:{},
-    oddsIds:[],
-    oddsObj:{}
+    matchDetail: {},
+    oddsIds: [],
+    oddsObj: {}
   },
 
   effects: {
-    *fetchMatchOdds({payload, callback}, { call, put, select }) {
-      let result = yield call(getPreMatchOdds, payload);
-      const {data} = result;
+    *fetchMatchOdds({ payload, callback }, { call, put }) {
+      const result = yield call(getPreMatchOdds, payload);
+      const { data } = result;
       yield put({
         type: 'saveData/saveData',
         payload: data,
@@ -32,7 +32,7 @@ export default {
           oddsObj
         },
       });
-      if(callback) callback()
+      if (callback) callback()
     },
   },
 

@@ -4,14 +4,15 @@ import { Carousel } from 'antd-mobile';
 import Link from 'umi/link';
 import styles from './index.scss';
 
-@connect(({ loading, userInfo, shopCart }) => ({
+@connect(({ userInfo, shopCart }) => ({
   userInfo,
   shopCart,
 }))
 class Home extends PureComponent {
-
   timer = null;
+
   balanceTimer = null;
+
   state = {
     showId: 1,
     data: ['1', '2', '3'],
@@ -24,7 +25,7 @@ class Home extends PureComponent {
     this.mainRef = React.createRef();
   }
 
-  /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
+  /* 10s轮询余额，60s轮询比赛列表，首次请求赔率列表 */
   componentDidMount() {
     this.fetchArea();
     const { dispatch } = this.props;
@@ -49,7 +50,7 @@ class Home extends PureComponent {
   }
 
   fetchArea = () => {
-    let params = {
+    const params = {
       sport: '1',
       gg: '1',
     };
@@ -57,22 +58,6 @@ class Home extends PureComponent {
     dispatch({
       type: 'area/fetch',
       payload: params,
-    });
-  };
-
-  /*获取better-scroll的this，赋值给scrollWrapChild
-  * */
-  onScrollWrapRef = (ref) => {
-    this.scrollWrapChild = ref;
-  };
-
-  /* 控制盘口显示隐藏 */
-  showArea = (id) => {
-    const { showOdds } = this.state;
-    showOdds.push(id);
-    const arr = showOdds.concat();
-    this.setState({
-      showArea: arr,
     });
   };
 
@@ -88,7 +73,6 @@ class Home extends PureComponent {
       type: 'shopCart/openCart',
     });
   };
-
 
   render() {
     const {
@@ -143,9 +127,9 @@ class Home extends PureComponent {
           </div>
           {
             showId === 1 ? (
-              <Link to='/bet/inPlay' className={styles['game-list']}>
+              <Link to="/bet/inPlay" className={styles['game-list']}>
                 <div className={styles.item}>
-                  <span className={styles.icon + ' ' + styles.ball}/>
+                  <span className={`${styles.icon} ${styles.ball}`}/>
                   <span className={styles.name}>足球</span>
                 </div>
               </Link>
@@ -158,9 +142,9 @@ class Home extends PureComponent {
           </div>
           {
             showId === 2 ? (
-              <Link to='/bet/today' className={styles['game-list']}>
+              <Link to="/bet/today" className={styles['game-list']}>
                 <div className={styles.item}>
-                  <span className={styles.icon + ' ' + styles.ball}/>
+                  <span className={`${styles.icon} ${styles.ball}`}/>
                   <span className={styles.name}>足球</span>
                 </div>
               </Link>
@@ -173,9 +157,9 @@ class Home extends PureComponent {
           </div>
           {
             showId === 3 ? (
-              <Link to='/bet/asian' className={styles['game-list']}>
+              <Link to="/bet/asian" className={styles['game-list']}>
                 <div className={styles.item}>
-                  <span className={styles.icon + ' ' + styles.ball}/>
+                  <span className={`${styles.icon} ${styles.ball}`}/>
                   <span className={styles.name}>足球</span>
                 </div>
               </Link>
@@ -183,7 +167,7 @@ class Home extends PureComponent {
           }
         </div>
         <div className={styles['line-box']}>
-          <Link to='/bet/gameResult'>
+          <Link to="/bet/gameResult">
             <div className={styles.line}>
               <div className={styles.name}>
                 赛果
@@ -192,10 +176,10 @@ class Home extends PureComponent {
           </Link>
           <div className={styles.line}>
             <div className={styles.item}>亚洲盘</div>
-            <Link to='/bet/announcement' className={styles.item}>公告</Link>
+            <Link to="/bet/announcement" className={styles.item}>公告</Link>
           </div>
           <div className={styles.line}>
-            <Link to='/bet/help' className={styles.item}>帮助</Link>
+            <Link to="/bet/help" className={styles.item}>帮助</Link>
             <div className={styles.item}>登出</div>
           </div>
         </div>
@@ -203,17 +187,17 @@ class Home extends PureComponent {
         <div className={styles.menu}>
           <div className={styles.nav}>
             <ul>
-              <Link to='/' className={styles.item}>
-                <i className={styles.active + ' ' + styles.icon + ' ' + styles['home-icon']}/>
-                <span className={styles.text + ' ' + styles.active}>首页</span>
+              <Link to="/" className={styles.item}>
+                <i className={`${styles.active} ${styles.icon} ${styles['home-icon']}`}/>
+                <span className={`${styles.text} ${styles.active}`}>首页</span>
               </Link>
-              <Link to='/bet/live' className={styles.item}>
-                <i className={styles.icon + ' ' + styles.live}/>
+              <Link to="/bet/live" className={styles.item}>
+                <i className={`${styles.icon} ${styles.live}`}/>
                 <span className={styles.text}>直播表</span>
               </Link>
 
               <li
-                className={(choiceId > 110 ? 1 : 0) + mixedDishId.length > 0 ? styles['item-bet'] + ' ' + styles.betActive
+                className={(choiceId > 110 ? 1 : 0) + mixedDishId.length > 0 ? `${styles['item-bet']} ${styles.betActive}`
                   : styles['item-bet']}
                 onClick={this.openCart}
               >
@@ -222,12 +206,12 @@ class Home extends PureComponent {
                   }</span>
                 <span className={styles.text2}>交易单</span>
               </li>
-              <Link to='/bet/accountHistory' className={styles.item}>
-                <i className={styles.icon + ' ' + styles.history}/>
+              <Link to="/bet/accountHistory" className={styles.item}>
+                <i className={`${styles.icon} ${styles.history}`}/>
                 <span className={styles.text}>账户历史</span>
               </Link>
-              <Link to='/bet/transaction' className={styles.item}>
-                <i className={styles.icon + ' ' + styles.accountRunning}/>
+              <Link to="/bet/transaction" className={styles.item}>
+                <i className={`${styles.icon} ${styles.accountRunning}`}/>
                 <span className={styles.text}>交易状况</span>
               </Link>
             </ul>

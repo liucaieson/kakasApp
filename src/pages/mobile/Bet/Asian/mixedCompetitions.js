@@ -10,16 +10,15 @@ import Breadcrumbs from '../../../../components/Breadcrumbs';
 @connect(({ area, competitions, loading }) => ({
   competitions,
   area,
-  competitionsLoading:loading.effects['competitions/fetch']
+  competitionsLoading: loading.effects['competitions/fetch']
 }))
 class Home extends PureComponent {
-
   timer = null;
+
   balanceTimer = null;
+
   state = {
-    showMatch: [],
-    tab: '1',
-    selectArea:'all'
+    selectArea: 'all'
   };
 
   constructor(props) {
@@ -28,7 +27,7 @@ class Home extends PureComponent {
     this.mainRef = React.createRef();
   }
 
-  /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
+  /* 10s轮询余额，60s轮询比赛列表，首次请求赔率列表 */
   componentDidMount() {
     this.fetchArea();
     const { dispatch } = this.props;
@@ -42,7 +41,7 @@ class Home extends PureComponent {
   }
 
   fetchArea = () => {
-    let params = {
+    const params = {
       sport: '1',
       gg: '1',
     };
@@ -64,10 +63,9 @@ class Home extends PureComponent {
 
   refreshMatchOdds = () => {
     const { dispatch, competitionsLoading } = this.props;
-    console.log(competitionsLoading,this.props)
     /* 需要节流 */
-    if(competitionsLoading){
-      return false
+    if (competitionsLoading) {
+      return
     }
     dispatch({
       type: 'competitions/fetch',
@@ -110,7 +108,7 @@ class Home extends PureComponent {
         <div className={styles.main} ref={this.mainRef}>
           <div className={styles['game-tab']}>
             <Breadcrumbs
-              separator='/'
+              separator="/"
             >
               <span>足球</span>
             </Breadcrumbs>
@@ -118,16 +116,16 @@ class Home extends PureComponent {
               <span className={styles.time} onClick={this.refreshMatchOdds}>
                 <CountDown
                   onCountDownRef={this.onCountDownRef}
-                  time='60'
+                  time="60"
                   onEnd={this.setTimeFetchMatchList}/>
               </span>
             </div>
           </div>
           <div className={styles['play-tab']}>
-            <Link to='/bet/asianCompetitionsList' className={styles.tab}>
+            <Link to="/bet/asianCompetitionsList" className={styles.tab}>
               让球&大小
             </Link>
-            <div className={styles.tab + ' ' + styles.active}>
+            <div className={`${styles.tab} ${styles.active}`}>
               混合过关
             </div>
           </div>
@@ -136,7 +134,7 @@ class Home extends PureComponent {
               <div>
                 <div className={styles.selection}>
                   <select value={selectArea} className={styles.select} onChange={this.change}>
-                    <option value={'all'} >全部</option>
+                    <option value="all" >全部</option>
                     {
                       areaId.map((item) => (
                         <option
@@ -168,7 +166,7 @@ class Home extends PureComponent {
                         }
                       </div>
                     ))
-                    :  competitionsObj[selectArea].map((val) => (
+                    : competitionsObj[selectArea].map((val) => (
                       <div className={styles['area-box']} key={val.competitionId} >
                         <Link key={val.competitionId} className={styles['competition-box']}
                               to={`/bet/asianMatchList?competitionId=${val.competitionId}`}>

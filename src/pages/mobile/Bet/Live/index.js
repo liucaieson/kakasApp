@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import styles from './index.scss';
 import moment from 'moment';
 import Link from 'umi/link';
+import styles from './index.scss';
 
 const timeList = [];
 let date = '';
@@ -24,7 +24,6 @@ const sportMap = [
 
 
 class Live extends PureComponent {
-
   state = {
     selectSport: '',
     selectTime: moment().format('YYYY-MM-DD'),
@@ -74,7 +73,7 @@ class Live extends PureComponent {
             </select>
           </div>
           <div className={styles.list}>
-            <Link to='/bet/inPlayLive?match=0'>
+            <Link to="/bet/inPlayLive?match=0">
               <div className={styles.item}>
                 <span className={styles['tv-icon']} />
                 <span className={styles['sport-live-icon']} />
@@ -83,7 +82,7 @@ class Live extends PureComponent {
                 </span>
               </div>
             </Link>
-            <Link to='/bet/inPlayLive?match=1'>
+            <Link to="/bet/inPlayLive?match=1">
               <div className={styles.item}>
                 <span className={styles['tv-icon']} />
                 <span className={styles['sport-live-icon']} />
@@ -92,7 +91,7 @@ class Live extends PureComponent {
                 </span>
               </div>
             </Link>
-            <Link to='/bet/inPlayLive?match=2'>
+            <Link to="/bet/inPlayLive?match=2">
               <div className={styles.item}>
                 <span className={styles['tv-icon']} />
                 <span className={styles['sport-live-icon']} />
@@ -123,5 +122,3 @@ class Live extends PureComponent {
 }
 
 export default Live;
-
-

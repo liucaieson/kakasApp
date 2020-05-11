@@ -1,19 +1,15 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
-import  { Accordion } from 'antd-mobile';
 import Link from 'umi/link';
 import styles from './index.scss';
 
-@connect(({  loading, userInfo, }) => ({
+@connect(({ userInfo, }) => ({
   userInfo,
 }))
 class Home extends PureComponent {
-
   timer = null;
+
   balanceTimer = null;
-  state = {
-    showId: 1
-  };
 
   constructor(props) {
     super(props);
@@ -21,7 +17,7 @@ class Home extends PureComponent {
     this.mainRef = React.createRef();
   }
 
-  /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
+  /* 10s轮询余额，60s轮询比赛列表，首次请求赔率列表 */
   componentDidMount() {
     this.fetchArea();
     const { dispatch } = this.props;
@@ -44,7 +40,7 @@ class Home extends PureComponent {
    * 请求联赛区域接口
    */
   fetchArea = () => {
-    let params = {
+    const params = {
       sport: '1',
       gg: '1'
     };
@@ -62,8 +58,8 @@ class Home extends PureComponent {
           <div className={styles.name}>早盘赛事</div>
         </div>
         <div className={styles['game-list']}>
-          <Link to='/bet/asianCompetitionsList' className={styles.item}>
-            <span className={styles.icon + ' ' + styles.ball}  />
+          <Link to="/bet/asianCompetitionsList" className={styles.item}>
+            <span className={`${styles.icon} ${styles.ball}`} />
             <span className={styles.name}>足球</span>
           </Link>
         </div>

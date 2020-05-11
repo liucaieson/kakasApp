@@ -6,20 +6,20 @@ export default {
   namespace: 'matchAllOdds',
 
   state: {
-    matchAllOdds:[
+    matchAllOdds: [
       []
     ]
   },
 
   effects: {
-    *fetch({payload, callback}, { call, put, select }) {
-      let result = yield call(getPreMatchOddsAllGG, payload);
-      const {data} = result;
+    *fetch({ payload, callback }, { call, put }) {
+      const result = yield call(getPreMatchOddsAllGG, payload);
+      const { data } = result;
       yield put({
         type: 'save',
         payload: data,
       });
-      if(callback) callback()
+      if (callback) callback()
     },
   },
 

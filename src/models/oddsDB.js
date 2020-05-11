@@ -8,10 +8,10 @@ export default {
   },
 
   effects: {
-    *saveOddsData({payload}, { call, put, select }) {
+    *saveOddsData({ payload }, { put }) {
       yield put({
         type: 'save',
-        payload: payload,
+        payload,
       });
     },
 

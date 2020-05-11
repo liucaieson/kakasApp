@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 
 export const BetDishItemHoc = (Wrapper) => {
-
   @connect(({ shopCart }) => ({
     shopCart
   }))
@@ -34,5 +33,4 @@ export const BetDishItemHoc = (Wrapper) => {
   }
 
   return DishHoc
-
-}
+};

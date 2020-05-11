@@ -9,21 +9,20 @@ export default {
   },
 
   effects: {
-    *fetchAsianDish(_, { call, put, select }) {
-      let data = yield call(getGg,{token:'xxx',sports: 1});
+    *fetchAsianDish(_, { call, put }) {
+      const data = yield call(getGg, { token: 'xxx', sports: 1 });
       yield put({
         type: 'saveAsianDish',
         payload: data,
       });
     },
-    *fetchTodayDish(_, { call, put, select }) {
-      let data = yield call(getGg,{token:'xxx',sports: 1,date: '2018-11-10'});
+    *fetchTodayDish(_, { call, put }) {
+      const data = yield call(getGg, { token: 'xxx', sports: 1, date: '2018-11-10' });
       yield put({
         type: 'saveTodayDish',
         payload: data,
       });
     },
-
   },
 
   reducers: {
@@ -40,5 +39,4 @@ export default {
       };
     },
   },
-
 };

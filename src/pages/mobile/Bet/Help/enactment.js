@@ -2,20 +2,19 @@ import React, { PureComponent } from 'react';
 import styles from './index.scss';
 
 export default class enactment extends PureComponent {
-
   state = {
     type: '1'
   };
 
-  change  = (e) => {
+  change = (e) => {
     this.setState({
       type: e.target.value
     })
   };
 
-  renderTable(){
+  renderTable() {
     const { type } = this.state;
-    if( type === '1'){
+    if (type === '1') {
       return (
         <table className={styles.table}>
           <tbody>
@@ -56,7 +55,7 @@ export default class enactment extends PureComponent {
         </table>
       )
     }
-    if( type === '2'){
+    if (type === '2') {
       return (
         <table className={styles.table}>
           <tbody>
@@ -91,7 +90,7 @@ export default class enactment extends PureComponent {
         </table>
       )
     }
-    if( type === '3'){
+    if (type === '3') {
       return (
         <table className={styles.table}>
           <tbody>
@@ -126,7 +125,7 @@ export default class enactment extends PureComponent {
         </table>
       )
     }
-    if( type === '4'){
+    if (type === '4') {
       return (
         <table className={styles.table}>
           <tbody>
@@ -145,12 +144,11 @@ export default class enactment extends PureComponent {
         </table>
       )
     }
+    return null
   }
 
 
   render() {
-
-
     return (
       <div className={styles.help}>
         <div className={styles['game-tab']}>
@@ -159,10 +157,10 @@ export default class enactment extends PureComponent {
         <div className={styles.main}>
           <div className={styles.selection}>
           <select value={this.state.type} className={styles.select} onChange={this.change}>
-            <option value='1'>足球</option>
-            <option value='2'>篮球/美式足球</option>
-            <option value='3'>其他</option>
-            <option value='4'>冠军</option>
+            <option value="1">足球</option>
+            <option value="2">篮球/美式足球</option>
+            <option value="3">其他</option>
+            <option value="4">冠军</option>
           </select>
           </div>
           {this.renderTable()}
@@ -171,5 +169,3 @@ export default class enactment extends PureComponent {
     );
   }
 }
-
-

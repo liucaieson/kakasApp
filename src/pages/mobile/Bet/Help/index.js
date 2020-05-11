@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './index.scss';
 import Link from 'umi/link';
+import styles from './index.scss';
 
 const list = [
   {
@@ -14,7 +14,7 @@ const list = [
   {
     name: '修改密码',
     link: '/bet/changePassword',
-  },*/
+  }, */
   {
     name: '体育规则',
     link: '/bet/SportsRules',
@@ -23,10 +23,10 @@ const list = [
     name: '规则与条款',
     link: '/bet/terms',
   },
-  /*{
+  /* {
     name: '新功能',
     link: '/bet/newFunction',
-  },*/
+  }, */
   {
     name: '混合过关交易指南',
     link: '/bet/mixedTradeGuide',
@@ -48,7 +48,7 @@ export default () => (
     </div>
     <ul className={styles['list-box']}>
       {
-        list.map((val, index) => (
+        list.map((val) => (
           <Link to={val.link} className={styles.item} key={val.link}>
               <span className={styles.title}>
                 {val.name}
@@ -59,5 +59,3 @@ export default () => (
     </ul>
   </div>
 )
-
-

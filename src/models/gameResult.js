@@ -4,16 +4,16 @@ export default {
   namespace: 'gameResult',
 
   state: {
-    data:[],
-    current:1,
+    data: [],
+    current: 1,
     count: 1,
-    competitions:[]
+    competitions: []
   },
 
   effects: {
-    *fetch({payload, callback}, { call, put, select }) {
-      let res = yield call(matchQuery, payload);
-      const { data , current, count} = res;
+    *fetch({ payload, callback }, { call, put }) {
+      const res = yield call(matchQuery, payload);
+      const { data, current, count } = res;
       yield put({
         type: 'save',
         payload: {
@@ -22,15 +22,15 @@ export default {
           count
         },
       });
-      if(callback) callback(data)
+      if (callback) callback(data)
     },
-    *fetchAllCompetitions({payload, callback}, { call, put, select }) {
-      let data = yield call(getAllCompetitions, payload);
+    *fetchAllCompetitions({ payload, callback }, { call, put }) {
+      const data = yield call(getAllCompetitions, payload);
       yield put({
         type: 'saveCompetitions',
         payload: data,
       });
-      if(callback) callback(data)
+      if (callback) callback(data)
     },
   },
 
@@ -39,7 +39,7 @@ export default {
       return {
         ...state,
         data: payload.data,
-        current:payload.current,
+        current: payload.current,
         count: payload.count
       };
     },

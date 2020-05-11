@@ -1,12 +1,8 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import styles from './index.scss';
-import Link from 'umi/link';
 
-export default class oddsCalc extends PureComponent {
-
-  render() {
-    return (
-      <div className={styles.help}>
+export default () => (
+  <div className={styles.help}>
         <div className={styles['game-tab']}>
           <div className={styles.name}>赔率计算列表</div>
         </div>
@@ -208,8 +204,4 @@ export default class oddsCalc extends PureComponent {
           </table>
         </div>
       </div>
-    );
-  }
-}
-
-
+)

@@ -1,10 +1,9 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
-import styles from './index.scss';
 import Link from 'umi/link';
 import { Pagination } from 'antd-mobile';
+import styles from './index.scss';
 import Loading from '../../../../components/PCMask';
-
 
 @connect(({ accountStatement, loading }) => ({
   accountStatement,
@@ -30,8 +29,8 @@ class Announcement extends PureComponent {
         page: 1,
         size: 10,
         sport: '1',
-        /*start_time: +(moment(startDate).valueOf()/1000).toFixed(0),
-        end_time: +(moment(moment(endDate).format('YYYY-MM-DD 23:59:59'))/1000).toFixed(0)*/
+        /* start_time: +(moment(startDate).valueOf()/1000).toFixed(0),
+        end_time: +(moment(moment(endDate).format('YYYY-MM-DD 23:59:59'))/1000).toFixed(0) */
       },
       callback: response => {
         const { count, current } = response;
@@ -47,18 +46,19 @@ class Announcement extends PureComponent {
 
   togglePage = (flag) => {
     const { dispatch, loading } = this.props;
-    let { current,size ,total } = this.state;
+    const { size, total } = this.state;
+    let currentPage = this.state.current;
     if (loading) {
-      return false;
+      return
     }
     if (flag === 'next') {
-      current = current + 1;
+      currentPage += 1;
     } else {
-      current = current - 1;
+      currentPage -= 1;
     }
     /* 边界处理 */
-    if(current < 1 || current > Math.ceil(total / size) ){
-      return false
+    if (currentPage < 1 || currentPage > Math.ceil(total / size)) {
+      return
     }
     this.setState({
       isShowLoading: true,
@@ -66,7 +66,7 @@ class Announcement extends PureComponent {
     dispatch({
       type: 'accountStatement/fetch',
       payload: {
-        page: current,
+        page: currentPage,
         size: 10,
         sport: '1',
       },
@@ -80,16 +80,7 @@ class Announcement extends PureComponent {
         });
       },
     });
-
   };
-
-
-  /* 返回首页*/
-  goBack = () => {
-    const { history } = this.props;
-    history.go(-1);
-  };
-
 
   render() {
     const { accountStatement: { data } } = this.props;
@@ -97,17 +88,16 @@ class Announcement extends PureComponent {
     return (
       <div className={styles.accountHistory}>
         <div className={styles['play-tab']}>
-          <Link to='/bet/transaction' className={styles.tab}
+          <Link to="/bet/transaction" className={styles.tab}
           >交易状况
           </Link>
-          <div className={styles.tab + ' ' + styles.active}
+          <div className={`${styles.tab} ${styles.active}`}
           >账户历史
           </div>
         </div>
         <div className={styles['game-tab']}>
           <div className={styles.name}>账户历史摘要</div>
-          <div className={styles.box}>
-          </div>
+          <div className={styles.box} />
         </div>
         <div className={styles.main}>
           <table width="100%" border="0" cellSpacing="0" cellPadding="0" className={styles.table}>
@@ -123,7 +113,7 @@ class Announcement extends PureComponent {
                 (
                   isShowLoading ?
                     <div className={styles.loadingBox}>
-                      <Loading bg="rgba(255,255,255,.2)"  loadingIconSize="40px" color="#30717b"/>
+                      <Loading bg="rgba(255,255,255,.2)" loadingIconSize="40px" color="#30717b"/>
                     </div>
                     :
                     <Fragment>
@@ -152,19 +142,18 @@ class Announcement extends PureComponent {
           </table>
           {
             total > 9 ?
-              <Pagination total={Math.ceil(total / size)}
-                          className={styles.pagination}
-                          current={current}
-                          locale={{
-                            prevText: (<span onClick={() => this.togglePage('prev')}>上一页</span>),
-                            nextText: (<span onClick={() => this.togglePage('next')}>下一页</span>),
-                          }}
+              <Pagination
+                total={Math.ceil(total / size)}
+                className={styles.pagination}
+                current={current}
+                locale={{
+                prevText: (<span onClick={() => this.togglePage('prev')}>上一页</span>),
+                nextText: (<span onClick={() => this.togglePage('next')}>下一页</span>),
+              }}
               /> : ''
           }
-
         </div>
       </div>
-
     );
   }
 }

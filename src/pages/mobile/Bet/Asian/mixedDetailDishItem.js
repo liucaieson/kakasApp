@@ -9,7 +9,6 @@ import { MixedDishItemHoc } from '../Hoc/mixedDishItemHoc'
   shopCart
 }))
 class DetailDishItem extends PureComponent {
-
   state = {
     up: 0,
     prevDish: 0,
@@ -37,7 +36,7 @@ class DetailDishItem extends PureComponent {
     return null;
   }
 
-  /*/!* 添加投注单到购物车 *!/
+  /* /!* 添加投注单到购物车 *!/
   addMixedShopCart = (type, matchId, gamblingId, choiceId, id) => {
     const { dispatch, shopCart : { mixedDishId, mixedDishInfo }  } = this.props;
     if (mixedDishId.includes(matchId) && mixedDishInfo[matchId].choiceId === choiceId ) {
@@ -58,19 +57,17 @@ class DetailDishItem extends PureComponent {
         },
       });
     }
-  };*/
+  }; */
 
   renderUp() {
     const { up } = this.state;
-    if (up === 0) {
-      return '';
-    }
     if (up === 1) {
       return <div className={styles.up}/>;
     }
     if (up === -1) {
       return <div className={styles.down}/>;
     }
+    return null
   }
 
   renderTeamName() {
@@ -79,13 +76,12 @@ class DetailDishItem extends PureComponent {
       homeName,
       awayName
     } = this.props;
-    if(name === '1'){
+    if (name === '1') {
       return homeName
-    }else if( name === '2'){
+    } if (name === '2') {
       return awayName
-    }else{
-      return dishNameMap[name]
     }
+      return dishNameMap[name]
   }
 
   render() {
@@ -100,13 +96,13 @@ class DetailDishItem extends PureComponent {
       name
     } = this.props;
 
-    const {shopCart : { mixedDishId, mixedDishInfo }, addShopCart } = this.props;
+    const { shopCart: { mixedDishInfo }, addShopCart } = this.props;
 
-    if(oddId === '15' || oddId === '16' || oddId === '3'){
+    if (oddId === '15' || oddId === '16' || oddId === '3') {
       return (
         <div key={choiceId}
              className={styles.item1}
-             onClick={() => addShopCart( 2, matchId, gamblingId, choiceId, dishId)}
+             onClick={() => addShopCart(2, matchId, gamblingId, choiceId, dishId)}
         >
           <div className={styles.name}>
             {
@@ -114,7 +110,9 @@ class DetailDishItem extends PureComponent {
             }
           </div>
           <div
-            className={( mixedDishInfo[matchId] &&  mixedDishInfo[matchId].choiceId === choiceId)  ? `${styles.dish} ${styles.active}` : styles.dish}
+            className={(mixedDishInfo[matchId] &&
+              mixedDishInfo[matchId].choiceId === choiceId) ?
+              `${styles.dish} ${styles.active}` : styles.dish}
           >
              <span className={styles.handicap}>
             {choiceHandicap && `${choiceHandicap}`}
@@ -126,14 +124,15 @@ class DetailDishItem extends PureComponent {
           {this.renderUp()}
         </div>
       );
-    }else if(oddId === '2' || oddId === '6'){
+    } if (oddId === '2' || oddId === '6') {
       return (
         <div key={choiceId}
              className={styles.item2}
-             onClick={() => addShopCart( 2 , matchId, gamblingId, choiceId, dishId)}
+             onClick={() => addShopCart(2, matchId, gamblingId, choiceId, dishId)}
         >
-
-          <div  className={( mixedDishInfo[matchId] &&  mixedDishInfo[matchId].choiceId === choiceId)  ? `${styles.dish} ${styles.active}` : styles.dish}
+          <div className={(mixedDishInfo[matchId] && mixedDishInfo[matchId].choiceId === choiceId) ?
+            `${styles.dish} ${styles.active}` :
+            styles.dish}
           >
             <div className={styles.handicap}>
               {name}
@@ -145,18 +144,20 @@ class DetailDishItem extends PureComponent {
           {this.renderUp()}
         </div>
       );
-    }else {
+    }
       return (
         <div key={choiceId}
              className={styles.item3}
-             onClick={() => addShopCart( 2 , matchId, gamblingId, choiceId, dishId)}
+             onClick={() => addShopCart(2, matchId, gamblingId, choiceId, dishId)}
         >
           <div className={styles.name}>
             {
               this.renderTeamName()
             }
           </div>
-          <div className={( mixedDishInfo[matchId] &&  mixedDishInfo[matchId].choiceId === choiceId)  ? `${styles.dish} ${styles.active}` : styles.dish}
+          <div className={(mixedDishInfo[matchId] && mixedDishInfo[matchId].choiceId === choiceId) ?
+            `${styles.dish} ${styles.active}` :
+            styles.dish}
           >
              <span className={styles.handicap}>
             {choiceHandicap && `${choiceHandicap}`}
@@ -168,9 +169,6 @@ class DetailDishItem extends PureComponent {
           {this.renderUp()}
         </div>
       );
-    }
-
-
   }
 }
 

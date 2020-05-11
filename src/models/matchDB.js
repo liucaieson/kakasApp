@@ -8,10 +8,10 @@ export default {
   },
 
   effects: {
-    *saveMatchData({payload}, { call, put, select }) {
+    *saveMatchData({ payload }, { put }) {
       yield put({
         type: 'save',
-        payload: payload,
+        payload,
       });
     },
 

@@ -1,31 +1,23 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './deatil.scss';
-import { Icon } from 'antd-mobile';
-import Loading from '../../../../components/PCMask';
-import DishItem from './detailDishItem';
-import CountDown from '../../../../components/CountDown';
-import GotoTopFooter from '../../../../components/GotoTopFooter';
-import CollapseList from '../../../../components/CollapseList';
-
-
+import CountDown from '@/components/CountDown';
+import CollapseList from '@/components/CollapseList';
 
 @connect(({ inPlay, loading }) => ({
   inPlay,
   oddsLoading: loading.effects['inPlay/fetchMatchAllOdds'],
 }))
 class InPlayDetailPage extends PureComponent {
-
   timer = null;
+
   balanceTimer = null;
+
   state = {
-    firstLoading: true,
-    prevPeriod: '1:00',
-    calcPeriod: '1:00',
     host: '',
     hostScore: 0,
     away: '',
-    awayScore:0
+    awayScore: 0
   };
 
   globalParams = {
@@ -39,42 +31,39 @@ class InPlayDetailPage extends PureComponent {
     this.mainRef = React.createRef();
   }
 
-  /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
+  /* 10s轮询余额，60s轮询比赛列表，首次请求赔率列表 */
   componentDidMount() {
     const { location } = this.props;
     const { query } = location;
     const { match } = query;
-    if(match === '0'){
-      window.frames['videoIFrame'].location.href = 'https://player.youku.com/embed/XNDUxMzU0ODg2OA==' ;
+    if (match === '0') {
+      window.frames.videoIFrame.location.href = 'https://player.youku.com/embed/XNDUxMzU0ODg2OA==';
       this.setState({
         host: '德国',
         hostScore: 7,
         away: '巴西',
-        awayScore:1
+        awayScore: 1
       })
     }
-    if(match === '1'){
-      window.frames['videoIFrame'].location.href = 'https://player.youku.com/embed/XMTczMzk0ODQ3Mg==';
+    if (match === '1') {
+      window.frames.videoIFrame.location.href = 'https://player.youku.com/embed/XMTczMzk0ODQ3Mg==';
       this.setState({
         host: '德国',
         hostScore: 1,
         away: '阿根廷',
-        awayScore:0
+        awayScore: 0
       })
     }
 
-    if(match === '2'){
-      window.frames['videoIFrame'].location.href = 'https://player.youku.com/embed/XMjc5NDU3NjIyOA==';
+    if (match === '2') {
+      window.frames.videoIFrame.location.href = 'https://player.youku.com/embed/XMjc5NDU3NjIyOA==';
       this.setState({
         host: '尤文图斯',
         hostScore: 0,
         away: '巴塞罗娜',
-        awayScore:3
+        awayScore: 3
       })
     }
-
-
-
   }
 
   setTimeFetchMatchList = () => {
@@ -102,10 +91,9 @@ class InPlayDetailPage extends PureComponent {
 
 
   render() {
-
-    const {host, hostScore,away ,awayScore } = this.state
+    const { host, hostScore, away, awayScore } = this.state
     return (
-      <div className={styles.detail} key='matchList'>
+      <div className={styles.detail} key="matchList">
         {
             (
                 <div>
@@ -120,7 +108,7 @@ class InPlayDetailPage extends PureComponent {
                         <span className={styles.time} onClick={this.refreshMatchOdds}>
                           <CountDown
                             onCountDownRef={this.onCountDownRef}
-                            time='10'
+                            time="10"
                             onEnd={this.setTimeFetchMatchList}/>
                         </span>
                       </div>
@@ -143,15 +131,15 @@ class InPlayDetailPage extends PureComponent {
                       </div>
                     </div>
                     <div className={styles.liveBox}>
-                      <iframe className={styles.iframe} name='videoIFrame'  width="100%" height="100%" src="https://player.youku.com/embed/XNDUxMzU0ODg2OA==" frameBorder="0"
+                      <iframe className={styles.iframe} name="videoIFrame" width="100%" height="100%" src="https://player.youku.com/embed/XNDUxMzU0ODg2OA==" frameBorder="0"
                               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                               allowFullScreen />
                     </div>
                     <div className={styles['all-odds']}>
                       <CollapseList
                         key={1}
-                        title={'相关信息'}
-                        isArrow={true}
+                        title="相关信息"
+                        isArrow
                         titleStyle={{
                           height: '6vh',
                           lineHeight: '6vh',

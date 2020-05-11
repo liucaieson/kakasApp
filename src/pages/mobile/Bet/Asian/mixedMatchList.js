@@ -16,8 +16,8 @@ import Breadcrumbs from '../../../../components/Breadcrumbs';
   matchListLoading: loading.effects['matchList/fetchMatchOdds'],
 }))
 class BetPage extends PureComponent {
-
   timer = null;
+
   state = {
     isLoading: true,
   };
@@ -28,7 +28,7 @@ class BetPage extends PureComponent {
     this.mainRef = React.createRef();
   }
 
-  /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
+  /* 10s轮询余额，60s轮询比赛列表，首次请求赔率列表 */
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -77,7 +77,7 @@ class BetPage extends PureComponent {
     const { dispatch, location, matchListLoading } = this.props;
     /* 需要节流 */
     if (matchListLoading) {
-      return false;
+      return
     }
     const { query } = location;
     const { competitionId } = query;
@@ -108,10 +108,13 @@ class BetPage extends PureComponent {
       <div className={styles.matchList}>
         <div className={styles['game-tab']}>
           <Breadcrumbs
-            separator='/'
+            separator="/"
           >
             <span>足球</span>
-            <span className={styles.item}>{competitionsMap[competitionId] && competitionsMap[competitionId].competitionName}</span>
+            <span className={styles.item}>
+              {competitionsMap[competitionId] &&
+              competitionsMap[competitionId].competitionName}
+            </span>
           </Breadcrumbs>
 
 
@@ -119,29 +122,33 @@ class BetPage extends PureComponent {
             <span className={styles.time} onClick={this.refreshMatchOdds}>
               <CountDown
                 onCountDownRef={this.onCountDownRef}
-                time='60'
+                time="60"
                 onEnd={this.setTimeFetchMatchList}/>
             </span>
           </div>
         </div>
         <div className={styles['play-tab']}>
-          <Link to='/bet/asianCompetitionsList' className={styles.tab}>
+          <Link to="/bet/asianCompetitionsList" className={styles.tab}>
             让球&大小
           </Link>
           <div
-            className={styles.tab + ' ' + styles.active}
+            className={`${styles.tab} ${styles.active}`}
           >
             混合过关
           </div>
         </div>
         {
-          isLoading ? <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :
+          isLoading ? <Loading
+              bg="rgba(0,0,0,0.1)"
+              loadingIconSize="40px"
+              color="#30717b"
+            /> :
             <div className={styles.main} ref={this.mainRef}>
               {
-                times.map((val) => (
-                  <div key={val}>
+                times.map((v) => (
+                  <div key={v}>
                     {
-                      matchObj[val].map((val) => (
+                      matchObj[v].map((val) => (
                         <div className={styles['match-item']} key={val.matchId}>
                           <div className={styles['match-date']}>
                             <div className={styles.content}>
@@ -150,7 +157,7 @@ class BetPage extends PureComponent {
                             </div>
                             <div className={styles.text}>让球</div>
                             <div className={styles.text}>大/小</div>
-                            <div></div>
+                            <div />
 
                           </div>
                           <div className={styles['match-odds']}>
@@ -222,7 +229,7 @@ class BetPage extends PureComponent {
                           <Link to={`/bet/asianMixedDetail?matchId=${val.matchId}`} className={styles['match-play']}>
                             <div className={styles.text}>{val.amount}</div>
                             <div className={styles.text}>玩法</div>
-                            <div className={styles.arrow}></div>
+                            <div className={styles.arrow} />
                           </Link>
 
                         </div>

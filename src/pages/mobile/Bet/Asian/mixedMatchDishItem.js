@@ -10,12 +10,7 @@ import { MixedDishItemHoc } from '../Hoc/mixedDishItemHoc';
 }))
 class IndexDishItem extends PureComponent {
 
-  state = {
-    up: 0,
-    prevDish: 0,
-  };
-
-  /*static getDerivedStateFromProps(props, state) {
+  /* static getDerivedStateFromProps(props, state) {
     if (state.prevDish === 0) {
       return {
         up: 0,
@@ -35,7 +30,7 @@ class IndexDishItem extends PureComponent {
       };
     }
     return null;
-  }*/
+  } */
 
   /* 添加投注单到购物车
    * type =1 为单注， 2位混合过关
@@ -60,7 +55,7 @@ class IndexDishItem extends PureComponent {
         },
       });
     }
-  };*/
+  }; */
 
  /* renderUp() {
     const { up } = this.state;
@@ -81,12 +76,23 @@ class IndexDishItem extends PureComponent {
       name,
     } = this.props;
     if (name === 'Over') {
-      return (<span className={styles.handicap}> <i className={styles.i}>大</i>{choiceHandicap}</span>);
-    } else if (name === 'Under') {
-      return (<span className={styles.handicap}> <i className={styles.i}>小</i>{choiceHandicap}</span>);
-    } else {
-      return (<span className={styles.handicap}> {choiceHandicap}</span>);
+      return (
+        <span className={styles.handicap}>
+          <i className={styles.i}>大</i>{choiceHandicap}
+          </span>
+      );
+    } if (name === 'Under') {
+      return (
+        <span className={styles.handicap}>
+          <i className={styles.i}>小</i>{choiceHandicap}
+        </span>
+      );
     }
+      return (
+        <span className={styles.handicap}>
+          {choiceHandicap}
+        </span>
+      );
   }
 
   render() {
@@ -99,23 +105,25 @@ class IndexDishItem extends PureComponent {
       dish,
     } = this.props;
 
-    const {shopCart : { mixedDishId, mixedDishInfo }, addShopCart } = this.props;
+    const { shopCart: { mixedDishInfo }, addShopCart } = this.props;
 
     return (
       <div
         className={styles.item}
         key={choiceId}
-        onClick={() => addShopCart( 2 , matchId, gamblingId, choiceId, dishId)}
+        onClick={() => addShopCart(2, matchId, gamblingId, choiceId, dishId)}
       >
         <span
-          className={( mixedDishInfo[matchId] &&  mixedDishInfo[matchId].choiceId === choiceId) ? `${styles.price} ${styles.active}` : styles.price}
+          className={(mixedDishInfo[matchId] && mixedDishInfo[matchId].choiceId === choiceId) ?
+            `${styles.price} ${styles.active}` :
+            styles.price}
         >
           {choiceHandicap ? this.renderHandicap() : ''}
           <span className={styles.mun}>
             {dish}
           </span>
         </span>
-       {/* {this.renderUp()}*/}
+       {/* {this.renderUp()} */}
       </div>
     );
   }

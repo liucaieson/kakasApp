@@ -4,14 +4,14 @@ export default {
   namespace: 'dates',
 
   state: {
-    dates:[
+    dates: [
 
     ]
   },
 
   effects: {
-    *fetch({payload}, { call, put, select }) {
-      let data = yield call(getDates,payload);
+    *fetch({ payload }, { call, put }) {
+      const data = yield call(getDates, payload);
       yield put({
         type: 'save',
         payload: data,

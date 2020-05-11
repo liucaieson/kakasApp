@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
-import styles from './index.scss';
 import { connect } from 'dva';
-import Loading from '../../../../components/PCMask';
 import { Pagination } from 'antd-mobile';
 import moment from 'moment';
+import Loading from '@/components/PCMask';
+import styles from './index.scss';
 
 const timeList = [];
 let date = '';
@@ -11,7 +11,7 @@ let date = '';
 for (let i = 0; i < 7; i++) {
   date = moment().subtract(i, 'day').format('YYYY-MM-DD');
   timeList.push({
-      name:date,
+      name: date,
       value: date
     }
   )
@@ -23,7 +23,6 @@ for (let i = 0; i < 7; i++) {
   loading: loading.models.gameResult,
 }))
 class GameResult extends PureComponent {
-
   state = {
     selectCpt: null,
     selectTime: moment().format('YYYY-MM-DD')
@@ -46,10 +45,10 @@ class GameResult extends PureComponent {
       type: 'gameResult/fetch',
       payload: {
         ...this.defaultParams,
-        page:1,
-        size:10,
-        start:selectTime,
-        end:selectTime
+        page: 1,
+        size: 10,
+        start: selectTime,
+        end: selectTime
       },
     });
   }
@@ -72,7 +71,7 @@ class GameResult extends PureComponent {
       newCurrent = current - 1;
     }
     /* 边界处理 */
-    if(current < 1 || current > Math.ceil(count / 10) ){
+    if (current < 1 || current > Math.ceil(count / 10)) {
       return false
     }
     dispatch({
@@ -115,8 +114,8 @@ class GameResult extends PureComponent {
       type: 'gameResult/fetch',
       payload: {
         ...this.defaultParams,
-        page:1,
-        size:10,
+        page: 1,
+        size: 10,
         competitions: selectCpt,
         start: selectTime,
         end: selectTime
@@ -128,16 +127,16 @@ class GameResult extends PureComponent {
     const { gameResult: { data, count, current },
       gameResult: { competitions },
       loading } = this.props;
-    const {selectCpt, selectTime} = this.state;
+    const { selectCpt, selectTime } = this.state;
     return (
       <div className={styles.help}>
         <div className={styles['game-tab']}>
           <div className={styles.name}>赛果</div>
         </div>
-        <div  className={styles.main}>
+        <div className={styles.main}>
           <div className={styles.selection}>
-            <select  value={selectCpt} className={styles.select} onChange={this.changeCpt}>
-              <option value='null' >全部</option>
+            <select value={selectCpt} className={styles.select} onChange={this.changeCpt}>
+              <option value="null" >全部</option>
               {
                 competitions.map((item) => (
                   <option
@@ -172,10 +171,10 @@ class GameResult extends PureComponent {
           </div>
           <div className={styles['content-box']}>
           {
-            loading ?  <div className={styles.loadingBox}>
-              <Loading bg="rgba(255,255,255,.2)"  loadingIconSize="40px" color="#30717b" />
-            </div>  :(
-                data && data.length > 0 ? data.map( (val) => (
+            loading ? <div className={styles.loadingBox}>
+              <Loading bg="rgba(255,255,255,.2)" loadingIconSize="40px" color="#30717b" />
+            </div> : (
+                data && data.length > 0 ? data.map((val) => (
                 <div className={styles.content}>
                   <div className={styles.cptName}>{val.competitionName}</div>
                   <div className={styles.line}>
@@ -194,7 +193,7 @@ class GameResult extends PureComponent {
                     </div>
                   </div>
                 </div>
-                )) : <div style={{width: '100%', height: '40px',textAlign: 'center', lineHeight: '40px'}}>无比赛</div>
+                )) : <div style={{ width: '100%', height: '40px', textAlign: 'center', lineHeight: '40px' }}>无比赛</div>
             )
           }
           </div>
@@ -216,5 +215,3 @@ class GameResult extends PureComponent {
 }
 
 export default GameResult;
-
-

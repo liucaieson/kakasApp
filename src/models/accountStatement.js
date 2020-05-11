@@ -1,4 +1,4 @@
-/* 请求账变记录 */
+/* 账变记录 */
 import { accountStatement } from '@/services/api';
 import { Toast } from 'antd-mobile'
 
@@ -6,14 +6,14 @@ export default {
   namespace: 'accountStatement',
 
   state: {
-      data:[],
+    data: [],
   },
 
   effects: {
-    *fetch({payload, callback}, { call, put, select }) {
-      let data = yield call(accountStatement, payload);
-        if(data.data.length === 0){
-          Toast.info('暂无更多',1);
+    *fetch({ payload, callback }, { call, put }) {
+      const data = yield call(accountStatement, payload);
+        if (data.data.length === 0) {
+          Toast.info('暂无更多', 1);
           return
         }
         yield put({
@@ -23,7 +23,7 @@ export default {
           },
         });
 
-      if(callback) callback(data)
+      if (callback) callback(data)
     }
   },
 

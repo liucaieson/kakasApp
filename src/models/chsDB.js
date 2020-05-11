@@ -8,10 +8,10 @@ export default {
   },
 
   effects: {
-    *saveChsData({payload}, { call, put, select }) {
+    *saveChsData({ payload }, { call, put, select }) {
       yield put({
         type: 'save',
-        payload: payload,
+        payload,
       });
     },
   },

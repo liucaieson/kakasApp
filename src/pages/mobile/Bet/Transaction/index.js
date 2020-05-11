@@ -1,20 +1,20 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
-import styles from './index.scss';
 import Link from 'umi/link';
-import { dishNameMap } from '../../../../utils/utils';
 import { Pagination } from 'antd-mobile';
-import Loading from '../../../../components/PCMask';
-import Accordion from '../../../../components/Accordion';
+import styles from './index.scss';
+import { dishNameMap } from '@/utils/utils';
+import Loading from '@/components/PCMask';
+import Accordion from '@/components/Accordion';
 
 
 const betTypeMap = {
-  '1': '单注',
-  '2': '二串一',
-  '3': '三串一',
-  '4': '四串一',
-  '5': '五串一',
-  '6': '六串一',
+  1: '单注',
+  2: '二串一',
+  3: '三串一',
+  4: '四串一',
+  5: '五串一',
+  6: '六串一',
 };
 
 @connect(({ historyBets, loading }) => ({
@@ -22,7 +22,6 @@ const betTypeMap = {
   loading: loading.models.historyBets,
 }))
 class Transaction extends PureComponent {
-
   /**
    *
    * @type {{isShowLoading: boolean 请求接口的loading效果 ,
@@ -53,8 +52,8 @@ class Transaction extends PureComponent {
         size: 10,
         betStatus: '',
         sport: '1',
-        /*start_time: +(moment(startDate).valueOf()/1000).toFixed(0),
-        end_time: +(moment(moment(endDate).format('YYYY-MM-DD 23:59:59'))/1000).toFixed(0)*/
+        /* start_time: +(moment(startDate).valueOf()/1000).toFixed(0),
+        end_time: +(moment(moment(endDate).format('YYYY-MM-DD 23:59:59'))/1000).toFixed(0) */
       },
       callback: response => {
         const { count, current } = response;
@@ -96,19 +95,21 @@ class Transaction extends PureComponent {
 
   togglePage = (flag) => {
     const { dispatch, loading } = this.props;
-    let { current, size, total, betStatus } = this.state;
+    const { size, total, betStatus } = this.state;
+    let currentPage = this.state.current;
     if (loading) {
-      return false;
+      return
     }
 
+    // 判断向前还是向后翻页
     if (flag === 'next') {
-      current = current + 1;
+      currentPage += 1;
     } else {
-      current = current - 1;
+      currentPage -= 1;
     }
-    /* 边界处理 */
-    if (current < 1 || current > Math.ceil(total / size)) {
-      return false;
+    // 边界处理
+    if (currentPage < 1 || currentPage > Math.ceil(total / size)) {
+      return
     }
     this.setState({
       isShowLoading: true,
@@ -116,7 +117,7 @@ class Transaction extends PureComponent {
     dispatch({
       type: 'historyBets/fetch',
       payload: {
-        page: current,
+        page: currentPage,
         size: 10,
         sport: '1',
         betStatus,
@@ -139,7 +140,7 @@ class Transaction extends PureComponent {
     return (
       <div className={styles.transaction}>
         <div className={styles['play-tab']}>
-          <div className={styles.tab + ' ' + styles.active}
+          <div className={`${styles.tab} ${styles.active}`}
           >交易状况
           </div>
           <Link to="/bet/AccountHistory" className={styles.tab}
@@ -147,8 +148,7 @@ class Transaction extends PureComponent {
         </div>
         <div className={styles['game-tab']}>
           <div className={styles.name}>账户交易记录</div>
-          <div className={styles.box}>
-          </div>
+          <div className={styles.box} />
         </div>
         <div className={styles.main}>
           <div className={styles['sub-title']}>
@@ -173,7 +173,7 @@ class Transaction extends PureComponent {
                   data.length > 0 ?
                     <ul className={styles['list-box']}>
                       {
-                        data.map((val, index) => (
+                        data.map((val) => (
                           <li className={styles.item} key={val.betId}>
                             <Accordion>
                               <div className={styles.title}>
@@ -237,7 +237,7 @@ class Transaction extends PureComponent {
                         ))
                       }
                     </ul>
-                    : <div className='no-data'>
+                    : <div className="no-data">
                       暂无数据
                     </div>
                 )

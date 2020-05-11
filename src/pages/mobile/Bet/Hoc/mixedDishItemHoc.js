@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { getTimeout } from '../../../../utils/utils'
-
 
 export const MixedDishItemHoc = (Wrapper) => {
-
   @connect(({ shopCart }) => ({
     shopCart,
   }))
@@ -17,9 +14,8 @@ export const MixedDishItemHoc = (Wrapper) => {
           payload: matchId,
         });
       } else {
-        const { dispatch, shopCart: { mixedDishId } } = this.props;
-        /*如果混合过关的购物车不包含这个matchId说明是选择混合过关的比赛场次增加，添加水波纹动画 */
-        if( !mixedDishId.includes(matchId)){
+        /* 如果混合过关的购物车不包含这个matchId说明是选择混合过关的比赛场次增加，添加水波纹动画 */
+        if (!mixedDishId.includes(matchId)) {
           const hooker1 = document.getElementById('betAnimateHooker1');
           const hooker2 = document.getElementById('betAnimateHooker2');
           hooker1.classList.add('bet-wave-animate1');
@@ -52,4 +48,3 @@ export const MixedDishItemHoc = (Wrapper) => {
 
   return MixedHoc;
 };
-
