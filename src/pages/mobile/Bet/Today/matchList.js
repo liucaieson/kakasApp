@@ -3,12 +3,12 @@ import { connect } from 'dva';
 import Link from 'umi/link';
 import styles from './matchList.scss';
 import { calcDate3 } from '@/utils/utils';
-import Loading from '../../../../components/PCMask';
+import Loading from '@/components/LoadingMask';
 import DishItem from './matchDishItem';
 import moment from 'moment';
-import CountDown from '../../../../components/CountDown';
-import GotoTopFooter from '../../../../components/GotoTopFooter';
-import Breadcrumbs from '../../../../components/Breadcrumbs';
+import CountDown from '@/components/CountDown';
+import GotoTopFooter from '@/components/GotoTopFooter';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 @connect(({ matchList, userInfo, competitions, loading }) => ({
   matchList,
@@ -17,10 +17,9 @@ import Breadcrumbs from '../../../../components/Breadcrumbs';
   matchListLoading: loading.effects['matchList/fetchMatchOdds'],
 }))
 class BetPage extends PureComponent {
-
   timer = null;
+
   state = {
-    showOdds: [],
     isLoading: true,
   };
 
@@ -36,7 +35,7 @@ class BetPage extends PureComponent {
     this.mainRef = React.createRef();
   }
 
-  /*10s轮询余额，60s轮询比赛列表，首次请求赔率列表*/
+  /* 10s轮询余额，60s轮询比赛列表，首次请求赔率列表 */
   componentDidMount() {
     this.fetchMatchOdds();
   }
@@ -59,7 +58,7 @@ class BetPage extends PureComponent {
     const { dispatch, location, matchListLoading } = this.props;
     /* 需要节流 */
     if (matchListLoading) {
-      return false;
+      return
     }
     const { query } = location;
     const { competitionId } = query;
@@ -97,11 +96,6 @@ class BetPage extends PureComponent {
     });
   };
 
-  goBack = () => {
-    const { history } = this.props;
-    history.go(-1);
-  };
-
   render() {
     const {
       location,
@@ -113,10 +107,10 @@ class BetPage extends PureComponent {
     const { isLoading } = this.state;
 
     return (
-      <div className={styles.matchList} key='matchList'>
+      <div className={styles.matchList}>
         <div className={styles['game-tab']}>
           <Breadcrumbs
-            separator='/'
+            separator="/"
           >
             <span>足球</span>
             <span className={styles.item}>
@@ -127,26 +121,27 @@ class BetPage extends PureComponent {
             <span className={styles.time} onClick={this.refreshMatchOdds}>
               <CountDown
                 onCountDownRef={this.onCountDownRef}
-                time='60'
-                onEnd={this.setTimeFetchMatchList}/>
+                time="60"
+                onEnd={this.setTimeFetchMatchList}
+              />
             </span>
           </div>
         </div>
         <div className={styles['play-tab']}>
-          <div className={styles.tab + ' ' + styles.active}
+          <div className={`${styles.tab} ${styles.active}`}
           >让球&大小
           </div>
-          <Link to='/bet/todayMixedCompetitionsList' className={styles.tab}
+          <Link to="/bet/todayMixedCompetitionsList" className={styles.tab}
           >混合过关</Link>
         </div>
         {
           isLoading ? <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :
             <div className={styles.main} ref={this.mainRef}>
               {
-                times.map((val) => (
-                  <div key={val}>
+                times.map((v) => (
+                  <div key={v}>
                     {
-                      matchObj[val].map((val) => (
+                      matchObj[v].map((val) => (
                         <div className={styles['match-item']} key={val.matchId}>
                           <div className={styles['match-date']}>
                             <div className={styles.content}>
@@ -155,7 +150,7 @@ class BetPage extends PureComponent {
                             </div>
                             <div className={styles.text}>让球</div>
                             <div className={styles.text}>大/小</div>
-                            <div></div>
+                            <div />
 
                           </div>
                           <div className={styles['match-odds']}>
@@ -227,7 +222,7 @@ class BetPage extends PureComponent {
                           <Link to={`/bet/todayDetail?matchId=${val.matchId}`} className={styles['match-play']}>
                             <div className={styles.text}>{val.amount}</div>
                             <div className={styles.text}>玩法</div>
-                            <div className={styles.arrow}></div>
+                            <div className={styles.arrow} />
                           </Link>
 
                         </div>

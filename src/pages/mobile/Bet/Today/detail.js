@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './deatil.scss';
 import { calcDate2 } from '@/utils/utils';
-import Loading from '@/components/PCMask';
+import Loading from '@/components/LoadingMask';
 import DishItem from './detailDishItem';
 import CountDown from '@/components/CountDown';
 import GotoTopFooter from '@/components/GotoTopFooter';

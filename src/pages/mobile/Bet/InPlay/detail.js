@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './deatil.scss';
-import Loading from '@/components/PCMask';
+import Loading from '@/components/LoadingMask';
 import DishItem from './detailDishItem';
 import CountDown from '@/components/CountDown';
 import GotoTopFooter from '@/components/GotoTopFooter';
@@ -66,11 +66,10 @@ class InPlayDetailPage extends PureComponent {
     });
 
     /* 后端没有传数据，prevPeriod则不存在 则不能进行倒计时 */
-    const { prevPeriod } = this.state;
-    if (prevPeriod) {
+    const calcPeriod = this.state.prevPeriod;
+    if (calcPeriod) {
       this.timer = setInterval(() => {
         const { prevPeriod } = this.state;
-        console.log(prevPeriod)
         let minute = prevPeriod.split(':')[0];
         let second = prevPeriod.split(':')[1];
         if (minute === '45') {

@@ -7,18 +7,16 @@
 
 import React, { PureComponent } from 'react';
 
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { CSSTransition } from 'react-transition-group';
 import './index.less';
 
 export default class BasicLayout extends PureComponent {
-
   render() {
-   const {children, come, clsName} = this.props;
+   const { children, come, clsName } = this.props;
     return (
         <CSSTransition in={come} classNames={clsName} timeout={300}>
-            {children}
+          {children}
         </CSSTransition>
     );
   }
 }
-

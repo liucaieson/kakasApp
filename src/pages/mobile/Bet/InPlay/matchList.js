@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import Link from 'umi/link';
 import { calcDate4 } from '@/utils/utils';
 import styles from './matchList.scss';
-import Loading from '@/components/PCMask';
+import Loading from '@/components/LoadingMask';
 import CountDown from '@/components/CountDown/index';
 import DishItem from './matchListDishItem';
 import GotoTopFooter from '@/components/GotoTopFooter';
@@ -83,11 +83,6 @@ class RoundPage extends PureComponent {
     this.countRef = ref;
   };
 
-  goBack = () => {
-    const { history } = this.props;
-    history.go(-1);
-  };
-
   render() {
     const {
       inPlay: { cptIds, matchListObj },
@@ -112,7 +107,6 @@ class RoundPage extends PureComponent {
         {
           firstLoading ? <Loading
               bg="rgba(0,0,0,0.1)"
-              loadingIconSize="40px"
               color="#30717b"
             /> :
             <div className={styles.main} ref={this.mainRef}>
@@ -128,10 +122,10 @@ class RoundPage extends PureComponent {
                     </h4>
                   </div>
                   :
-                  cptIds.map((val) => (
-                    <div key={val}>
+                  cptIds.map((v) => (
+                    <div key={v}>
                       {
-                        matchListObj[val].map((val) => (
+                        matchListObj[v].map((val) => (
                           <div className={styles['match-item']} key={val.matchId}>
                             <div className={styles['match-date']}>
                               <div className={styles.content}>
@@ -149,7 +143,9 @@ class RoundPage extends PureComponent {
                                       : <div
                                         className={styles.time}>
                                       <span
-                                        className={styles.day}>{val.time.substring(8, 10)}:{val.time.substring(10, 12)}</span>
+                                        className={styles.day}>
+                                        {val.time.substring(8, 10)}:{val.time.substring(10, 12)}
+                                        </span>
                                       </div>
                                   }</div>
                               </div>

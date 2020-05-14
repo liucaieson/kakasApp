@@ -46,55 +46,6 @@
         text-align: left;
         background-color: #2d6265;
       }
-      .competition-box {
-        width: 100%;
-        margin-bottom: .5vh;
-        .name-box {
-          @include competitions-name-layout();
-        }
-        .match-box {
-          width: 100%;
-          color: $fz-color1;
-          .match-line {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: white;
-            @include border-bottom-1px(#dedede);
-            .left {
-              width: 70%;
-              padding-left: 5%;
-              text-align: left;
-              color: $fz-color1;
-              .name {
-                font-size: px2vw(14);
-                line-height: px2vw(28);
-              }
-              .time {
-                font-size: px2vw(12);
-                line-height: px2vw(24);
-              }
-            }
-            .right {
-              width: 30%;
-              display: flex;
-              align-items: center;
-              justify-content: flex-start;
-              flex-direction: row-reverse;
-              padding-right: 4%;
-              .dish-count {
-                color: $fz-color4;
-                width: px2vw(24);
-                height: px2vw(24);
-                padding-right: px2vw(1);
-                line-height: px2vw(22);
-                font-size: px2vw(12);
-                @include border-1px(#dc9602)
-              }
-            }
-          }
-        }
-      }
     }
     .event-loading {
       position: relative;

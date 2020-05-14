@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './deatil.scss';
 import { calcDate2 } from '@/utils/utils';
-import Loading from '@/components/PCMask';
+import Loading from '@/components/LoadingMask';
 import DishItem from './mixedDetailDishItem';
 import CountDown from '@/components/CountDown';
 import GotoTopFooter from '@/components/GotoTopFooter';
@@ -111,15 +111,15 @@ class DetailPage extends PureComponent {
                   <div className={styles.item}>混合过关</div>
                   <div className={styles.item}>
                     {matchDetail.cptName}
-                    </div>
+                  </div>
                 </Breadcrumbs>
                   <div className={styles.box}>
                     <span className={styles.time} onClick={this.refreshMatchOdds}>
-                        <CountDown
-                          onCountDownRef={this.onCountDownRef}
-                          time="60"
-                          onEnd={this.setTimeFetchMatchList}/>
-                      </span>
+                      <CountDown
+                        onCountDownRef={this.onCountDownRef}
+                        time="60"
+                        onEnd={this.setTimeFetchMatchList}/>
+                    </span>
                   </div>
               </div>
               <div className={styles.main} ref={this.mainRef}>
@@ -135,15 +135,16 @@ class DetailPage extends PureComponent {
                 </div>
                 <div className={styles['all-odds']}>
                   {
-                    matchDetail.odds && matchDetail.odds.map((val) => (
-                      <CollapseList
-                        key={val.oddId}
-                        title={val.oddName}
-                        isArrow
-                        titleStyle={{
-                          height: '6vh',
-                          lineHeight: '6vh',
-                          fontSize: '3.4vw',
+                    matchDetail.odds &&
+                    matchDetail.odds.map((val) => (
+                          <CollapseList
+                          key={val.oddId}
+                          title={val.oddName}
+                          isArrow
+                          titleStyle={{
+                            height: '6vh',
+                            lineHeight: '6vh',
+                            fontSize: '3.4vw',
                         }}
                       >
                         <div className={styles['odds-item']}>

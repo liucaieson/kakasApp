@@ -1,6 +1,5 @@
-/*import MBPageRoutes from './mbRouter.config';*/
+/* import MBPageRoutes from './mbRouter.config'; */
 import MBPageRoutes from './router.config';
-const path = require('path');
 
 export default {
   plugins: [
@@ -25,23 +24,15 @@ export default {
       },
     }],
   ],
-  alias:{
-    components:path.resolve(__dirname,'src/components'),
-    utils:path.resolve(__dirname,'src/utils'),
-    services:path.resolve(__dirname,'src/services'),
-    models:path.resolve(__dirname,'src/models'),
-    images:path.resolve(__dirname,'src/assets'),
-    styles:path.resolve(__dirname,'src/styles')
-  },
   // 路由配置
-  routes:   MBPageRoutes,
+  routes: MBPageRoutes,
   history: 'browser',
-  hash:true,
+  hash: true,
  /* proxy: {
     "/test": {
       "target": "http://35.229.133.12:8090",
       "changeOrigin": true,
       "pathRewrite": { "^/test" : "/api/v1" }
     }
-  },*/
+  }, */
 }

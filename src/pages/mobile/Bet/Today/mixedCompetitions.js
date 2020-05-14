@@ -4,7 +4,8 @@ import Link from 'umi/link';
 import styles from './competitionsList.scss';
 import moment from 'moment';
 import CountDown from '@/components/CountDown';
-import Loading from '@/components/PCMask';
+import Loading from '@/components/LoadingMask';
+import CompetitionsNameLayout from '@/components/CompetitionsNameLayout';
 import GotoTopFooter from '@/components/GotoTopFooter';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
@@ -120,7 +121,6 @@ class Home extends PureComponent {
             competitionsLoading ?
               <Loading
                 bg="rgba(0,0,0,0.1)"
-                loadingIconSize="40px"
                 color="#30717b"
               />
               :
@@ -130,17 +130,13 @@ class Home extends PureComponent {
                     <div className={styles['area-box']} key={item}>
                       {
                         competitionsObj[item].map((val) => (
-                          <Link key={val.competitionId} className={styles['competition-box']}
-                                to={`/bet/todayMixedMatchList?competitionId=${val.competitionId}`}>
-                            <div className={styles['name-box']}>
-                              <div className={styles.name}>
-                                {val.competitionName}
-                              </div>
-                              <div className={styles.count}>
-                                {val.matches}
-                              </div>
-                            </div>
-                          </Link>
+                          <CompetitionsNameLayout
+                            key={val.competitionId}
+                            type="todayMixed"
+                            competitionId={val.competitionId}
+                            competitionName={val.competitionName}
+                            matches={val.matches}
+                          />
                         ))
                       }
                     </div>

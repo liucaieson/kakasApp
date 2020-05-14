@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import Link from 'umi/link';
 import { Pagination } from 'antd-mobile';
 import styles from './index.scss';
-import Loading from '../../../../components/PCMask';
+import Loading from '@/components/LoadingMask';
 
 @connect(({ accountStatement, loading }) => ({
   accountStatement,

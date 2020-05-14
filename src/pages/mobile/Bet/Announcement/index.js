@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Pagination } from 'antd-mobile';
 import styles from './index.scss';
 
-import MbPageLoading from '@/components/MbPageLoading/index';
+import MbPageLoading from '@/components/LoadingMask';
 
 @connect(({ announcement, loading }) => ({
   announcement,
@@ -83,7 +83,7 @@ class Announcement extends PureComponent {
     const { announcement: { data } } = this.props;
     const { isShowLoading, total, size, current } = this.state;
     return (
-      <div className={styles.announcement} key="announcement">
+      <div className={styles.announcement} >
         <div className={styles['game-tab']}>
           <div className={styles.name}>公告</div>
           <div className={styles.box}>
@@ -93,7 +93,11 @@ class Announcement extends PureComponent {
           </div>
         </div>
         {
-          isShowLoading ? (<MbPageLoading/>) :
+          isShowLoading ? (
+            <MbPageLoading
+              bg="rgba(0,0,0,0.1)"
+              color="#30717b"
+            />) :
             (
               data && data.length > 0 ?
                 <Fragment>

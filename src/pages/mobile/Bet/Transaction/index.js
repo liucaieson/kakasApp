@@ -4,7 +4,7 @@ import Link from 'umi/link';
 import { Pagination } from 'antd-mobile';
 import styles from './index.scss';
 import { dishNameMap } from '@/utils/utils';
-import Loading from '@/components/PCMask';
+import Loading from '@/components/LoadingMask';
 import Accordion from '@/components/Accordion';
 
 

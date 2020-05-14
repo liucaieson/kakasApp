@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './deatil.scss';
 import { calcDate2 } from '@/utils/utils';
-import Loading from '../../../../components/PCMask';
+import Loading from '@/components/LoadingMask';
 import DishItem from './mixedDetailDishItem';
-import CountDown from '../../../../components/CountDown';
-import GotoTopFooter from '../../../../components/GotoTopFooter';
-import CollapseList from '../../../../components/CollapseList';
-import Breadcrumbs from '../../../../components/Breadcrumbs';
+import CountDown from '@/components/CountDown';
+import GotoTopFooter from '@/components/GotoTopFooter';
+import CollapseList from '@/components/CollapseList';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 @connect(({ matchDetail, matchAllOdds, competitions, userInfo, loading }) => ({
   matchDetail,

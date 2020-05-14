@@ -1,0 +1,37 @@
+@import "../../styles/utils";
+
+.competition-box {
+  width: 100%;
+  margin-bottom: .5vh;
+  .name-box {
+    font-size: px2vw(14);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 16px;
+    line-height: px2vh(44);
+    height: px2vh(48);
+    margin: 8px 8px 0;
+    background-color: #f5f2f0;
+    border-radius: 3px;
+    width: calc(100% - 16px);
+    color: #453c35;
+    box-sizing: border-box;
+    .name {
+      opacity: 0.8;
+      @include textOverflow();
+    }
+    .count {
+      width: px2vw(59);
+      height: px2vh(48);
+      color: #453c35;
+      font-weight: 600;
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+      border-radius: 0 3px 3px 0;
+      background: rgba(233, 228, 226, 0.4);
+      box-sizing: border-box;
+    }
+  }
+}

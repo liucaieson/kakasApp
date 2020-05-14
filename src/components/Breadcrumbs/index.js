@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import styles from './index.scss';
 import { Icon } from 'antd-mobile';
 
-export default class Accordion extends Component {
-
+export default class Accordion extends PureComponent {
   render() {
     const { children, separator } = this.props;
 
@@ -26,5 +25,3 @@ export default class Accordion extends Component {
     );
   }
 }
-
-

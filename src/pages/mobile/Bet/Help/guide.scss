@@ -1,0 +1,63 @@
+@import "../../../../styles/utils";
+@import "../../../../styles/common";
+
+.guide {
+  width: 100%;
+  position: relative;
+  padding-bottom: px2vh(70);
+  .game-tab {
+    @include breadcrumbs-layout();
+  }
+  .main{
+    width: 100%;
+    padding: 0 px2vw(20);
+    .guide-nav{
+      position: relative;
+      margin: 0 auto;
+      width: 100%;
+      top: 4px;
+      .guide-nav-item{
+        text-align: center;
+        background: #ebebeb;
+        color: #905b19;
+        padding: px2vw(16) 0;
+        margin: 0 0 2px 0;
+        font-size: px2vw(15);
+      }
+      .active{
+        background:#905b19;
+        color:  #fff;
+      }
+    }
+    .guide-content{
+      width: 100%;
+      .section{
+        width: 100%;
+        margin-top: px2vh(20);
+        .title{
+          text-align: left;
+          font-size: px2vw(18);
+          padding: px2vw(12) px2vw(14);
+          color: #fff;
+          background: #905b19;
+        }
+        .text{
+          margin: px2vw(16) 0;
+          padding: 0 px2vw(15);
+          text-align: left;
+          p{
+            text-align: left;
+            font-weight: 100;
+            line-height: 1.8;
+          }
+          img{
+            width: 100%;
+            margin: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+

@@ -2,10 +2,11 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import Link from 'umi/link';
 import styles from './competitionsList.scss';
-import CountDown from '../../../../components/CountDown';
-import Loading from '../../../../components/PCMask';
-import GotoTopFooter from '../../../../components/GotoTopFooter';
-import Breadcrumbs from '../../../../components/Breadcrumbs';
+import CountDown from '@/components/CountDown';
+import Loading from '@/components/LoadingMask';
+import GotoTopFooter from '@/components/GotoTopFooter';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import CompetitionsNameLayout from '@/components/CompetitionsNameLayout';
 
 @connect(({ area, competitions, loading }) => ({
   competitions,
@@ -151,34 +152,24 @@ class Home extends PureComponent {
                       <div className={styles['area-box']} key={item}>
                         {
                           competitionsObj[item].map((val) => (
-                            <Link key={val.competitionId} className={styles['competition-box']}
-                                  to={`/bet/asianMixedMatchList?competitionId=${val.competitionId}`}>
-                              <div className={styles['name-box']}>
-                                <div className={styles.name}>
-                                  {val.competitionName}
-                                </div>
-                                <div className={styles.count}>
-                                  {val.matches}
-                                </div>
-                              </div>
-                            </Link>
+                            <CompetitionsNameLayout
+                              type="asianMixed"
+                              competitionId={val.competitionId}
+                              competitionName={val.competitionName}
+                              matches={val.matches}
+                            />
                           ))
                         }
                       </div>
                     ))
                     : competitionsObj[selectArea].map((val) => (
                       <div className={styles['area-box']} key={val.competitionId} >
-                        <Link key={val.competitionId} className={styles['competition-box']}
-                              to={`/bet/asianMatchList?competitionId=${val.competitionId}`}>
-                          <div className={styles['name-box']}>
-                            <div className={styles.name}>
-                              {val.competitionName}
-                            </div>
-                            <div className={styles.count}>
-                              {val.matches}
-                            </div>
-                          </div>
-                        </Link>
+                        <CompetitionsNameLayout
+                          type="asianMixed"
+                          competitionId={val.competitionId}
+                          competitionName={val.competitionName}
+                          matches={val.matches}
+                        />
                       </div>
                     ))
                 }

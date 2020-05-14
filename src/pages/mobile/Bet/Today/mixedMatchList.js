@@ -4,7 +4,7 @@ import Link from 'umi/link';
 import moment from 'moment';
 import styles from './matchList.scss';
 import { calcDate3 } from '@/utils/utils';
-import Loading from '@/components/PCMask';
+import Loading from '@/components/LoadingMask';
 import DishItem from './mixedMatchDishItem';
 import CountDown from '@/components/CountDown';
 import GotoTopFooter from '@/components/GotoTopFooter';

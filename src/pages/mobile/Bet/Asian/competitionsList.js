@@ -2,15 +2,16 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import Link from 'umi/link';
 import styles from './competitionsList.scss';
-import CountDown from '../../../../components/CountDown';
-import Loading from '../../../../components/PCMask';
-import GotoTopFooter from '../../../../components/GotoTopFooter';
-import Breadcrumbs from '../../../../components/Breadcrumbs'
+import CountDown from '@/components/CountDown';
+import Loading from '@/components/LoadingMask';
+import GotoTopFooter from '@/components/GotoTopFooter';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import CompetitionsNameLayout from '@/components/CompetitionsNameLayout';
 
 @connect(({ area, competitions, loading }) => ({
   competitions,
   area,
-  competitionsLoading: loading.effects['competitions/fetch']
+  competitionsLoading: loading.effects['competitions/fetch'],
 }))
 class Home extends PureComponent {
   timer = null;
@@ -18,7 +19,7 @@ class Home extends PureComponent {
   balanceTimer = null;
 
   state = {
-    selectArea: 'all'
+    selectArea: 'all',
   };
 
   constructor(props) {
@@ -53,7 +54,7 @@ class Home extends PureComponent {
   };
 
   setTimeFetchMatchList = () => {
-    this.fetchMatchOdds()
+    this.fetchMatchOdds();
   };
 
   /* 获取倒计时组件的this */
@@ -69,7 +70,7 @@ class Home extends PureComponent {
     const { dispatch, competitionsLoading } = this.props;
     /* 需要节流 */
     if (competitionsLoading) {
-      return false
+      return;
     }
     dispatch({
       type: 'competitions/fetch',
@@ -103,8 +104,8 @@ class Home extends PureComponent {
    */
   change = (e) => {
     this.setState({
-      selectArea: e.target.value
-    })
+      selectArea: e.target.value,
+    });
   };
 
   render() {
@@ -133,7 +134,8 @@ class Home extends PureComponent {
           </div>
           <div className={styles['play-tab']}>
             <div className={`${styles.tab} ${styles.active}`}
-            >让球&大小</div>
+            >让球&大小
+            </div>
             <Link to="/bet/asianMixedCompetitionsList" className={styles.tab}
             >混合过关</Link>
           </div>
@@ -153,44 +155,32 @@ class Home extends PureComponent {
                     }
                   </select>
                 </div>
+                <div className={styles['area-box']}>
                 {
                   selectArea === 'all' ?
-                  areaId.map((item) => (
-                    <div className={styles['area-box']} key={item}>
-                      {
-                        competitionsObj[item].map((val) => (
-                          <Link key={val.competitionId}
-                                className={styles['competition-box']}
-                                to={`/bet/asianMatchList?competitionId=${val.competitionId}`}>
-                            <div className={styles['name-box']}>
-                              <div className={styles.name}>
-                                {val.competitionName}
-                              </div>
-                              <div className={styles.count}>
-                                {val.matches}
-                              </div>
-                            </div>
-                          </Link>
-                        ))
-                      }
-                    </div>
-                  ))
-                    : competitionsObj[selectArea].map((val) => (
-                      <div className={styles['area-box']} key={val.competitionId} >
-                        <Link key={val.competitionId} className={styles['competition-box']}
-                              to={`/bet/asianMatchList?competitionId=${val.competitionId}`}>
-                          <div className={styles['name-box']}>
-                            <div className={styles.name}>
-                              {val.competitionName}
-                            </div>
-                            <div className={styles.count}>
-                              {val.matches}
-                            </div>
-                          </div>
-                        </Link>
-                      </div>
+                    areaId.map((item) => (
+                      competitionsObj[item].map((val) => (
+                        <CompetitionsNameLayout
+                          key={val.competitionId}
+                          type="asian"
+                          competitionId={val.competitionId}
+                          competitionName={val.competitionName}
+                          matches={val.matches}
+                        />
+                      ))
+                    ))
+                    :
+                    competitionsObj[selectArea].map((val) => (
+                      <CompetitionsNameLayout
+                        key={val.competitionId}
+                        type="asian"
+                        competitionId={val.competitionId}
+                        competitionName={val.competitionName}
+                        matches={val.matches}
+                      />
                     ))
                 }
+                </div>
                 <GotoTopFooter/>
               </div>
           }

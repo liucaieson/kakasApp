@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import styles from './deatil.scss';
-import { dishNameMap } from '../../../../utils/utils';
+import { dishNameMap } from '@/utils/utils';
 
 @connect(({ shopCart }) => ({
   shopCart

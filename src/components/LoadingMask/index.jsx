@@ -1,26 +1,29 @@
 import React from 'react';
-import { ActivityIndicator } from 'antd-mobile';
 import styles from './index.scss';
 
-export default () => (
+export default ({ bg, color }) => (
   <div
     style={{
       position: 'fixed',
-      top: 0,
-      left: 0,
+      top: '8vh',
+      right: 0,
       width: '100%',
       height: '100%',
-      background: 'rgba(0,0,0,0.5)'
+      backgroundColor: bg || 'rgba(0,0,0,0.1)',
+      zIndex: 998,
     }}
   >
     <div
       style={{
         position: 'absolute',
-        top: '50%',
+        top: '36%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
         width: '100px',
         height: '100px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <div
@@ -29,17 +32,17 @@ export default () => (
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-between',
+          color,
         }}
       >
         <div className={styles['loadingio-spinner-dual-ball-lixo9zz3vac']}>
           <div className={styles['ldio-p0a4d5z2saq']}>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div/>
+            <div/>
+            <div/>
           </div>
         </div>
       </div>
     </div>
   </div>
 );
-

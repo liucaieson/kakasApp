@@ -1,10 +1,10 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
-import { Icon } from 'antd-mobile';
+import { Icon, Toast } from 'antd-mobile';
 import styles from './index.scss';
 import { dishNameMap } from '../../utils/utils';
-import { Toast } from 'antd-mobile';
-import Loading from '../../components/MbPageLoading';
+
+import Loading from '@/components/LoadingMask';
 
 @connect(({ loading, userInfo, shopCart, chsDB }) => ({
   userInfo,
@@ -16,7 +16,6 @@ import Loading from '../../components/MbPageLoading';
   checkMixedLoading: loading.effects['shopCart/checkMixedOrder'],
 }))
 class ShopCart extends PureComponent {
-
   /**
    * @type {{showCart: boolean 购物撤隐藏显示,
    * showKeyboard: boolean 模拟键盘的隐藏显示,
@@ -26,7 +25,6 @@ class ShopCart extends PureComponent {
    * showSetting: boolean 展示按照最新赔率的提示信息}}
    */
   state = {
-    showCart: false,
     showKeyboard: false,
     money: '',
     resData: [],
@@ -46,7 +44,7 @@ class ShopCart extends PureComponent {
     if (choiceId < 100 && mixedDishId.length < 1) {
       return;
     }
-    let dishId = [];
+    const dishId = [];
     if (type === 1) {
       dispatch({
         type: 'shopCart/checkBetOrder',
@@ -57,7 +55,7 @@ class ShopCart extends PureComponent {
       });
     } else {
       mixedDishId.map((val) => {
-        let choiceId = mixedDishInfo[val].choiceId;
+        const { choiceId } = mixedDishInfo[val];
         dishId.push(chsDB[choiceId].dishId);
       });
       dispatch({
@@ -70,7 +68,7 @@ class ShopCart extends PureComponent {
     }
   };
 
-  /*请求用户余额接口*/
+  /* 请求用户余额接口 */
   getUserInfo = () => {
     const { dispatch } = this.props;
     dispatch({
@@ -109,7 +107,7 @@ class ShopCart extends PureComponent {
     if (money.length >= 6) {
       return;
     }
-    money = money + num + '';
+    money = `${money + num}`;
     this.setState({
       money,
     });
@@ -132,7 +130,7 @@ class ShopCart extends PureComponent {
     if (money <= 0) {
       return;
     }
-    money = money + '';
+    money += '';
     money = money.substring(0, money.length - 1);
     this.setState({
       money,
@@ -144,7 +142,7 @@ class ShopCart extends PureComponent {
    * @param num
    */
   setMoney = (num) => {
-    let { money } = this.state;
+    const { money } = this.state;
     if (money.length >= 7) {
       return;
     }
@@ -176,8 +174,9 @@ class ShopCart extends PureComponent {
    * 切换展示信息
    */
   toggleSetting = () => {
+    const { showSetting } = this.state;
     this.setState({
-      showSetting: !this.state.showSetting,
+      showSetting: !showSetting,
     });
   };
 
@@ -198,7 +197,7 @@ class ShopCart extends PureComponent {
             money: '',
           });
           if (data[0].code === '208') {
-            /* this.closeShopCart();*/
+            /* this.closeShopCart(); */
             Toast.info('投注成功', 1.5);
             this.setState({
               showFinishBets: true,
@@ -231,7 +230,7 @@ class ShopCart extends PureComponent {
             money: '',
           });
           if (data.code === 200) {
-            /* this.closeShopCart();*/
+            /* this.closeShopCart(); */
             Toast.info('投注成功', 1.5);
             this.setState({
               showFinishBets: true,
@@ -372,7 +371,7 @@ class ShopCart extends PureComponent {
         </div>
       );
     }
-    else {
+
       return (
         <div className={styles.betsBox}>
           <div className={styles.content} onClick={this.hideKeyboard}>
@@ -397,7 +396,8 @@ class ShopCart extends PureComponent {
                     </div>
                     <div className={styles.delMixed} onClick={() => this.delOneMixedBet(val)}/>
                     <div className={styles.choose}>
-                      {chsDB[mixedDishInfo[val].choiceId] && dishNameMap[chsDB[mixedDishInfo[val].choiceId].name]}
+                      {chsDB[mixedDishInfo[val].choiceId] &&
+                      dishNameMap[chsDB[mixedDishInfo[val].choiceId].name]}
                       <span className={styles.handicap}>{mixedDishInfo[val].choiceHandicap}</span>
                       @
                       <span className={styles.odds}>
@@ -475,7 +475,7 @@ class ShopCart extends PureComponent {
                           </div>
                         </div>
                       </div>
-                    }*/}
+                    } */}
           {
             showSetting ? this.renderSetting() : ''
           }
@@ -489,7 +489,6 @@ class ShopCart extends PureComponent {
           </div>
         </div>
       );
-    }
   }
 
   render() {
@@ -513,7 +512,7 @@ class ShopCart extends PureComponent {
               余额：{balance}
             </div>
             <div className={styles.close} >
-              <Icon type='cross' className={styles.closeBet}/>
+              <Icon type="cross" className={styles.closeBet}/>
             </div>
           </div>
           {
@@ -558,7 +557,9 @@ class ShopCart extends PureComponent {
                                           {val.cptName}
                                         </div>
                                         <div className={styles.team}>
-                                          <span className={styles.name}>{val.homeName} vs {val.awayName}</span>
+                                          <span className={styles.name}>
+                                            {val.homeName} vs {val.awayName}
+                                            </span>
                                         </div>
                                       </div>
                                     </div>

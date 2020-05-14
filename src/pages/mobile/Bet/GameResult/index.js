@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Pagination } from 'antd-mobile';
 import moment from 'moment';
-import Loading from '@/components/PCMask';
+import Loading from '@/components/LoadingMask';
 import styles from './index.scss';
 
 const timeList = [];

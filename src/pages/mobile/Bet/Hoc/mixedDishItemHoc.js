@@ -41,7 +41,7 @@ export const MixedDishItemHoc = (Wrapper) => {
 
     render() {
       return (
-        <Wrapper {...this.props} addShopCart={this.addMixedShopCart}/>
+        <Wrapper {...this.props} addShopCart={this.addMixedShopCart} />
       );
     }
   }

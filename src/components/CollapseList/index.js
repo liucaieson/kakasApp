@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import styles from './index.scss';
 import { Icon } from 'antd-mobile';
+import styles from './index.scss';
 
 export default class Accordion extends Component {
-
   state = {
     isShow: true,
   };
 
-  componentDidMount(){
+  componentDidMount() {
     const { defaultShow } = this.props;
-    if(defaultShow){
+    if (defaultShow) {
       this.setState({
         isShow: defaultShow
       })
@@ -53,5 +52,3 @@ export default class Accordion extends Component {
     );
   }
 }
-
-

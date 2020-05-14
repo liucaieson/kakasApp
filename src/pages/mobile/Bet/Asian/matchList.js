@@ -3,11 +3,11 @@ import { connect } from 'dva';
 import Link from 'umi/link';
 import styles from './matchList.scss';
 import { calcDate3 } from '@/utils/utils';
-import Loading from '../../../../components/PCMask';
+import Loading from '@/components/LoadingMask';
 import DishItem from './matchDishItem';
-import CountDown from '../../../../components/CountDown';
-import GotoTopFooter from '../../../../components/GotoTopFooter';
-import Breadcrumbs from '../../../../components/Breadcrumbs';
+import CountDown from '@/components/CountDown';
+import GotoTopFooter from '@/components/GotoTopFooter';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 @connect(({ matchList, userInfo, competitions, loading }) => ({
   matchList,

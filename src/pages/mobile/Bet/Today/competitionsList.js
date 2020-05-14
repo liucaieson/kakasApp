@@ -3,10 +3,11 @@ import { connect } from 'dva';
 import Link from 'umi/link';
 import moment from 'moment';
 import styles from './competitionsList.scss';
-import CountDown from '../../../../components/CountDown';
-import GotoTopFooter from '../../../../components/GotoTopFooter';
-import Loading from '../../../../components/PCMask';
-import Breadcrumbs from '../../../../components/Breadcrumbs';
+import CountDown from '@/components/CountDown';
+import GotoTopFooter from '@/components/GotoTopFooter';
+import CompetitionsNameLayout from '@/components/CompetitionsNameLayout';
+import Loading from '@/components/LoadingMask';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 @connect(({ competitions, loading }) => ({
   competitions,
@@ -130,17 +131,13 @@ class Home extends PureComponent {
                     <div className={styles['area-box']} key={item}>
                       {
                         competitionsObj[item].map((val) => (
-                          <Link key={val.competitionId} className={styles['competition-box']}
-                                to={`/bet/todayMatchList?competitionId=${val.competitionId}`}>
-                            <div className={styles['name-box']}>
-                              <div className={styles.name}>
-                                {val.competitionName}
-                              </div>
-                              <div className={styles.count}>
-                                {val.matches}
-                              </div>
-                            </div>
-                          </Link>
+                          <CompetitionsNameLayout
+                            key={val.competitionId}
+                            type="today"
+                            competitionId={val.competitionId}
+                            competitionName={val.competitionName}
+                            matches={val.matches}
+                          />
                         ))
                       }
                     </div>
