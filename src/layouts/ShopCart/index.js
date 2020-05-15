@@ -40,7 +40,10 @@ class ShopCart extends PureComponent {
 
   checkBetOrder = () => {
     /* 单注传一个dishID,混合传多个dishId组成字符串 */
-    const { dispatch, shopCart: { type, choiceId, mixedDishId, mixedDishInfo }, chsDB: { chsDB } } = this.props;
+    const { dispatch,
+      shopCart: { type, choiceId, mixedDishId, mixedDishInfo },
+      chsDB: { chsDB }
+    } = this.props;
     if (choiceId < 100 && mixedDishId.length < 1) {
       return;
     }
@@ -54,7 +57,7 @@ class ShopCart extends PureComponent {
         },
       });
     } else {
-      mixedDishId.map((val) => {
+      mixedDishId.forEach((val) => {
         const { choiceId } = mixedDishInfo[val];
         dishId.push(chsDB[choiceId].dishId);
       });
@@ -263,7 +266,7 @@ class ShopCart extends PureComponent {
     } = this.props;
     const { showKeyboard, money, showSetting } = this.state;
     let mixedAllOdds = 0;
-    mixedDishId.map((val) => {
+    mixedDishId.forEach((val) => {
       mixedAllOdds += +chsDB[mixedDishInfo[val].choiceId].dish;
     });
     if (type === 1) {

@@ -356,9 +356,9 @@ export default class Guide extends React.PureComponent {
                   前一项所赢的彩金将被重新投注在随后的投注项上。</p>
                 <p>双式投注/ 2项复式投注：一注中包括了2项对不同赛事的投注选项</p>
                 <p>三式投注/ 3项复式投注：一注中包括了3项对不同赛事的投注选项</p>
-                <p>四式投注/ 4项复式投注：一注中包括了2项对不同赛事的投注选项</p>
-                <p>五式投注/ 5项复式投注：一注中包括了3项对不同赛事的投注选项</p>
-                <p>六式投注/ 6项复式投注：一注中包括了2项对不同赛事的投注选项</p>
+                <p>四式投注/ 4项复式投注：一注中包括了4项对不同赛事的投注选项</p>
+                <p>五式投注/ 5项复式投注：一注中包括了5项对不同赛事的投注选项</p>
+                <p>六式投注/ 6项复式投注：一注中包括了6项对不同赛事的投注选项</p>
               </div>
             </div>
           </div>
@@ -537,7 +537,7 @@ export default class Guide extends React.PureComponent {
   }
 
   render() {
-    const { tab } = this.state
+    const { tab } = this.state;
     return (
       <div className={styles.guide}>
         <div className={styles['game-tab']}>

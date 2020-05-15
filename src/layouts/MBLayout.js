@@ -26,16 +26,10 @@ const ANIMATION_MAP = {
   chsDB,
 }))
 class BasicLayout extends PureComponent {
-
-  state = {
-    isLogin: false,
-    showCart: false,
-  };
-
   timer = null;
 
   componentDidMount() {
-    const { dispatch, location } = this.props;
+    const { location } = this.props;
     const { query } = location;
     const { accessCode } = query;
     const code = sessionStorage.getItem('accessCode');
@@ -43,31 +37,30 @@ class BasicLayout extends PureComponent {
       /* Modal.alert(
           '亚冠体育',
           '欢迎来到亚冠体育'
-       );*/
+       ); */
       this.timer = setInterval(this.getUserInfo, 30000);
     } else if (accessCode !== undefined) {
       sessionStorage.setItem('accessCode', accessCode);
       /* Modal.alert(
          '亚冠体育',
          '欢迎来到亚冠体育'
-       );*/
+       ); */
       this.timer = setInterval(this.getUserInfo, 30000);
     } else {
       sessionStorage.setItem('accessCode', 'faeb2ead70b74948ae3b7c4cd73243f1');
       /* Modal.alert(
          '亚冠体育',
         '欢迎来到亚冠体育,当前为试玩账号'
-       );*/
+       ); */
       this.getUserInfo();
     }
-
   }
 
   componentWillUnmount() {
     window.clearInterval(this.timer);
   }
 
-  /*请求用户余额接口*/
+  /* 请求用户余额接口 */
   getUserInfo = () => {
     const { dispatch } = this.props;
     dispatch({
@@ -77,7 +70,7 @@ class BasicLayout extends PureComponent {
 
   render() {
     const {
-      children, location, loading,
+      children, loading,
       shopCart: { showCart },
     } = this.props;
     const { href } = window.location; // 浏览器地址栏中地址
