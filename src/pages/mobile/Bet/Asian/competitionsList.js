@@ -134,10 +134,15 @@ class Home extends PureComponent {
           </div>
           <div className={styles['play-tab']}>
             <div className={`${styles.tab} ${styles.active}`}
-            >让球&大小
+            >
+              让球&大小
             </div>
-            <Link to="/bet/asianMixedCompetitionsList" className={styles.tab}
-            >混合过关</Link>
+            <Link
+              to="/bet/asianMixedCompetitionsList"
+              className={styles.tab}
+            >
+              混合过关
+            </Link>
           </div>
           {
             competitionsLoading ? <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :

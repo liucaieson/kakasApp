@@ -18,8 +18,8 @@ class InPlayDetailPage extends PureComponent {
 
   state = {
     firstLoading: true,
-    prevPeriod: '1:00',
-    calcPeriod: '1:00',
+    prevPeriod: '0:00',
+    calcPeriod: '0:00',
   };
 
   globalParams = {
@@ -33,16 +33,16 @@ class InPlayDetailPage extends PureComponent {
     this.mainRef = React.createRef();
   }
 
-  static getDerivedStateFromProps (props, state) {
+  static getDerivedStateFromProps(props, state) {
     if (props.inPlay.inPlayAllOdds &&
       props.inPlay.inPlayAllOdds[0] &&
       props.inPlay.inPlayAllOdds[0].period !== state.calcPeriod) {
       return {
         prevPeriod: props.inPlay.inPlayAllOdds[0].period,
-        calcPeriod: props.inPlay.inPlayAllOdds[0].period
-      }
+        calcPeriod: props.inPlay.inPlayAllOdds[0].period,
+      };
     }
-    return null
+    return null;
   }
 
   /* 10s轮询余额，60s轮询比赛列表，首次请求赔率列表 */
@@ -53,7 +53,7 @@ class InPlayDetailPage extends PureComponent {
 
     this.globalParams = {
       ...this.globalParams,
-      match: matchId
+      match: matchId,
     };
     dispatch({
       type: 'inPlay/fetchMatchAllOdds',
@@ -66,33 +66,31 @@ class InPlayDetailPage extends PureComponent {
     });
 
     /* 后端没有传数据，prevPeriod则不存在 则不能进行倒计时 */
-    const calcPeriod = this.state.prevPeriod;
-    if (calcPeriod) {
-      this.timer = setInterval(() => {
-        const { prevPeriod } = this.state;
-        let minute = prevPeriod.split(':')[0];
-        let second = prevPeriod.split(':')[1];
-        if (minute === '45') {
-          this.setState({
-            prevPeriod: '45:00'
-          })
-        } else if (minute === '90') {
-          this.setState({
-            prevPeriod: '45:00'
-          })
-        } else {
-          second = +second + 1;
-          if (second >= 59) {
-            minute = +minute + 1;
-            second = 0
-          }
-          const newPeriod = `${minute}:${second.toString().padStart(2, '0')}`;
-          this.setState({
-            prevPeriod: newPeriod
-          })
+    this.timer = setInterval(() => {
+      const { prevPeriod } = this.state;
+      if (!prevPeriod) return;
+      let minute = prevPeriod.split(':')[0];
+      let second = prevPeriod.split(':')[1];
+      if (minute === '45') {
+        this.setState({
+          prevPeriod: '45:00',
+        });
+      } else if (minute === '90') {
+        this.setState({
+          prevPeriod: '45:00',
+        });
+      } else {
+        second = +second + 1;
+        if (second >= 59) {
+          minute = +minute + 1;
+          second = 0;
         }
-      }, 1000)
-    }
+        const newPeriod = `${minute}:${second.toString().padStart(2, '0')}`;
+        this.setState({
+          prevPeriod: newPeriod,
+        });
+      }
+    }, 1000);
   }
 
   // 清除定时器
@@ -108,7 +106,7 @@ class InPlayDetailPage extends PureComponent {
     const { dispatch, oddsLoading } = this.props;
     /* 需要节流 */
     if (oddsLoading) {
-      return
+      return;
     }
     dispatch({
       type: 'inPlay/fetchMatchAllOdds',
@@ -158,8 +156,8 @@ class InPlayDetailPage extends PureComponent {
                       <div className={styles.line}>/</div>
                       <div
                         className={styles.item}>
-                          {inPlayAllOdds[0].cptName}
-                        </div>
+                        {inPlayAllOdds[0].cptName}
+                      </div>
                       <div className={styles.box}>
                         <span className={styles.time} onClick={this.refreshMatchOdds}>
                           <CountDown
@@ -173,16 +171,18 @@ class InPlayDetailPage extends PureComponent {
                   <div className={styles.main} ref={this.mainRef}>
                     <div className={styles.content}>
                       <div className={styles.date}>
-                        { prevPeriod}
+                        {inPlayAllOdds[0].goOnFlag === 1 ? prevPeriod : inPlayAllOdds[0].period}
                       </div>
                       <div className={styles.score}>
-                        <div className={styles['home-score']}>{inPlayAllOdds[0].soccer && inPlayAllOdds[0].soccer.split('-')[0]}</div>
+                        <div
+                          className={styles['home-score']}>{inPlayAllOdds[0].soccer && inPlayAllOdds[0].soccer.split('-')[0]}</div>
                         <div className={styles.vs}>|</div>
-                        <div className={styles['away-score']}>{inPlayAllOdds[0].soccer && inPlayAllOdds[0].soccer.split('-')[1]}</div>
+                        <div
+                          className={styles['away-score']}>{inPlayAllOdds[0].soccer && inPlayAllOdds[0].soccer.split('-')[1]}</div>
                       </div>
                       <div className={styles.team}>
                         <div className={styles['home-name']}>{inPlayAllOdds[0].homeName}</div>
-                        <div className={styles.vs} />
+                        <div className={styles.vs}/>
                         <div className={styles['away-name']}>{inPlayAllOdds[0].awayName}</div>
                       </div>
                     </div>
@@ -196,26 +196,26 @@ class InPlayDetailPage extends PureComponent {
                             titleStyle={{
                               height: '6vh',
                               lineHeight: '6vh',
-                              fontSize: '3.4vw'
+                              fontSize: '3.4vw',
                             }}
                           >
                             <div className={styles['odds-item']}>
                               {
-                               val.chs.map((item) => (
-                                    <DishItem
-                                      key={item.choiceId}
-                                      choiceId={item.choiceId}
-                                      matchId={inPlayAllOdds[0].matchId}
-                                      gamblingId={val.gamblingId}
-                                      dishId={item.dishId}
-                                      dish={item.dish}
-                                      name={item.name}
-                                      choiceHandicap={item.choiceHandicap}
-                                      oddId={val.oddId}
-                                      homeName={inPlayAllOdds[0].homeName}
-                                      awayName={inPlayAllOdds[0].awayName}
-                                    />
-                                  ))
+                                val.chs.map((item) => (
+                                  <DishItem
+                                    key={item.choiceId}
+                                    choiceId={item.choiceId}
+                                    matchId={inPlayAllOdds[0].matchId}
+                                    gamblingId={val.gamblingId}
+                                    dishId={item.dishId}
+                                    dish={item.dish}
+                                    name={item.name}
+                                    choiceHandicap={item.choiceHandicap}
+                                    oddId={val.oddId}
+                                    homeName={inPlayAllOdds[0].homeName}
+                                    awayName={inPlayAllOdds[0].awayName}
+                                  />
+                                ))
                               }
                             </div>
                           </CollapseList>
@@ -223,7 +223,7 @@ class InPlayDetailPage extends PureComponent {
                       }
                     </div>
                   </div>
-                  <GotoTopFooter />
+                  <GotoTopFooter/>
                 </div>
                 :
                 <div className={styles.main}>

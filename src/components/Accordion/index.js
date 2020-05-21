@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import styles from './index.scss';
 
 export default class Accordion extends Component {
-
   state = {
     isShow: false,
   };
 
-  componentDidMount(){
+  componentDidMount() {
     const { defaultShow } = this.props;
-    if(defaultShow){
+    if (defaultShow) {
       this.setState({
         isShow: defaultShow
       })
@@ -27,7 +26,7 @@ export default class Accordion extends Component {
     const { isShow } = this.state;
 
     return (
-      <div style={{width: '100%'}}>
+      <div style={{ width: '100%' }}>
         <div className={styles.title} onClick={this.toggle}>
           {this.props.children[0]}
         </div>
@@ -38,5 +37,3 @@ export default class Accordion extends Component {
     );
   }
 }
-
-

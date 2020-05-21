@@ -1,19 +1,14 @@
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import styles from './index.scss';
 
-export default class enactment extends PureComponent {
-  state = {
-    type: '1'
+export default () => {
+  const [type, setType] = useState('1');
+
+  const change = (e) => {
+   setType(e.target.value)
   };
 
-  change = (e) => {
-    this.setState({
-      type: e.target.value
-    })
-  };
-
-  renderTable() {
-    const { type } = this.state;
+  const renderTable = () => {
     if (type === '1') {
       return (
         <table className={styles.table}>
@@ -147,25 +142,24 @@ export default class enactment extends PureComponent {
     return null
   }
 
-
-  render() {
-    return (
-      <div className={styles.help}>
-        <div className={styles['game-tab']}>
-          <div className={styles.name}>详细设定</div>
-        </div>
-        <div className={styles.main}>
-          <div className={styles.selection}>
-          <select value={this.state.type} className={styles.select} onChange={this.change}>
-            <option value="1">足球</option>
-            <option value="2">篮球/美式足球</option>
-            <option value="3">其他</option>
-            <option value="4">冠军</option>
-          </select>
-          </div>
-          {this.renderTable()}
-        </div>
+  return (
+    <div className={styles.help}>
+      <div className={styles['game-tab']}>
+        <div className={styles.name}>详细设定</div>
       </div>
-    );
-  }
+      <div className={styles.main}>
+        <div className={styles.selection}>
+          <select value={type}
+                  className={styles.select}
+                  onChange={change}
+          >
+          <option value="1">足球</option>
+          <option value="2">篮球/美式足球</option>
+          <option value="3">其他</option>
+          <option value="4">冠军</option>
+        </select>
+        </div>
+        {renderTable()}</div>
+    </div>
+  );
 }

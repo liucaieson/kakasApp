@@ -40,7 +40,8 @@ class ShopCart extends PureComponent {
 
   checkBetOrder = () => {
     /* 单注传一个dishID,混合传多个dishId组成字符串 */
-    const { dispatch,
+    const {
+      dispatch,
       shopCart: { type, choiceId, mixedDishId, mixedDishInfo },
       chsDB: { chsDB }
     } = this.props;
@@ -169,7 +170,6 @@ class ShopCart extends PureComponent {
     dispatch({
       type: 'shopCart/delOneMixedBet',
       payload: matchId,
-
     });
   };
 
@@ -201,7 +201,7 @@ class ShopCart extends PureComponent {
           });
           if (data[0].code === '208') {
             /* this.closeShopCart(); */
-            Toast.info('投注成功', 1.5);
+            Toast.info('投注成功', 1);
             this.setState({
               showFinishBets: true,
               resData: data,
@@ -284,18 +284,22 @@ class ShopCart extends PureComponent {
                     {dishInfo.cptName}
                   </div>
                   <div className={styles.team}>
-                    <span className={styles.name}>{dishInfo.homeName} vs {dishInfo.awayName}</span>
+                    <span className={styles.name}>
+                      {dishInfo.homeName} vs {dishInfo.awayName}
+                    </span>
                   </div>
                 </div>
               </div>
               <div className={styles.choose}>
                 {chsDB[dishInfo.choiceId] && dishNameMap[chsDB[dishInfo.choiceId].name]}
-                <span className={styles.handicap}>{dishInfo.choiceHandicap}</span>
+                <span className={styles.handicap}>
+                  {dishInfo.choiceHandicap}
+                </span>
                 @
                 <span className={styles.odds}>
-                             {dishInfo.choiceId && chsDB[dishInfo.choiceId] &&
-                             chsDB[dishInfo.choiceId].dish}
-                          </span>
+                   {dishInfo.choiceId && chsDB[dishInfo.choiceId] &&
+                   chsDB[dishInfo.choiceId].dish}
+                </span>
               </div>
               {
                 dishInfo.code === '3001' || dishInfo.code === '2111' ?
@@ -313,14 +317,17 @@ class ShopCart extends PureComponent {
               }
             </div>
           </div>
-          {dishInfo.code === '3001' || dishInfo.code === '2111' ?
+          {
+            dishInfo.code === '3001' || dishInfo.code === '2111' ?
             '' :
             <div className={styles.winMoney} onClick={this.hideKeyboard}>
               <div className={styles['line-box']}>
                 <div className={styles.line}>
                   <div className={styles.text}>可赢金额</div>
                   <div className={styles.money}>
-                    {chsDB[dishInfo.choiceId] && (chsDB[dishInfo.choiceId].dish * money).toFixed(2)}</div>
+                    {chsDB[dishInfo.choiceId] &&
+                    (chsDB[dishInfo.choiceId].dish * money).toFixed(2)}
+                  </div>
                 </div>
               </div>
             </div>
@@ -418,17 +425,20 @@ class ShopCart extends PureComponent {
                   dishInfo.code === '3001' || dishInfo.code === '2111' ?
                     <div className={styles['error-box']}>
                       注意：{dishInfo.message}
-                    </div> :
+                    </div>
+                    :
                     <div className={styles['bet-input']}>
                       <div className={styles.left} onClick={this.openKeyboard}>
                         <div className={styles.num}>{money}</div>
-                        <div className={styles.clearNum}/>
+                        <div className={styles.clearNum} onClick={this.delMoney} />
                       </div>
                       <div className={styles.right}>
                         <div className={styles.high}>最低投注:<i>50</i></div>
                         <div className={styles.high}>最大投注:<i>30000</i></div>
                       </div>
-                    </div>) : <div className={styles['error-box']}>
+                    </div>
+                )
+                  : <div className={styles['error-box']}>
                   <div className={styles.error}/>
                   <div className={styles.message}>
                     混合过关-需要选择最少2个投注
@@ -570,8 +580,8 @@ class ShopCart extends PureComponent {
                                       <span className={styles.handicap}>{val.choiceHandicap}</span>
                                       @
                                       <span className={styles.odds}>
-                                     {val.dish}
-                                   </span>
+                                        {val.dish}
+                                      </span>
                                     </div>
                                   </div>
                                 ),

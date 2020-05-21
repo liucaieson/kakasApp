@@ -1,269 +1,264 @@
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import styles from './sportRules.scss';
-import Accordion from '../../../../components/Accordion';
+import Accordion from '@/components/Accordion';
 
-export default class SportRules extends PureComponent {
-  state = {
-    showList: '1',
+export default () => {
+  const [showList, setShowList] = useState('1');
+
+  const change = (e) => {
+    setShowList(e.target.value)
   };
 
-  change = (e) => {
-    this.setState({
-      showList: e.target.value,
-    });
-  };
-
-  renderList() {
-    const { showList } = this.state;
+  const renderList = () => {
     switch (showList) {
       case '1':
         return (
           <div>
-            <div className={styles.h1}>90分钟赛事 </div>
-          <Accordion>
-            <div className={styles.title}>90分钟赛事投注</div>
-            <div className={styles.content}>
-              除非有特別声明，否则所有赛事的盘口都基于90分钟规定时间比赛的结果。在此，90分钟赛事包括伤停补时，但不包括加时赛、点球或金球所用时间。如果比赛在90分钟完成前就结束，除非有特别声明，否则投注作废；
-              在比赛结束前赛果已被确定的投注除外。但是盘口必须要能完全确定，投注才有效。例如，对首位进球球员或何时射入第一个球的投注等，如果在比赛结束前进球已产生，投注将继续有效。
-              友谊赛事为此规则的一个例外：友谊赛事的所有投注盘口将依据比赛结束时（不包括加时赛）的实际结果进行结算，不论整90分钟是否完成；而对于沙滩足球赛事而言，盘口仅限进行的36分钟赛事。
-              关于被明确列为“青年队”的赛事，“青年队”赛事是我们的通用术语，系指年龄在23岁以下的参赛队员所进行的足球赛事。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>加时赛滚球盘口</div>
-            <div className={styles.content}>
-              投注将按照加时赛时间段的官方数据进行结算。常规赛段内的任何进球或角球或者该时段内所导致的进球或角球均不计算。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>推迟、提前或取消比赛</div>
-            <div className={styles.content}>
-              当赛事未进行或被延期时，如果此比赛在同一星期內（星期日为止）进行，投注继续有效（除非双方共同达成协议取消赛事）；否则与此赛事有关的投注项将被视为无效/无结果/未参赛。
-              如果为了电视现场转播而将赛事时间从周末改至星期一晚，则该赛事所有相关投注继续有效。
-              如果网站赛事列表中出现先于规定的日期或开球时间举行的比赛，只要下注时间早于更改后的开球时间，此类比赛仍可被纳入投注范围之内。
-              如果任何足球赛在90分钟结束前被中止，则投注作废，除非在比赛中止前赛果已被确定。但是盘口必须要能完全确定，投注才有效。例如，对首位进球球员或何时射入第一个球的投注等，如果在比赛中止前进球已产生，投注继续有效。
-              南美俱乐部的赛事是唯一可以不遵循以上中止规则的比赛。只要其赛果获得相关足球组织联盟的承认，全场赛果和双胜彩的盘口（赛前和滚球盘）投注将以比赛中止时的赛果为准。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>赛事未按所列出的进行</div>
-            <div className={styles.content}>
-              如果球赛的举行场地有改变（改在客队场地进行除外），只要主队位置没有改变，则已确认的投注依旧成立。如果列出比赛中的主客队位置互换（例如比赛在原客队场地进行），则原本的相应投注将计为无效。
-              我们会尽力在网站上标明所有在中立场地进行的比赛。无论本网站是否标明，只要是在中立场地进行的比赛，无论哪队被列为“主队”，投注均成立。
-              如果是官方赛事，而官方列出的球队信息与我们网站公布的不同，例如：官方赛事在球队名称中详细注明“后备队”、“年龄组”（如21岁以下）或“性别”（如女子），则投注为无效。
-              对于所有其它情况，投注都有效，包括我们列出球队名称但是没有在队名上说明“XI”等。
-              如果比赛以非标准赛制进行，例如，3或4个赛节，那么所有与“半场”有关的盘口均作废
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>投注金的结算</div>
-            <div className={styles.content}>
-              投注结算将以英国国家通讯社（Press Association）公布的数据为根据。当英国国家通讯社没有公布相关数据或有重要证据证明英国国家通讯社的数据有误时，我们将依据相关独立资料进行结算。
-              对于比赛、球队和球员数据盘口，结算将根据Opta提供的数据以及他们对每个数据的定义进行。 如果缺乏一致且独立的证据，或出现明显互相矛盾的证据资料，投注将按我们自己的数据进行结算。
-              如果球队随后被取消或者恢复参赛资格，比赛投注或资格赛投注将不受影响。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>首位/最后得分球员</div>
-            <div className={styles.content}>
-              只接受90分钟比赛的投注。
-              我们将尽量为每位选手开出“首位/最后得分球员”赔率。但是，如果盘口未报出的球员最先/最后进球得分，则他们将算作是获胜者。如果选手未参赛，则投注无效，同样，如果投注了首位得分球员盘口，而所选球员在第一个进球得分产生后才上场，或如果该球员未上场，且选择了“若开赛时未上场则取消”的选项，则相应投注无效。在“最后得分球员”的投注中，所有参加比赛的球员均将视为“参赛球员”，但如果投注某位球员后，投注因选择“若开赛时未上场则取消”而取消，该球员将不视为参赛球员。
-              首位得分球员独赢及位置投注 - 在90分钟赛事里，该投注将按照1/3原赔率无限制位置进行赔付。 官方机构的随后查询，将不作为投注结算的依据。
-              请注意，在进行投注结算时，乌龙球不被计算在內。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>多次得分球员/得分两次或更多/上演帽子戏法</div>
-            <div className={styles.content}>
-              只接受90分钟比赛的投注。
-              若所投注的球员未参赛，则投注作废。出于结算目的，所有参与比赛的球员将视为“参赛球员”，但如果投注某位球员后，投注因选择“若开赛时未上场则取消”而取消，该球员将不视为参赛球员。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>正确比分(波胆)</div>
-            <div className={styles.content}>
-              预测正常赛时结束时的比分。乌龙球也计算在內
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>比分预测 - 首位得分球员/正确比分双式投注</div>
-            <div className={styles.content}>
-              如果被投注球员并沒有上场或在首个进球得分已产生后才上场，投注将被转为对正确比分盘口的单项投注，并以开赛时报出的相应赔率为准。如果赛事在首个进球得分产生后被中止，投注将转为对首位得分球员盘口的单项投注，并以开赛时报出的相应赔率为准。如果赛事的首个进球是乌龙球，投注将根据下一个得分球员及正确比分盘口进行结算。如果比赛的所有进球都是乌龙球，投注会自动转为正确比分盘口的单项投注，并以开赛时报出的相应赔率为准。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>球队首位/最后进球得分手</div>
-            <div className={styles.content}>
-              如果所投注的球员未参赛，投注无效。若所投注的球员在其球队的首个进球得分产生后才上场参赛，则无论其是否在比赛中得分，相关投注无效。乌龙球不算入内。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>滚球盘下一位进球得分手</div>
-            <div className={styles.content}>
-              我们将尽力为每一位可能参赛的球员开出“下一位进球得分手”的赔率。但是，如果下一位进球得分的球员并未包含在最初开出的盘口中，该进球球员仍然算作获胜者。如果所投注的球员没有参赛，投注作废（就像“首位得分球员”的投注，如果球员在第一个进球产生后才上场，对此球员的投注作废）。所有在下个进球产生前上场参赛的球员，均被视为参赛者。如果您在中场休息期间投注，且您投注的球员在下半场没有返场比赛，则投注作废。
-              官方机构的随后查询，将不作为投注结算的依据。 乌龙球不计算在內。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>任意时间的得分球员</div>
-            <div className={styles.content}>
-              所有参加比赛的球员均将视为“参赛球员”，但如果投注某位球员后，投注因选择“若开赛时未上场则取消”而取消，该球员将不视为参赛球员。 对未能完成比赛的投注，将被当作“未参赛”结算。
-              请注意，投注结算时，乌龙球不计算在内。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>进球得分手配对投注</div>
-            <div className={styles.content}>
-              双方球员都必须开始比赛，投注方为有效。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>首个进球时间</div>
-            <div className={styles.content}>
-              如果在首个进球得分后赛事中止，所有投注仍然有效。 如果赛事在首个进球得分前中止，则对已经结束的时间段所下的投注将被结算为输。而对于其它时间段的投注（包括赛事中止的时间段）将被计为无效，按照未参赛处理。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>伤停补时</div>
-            <div className={styles.content}>
-              伤停补时总时的投注，将按照第四裁判记分牌上的时间进行结算，而不采用实际的比赛时间。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>十分钟事件</div>
-            <div className={styles.content}>
-              第一个十分钟事件必须发生在0:00至09:59时段内（例如：如果在此时段中获判一个角球，但该角球是在10:00后进行，则不计算在内）。指定的10分钟必须完成，投注方可成立（除非特定盘口的结果已被确定）。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>首个角球时间</div>
-            <div className={styles.content}>
-              投注的结算将依据实际的角球开出时间（而非获判角球的时间）。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>半场比分预测（半场正确比分及首个得分球员）</div>
-            <div className={styles.content}>
-              如果球员是在一个进球得分已经产生后进场、或没有参加上半场比赛、或上半场进球全部为乌龙球，则投注将按照半场正确比分盘口的单注进行结算，且使用比赛开始时的相应赔率。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>任意时间比分预测（正确比分及任何时间得分球员）</div>
-            <div className={styles.content}>
-              如果球员没有在90分钟内进场、或仅进了乌龙球，则投注将按照正确比分盘口的单注进行结算，并使用比赛开始时的相应赔率。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>时间预测（首个进球时间及首个得分球员）</div>
-            <div className={styles.content}>
-              所投注的球员必须开始比赛，投注方可成立。否则包括该球员的投注将计为无效（与首个进球的时间无关）。如果进球为乌龙球，则投注将计为无效。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>让分投注，包括滚球（三项）</div>
-            <div className={styles.content}>
-              让分投注的结算是以让分赔率为准，按让分后的赛果来计算的。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>半场赛果，包括滚球</div>
-            <div className={styles.content}>
-              若赛事在上半场结束前被中止，投注作废。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>获得最多进球的半场</div>
-            <div className={styles.content}>
-              如果赛事中止，投注作废。除非投注结算已可被确认。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>半场正确比分</div>
-            <div className={styles.content}>
-              若赛事在上半场结束前被中止，投注作废。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>上半场进球数</div>
-            <div className={styles.content}>
-              若赛事在上半场结束前被中止，除非投注结算已可被确认，否则投注作废。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>球队最高得分半场</div>
-            <div className={styles.content}>
-              预测指定球队在比赛哪个半场中射入更多进球。如果比赛中止，除非投注结算已可被确认，否则投注作废。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>上半场角球数，包括滚球</div>
-            <div className={styles.content}>
-              若赛事在上半场结束前被中止，除非投注结算已可被确认，否则投注作废。获判但并未实际执行的角球，不予计算在内。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>两项角球数滚球盘</div>
-            <div className={styles.content}>
-              结算依据为比赛中的总角球数。如果赛事在90分钟前被中止，除非投注结算已可被确认，否则所有投注作废。获判但并未实际执行的角球，不予计算在内。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>最多角球数滚球盘</div>
-            <div className={styles.content}>
-              结算依据为比赛中获得最多角球数的球队，如果赛事中止，所有投注作废。获判但并未实际执行的角球，不予计算在内。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>“首先获得”角球数滚球盘</div>
-            <div className={styles.content}>
-              结算依据为首先获得指定角球数的球队。如果赛事在90分钟前被中止，除非投注的结算已可被确认，否则所有投注作废。获判但并未实际执行的角球，不予计算在内。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>10/20/30/40等分钟赛果滚球盘</div>
-            <div className={styles.content}>
-              结算依据为比赛在指定时间的赛果。如：10分钟赛果的结算依据为比赛进行了10分钟时的赛果。如果赛事在90分钟前被中止，除非投注的结算已被确定，否则所有投注作废。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>半场 - 全场双重赛果</div>
-            <div className={styles.content}>
-              如果赛事中止，投注作废。加时赛及点球不予计算在內。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>虚拟比赛</div>
-            <div className={styles.content}>
-              这是将两支队伍在一轮赛事中进行组合的一种虚拟比赛，仅用于投注。在实际比赛中进球最多的球队将被视为获胜者。如果两队所进的球一样多，投注按平局结算。如果两队中任一队的比赛被推迟或取消，投注无效。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>赛事特別投注</div>
-            <div className={styles.content}>
-              除非另有说明，否则如果特别投注中所投的球员未能参赛，投注作废。 除非另有说明，否则投注结算以90分钟赛果为准，加时赛、金球或点球决胜均不计算在內。
-              如果特别投注中所含参赛者多于一个，而且某些参赛者未参赛，则如果相应赔率适用，投注（对于剩余参赛者来说）依然有效。
-              对于“球队获胜进球手”的投注，只有当球员所属的球队以恰好一球赢得比赛，而且被投注的球员射入最后一球时，投注才算赢。 对于“上下半场均获胜的球队”投注，只有球队在上下半场得分均领先于对方球队时，投注才算赢。
-              关于“落后反超获胜的球队”的投注盘，所投注的球队必须首先在比赛中任意阶段落后，但后来反超获胜（90分钟内），投注才算赢。 球队“点球得分/罚失点球” -
-              所有投注以90分钟赛事为准。若赛事中没有出现点球，投注将会结算为输。 如果罚点球时犯规（裁判员认定罚点球者在向前跑动或踢球时方式不当），则该点球将不被视为罚中/罚失，且不计入此盘口。 “比赛中出现点球” -
-              如果点球判出，此盘口的结算以“是”为赢，与结果无关（例如，罚中/罚失或罚点球时犯规）。但是如果视频助理裁判推翻原来的判决，那么此盘口的结算以“否”为赢，除非在比赛中出现其他点球。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>全场最佳球员</div>
-            <div className={styles.content}>
-              该投注的结算将按官方组织（如FIFA的世界杯赛）宣布的结果为根据。如果没有官方结果，则投注将以Sky电视台评定的比赛最佳球员为准。如果比赛没有Sky电视台直播，则按照英国无线电视（或其他广播、电视台）评定的比赛最佳球员为准。如果没有直播，则无论比赛节目主持或权威人士是否评出最佳球员，所有相关投注都无效。
-              参加比赛的球员将被视为“参赛者”。如果投注球员没有参加比赛，投注无效。如果一个或一个以上的球员被评定为全场最佳球员，并列名次规则适用。
-              依客户要求，我们将为没开出盘口的球员提供赔率。因此，如果没开出盘口的球员最后被评为全场最佳球员，将仍算作获胜者。
-            </div>
-          </Accordion>
-          <Accordion>
-            <div className={styles.title}>双胜彩</div>
-            <div className={styles.content}>
-              该投注盘有以下选项： 1或X - 如果主队胜出或者两队打和，该选项投注为赢。 X或2 - 如果客队胜出或者两队打和，该选项投注为赢。 1或2 -如果主队胜出或客队胜出，该选项投注为赢。
-              进行投注结算时，如果比赛是在中立场举行，列在前面的球队将被视为主队。
-            </div>
-          </Accordion>
-        </div>);
+            <div className={styles.h1}>90分钟赛事</div>
+            <Accordion>
+              <div className={styles.title}>90分钟赛事投注</div>
+              <div className={styles.content}>
+                除非有特別声明，否则所有赛事的盘口都基于90分钟规定时间比赛的结果。在此，90分钟赛事包括伤停补时，但不包括加时赛、点球或金球所用时间。如果比赛在90分钟完成前就结束，除非有特别声明，否则投注作废；
+                在比赛结束前赛果已被确定的投注除外。但是盘口必须要能完全确定，投注才有效。例如，对首位进球球员或何时射入第一个球的投注等，如果在比赛结束前进球已产生，投注将继续有效。
+                友谊赛事为此规则的一个例外：友谊赛事的所有投注盘口将依据比赛结束时（不包括加时赛）的实际结果进行结算，不论整90分钟是否完成；而对于沙滩足球赛事而言，盘口仅限进行的36分钟赛事。
+                关于被明确列为“青年队”的赛事，“青年队”赛事是我们的通用术语，系指年龄在23岁以下的参赛队员所进行的足球赛事。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>加时赛滚球盘口</div>
+              <div className={styles.content}>
+                投注将按照加时赛时间段的官方数据进行结算。常规赛段内的任何进球或角球或者该时段内所导致的进球或角球均不计算。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>推迟、提前或取消比赛</div>
+              <div className={styles.content}>
+                当赛事未进行或被延期时，如果此比赛在同一星期內（星期日为止）进行，投注继续有效（除非双方共同达成协议取消赛事）；否则与此赛事有关的投注项将被视为无效/无结果/未参赛。
+                如果为了电视现场转播而将赛事时间从周末改至星期一晚，则该赛事所有相关投注继续有效。
+                如果网站赛事列表中出现先于规定的日期或开球时间举行的比赛，只要下注时间早于更改后的开球时间，此类比赛仍可被纳入投注范围之内。
+                如果任何足球赛在90分钟结束前被中止，则投注作废，除非在比赛中止前赛果已被确定。但是盘口必须要能完全确定，投注才有效。例如，对首位进球球员或何时射入第一个球的投注等，如果在比赛中止前进球已产生，投注继续有效。
+                南美俱乐部的赛事是唯一可以不遵循以上中止规则的比赛。只要其赛果获得相关足球组织联盟的承认，全场赛果和双胜彩的盘口（赛前和滚球盘）投注将以比赛中止时的赛果为准。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>赛事未按所列出的进行</div>
+              <div className={styles.content}>
+                如果球赛的举行场地有改变（改在客队场地进行除外），只要主队位置没有改变，则已确认的投注依旧成立。如果列出比赛中的主客队位置互换（例如比赛在原客队场地进行），则原本的相应投注将计为无效。
+                我们会尽力在网站上标明所有在中立场地进行的比赛。无论本网站是否标明，只要是在中立场地进行的比赛，无论哪队被列为“主队”，投注均成立。
+                如果是官方赛事，而官方列出的球队信息与我们网站公布的不同，例如：官方赛事在球队名称中详细注明“后备队”、“年龄组”（如21岁以下）或“性别”（如女子），则投注为无效。
+                对于所有其它情况，投注都有效，包括我们列出球队名称但是没有在队名上说明“XI”等。
+                如果比赛以非标准赛制进行，例如，3或4个赛节，那么所有与“半场”有关的盘口均作废
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>投注金的结算</div>
+              <div className={styles.content}>
+                投注结算将以英国国家通讯社（Press Association）公布的数据为根据。当英国国家通讯社没有公布相关数据或有重要证据证明英国国家通讯社的数据有误时，我们将依据相关独立资料进行结算。
+                对于比赛、球队和球员数据盘口，结算将根据Opta提供的数据以及他们对每个数据的定义进行。 如果缺乏一致且独立的证据，或出现明显互相矛盾的证据资料，投注将按我们自己的数据进行结算。
+                如果球队随后被取消或者恢复参赛资格，比赛投注或资格赛投注将不受影响。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>首位/最后得分球员</div>
+              <div className={styles.content}>
+                只接受90分钟比赛的投注。
+                我们将尽量为每位选手开出“首位/最后得分球员”赔率。但是，如果盘口未报出的球员最先/最后进球得分，则他们将算作是获胜者。如果选手未参赛，则投注无效，同样，如果投注了首位得分球员盘口，而所选球员在第一个进球得分产生后才上场，或如果该球员未上场，且选择了“若开赛时未上场则取消”的选项，则相应投注无效。在“最后得分球员”的投注中，所有参加比赛的球员均将视为“参赛球员”，但如果投注某位球员后，投注因选择“若开赛时未上场则取消”而取消，该球员将不视为参赛球员。
+                首位得分球员独赢及位置投注 - 在90分钟赛事里，该投注将按照1/3原赔率无限制位置进行赔付。 官方机构的随后查询，将不作为投注结算的依据。
+                请注意，在进行投注结算时，乌龙球不被计算在內。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>多次得分球员/得分两次或更多/上演帽子戏法</div>
+              <div className={styles.content}>
+                只接受90分钟比赛的投注。
+                若所投注的球员未参赛，则投注作废。出于结算目的，所有参与比赛的球员将视为“参赛球员”，但如果投注某位球员后，投注因选择“若开赛时未上场则取消”而取消，该球员将不视为参赛球员。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>正确比分(波胆)</div>
+              <div className={styles.content}>
+                预测正常赛时结束时的比分。乌龙球也计算在內
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>比分预测 - 首位得分球员/正确比分双式投注</div>
+              <div className={styles.content}>
+                如果被投注球员并沒有上场或在首个进球得分已产生后才上场，投注将被转为对正确比分盘口的单项投注，并以开赛时报出的相应赔率为准。如果赛事在首个进球得分产生后被中止，投注将转为对首位得分球员盘口的单项投注，并以开赛时报出的相应赔率为准。如果赛事的首个进球是乌龙球，投注将根据下一个得分球员及正确比分盘口进行结算。如果比赛的所有进球都是乌龙球，投注会自动转为正确比分盘口的单项投注，并以开赛时报出的相应赔率为准。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>球队首位/最后进球得分手</div>
+              <div className={styles.content}>
+                如果所投注的球员未参赛，投注无效。若所投注的球员在其球队的首个进球得分产生后才上场参赛，则无论其是否在比赛中得分，相关投注无效。乌龙球不算入内。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>滚球盘下一位进球得分手</div>
+              <div className={styles.content}>
+                我们将尽力为每一位可能参赛的球员开出“下一位进球得分手”的赔率。但是，如果下一位进球得分的球员并未包含在最初开出的盘口中，该进球球员仍然算作获胜者。如果所投注的球员没有参赛，投注作废（就像“首位得分球员”的投注，如果球员在第一个进球产生后才上场，对此球员的投注作废）。所有在下个进球产生前上场参赛的球员，均被视为参赛者。如果您在中场休息期间投注，且您投注的球员在下半场没有返场比赛，则投注作废。
+                官方机构的随后查询，将不作为投注结算的依据。 乌龙球不计算在內。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>任意时间的得分球员</div>
+              <div className={styles.content}>
+                所有参加比赛的球员均将视为“参赛球员”，但如果投注某位球员后，投注因选择“若开赛时未上场则取消”而取消，该球员将不视为参赛球员。 对未能完成比赛的投注，将被当作“未参赛”结算。
+                请注意，投注结算时，乌龙球不计算在内。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>进球得分手配对投注</div>
+              <div className={styles.content}>
+                双方球员都必须开始比赛，投注方为有效。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>首个进球时间</div>
+              <div className={styles.content}>
+                如果在首个进球得分后赛事中止，所有投注仍然有效。 如果赛事在首个进球得分前中止，则对已经结束的时间段所下的投注将被结算为输。而对于其它时间段的投注（包括赛事中止的时间段）将被计为无效，按照未参赛处理。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>伤停补时</div>
+              <div className={styles.content}>
+                伤停补时总时的投注，将按照第四裁判记分牌上的时间进行结算，而不采用实际的比赛时间。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>十分钟事件</div>
+              <div className={styles.content}>
+                第一个十分钟事件必须发生在0:00至09:59时段内（例如：如果在此时段中获判一个角球，但该角球是在10:00后进行，则不计算在内）。指定的10分钟必须完成，投注方可成立（除非特定盘口的结果已被确定）。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>首个角球时间</div>
+              <div className={styles.content}>
+                投注的结算将依据实际的角球开出时间（而非获判角球的时间）。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>半场比分预测（半场正确比分及首个得分球员）</div>
+              <div className={styles.content}>
+                如果球员是在一个进球得分已经产生后进场、或没有参加上半场比赛、或上半场进球全部为乌龙球，则投注将按照半场正确比分盘口的单注进行结算，且使用比赛开始时的相应赔率。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>任意时间比分预测（正确比分及任何时间得分球员）</div>
+              <div className={styles.content}>
+                如果球员没有在90分钟内进场、或仅进了乌龙球，则投注将按照正确比分盘口的单注进行结算，并使用比赛开始时的相应赔率。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>时间预测（首个进球时间及首个得分球员）</div>
+              <div className={styles.content}>
+                所投注的球员必须开始比赛，投注方可成立。否则包括该球员的投注将计为无效（与首个进球的时间无关）。如果进球为乌龙球，则投注将计为无效。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>让分投注，包括滚球（三项）</div>
+              <div className={styles.content}>
+                让分投注的结算是以让分赔率为准，按让分后的赛果来计算的。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>半场赛果，包括滚球</div>
+              <div className={styles.content}>
+                若赛事在上半场结束前被中止，投注作废。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>获得最多进球的半场</div>
+              <div className={styles.content}>
+                如果赛事中止，投注作废。除非投注结算已可被确认。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>半场正确比分</div>
+              <div className={styles.content}>
+                若赛事在上半场结束前被中止，投注作废。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>上半场进球数</div>
+              <div className={styles.content}>
+                若赛事在上半场结束前被中止，除非投注结算已可被确认，否则投注作废。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>球队最高得分半场</div>
+              <div className={styles.content}>
+                预测指定球队在比赛哪个半场中射入更多进球。如果比赛中止，除非投注结算已可被确认，否则投注作废。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>上半场角球数，包括滚球</div>
+              <div className={styles.content}>
+                若赛事在上半场结束前被中止，除非投注结算已可被确认，否则投注作废。获判但并未实际执行的角球，不予计算在内。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>两项角球数滚球盘</div>
+              <div className={styles.content}>
+                结算依据为比赛中的总角球数。如果赛事在90分钟前被中止，除非投注结算已可被确认，否则所有投注作废。获判但并未实际执行的角球，不予计算在内。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>最多角球数滚球盘</div>
+              <div className={styles.content}>
+                结算依据为比赛中获得最多角球数的球队，如果赛事中止，所有投注作废。获判但并未实际执行的角球，不予计算在内。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>“首先获得”角球数滚球盘</div>
+              <div className={styles.content}>
+                结算依据为首先获得指定角球数的球队。如果赛事在90分钟前被中止，除非投注的结算已可被确认，否则所有投注作废。获判但并未实际执行的角球，不予计算在内。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>10/20/30/40等分钟赛果滚球盘</div>
+              <div className={styles.content}>
+                结算依据为比赛在指定时间的赛果。如：10分钟赛果的结算依据为比赛进行了10分钟时的赛果。如果赛事在90分钟前被中止，除非投注的结算已被确定，否则所有投注作废。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>半场 - 全场双重赛果</div>
+              <div className={styles.content}>
+                如果赛事中止，投注作废。加时赛及点球不予计算在內。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>虚拟比赛</div>
+              <div className={styles.content}>
+                这是将两支队伍在一轮赛事中进行组合的一种虚拟比赛，仅用于投注。在实际比赛中进球最多的球队将被视为获胜者。如果两队所进的球一样多，投注按平局结算。如果两队中任一队的比赛被推迟或取消，投注无效。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>赛事特別投注</div>
+              <div className={styles.content}>
+                除非另有说明，否则如果特别投注中所投的球员未能参赛，投注作废。 除非另有说明，否则投注结算以90分钟赛果为准，加时赛、金球或点球决胜均不计算在內。
+                如果特别投注中所含参赛者多于一个，而且某些参赛者未参赛，则如果相应赔率适用，投注（对于剩余参赛者来说）依然有效。
+                对于“球队获胜进球手”的投注，只有当球员所属的球队以恰好一球赢得比赛，而且被投注的球员射入最后一球时，投注才算赢。 对于“上下半场均获胜的球队”投注，只有球队在上下半场得分均领先于对方球队时，投注才算赢。
+                关于“落后反超获胜的球队”的投注盘，所投注的球队必须首先在比赛中任意阶段落后，但后来反超获胜（90分钟内），投注才算赢。 球队“点球得分/罚失点球” -
+                所有投注以90分钟赛事为准。若赛事中没有出现点球，投注将会结算为输。 如果罚点球时犯规（裁判员认定罚点球者在向前跑动或踢球时方式不当），则该点球将不被视为罚中/罚失，且不计入此盘口。 “比赛中出现点球” -
+                如果点球判出，此盘口的结算以“是”为赢，与结果无关（例如，罚中/罚失或罚点球时犯规）。但是如果视频助理裁判推翻原来的判决，那么此盘口的结算以“否”为赢，除非在比赛中出现其他点球。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>全场最佳球员</div>
+              <div className={styles.content}>
+                该投注的结算将按官方组织（如FIFA的世界杯赛）宣布的结果为根据。如果没有官方结果，则投注将以Sky电视台评定的比赛最佳球员为准。如果比赛没有Sky电视台直播，则按照英国无线电视（或其他广播、电视台）评定的比赛最佳球员为准。如果没有直播，则无论比赛节目主持或权威人士是否评出最佳球员，所有相关投注都无效。
+                参加比赛的球员将被视为“参赛者”。如果投注球员没有参加比赛，投注无效。如果一个或一个以上的球员被评定为全场最佳球员，并列名次规则适用。
+                依客户要求，我们将为没开出盘口的球员提供赔率。因此，如果没开出盘口的球员最后被评为全场最佳球员，将仍算作获胜者。
+              </div>
+            </Accordion>
+            <Accordion>
+              <div className={styles.title}>双胜彩</div>
+              <div className={styles.content}>
+                该投注盘有以下选项： 1或X - 如果主队胜出或者两队打和，该选项投注为赢。 X或2 - 如果客队胜出或者两队打和，该选项投注为赢。 1或2 -如果主队胜出或客队胜出，该选项投注为赢。
+                进行投注结算时，如果比赛是在中立场举行，列在前面的球队将被视为主队。
+              </div>
+            </Accordion>
+          </div>);
       case '2':
         return (<div>
           <div className={styles.h1}>亚洲让分盘</div>
@@ -929,42 +924,39 @@ export default class SportRules extends PureComponent {
       default:
         return '';
     }
-  }
+  };
 
-  render() {
-    const { showList } = this.state;
-    return (
-      <div className={styles.sportRules}>
-        <div className={styles['game-tab']}>
-          <div className={styles.name}>体育规则</div>
+  return (
+    <div className={styles.sportRules}>
+      <div className={styles['game-tab']}>
+        <div className={styles.name}>体育规则</div>
+      </div>
+      <div className={styles.main}>
+        <div className={styles.selection}>
+          <select value={showList} className={styles.select} onChange={change}>
+            <option value="1" key={1}>
+              90分钟赛事规则
+            </option>
+            <option value="2" key={2}>
+              亚洲让分盘
+            </option>
+            <option value="3" key={3}>
+              锦标赛投注
+            </option>
+            <option value="4" key={4}>
+              早期投注
+            </option>
+            <option value="5" key={5}>
+              球赛数据投注
+            </option>
+          </select>
         </div>
-        <div className={styles.main}>
-          <div className={styles.selection}>
-            <select value={showList} className={styles.select} onChange={this.change}>
-              <option value="1" key={1}>
-                90分钟赛事规则
-              </option>
-              <option value="2" key={2}>
-                亚洲让分盘
-              </option>
-              <option value="3" key={3}>
-                锦标赛投注
-              </option>
-              <option value="4" key={4}>
-                早期投注
-              </option>
-              <option value="5" key={5}>
-                球赛数据投注
-              </option>
-            </select>
-          </div>
-          <div className={styles.list}>
-            {
-              this.renderList()
-            }
-          </div>
+        <div className={styles.list}>
+          {
+            renderList()
+          }
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }

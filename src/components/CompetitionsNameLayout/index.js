@@ -7,7 +7,7 @@ const linkMap = {
   todayMixed: '/bet/todayMixedMatchList?competitionId=',
   asian: '/bet/asianMatchList?competitionId=',
   asianMixed: '/bet/asianMixedMatchList?competitionId='
-}
+};
 
 // type1代表今日2代表早盘
 export default ({ type, competitionId, competitionName, matches }) => (

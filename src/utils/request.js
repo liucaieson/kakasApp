@@ -27,7 +27,7 @@ function checkStatus(response) {
   if (response.status === '401') {
     const errortext = codeMessage[response.status] || response.statusText;
     Toast.info({
-      content: `Token失效`,
+      content: 'Token失效',
       description: errortext,
       duration: 1.5,
       onClose: () => {
@@ -36,12 +36,9 @@ function checkStatus(response) {
         window.location.reload();
       }
     });
-    return;
+    return false;
   }
   const errortext = codeMessage[response.status] || response.statusText;
-  /*Toast.info({
-    message: `请求错误 ${response.status}: ${response.url}`,
-  });*/
   const error = new Error(errortext);
   error.name = response.status;
   error.response = response;
@@ -57,9 +54,9 @@ function checkStatus(response) {
  */
 function request(url, options) {
   if (sessionStorage.getItem('token')) {
-    options.headers = {
+      options.headers = {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      Accept: 'application/json',
     };
     options.headers.Authorization = `${sessionStorage.getItem('token')}`;
   }
@@ -101,16 +98,16 @@ function proxyRequest(url, options) {
   return request(url, options).then((response) => {
     if (response.code === '200') {
       return response.result;
-    }else{
-      /*Toast.info({
-        message: response.message,
-      });*/
     }
+      /* Toast.info({
+        message: response.message,
+      }); */
+
     return response || null;
-  }).catch((e) => {
-    /*Toast.info({
+  }).catch(() => {
+    /* Toast.info({
       message: e.message,
-    });*/
+    }); */
   });
 }
 

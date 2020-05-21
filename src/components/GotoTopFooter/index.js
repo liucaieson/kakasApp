@@ -1,40 +1,29 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './index.scss';
 
-export default class GotoTopFooter extends PureComponent {
-  state = {
-    show: true,
-  };
+export default () => {
+  const [show, setShow] = useState(true);
 
-  constructor(props) {
-    super(props);
-    this.tRef = React.createRef();
-  }
+  const toTopRef = useRef();
 
-  componentDidMount() {
-    if (this.tRef.current.offsetTop > 667) {
-      this.setState({
-        show: true,
-      });
+  useEffect(() => {
+    if (toTopRef.current.offsetTop > 667) {
+      setShow(true)
     } else {
-      this.setState({
-        show: false,
-      });
+      setShow(false)
     }
-  }
+  }, []);
 
-  gotoTop = () => {
+  const gotoTop = () => {
     const container = document.getElementById('betContainer');
     container.scrollIntoView();
   };
 
-  render() {
-    const { show } = this.state;
-    return (
-      show &&
-      <div id="to-top" ref={this.tRef} className={styles['to-top']} onClick={this.gotoTop}>
-        回到顶部
-      </div>
-    );
-  }
+  return (
+    show &&
+    <div id="to-top" ref={toTopRef} className={styles['to-top']} onClick={gotoTop}>
+      回到顶部
+    </div>
+  );
 }
+

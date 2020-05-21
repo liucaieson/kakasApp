@@ -62,7 +62,7 @@ class Home extends PureComponent {
       });
     }
 
-    history.listen((location) => {
+    history.listen(( location ) => {
       const { pathname } = location;
       if (pathname.includes('inPlay')) {
         this.setState({

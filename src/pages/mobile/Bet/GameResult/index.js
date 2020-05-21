@@ -17,7 +17,6 @@ for (let i = 0; i < 7; i++) {
   )
 }
 
-
 @connect(({ gameResult, loading }) => ({
   gameResult,
   loading: loading.models.gameResult,
@@ -63,7 +62,7 @@ class GameResult extends PureComponent {
     const { selectTime, selectCpt } = this.state;
     let newCurrent = 1;
     if (loading) {
-      return false;
+      return
     }
     if (flag === 'next') {
       newCurrent = current + 1;
@@ -72,7 +71,7 @@ class GameResult extends PureComponent {
     }
     /* 边界处理 */
     if (current < 1 || current > Math.ceil(count / 10)) {
-      return false
+      return
     }
     dispatch({
       type: 'gameResult/fetch',
