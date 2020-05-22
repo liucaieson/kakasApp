@@ -20,7 +20,7 @@ const ANIMATION_MAP = {
   POP: 'back',
 };
 
-@connect(({ loading, userInfo, shopCart, chsDB }) => ({
+@connect(({ userInfo, shopCart, chsDB }) => ({
   userInfo,
   shopCart,
   chsDB,
