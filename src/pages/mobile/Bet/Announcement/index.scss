@@ -53,7 +53,9 @@
       .detail {
         width: 100%;
         padding: px2vh(10) px2vw(10);
-        font-size: px2vw(11);
+        font-size: px2vw(12);
+        line-height: 1.5;
+        font-weight: 100;
         color: #232323;
         box-sizing: border-box;
       }

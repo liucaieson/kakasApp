@@ -172,17 +172,13 @@ export const calcDate = (date) => {
 };
 
 export const calcDate2 = (date) => {
-  const cacheDate = moment(date.substring(0, 8), 'YYYYMMDD');
-  const time = cacheDate.format('YYYY年MM月DD日  星期dd');
-  const day = `${date.substring(8, 10)}:${date.substring(10, 12)}`;
+  const time = moment.utc(date).local().format('YYYY年MM月DD日  星期dd');
+  const day = moment.utc(date).local().format('HH:mm')
   return `${time} ${day}`
 };
 
 export const calcDate3 = (date) => {
-  const cacheDate = moment(date.substring(0, 8), 'YYYYMMDD');
-  const time = cacheDate.format('DD / MM');
-  const day = `${date.substring(8, 10)}:${date.substring(10, 12)}`;
-  return `${time} ${day}`
+  return moment.utc(date).local().format('MM/DD HH:mm')
 };
 
 export const calcDate4 = (date) => {

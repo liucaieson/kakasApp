@@ -6,6 +6,7 @@ import styles from './index.scss';
 import { dishNameMap } from '@/utils/utils';
 import Loading from '@/components/LoadingMask';
 import Accordion from '@/components/Accordion';
+import moment from 'moment';
 
 
 const betTypeMap = {
@@ -200,7 +201,9 @@ class Transaction extends PureComponent {
                                     <div className={styles.info} key={item.betDetailId}>
                                       <div className={styles.left}>
                                         <div
-                                          className={styles['dish-name']}>{dishNameMap[item.choiceContent]}{item.choiceHandicap}</div>
+                                          className={styles['dish-name']}>
+                                          {dishNameMap[item.choiceContent]}{item.choiceHandicap}
+                                          </div>
                                         <div className={styles['odds-name']}>{item.oddName}</div>
                                         <div className={styles.match}>{item.hostName}---{item.awayName}</div>
                                       </div>
@@ -220,7 +223,9 @@ class Transaction extends PureComponent {
                                   ))
                                 }
                                 <div className={styles.orderNum}>订单号：{val.betId}</div>
-                                <div className={styles.betTime}>下注时间：{val.betTime}</div>
+                                <div className={styles.betTime}>下注时间：
+                                  {moment.utc(val.betTime).local().format('YYYY-MM-DD HH:mm:ss')}
+                                </div>
                                 <div className={styles.money}>
                                   <div className={styles.left}>
                                     <span className={styles.text}>本金：</span>

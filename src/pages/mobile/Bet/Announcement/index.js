@@ -2,6 +2,7 @@ import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import { Pagination } from 'antd-mobile';
 import styles from './index.scss';
+import moment from 'moment';
 
 import MbPageLoading from '@/components/LoadingMask';
 
@@ -106,7 +107,7 @@ class Announcement extends PureComponent {
                       data.map((val) => (
                         <li className={styles.item} key={val.messageId}>
                           <div className={styles.title}>
-                            {val.date}
+                            {moment.utc(val.date).local().format('YYYY-MM-DD HH:mm')}
                           </div>
                           <div className={styles.detail}>
                             {val.messageText}

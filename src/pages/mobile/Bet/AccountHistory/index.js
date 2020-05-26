@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
+import moment from 'moment'
 import Link from 'umi/link';
 import { Pagination } from 'antd-mobile';
 import styles from './index.scss';
@@ -121,7 +122,7 @@ class Announcement extends PureComponent {
                         data.map((val, index) => (
                           <tr className={styles.line} key={index}>
                             <td className="his_date">
-                              {val.date}
+                              {moment.utc(val.date).local().format('YYYY-MM-DD HH:mm')}
                             </td>
                             <td>{val.money}</td>
                             <td>{val.balance}</td>

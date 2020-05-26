@@ -3,9 +3,10 @@ import { connect } from 'dva';
 import Link from 'umi/link';
 import styles from './index.scss';
 
-@connect(({ userInfo, shopCart }) => ({
+@connect(({ userInfo, shopCart, loading }) => ({
   userInfo,
   shopCart,
+  balanceLoading: loading.models.userInfo,
 }))
 class Home extends PureComponent {
   timer = null;
@@ -131,7 +132,11 @@ class Home extends PureComponent {
    }; */
 
   requestBalance = () => {
-    const { dispatch } = this.props;
+    const { dispatch, balanceLoading } = this.props;
+    // 节流
+    if (balanceLoading) {
+      return;
+    }
     dispatch({
       type: 'userInfo/fetch',
     });

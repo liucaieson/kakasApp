@@ -93,9 +93,11 @@
           color: #f5ad35;
         }
         .icon {
-          padding-left: px2vw(6);
+          margin-left: px2vw(6);
           display: block;
-          background: url(../../../assets/reload_curr.svg) no-repeat 50% 50%;
+          background: url(../../../assets/reload_curr.svg);
+          background-size: contain;
+          background-repeat: no-repeat;
           width: px2vw(14);
           height: px2vw(14);
         }
