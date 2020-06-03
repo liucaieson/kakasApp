@@ -23,6 +23,13 @@ class BetPage extends PureComponent {
     isLoading: true
   };
 
+  defaultParams = {
+    sport: '1',
+    gg: '1',
+    isOver: 0,
+    date: moment().format(''),
+  };
+
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
@@ -54,10 +61,8 @@ class BetPage extends PureComponent {
     dispatch({
       type: 'matchList/fetchMatchOdds',
       payload: {
-        sport: '1',
-        gg: '1',
         competitions: competitionId,
-        date: moment().format('YYYY-MM-DD'),
+        ...this.defaultParams
       },
       callback: () => {
         this.countRef.reset();
@@ -72,18 +77,14 @@ class BetPage extends PureComponent {
     dispatch({
       type: 'competitions/fetch',
       payload: {
-        sport: '1',
-        gg: '1',
-        date: moment().format('YYYY-MM-DD')
+        ...this.defaultParams
       },
     });
     dispatch({
       type: 'matchList/fetchMatchOdds',
       payload: {
-        sport: '1',
-        gg: '1',
         competitions: competitionId,
-        date: moment().format('YYYY-MM-DD')
+        ...this.defaultParams
       },
       callback: () => {
         this.setState({

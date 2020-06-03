@@ -50,9 +50,10 @@
       box-sizing: border-box;
       display: flex;
       font-size: 12px;
+      justify-content: space-between;
       .select{
         margin-right: px2vw(6);
-        width: 40%;
+        width: 48%;
         height: px2vh(30);
         line-height: px2vh(30);
         padding-left: 3px;
@@ -66,15 +67,6 @@
         -moz-appearance: none;
         /* opacity: 0.6; */
         border-radius: 3px;
-      }
-      .search{
-        width: 15%;
-        height: px2vh(30);
-        text-align: center;
-        color: #fff;
-        background-color: #725945;
-        border-radius: 4px;
-        @include border-1px(#fff,4px)
       }
     }
     .title{

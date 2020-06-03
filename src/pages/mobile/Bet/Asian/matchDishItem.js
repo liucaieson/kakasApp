@@ -65,7 +65,7 @@ class IndexDishItem extends PureComponent {
    * 渲染赔率变化
    * @returns {*}
    */
-  renderUp() {
+/*  renderUp() {
     const { up } = this.state;
     if (up === 1) {
       return <div className={styles.up}/>;
@@ -74,7 +74,7 @@ class IndexDishItem extends PureComponent {
       return <div className={styles.down}/>;
     }
     return null
-  }
+  } */
 
   /**
    * 对于大小盘口的名称做额外处理
@@ -129,8 +129,7 @@ class IndexDishItem extends PureComponent {
           <span className={styles.mun}>
             {dish}
           </span>
-          </span>
-        {this.renderUp()}
+        </span>
       </div>
     );
   }

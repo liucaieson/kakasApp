@@ -18,10 +18,11 @@ class Home extends PureComponent {
 
   balanceTimer = null;
 
-  globalParams = {
+  defaultParams = {
     sport: '1',
     gg: '1',
-    date: moment().format('YYYY-MM-DD'),
+    date: moment().format(),
+    isOver: 0
   };
 
   constructor(props) {
@@ -36,9 +37,7 @@ class Home extends PureComponent {
     dispatch({
       type: 'competitions/fetch',
       payload: {
-        sport: '1',
-        gg: '1',
-        date: moment().format('YYYY-MM-DD'),
+        ...this.defaultParams
       },
     });
   }
@@ -53,7 +52,7 @@ class Home extends PureComponent {
     dispatch({
       type: 'competitions/fetch',
       payload: {
-        ...this.globalParams,
+        ...this.defaultParams,
       },
     });
   };
@@ -67,9 +66,7 @@ class Home extends PureComponent {
     dispatch({
       type: 'competitions/fetch',
       payload: {
-        sport: '1',
-        gg: '1',
-        date: moment().format('YYYY-MM-DD'),
+        ...this.defaultParams
       },
       callback: () => {
         this.countRef.reset();
@@ -82,11 +79,10 @@ class Home extends PureComponent {
     dispatch({
       type: 'competitions/fetch',
       payload: {
-        ...this.globalParams,
+        ...this.defaultParams,
       },
     });
   };
-
 
   render() {
     const {

@@ -32,9 +32,91 @@
     <meta name="msapplication-tap-highlight" content="no">
 
     <meta name=”apple-mobile-web-app-status-bar-style” content=”black-translucent” />
-
+  <style>
+    @-webkit-keyframes loader13-1 {
+      0% {
+        -webkit-transform: rotate(270deg);
+      }
+      50% {
+        -webkit-transform: rotate(360deg);
+      }
+      100% {
+        -webkit-transform: rotate(270deg);
+      }
+    }
+    @-webkit-keyframes loader13-2 {
+      0% {
+        -webkit-transform: rotate(90deg);
+      }
+      50% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(90deg);
+      }
+    }
+    @-webkit-keyframes loader13-3 {
+      0% {
+        left: 100px;
+      }
+      100% {
+        left: 20px;
+      }
+    }
+    .loader-13 {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      z-index: -1;
+    }
+    .loader-13 div:nth-child(1), .loader-13 div:nth-child(2) {
+      width: 0;
+      height: 0;
+      border: 25px solid #fff;
+      border-right: 25px solid transparent;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .loader-13 div:nth-child(1) {
+      -webkit-animation: loader13-1 0.5s 0s infinite linear;
+    }
+    .loader-13 div:nth-child(2) {
+      -webkit-animation: loader13-2 0.5s 0s infinite linear;
+    }
+    .loader-13 div:nth-child(3), .loader-13 div:nth-child(4), .loader-13 div:nth-child(5) {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+      position: absolute;
+      left: 100px;
+      top: 20px;
+      opacity: 0.7;
+    }
+    .loader-13 div:nth-child(3) {
+      -webkit-animation: loader13-3 1s -0.66s linear infinite;
+    }
+    .loader-13 div:nth-child(4) {
+      -webkit-animation: loader13-3 1s -0.33s linear infinite;
+    }
+    .loader-13 div:nth-child(5) {
+      -webkit-animation: loader13-3 1s 0s linear infinite;
+    }
+  </style>
 </head>
-<body><div id="root"></div></body>
+<body>
+<div class="loader-13" id="loader-13">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+<div id="root">
+</div></body>
 <script>
 
   var isIphoneX = window.devicePixelRatio && window.devicePixelRatio === 3 && window.screen.width === 375 && testUA('iPhone')
@@ -90,13 +172,9 @@
 
   //拿到Performance并且初始化一些参数
   window.onload = () => {
+    document.getElementById('loader-13').style.display = 'none';
     let  { timing } = performance,
       start = timing.navigationStart,
-      dnsTime = 0,
-      tcpTime = 0,
-      firstPaintTime = 0,
-      domRenderTime = 0,
-      loadTime = 0;
     //根据提供的api和属性，拿到对应的时间
     dnsTime = timing.domainLookupEnd - timing.domainLookupStart;
     tcpTime = timing.connectEnd - timing.connectStart;

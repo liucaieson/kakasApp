@@ -22,7 +22,7 @@ export default {
           count
         },
       });
-      if (callback) callback(data)
+      if (callback) callback(current, count)
     },
     *fetchAllCompetitions({ payload, callback }, { call, put }) {
       const data = yield call(getAllCompetitions, payload);
