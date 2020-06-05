@@ -40,7 +40,7 @@ const list = [
     link: '/bet/help/oddsCalc',
   },
   {
-    name: '在线客服27/7',
+    name: '在线客服24/7',
     link: '/bet/help/onlineService',
   },
 ];

@@ -216,3 +216,14 @@ export function getTimeout(delays, durations) { // 从Vue源码里拷贝出来�
 export function toMs(s) {
   return Number(s.slice(0, -1)) * 1000
 }
+
+export const betTypeMap = {
+  1: '',
+  2: '二串一',
+  3: '三串一',
+  4: '四串一',
+  5: '五串一',
+  6: '六串一',
+  7: '七串一',
+  8: '八串一',
+};

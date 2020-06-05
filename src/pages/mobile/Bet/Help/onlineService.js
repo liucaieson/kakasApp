@@ -14,17 +14,17 @@ export default () => (
               <li><i className="iconPhone" /></li>
               <li>
                 <div>联络电话:</div>
-                <a id="tel01" href="tel:+85258089063">+852 5808 9063</a>
-                <a id="tel02" href="tel:+85258088664">+852 5808 8664</a>
-                <a id="tel03" href="tel:+639151950193">+63 915 195 0193</a>
-                <a id="tel04" href="tel:+639151955533">+63 915 195 5533</a>
+                <a id="tel01" href="tel:+888888888">+888 8888 8888</a>
+                <a id="tel02" href="tel:+888888888">+888 8888 8888</a>
+                <a id="tel03" href="tel:+888888888">+88 888 888 8888</a>
+                <a id="tel04" href="tel:+888888888">+88 888 888 8888</a>
               </li>
             </ul>
             <ul className="mailBox">
               <li><i className="iconMail" /></li>
               <li>
                 <div>电子信箱:</div>
-                <a id="email" href="mailto:royal888crown@hotmail.com">royal888crown@hotmail.com</a>
+                <a id="email" href="mailto:royal888crown@hotmail.com">royal8888888@hotmail.com</a>
               </li>
             </ul>
           </div>

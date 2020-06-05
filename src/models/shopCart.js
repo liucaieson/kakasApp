@@ -23,13 +23,13 @@ export default {
   },
 
   effects: {
-    *openCart(_, { call, put }) {
+    *openCart(_, { put }) {
       yield put({
         type: 'changeCartStatus',
         payload: true,
       });
     },
-    *closeCart(_, { call, put }) {
+    *closeCart(_, { put }) {
       yield put({
         type: 'changeCartStatus',
         payload: false,
@@ -128,13 +128,13 @@ export default {
         // 更新赔率
         const chsListObj = {};
 
-        let choiceId = 1;
+        let cheChoiceId = 1;
         let dishInfo = {};
-        data.data.map((val) => {
+        data.data.forEach((val) => {
           // 不等于208标识错误交给购物车,并更新赔率
           if (val.code !== '208') {
             chsListObj[val.choiceId] = val;
-            choiceId = val.choiceId;
+            cheChoiceId = val.choiceId;
             dishInfo = val
           }
         });
@@ -150,7 +150,7 @@ export default {
           type: 'save',
           payload: {
             type: 1,
-            choiceId,
+            choiceId: cheChoiceId,
             dishInfo
           },
         });
@@ -174,16 +174,15 @@ export default {
       const dishIdArr = [];
       const dishRateArr = [];
 
-      mixedDishId.map((val) => {
+      mixedDishId.forEach((val) => {
         dishIdArr.push(chsDB[mixedDishInfo[val].choiceId].dishId);
         dishRateArr.push(chsDB[mixedDishInfo[val].choiceId].dish)
       });
 
-
       const params = {
         sport: '1',
         result: [{
-          betType: `${mixedDishId.length}`,
+          betType: mixedDishId.length,
           dishValue: payload,
           dishId: dishIdArr.join(','),
           dishRate: dishRateArr.join(','),
@@ -193,17 +192,49 @@ export default {
       const data = yield call(postBetOrder, params);
       /* 200为投注成功 */
       if (data.code === 200) {
-        // 更新赔率
-        yield put({
-          type: 'saveMixed',
-          payload: {
-            type: 1,
-            mixedDishId: [],
-            mixedDishInfo: {}
-          },
+        const chsListObj = {};
+        // 判断错误数量===0 则下注成功
+        let err = 0;
+        data.data.forEach((val) => {
+          // 不等于208标识错误交给购物车,并更新赔率
+          if (val.code !== '208') {
+            err += 1;
+            chsListObj[val.matchId] = val;
+            mixedDishInfo[val.matchId] = {
+              ...mixedDishInfo[val.matchId],
+              ...val,
+            };
+          }
         });
+        const newChsDB = {
+          ...chsDB,
+          ...chsListObj,
+        };
+        yield put({
+          type: 'chsDB/saveChsData',
+          payload: newChsDB,
+        });
+        if (err === 0) {
+          yield put({
+            type: 'saveMixed',
+            payload: {
+              type: 2,
+              mixedDishId: [],
+              mixedDishInfo: {},
+            },
+          });
+        } else {
+          yield put({
+            type: 'saveMixed',
+            payload: {
+              type: 2,
+              mixedDishInfo,
+              mixedDishId,
+            },
+          });
+        }
         /* 将返回的数据给视图层处理 */
-        if (callback) callback(data);
+        if (callback) callback(data.data);
       } else if (data.code === 3002) {
         Toast.info('余额不足', 2);
       } else {
@@ -211,7 +242,7 @@ export default {
       }
     },
 
-    *addBetShopCart({ payload, callback }, { call, put, select }) {
+    *addBetShopCart({ payload }, { put, }) {
       if (payload.dishId === '') {
         return;
       }
@@ -237,14 +268,14 @@ export default {
         },
       });
     },
-    *addMixedBetShopCart({ payload, callback }, { call, put, select }) {
+    *addMixedBetShopCart({ payload }, { put, select }) {
       if (payload.dishId === '') {
         return;
       }
       const mixedDishId = yield select(state => state.shopCart.mixedDishId);
       const mixedDishInfo = yield select(state => state.shopCart.mixedDishInfo);
-      if (mixedDishId.length >= 6) {
-        Toast.info('混合过关最多选择6注', 2);
+      if (mixedDishId.length >= 8) {
+        Toast.info('混合过关最多选择8注', 2);
         return;
       }
       /* 储存以choiceId为key的盘口竟猜项数据 */
@@ -282,7 +313,7 @@ export default {
         },
       });
     },
-    *delAllShopCart({ payload }, { call, put, select }) {
+    *delAllShopCart(_, { put }) {
       yield put({
         type: 'allDel',
         payload: {
@@ -294,7 +325,7 @@ export default {
         }
       })
     },
-    *delOneMixedBet({ payload }, { call, put, select }) {
+    *delOneMixedBet({ payload }, { put, select }) {
       const shopCartData = yield select(state => state.shopCart);
 
       const { mixedDishId, mixedDishInfo } = shopCartData;

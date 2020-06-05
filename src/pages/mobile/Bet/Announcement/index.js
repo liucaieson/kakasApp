@@ -80,9 +80,51 @@ class Announcement extends PureComponent {
     });
   };
 
-  render() {
+  renderAnn() {
     const { announcement: { data } } = this.props;
-    const { isShowLoading, total, size, current } = this.state;
+    const { total, size, current } = this.state;
+    if (data) {
+      if (data.length > 0) {
+        return <Fragment>
+          <ul className={styles['list-box']}>
+            {
+              data.map((val) => (
+                <li className={styles.item} key={val.messageId}>
+                  <div className={styles.title}>
+                    {moment.utc(val.date).local().format('YYYY-MM-DD HH:mm')}
+                  </div>
+                  <div className={styles.detail}>
+                    {val.messageText}
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+          {
+            total > 9 ?
+              <Pagination
+                total={Math.ceil(total / size)}
+                className={styles.pagination}
+                current={current}
+                locale={{
+                  prevText: (<span onClick={() => this.togglePage('prev')}>上一页</span>),
+                  nextText: (<span onClick={() => this.togglePage('next')}>下一页</span>),
+                }}
+              /> : ''
+          }
+        </Fragment>
+      }
+        return (
+        <div className="no-data">
+          暂无数据
+        </div>
+        )
+    }
+      return null
+  }
+
+  render() {
+    const { isShowLoading } = this.state;
     return (
       <div className={styles.announcement} >
         <div className={styles['game-tab']}>
@@ -99,40 +141,7 @@ class Announcement extends PureComponent {
               bg="rgba(0,0,0,0.1)"
               color="#30717b"
             />) :
-            (
-              data && data.length > 0 ?
-                <Fragment>
-                  <ul className={styles['list-box']}>
-                    {
-                      data.map((val) => (
-                        <li className={styles.item} key={val.messageId}>
-                          <div className={styles.title}>
-                            {moment.utc(val.date).local().format('YYYY-MM-DD HH:mm')}
-                          </div>
-                          <div className={styles.detail}>
-                            {val.messageText}
-                          </div>
-                        </li>
-                      ))
-                    }
-                  </ul>
-                  {
-                    total > 9 ?
-                      <Pagination
-                        total={Math.ceil(total / size)}
-                        className={styles.pagination}
-                        current={current}
-                        locale={{
-                          prevText: (<span onClick={() => this.togglePage('prev')}>上一页</span>),
-                          nextText: (<span onClick={() => this.togglePage('next')}>下一页</span>),
-                        }}
-                      /> : ''
-                  }
-                </Fragment>
-                : <div className="no-data">
-                  暂无数据
-                </div>
-            )
+            this.renderAnn()
         }
       </div>
     );

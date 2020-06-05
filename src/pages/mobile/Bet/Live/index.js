@@ -6,7 +6,7 @@ import styles from './index.scss';
 const timeList = [];
 let date = '';
 
-for (let i = 0; i < 7; i++) {
+for (let i = 0; i < 7; i += 1) {
   date = moment().subtract(i, 'day').format('YYYY-MM-DD');
   timeList.push({
       name: date,
