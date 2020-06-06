@@ -22,6 +22,7 @@ export default [
       },
     ],
   }, */
+  { path: '/401', component: './401', title: '亚冠体育-验证过期' },
   {
     path: '/',
     component: '../layouts/MBLayout',

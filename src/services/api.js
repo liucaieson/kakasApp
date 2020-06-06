@@ -43,7 +43,7 @@ export async function postBetOrder(params) {
 
 /* 2.1.获取滚球赛事 */
 export async function getInPLay(params) {
-  return request(`${baseUrl}/portal/inplay/getInplayMatchOdds`, {
+  return request(`${baseUrl}/portal/inplay/getInplayMatchOdds?accessCode=${sessionStorage.getItem('accessCode')}`, {
     method: 'POST',
     body: {
       ...params,

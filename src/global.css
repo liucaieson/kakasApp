@@ -565,6 +565,16 @@ td{
   animation: bet-animate .8s .2s forwards;
 }
 
+.no-auth-page{
+  width: 90px;
+  padding-top:99px;
+  background-image:
+    url('./assets/a401@3x.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 10px;
+}
+
 
 @keyframes bet-animate {
   0% {

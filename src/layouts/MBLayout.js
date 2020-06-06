@@ -33,25 +33,15 @@ class BasicLayout extends PureComponent {
     const { query } = location;
     const { accessCode } = query;
     const code = sessionStorage.getItem('accessCode');
-    if (code && code !== 'faeb2ead70b74948ae3b7c4cd73243f1') {
-      /* Modal.alert(
-          '亚冠体育',
-          '欢迎来到亚冠体育'
-       ); */
-      this.timer = setInterval(this.getUserInfo, 30000);
-    } else if (accessCode !== undefined) {
+    if (accessCode) {
       sessionStorage.setItem('accessCode', accessCode);
-      /* Modal.alert(
-         '亚冠体育',
-         '欢迎来到亚冠体育'
-       ); */
-      this.timer = setInterval(this.getUserInfo, 30000);
+      this.getUserInfo();
+      return
+    }
+    if (code && code !== 'faeb2ead70b74948ae3b7c4cd73243f1') {
+      this.getUserInfo();
     } else {
       sessionStorage.setItem('accessCode', 'faeb2ead70b74948ae3b7c4cd73243f1');
-      /* Modal.alert(
-         '亚冠体育',
-        '欢迎来到亚冠体育,当前为试玩账号'
-       ); */
       this.getUserInfo();
     }
   }

@@ -1,7 +1,6 @@
 import fetch from 'dva/fetch';
 import { Toast } from 'antd-mobile';
 import { stringify as qsStringify } from 'qs';
-import storage from './localStorage';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -31,9 +30,8 @@ function checkStatus(response) {
       description: errortext,
       duration: 1.5,
       onClose: () => {
-        storage.remove('user');
-        storage.remove('loginStatus');
-        window.location.reload();
+        sessionStorage.clear();
+        window.location.replace('/401');
       }
     });
     return false;
@@ -45,21 +43,14 @@ function checkStatus(response) {
   throw error;
 }
 
-/**
- * Requests a URL, returning a promise.
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- * @return {object}           An object containing either "data" or "err"
- */
 function request(url, options) {
-  if (sessionStorage.getItem('token')) {
+ /* if (sessionStorage.getItem('token')) {
       options.headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
     };
     options.headers.Authorization = `${sessionStorage.getItem('token')}`;
-  }
+  } */
   const defaultOptions = {
     credentials: 'include'
   };

@@ -74,6 +74,13 @@ class Home extends PureComponent {
     });
   };
 
+  logout = () => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'login/logout',
+    });
+  };
+
   render() {
     const {
       userInfo: { userName, balance },
@@ -180,7 +187,7 @@ class Home extends PureComponent {
           </div>
           <div className={styles.line}>
             <Link to="/bet/help" className={styles.item}>帮助</Link>
-            <div className={styles.item}>登出</div>
+            <div className={styles.item} onClick={this.logout}>登出</div>
           </div>
         </div>
 
