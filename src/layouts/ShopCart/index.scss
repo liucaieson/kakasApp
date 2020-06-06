@@ -230,6 +230,7 @@
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
         margin-bottom: 3px;
         line-height: px2vh(30);
+        @include border-top-1px(#dadada);
         .message {
           width: 90%;
           color: #a21a0d;

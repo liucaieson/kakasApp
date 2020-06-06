@@ -9,6 +9,7 @@ import moment from 'moment';
 import CountDown from '@/components/CountDown';
 import GotoTopFooter from '@/components/GotoTopFooter';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import NoMatch from '@/components/NoMatch';
 
 @connect(({ matchList, userInfo, competitions, chsDB, loading }) => ({
   matchList,
@@ -60,7 +61,7 @@ class BetPage extends PureComponent {
     const { dispatch, location, matchListLoading } = this.props;
     /* 需要节流 */
     if (matchListLoading) {
-      return
+      return;
     }
     const { query } = location;
     const { competitionId } = query;
@@ -84,7 +85,7 @@ class BetPage extends PureComponent {
       type: 'matchList/fetchMatchOdds',
       payload: {
         competitions: competitionId,
-        ...this.defaultParams
+        ...this.defaultParams,
       },
       callback: () => {
         this.setState({
@@ -94,14 +95,125 @@ class BetPage extends PureComponent {
     });
   };
 
+  renderMatch() {
+    const {
+      matchList: { times, matchObj },
+      chsDB: { chsDB },
+    } = this.props;
+    if (times.length > 0) {
+      return (
+        <div className={styles.main}>
+          {
+            times.map((v) => (
+              <div key={v}>
+                {
+                  matchObj[v].map((val) => (
+                    <div className={styles['match-item']} key={val.matchId}>
+                      <div className={styles['match-date']}>
+                        <div className={styles.content}>
+                          <div className={styles.inplay}>今日</div>
+                          <div className={styles.time}>{calcDate3(val.time)}</div>
+                        </div>
+                        <div className={styles.text}>让球</div>
+                        <div className={styles.text}>大/小</div>
+                        <div/>
+
+                      </div>
+                      <div className={styles['match-odds']}>
+                        <div className={styles['match-info']}>
+                          <div className={styles['home-name']}>{val.homeName}</div>
+                          <div className={styles['away-name']}>{val.awayName}</div>
+                        </div>
+                        <div className={styles['match-bet']}>
+                          {
+                            val.odds[0].chs.map((item) => (
+                              item.name === '1' &&
+                              <DishItem
+                                key={item.choiceId}
+                                choiceId={item.choiceId}
+                                matchId={val.matchId}
+                                choiceHandicap={item.choiceHandicap}
+                                dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
+                                dish={chsDB[item.choiceId] && chsDB[item.choiceId].dish}
+                                name={item.name}
+                              />
+                            ))
+                          }
+                          {
+                            val.odds[0].chs.map((item) => (
+                              item.name === '2' &&
+                              <DishItem
+                                key={item.choiceId}
+                                choiceId={item.choiceId}
+                                matchId={val.matchId}
+                                choiceHandicap={item.choiceHandicap}
+                                dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
+                                dish={chsDB[item.choiceId] && chsDB[item.choiceId].dish}
+                                name={item.name}
+                              />
+                            ))
+                          }
+                        </div>
+                        <div className={styles['match-bet']}>
+                          {
+                            val.odds[1].chs.map((item) => (
+                              item.name === 'Over' &&
+                              <DishItem
+                                key={item.choiceId}
+                                choiceId={item.choiceId}
+                                matchId={val.matchId}
+                                choiceHandicap={item.choiceHandicap}
+                                dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
+                                dish={chsDB[item.choiceId] && chsDB[item.choiceId].dish}
+                                name={item.name}
+                              />
+                            ))
+                          }
+                          {
+                            val.odds[1].chs.map((item) => (
+                              item.name === 'Under' &&
+                              <DishItem
+                                key={item.choiceId}
+                                choiceId={item.choiceId}
+                                choiceHandicap={item.choiceHandicap}
+                                matchId={val.matchId}
+                                dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
+                                dish={chsDB[item.choiceId] && chsDB[item.choiceId].dish}
+                                name={item.name}
+                              />
+                            ))
+                          }
+                        </div>
+                      </div>
+                      <Link to={`/bet/todayDetail?matchId=${val.matchId}`} className={styles['match-play']}>
+                        <div className={styles.text}>{val.amount}</div>
+                        <div className={styles.text}>玩法</div>
+                        <div className={styles.arrow}/>
+                      </Link>
+
+                    </div>
+                  ))
+                }
+              </div>
+            ))
+          }
+          <GotoTopFooter/>
+        </div>
+      )
+    }
+    return (
+      <div className={styles.main}>
+        <NoMatch />
+      </div>
+    )
+  }
+
   render() {
     const {
       location,
       competitions: { competitionsMap },
-      matchList: { times, matchObj },
-      chsDB: { chsDB }
     }
-     = this.props;
+      = this.props;
     const { query } = location;
     const { competitionId } = query;
     const { isLoading } = this.state;
@@ -135,104 +247,9 @@ class BetPage extends PureComponent {
           >混合过关</Link>
         </div>
         {
-          isLoading ? <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :
-            <div className={styles.main} ref={this.mainRef}>
-              {
-                times.map((v) => (
-                  <div key={v}>
-                    {
-                      matchObj[v].map((val) => (
-                        <div className={styles['match-item']} key={val.matchId}>
-                          <div className={styles['match-date']}>
-                            <div className={styles.content}>
-                              <div className={styles.inplay}>今日</div>
-                              <div className={styles.time}>{calcDate3(val.time)}</div>
-                            </div>
-                            <div className={styles.text}>让球</div>
-                            <div className={styles.text}>大/小</div>
-                            <div />
-
-                          </div>
-                          <div className={styles['match-odds']}>
-                            <div className={styles['match-info']}>
-                              <div className={styles['home-name']}>{val.homeName}</div>
-                              <div className={styles['away-name']}>{val.awayName}</div>
-                            </div>
-                            <div className={styles['match-bet']}>
-                              {
-                                val.odds[0].chs.map((item) => (
-                                  item.name === '1' &&
-                                  <DishItem
-                                    key={item.choiceId}
-                                    choiceId={item.choiceId}
-                                    matchId={val.matchId}
-                                    choiceHandicap={item.choiceHandicap}
-                                    dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
-                                    dish={ chsDB[item.choiceId] && chsDB[item.choiceId].dish}
-                                    name={item.name}
-                                  />
-                                ))
-                              }
-                              {
-                                val.odds[0].chs.map((item) => (
-                                  item.name === '2' &&
-                                  <DishItem
-                                    key={item.choiceId}
-                                    choiceId={item.choiceId}
-                                    matchId={val.matchId}
-                                    choiceHandicap={item.choiceHandicap}
-                                    dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
-                                    dish={ chsDB[item.choiceId] && chsDB[item.choiceId].dish}
-                                    name={item.name}
-                                  />
-                                ))
-                              }
-                            </div>
-                            <div className={styles['match-bet']}>
-                              {
-                                val.odds[1].chs.map((item) => (
-                                  item.name === 'Over' &&
-                                  <DishItem
-                                    key={item.choiceId}
-                                    choiceId={item.choiceId}
-                                    matchId={val.matchId}
-                                    choiceHandicap={item.choiceHandicap}
-                                    dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
-                                    dish={ chsDB[item.choiceId] && chsDB[item.choiceId].dish}
-                                    name={item.name}
-                                  />
-                                ))
-                              }
-                              {
-                                val.odds[1].chs.map((item) => (
-                                  item.name === 'Under' &&
-                                  <DishItem
-                                    key={item.choiceId}
-                                    choiceId={item.choiceId}
-                                    choiceHandicap={item.choiceHandicap}
-                                    matchId={val.matchId}
-                                    dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
-                                    dish={ chsDB[item.choiceId] && chsDB[item.choiceId].dish}
-                                    name={item.name}
-                                  />
-                                ))
-                              }
-                            </div>
-                          </div>
-                          <Link to={`/bet/todayDetail?matchId=${val.matchId}`} className={styles['match-play']}>
-                            <div className={styles.text}>{val.amount}</div>
-                            <div className={styles.text}>玩法</div>
-                            <div className={styles.arrow} />
-                          </Link>
-
-                        </div>
-                      ))
-                    }
-                  </div>
-                ))
-              }
-              <GotoTopFooter/>
-            </div>
+          isLoading ?
+            <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :
+            this.renderMatch()
         }
       </div>
     );

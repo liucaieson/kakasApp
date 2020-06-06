@@ -5,6 +5,7 @@ import styles from './index.scss';
 import moment from 'moment';
 
 import MbPageLoading from '@/components/LoadingMask';
+import NoMatch from '@/components/NoMatch';
 
 @connect(({ announcement, loading }) => ({
   announcement,
@@ -115,9 +116,7 @@ class Announcement extends PureComponent {
         </Fragment>
       }
         return (
-        <div className="no-data">
-          暂无数据
-        </div>
+          <NoMatch />
         )
     }
       return null

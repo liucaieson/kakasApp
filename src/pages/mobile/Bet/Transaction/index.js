@@ -99,7 +99,7 @@ class Transaction extends PureComponent {
     const { size, total, betStatus } = this.state;
     let currentPage = this.state.current;
     if (loading) {
-      return
+      return;
     }
 
     // 判断向前还是向后翻页
@@ -110,7 +110,7 @@ class Transaction extends PureComponent {
     }
     // 边界处理
     if (currentPage < 1 || currentPage > Math.ceil(total / size)) {
-      return
+      return;
     }
     this.setState({
       isShowLoading: true,
@@ -135,8 +135,91 @@ class Transaction extends PureComponent {
     });
   };
 
-  render() {
+  renderTable() {
     const { historyBets: { data } } = this.props;
+    if (data.length > 0) {
+      return (
+        <ul className={styles['list-box']}>
+          {
+            data.map((val) => (
+              <li className={styles.item} key={val.betId}>
+                <Accordion>
+                  <div className={styles.title}>
+                    <span className={styles.money}>￥{val.betMoney}</span>
+                    <span className={styles.type}>{betTypeMap[val.betType]}</span>
+                    {
+                      val.betStatus === '已结算' ?
+                        <span className={styles.balance}>
+                          <span className={styles.num}>
+                            {
+                              val.bonusMoney > 0 ?
+                              <i className={styles.red}>￥{val.bonusMoney}</i>
+                              : <i className={styles.gray}>￥{val.bonusMoney}</i>
+                            }
+                          </span>
+                          {val.betStatus}
+                       </span>
+                        :
+                        <span className={styles.balance}>{val.betStatus}</span>
+                    }
+                  </div>
+                  <div className={styles.detail}>
+                    {
+                      val.detailed && val.detailed.map((item) => (
+                        <div className={styles.info} key={item.betDetailId}>
+                          <div className={styles.left}>
+                            <div
+                              className={styles['dish-name']}>
+                              {dishNameMap[item.choiceContent]}{item.choiceHandicap}
+                            </div>
+                            <div className={styles['odds-name']}>{item.oddName}</div>
+                            <div className={styles.match}>{item.hostName}---{item.awayName}</div>
+                          </div>
+                          <div className={styles.right}>
+                            <div className={styles.dish}>
+                              {item.dishRate}
+                            </div>
+                            <div className={styles.win}>
+                              {
+                                item.resultFlag === '胜' ?
+                                  <span className={styles.red}>{item.resultFlag}</span> :
+                                  <span className={styles.green}> {item.resultFlag}</span>
+                              }
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    }
+                    <div className={styles.orderNum}>订单号：{val.betId}</div>
+                    <div className={styles.betTime}>下注时间：
+                      {moment.utc(val.betTime).local().format('YYYY-MM-DD HH:mm:ss')}
+                    </div>
+                    <div className={styles.money}>
+                      <div className={styles.left}>
+                        <span className={styles.text}>本金：</span>
+                        <span className={styles.num}>￥{val.betMoney}</span>
+                      </div>
+                      <div className={styles.right}>
+                        <span className={styles.text}>返还：</span>
+                        <span className={styles.num}>￥{val.bonusMoney}</span>
+                      </div>
+                    </div>
+                  </div>
+                </Accordion>
+              </li>
+            ))
+          }
+        </ul>
+      );
+    }
+    return (
+      <div className="no-data">
+        暂无数据
+      </div>
+    );
+  }
+
+  render() {
     const { isShowLoading, betStatus, total, current, size } = this.state;
     return (
       <div className={styles.transaction}>
@@ -149,7 +232,7 @@ class Transaction extends PureComponent {
         </div>
         <div className={styles['game-tab']}>
           <div className={styles.name}>账户交易记录</div>
-          <div className={styles.box} />
+          <div className={styles.box}/>
         </div>
         <div className={styles.main}>
           <div className={styles['sub-title']}>
@@ -167,85 +250,11 @@ class Transaction extends PureComponent {
           </div>
           <div className={styles.main}>
             {
-              isShowLoading ? <div className={styles.loadingBox}>
+              isShowLoading ?
+                <div className={styles.loadingBox}>
                   <Loading bg="rgba(255,255,255,.2)" loadingIconSize="40px" color="#30717b"/>
                 </div> :
-                (
-                  data.length > 0 ?
-                    <ul className={styles['list-box']}>
-                      {
-                        data.map((val) => (
-                          <li className={styles.item} key={val.betId}>
-                            <Accordion>
-                              <div className={styles.title}>
-                                <span className={styles.money}>￥{val.betMoney}</span>
-                                <span className={styles.type}>{betTypeMap[val.betType]}</span>
-                                {
-                                  val.betStatus === '已结算' ?
-                                    <span className={styles.balance}>
-                                       <span className={styles.num}>
-                                      {val.bonusMoney > 0 ?
-                                        <i className={styles.red}>￥{val.bonusMoney}</i>
-                                        : <i className={styles.gray}>￥{val.bonusMoney}</i>
-                                      }
-                                    </span>
-                                      {val.betStatus}
-                                    </span>
-                                    :
-                                    <span className={styles.balance}>{val.betStatus}</span>
-                                }
-                              </div>
-                              <div className={styles.detail}>
-                                {
-                                  val.detailed && val.detailed.map((item) => (
-                                    <div className={styles.info} key={item.betDetailId}>
-                                      <div className={styles.left}>
-                                        <div
-                                          className={styles['dish-name']}>
-                                          {dishNameMap[item.choiceContent]}{item.choiceHandicap}
-                                          </div>
-                                        <div className={styles['odds-name']}>{item.oddName}</div>
-                                        <div className={styles.match}>{item.hostName}---{item.awayName}</div>
-                                      </div>
-                                      <div className={styles.right}>
-                                        <div className={styles.dish}>
-                                          {item.dishRate}
-                                        </div>
-                                        <div className={styles.win}>
-                                          {
-                                            item.resultFlag === '胜' ?
-                                              <span className={styles.red}>{item.resultFlag}</span> :
-                                              <span className={styles.green}> {item.resultFlag}</span>
-                                          }
-                                        </div>
-                                      </div>
-                                    </div>
-                                  ))
-                                }
-                                <div className={styles.orderNum}>订单号：{val.betId}</div>
-                                <div className={styles.betTime}>下注时间：
-                                  {moment.utc(val.betTime).local().format('YYYY-MM-DD HH:mm:ss')}
-                                </div>
-                                <div className={styles.money}>
-                                  <div className={styles.left}>
-                                    <span className={styles.text}>本金：</span>
-                                    <span className={styles.num}>￥{val.betMoney}</span>
-                                  </div>
-                                  <div className={styles.right}>
-                                    <span className={styles.text}>返还：</span>
-                                    <span className={styles.num}>￥{val.bonusMoney}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </Accordion>
-                          </li>
-                        ))
-                      }
-                    </ul>
-                    : <div className="no-data">
-                      暂无数据
-                    </div>
-                )
+                this.renderTable()
             }
             {
               total > 9 ?

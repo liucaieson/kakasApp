@@ -315,7 +315,6 @@ $fz-color6: #516375;
       @include dish-box()
     }
   }
-
 }
 
 /* 每个页面页头的面包屑的布局 */
@@ -334,15 +333,15 @@ $fz-color6: #516375;
       float: right;
       margin-right: px2vw(10);
       background: url(../../../../assets/button_login.svg) no-repeat 50%;
-      background-size: 30px 32px;
-      height: 48px;
-      width: 48px;
+      background-size: contain;
+      height: px2vw(28);
+      width: px2vw(28);
       text-align: center;
       vertical-align: middle;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: px2vw(10);
+      font-size: 12px;
     }
   }
 }
