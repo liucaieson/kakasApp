@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import { connect } from 'dva';
 import { Icon, Toast } from 'antd-mobile';
 import styles from './index.scss';
@@ -257,6 +257,7 @@ class ShopCart extends PureComponent {
               showKeyboard: false,
               money: '',
             });
+            Toast.info('投注成功', 1.5);
           } else {
             this.setState({
               showFinishBets: false,
@@ -266,10 +267,11 @@ class ShopCart extends PureComponent {
               showKeyboard: false,
               money: '',
             });
+            Toast.info('投注失败', 1.5);
           }
 
           /* this.closeShopCart(); */
-          Toast.info('投注成功', 1.5);
+
         },
       });
     } else if (money > 30000) {
@@ -280,14 +282,12 @@ class ShopCart extends PureComponent {
   };
 
   /* 渲染提示文字 */
-  renderSetting() {
-    return (
-      <div className={styles.setting}>
-        <div className={styles.icon}/>
-        系统将接受服务器最新赔率
-      </div>
-    );
-  }
+  renderSetting = () => (
+    <div className={styles.setting}>
+      <div className={styles.icon}/>
+      系统将接受服务器最新赔率
+    </div>
+  );
 
   renderBetOrMixed() {
     const {
@@ -300,7 +300,7 @@ class ShopCart extends PureComponent {
     mixedDishId.forEach((val) => {
       mixedAllOdds += +chsDB[mixedDishInfo[val].choiceId].dish;
       if (mixedDishInfo[val].code !== '208' && mixedDishInfo[val].code !== '200') {
-        mixErrTips = true
+        mixErrTips = true;
       }
     });
     if (type === 1) {
@@ -335,9 +335,13 @@ class ShopCart extends PureComponent {
                    chsDB[dishInfo.choiceId].dish}
                 </span>
               </div>
-              {
-                dishInfo.code === '3001' || dishInfo.code === '2111' ?
-                  null :
+            </div>
+          </div>
+          {
+            dishInfo.code === '3001' || dishInfo.code === '2111' ?
+              null :
+              <Fragment>
+                <div className={styles['input-container']}>
                   <div className={styles['bet-input']}>
                     <div className={styles.left} onClick={this.openKeyboard}>
                       <div className={styles.num}>{money}</div>
@@ -348,12 +352,7 @@ class ShopCart extends PureComponent {
                       <div className={styles.high}>最大投注:<i>30000</i></div>
                     </div>
                   </div>
-              }
-            </div>
-          </div>
-          {
-            dishInfo.code === '3001' || dishInfo.code === '2111' ?
-              '' :
+                </div>
               <div className={styles.winMoney} onClick={this.hideKeyboard}>
                 <div className={styles['line-box']}>
                   <div className={styles.line}>
@@ -365,6 +364,7 @@ class ShopCart extends PureComponent {
                   </div>
                 </div>
               </div>
+              </Fragment>
           }
           {
             dishInfo.code !== '200' && <div className={styles.warning}>
@@ -376,27 +376,28 @@ class ShopCart extends PureComponent {
             </div>
           }
           {
-            showKeyboard ? <div className={styles.betKeyboard}>
-              <div className={styles.numBox}>
-                <div className={styles.num} onClick={() => this.addMoney(1)}>1</div>
-                <div className={styles.num} onClick={() => this.addMoney(2)}>2</div>
-                <div className={styles.num} onClick={() => this.addMoney(3)}>3</div>
-                <div className={styles.num} onClick={() => this.addMoney(4)}>4</div>
-                <div className={styles.num} onClick={() => this.addMoney(5)}>5</div>
-                <div className={styles.num} onClick={() => this.addMoney(6)}>6</div>
-                <div className={styles.num} onClick={() => this.addMoney(7)}>7</div>
-                <div className={styles.num} onClick={() => this.addMoney(8)}>8</div>
-                <div className={styles.num} onClick={() => this.addMoney(9)}>9</div>
-                <div className={styles.num}/>
-                <div className={styles.num} onClick={() => this.addMoney(0)}>0</div>
-                <div className={styles.delNum} onClick={this.backMoney}/>
-              </div>
-              <div className={styles.quickBox}>
-                <div className={styles.add} onClick={() => this.setMoney(100)}>+100</div>
-                <div className={styles.add} onClick={() => this.setMoney(200)}>+200</div>
-                <div className={styles.add} onClick={() => this.setMoney(500)}>+500</div>
-                <div className={styles.add} onClick={() => this.setMoney(1000)}>+1000</div>
-              </div>
+            showKeyboard ?
+              <div className={styles.betKeyboard}>
+                <div className={styles.numBox}>
+                  <div className={styles.num} onClick={() => this.addMoney(1)}>1</div>
+                  <div className={styles.num} onClick={() => this.addMoney(2)}>2</div>
+                  <div className={styles.num} onClick={() => this.addMoney(3)}>3</div>
+                  <div className={styles.num} onClick={() => this.addMoney(4)}>4</div>
+                  <div className={styles.num} onClick={() => this.addMoney(5)}>5</div>
+                  <div className={styles.num} onClick={() => this.addMoney(6)}>6</div>
+                  <div className={styles.num} onClick={() => this.addMoney(7)}>7</div>
+                  <div className={styles.num} onClick={() => this.addMoney(8)}>8</div>
+                  <div className={styles.num} onClick={() => this.addMoney(9)}>9</div>
+                  <div className={styles.num} />
+                  <div className={styles.num} onClick={() => this.addMoney(0)}>0</div>
+                  <div className={styles.delNum} onClick={this.backMoney}/>
+                </div>
+                <div className={styles.quickBox}>
+                  <div className={styles.add} onClick={() => this.setMoney(100)}>+100</div>
+                  <div className={styles.add} onClick={() => this.setMoney(200)}>+200</div>
+                  <div className={styles.add} onClick={() => this.setMoney(500)}>+500</div>
+                  <div className={styles.add} onClick={() => this.setMoney(1000)}>+1000</div>
+                </div>
             </div> : ''
           }
           {
@@ -461,32 +462,37 @@ class ShopCart extends PureComponent {
                 </div>
               ))
             }
-            {
-              mixedDishId.length > 1 ? (
-                  mixErrTips ?
-                    <div className={styles['error-box']}>
+          </div>
+        </div>
+        <div className={styles['input-container']}>
+          {
+            mixedDishId.length > 1 ? (
+                mixErrTips ?
+                  <div className={styles['error-box']}>
+                    <div className={styles.error}/>
+                    <div className={styles.message}>
                       注意：部分比赛无法投注
                     </div>
-                    :
-                    <div className={styles['bet-input']}>
-                      <div className={styles.left} onClick={this.openKeyboard}>
-                        <div className={styles.num}>{money}</div>
-                        <div className={styles.clearNum} onClick={this.delMoney}/>
-                      </div>
-                      <div className={styles.right}>
-                        <div className={styles.high}>最低投注:<i>50</i></div>
-                        <div className={styles.high}>最大投注:<i>30000</i></div>
-                      </div>
-                    </div>
-                )
-                : <div className={styles['error-box']}>
-                  <div className={styles.error}/>
-                  <div className={styles.message}>
-                    混合过关-需要选择最少2个投注
                   </div>
+                  :
+                  <div className={styles['bet-input']}>
+                    <div className={styles.left} onClick={this.openKeyboard}>
+                      <div className={styles.num}>{money}</div>
+                      <div className={styles.clearNum} onClick={this.delMoney}/>
+                    </div>
+                    <div className={styles.right}>
+                      <div className={styles.high}>最低投注:<i>50</i></div>
+                      <div className={styles.high}>最大投注:<i>30000</i></div>
+                    </div>
+                  </div>
+              )
+              : <div className={styles['error-box']}>
+                <div className={styles.error}/>
+                <div className={styles.message}>
+                  混合过关-需要选择最少2个投注
                 </div>
-            }
-          </div>
+              </div>
+          }
         </div>
         <div className={styles.winMoney} onClick={this.hideKeyboard}>
           <div className={styles['line-box']}>
@@ -595,7 +601,7 @@ class ShopCart extends PureComponent {
               继续投注
             </div>
           </div>
-        )
+        );
       }
       if (type === 2) {
         return (
@@ -604,7 +610,7 @@ class ShopCart extends PureComponent {
               <i className={styles.icon}/>
               <div className={styles.text1}>{betTypeMap[betType]}</div>
               <div className={styles.text1}>
-              {orderText}
+                {orderText}
               </div>
             </div>
             {
@@ -644,10 +650,10 @@ class ShopCart extends PureComponent {
               继续投注
             </div>
           </div>
-        )
+        );
       }
     }
-    return null
+    return null;
   }
 
   render() {
@@ -686,7 +692,7 @@ class ShopCart extends PureComponent {
                   :
                   <div className={styles.betsBox}>
                     {
-                      showFinishBets ? null : <div className={styles.content}>
+                      !showFinishBets && <div className={styles.content}>
                         <div className={styles.noBet}>
                           <i className={styles.iconFlag}/>
                           <div className={styles.text}>请把选项加入在您的投注单</div>

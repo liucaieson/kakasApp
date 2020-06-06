@@ -10,10 +10,11 @@ import CountDown from '@/components/CountDown';
 import GotoTopFooter from '@/components/GotoTopFooter';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
-@connect(({ matchList, userInfo, competitions, loading }) => ({
+@connect(({ matchList, userInfo, competitions, chsDB, loading }) => ({
   matchList,
   competitions,
   userInfo,
+  chsDB,
   matchListLoading: loading.models.matchList,
 }))
 class BetPage extends PureComponent {
@@ -99,6 +100,7 @@ class BetPage extends PureComponent {
       location,
       competitions: { competitionsMap },
       matchList: { times, matchObj },
+      chsDB: { chsDB }
     } = this.props;
     const { query } = location;
     const { competitionId } = query;
@@ -167,8 +169,8 @@ class BetPage extends PureComponent {
                                   choiceId={item.choiceId}
                                   matchId={val.matchId}
                                   choiceHandicap={item.choiceHandicap}
-                                  dishId={item.dishId}
-                                  dish={item.dish}
+                                  dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
+                                  dish={ chsDB[item.choiceId] && chsDB[item.choiceId].dish}
                                   name={item.name}
                                 />
                               ))
@@ -181,8 +183,8 @@ class BetPage extends PureComponent {
                                   choiceId={item.choiceId}
                                   matchId={val.matchId}
                                   choiceHandicap={item.choiceHandicap}
-                                  dishId={item.dishId}
-                                  dish={item.dish}
+                                  dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
+                                  dish={ chsDB[item.choiceId] && chsDB[item.choiceId].dish}
                                   name={item.name}
                                 />
                               ))
@@ -197,8 +199,8 @@ class BetPage extends PureComponent {
                                   choiceId={item.choiceId}
                                   matchId={val.matchId}
                                   choiceHandicap={item.choiceHandicap}
-                                  dishId={item.dishId}
-                                  dish={item.dish}
+                                  dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
+                                  dish={ chsDB[item.choiceId] && chsDB[item.choiceId].dish}
                                   name={item.name}
                                 />
                               ))
@@ -211,8 +213,8 @@ class BetPage extends PureComponent {
                                   choiceId={item.choiceId}
                                   choiceHandicap={item.choiceHandicap}
                                   matchId={val.matchId}
-                                  dishId={item.dishId}
-                                  dish={item.dish}
+                                  dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
+                                  dish={ chsDB[item.choiceId] && chsDB[item.choiceId].dish}
                                   name={item.name}
                                 />
                               ))

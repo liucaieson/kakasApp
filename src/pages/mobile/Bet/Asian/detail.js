@@ -9,11 +9,12 @@ import GotoTopFooter from '@/components/GotoTopFooter';
 import CollapseList from '@/components/CollapseList';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
-@connect(({ matchDetail, matchAllOdds, competitions, userInfo, loading }) => ({
+@connect(({ matchDetail, matchAllOdds, competitions, userInfo, chsDB, loading }) => ({
   matchDetail,
   competitions,
   matchAllOdds,
   userInfo,
+  chsDB,
   matchDetailLoading: loading.effects['matchDetail/fetchMatchOdds'],
 }))
 class DetailPage extends PureComponent {
@@ -109,6 +110,7 @@ class DetailPage extends PureComponent {
     const {
       matchDetail: {
         matchDetail,
+        chsDB: { chsDB }
       },
     } = this.props;
     const { isLoading } = this.state;
@@ -165,8 +167,8 @@ class DetailPage extends PureComponent {
                                   choiceId={item.choiceId}
                                   matchId={matchDetail.matchId}
                                   gamblingId={val.gamblingId}
-                                  dishId={item.dishId}
-                                  dish={item.dish}
+                                  dishId={chsDB[item.choiceId] && chsDB[item.choiceId].dishId}
+                                  dish={ chsDB[item.choiceId] && chsDB[item.choiceId].dish}
                                   name={item.name}
                                   choiceHandicap={item.choiceHandicap}
                                   oddId={val.oddId}
