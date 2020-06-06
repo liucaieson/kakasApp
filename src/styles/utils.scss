@@ -166,10 +166,11 @@ $pageHeight: 667;
     position: absolute;
     left: 0;
     top: 0;
+    height: 1px;
     width: 100%;
     border-top: 1Px $style $color;
     transform-origin: 0 0;
-    @include min-device-pixel-ratio(scaleY(.5), scaleY(.33));
+    @include min-device-pixel-ratio(scale(.5), scale(.33));
   }
 }
 @mixin border-bottom-1px($color: #DDD, $style: solid) {
@@ -179,6 +180,7 @@ $pageHeight: 667;
     position: absolute;
     left: 0;
     bottom: 0;
+    height: 1px;
     width: 100%;
     border-bottom: 1Px $style $color;
     transform-origin: 0 0;
@@ -199,6 +201,7 @@ $pageHeight: 667;
     position: absolute;
     left: 0;
     top: 0;
+    width: 1px;
     height: 100%;
     border-left: 1Px $style $color;
     transform-origin: 0 0;

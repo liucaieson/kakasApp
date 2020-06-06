@@ -4,10 +4,10 @@
 
 .bet {
   color: #0b1422;
-  background: #fff;
   width: 100%;
-  height: 100%;
-  overflow-y: scroll;
+  min-height: 90vh;
+  padding-bottom: 10vh;
+  background-color: #f7f7f7;
   .header {
     display: flex;
     justify-content: space-between;

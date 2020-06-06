@@ -153,7 +153,7 @@
     }
     .input-container{
       width: 100%;
-      padding: 2px px2vw(8) 0 px2vw(8);
+      padding: 0 px2vw(8);
       background: #f0f0f0;
       box-sizing: border-box;
       .bet-input {
@@ -165,6 +165,7 @@
         align-items: center;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
         margin-bottom: 3px;
+        @include border-top-1px(#dadada);
         .message {
           width: 100%;
           color: #a21a0d;

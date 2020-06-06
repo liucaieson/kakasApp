@@ -110,8 +110,8 @@ class DetailPage extends PureComponent {
     const {
       matchDetail: {
         matchDetail,
-        chsDB: { chsDB }
       },
+      chsDB: { chsDB }
     } = this.props;
     const { isLoading } = this.state;
     return (

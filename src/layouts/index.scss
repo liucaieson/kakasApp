@@ -15,9 +15,10 @@
   background: #fff;
   .main {
     width: 100%;
-    height: calc(100vh - 7.3vh);
     position: relative;
-    overflow-x: hidden;
+    top: 0;
+    left: 0;
+    overflow-y: scroll;
     .event-loading {
       position: relative;
       width: 100%;

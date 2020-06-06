@@ -19,7 +19,6 @@ class Home extends PureComponent {
    */
   state = {
     showMenu: false,
-    showAnimate: false,
   };
 
   constructor(props) {
