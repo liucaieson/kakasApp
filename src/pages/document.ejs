@@ -181,7 +181,8 @@
     domRenderTime = timing.domContentLoadedEventEnd - start;
     loadTime = timing.loadEventStart - start;
 
-    console.log('DNS解析时间:', dnsTime,
+    console.log(
+      'DNS解析时间:', dnsTime,
       '\nTCP建立时间:', tcpTime,
       '\n首屏时间:', firstPaintTime,
       '\ndom渲染完成时间:', domRenderTime,

@@ -4,9 +4,7 @@ export default {
   namespace: 'dates',
 
   state: {
-    dates: [
-
-    ]
+    dates: []
   },
 
   effects: {
@@ -27,5 +25,4 @@ export default {
       };
     },
   },
-
 };

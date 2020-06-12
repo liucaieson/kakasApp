@@ -204,7 +204,7 @@ export const groupSplit = (arr, size) => {
   return r;
 };
 
-export function getTimeout(delays, durations) { // 从Vue源码里拷贝出来的代码的，获取动画完成的总时间，返回ms格式
+export function getTimeout(delays, durations) {
   while (delays.length < durations.length) {
     delays = delays.concat(delays);
   }
@@ -226,4 +226,18 @@ export const betTypeMap = {
   6: '六串一',
   7: '七串一',
   8: '八串一',
+};
+
+export const betStatusMap = {
+  0: '未结算',
+  1: '已结算'
+};
+
+export const betResultMap = {
+  0: '未结算',
+  1: '赢',
+  2: '输',
+  3: '退款',
+  11: '赢一半',
+  12: '输一半'
 };

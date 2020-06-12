@@ -128,13 +128,13 @@ class Home extends PureComponent {
                 <CountDown
                   onCountDownRef={this.onCountDownRef}
                   time="60"
-                  onEnd={this.setTimeFetchMatchList}/>
+                  onEnd={this.setTimeFetchMatchList}
+                />
               </span>
             </div>
           </div>
           <div className={styles['play-tab']}>
-            <div className={`${styles.tab} ${styles.active}`}
-            >
+            <div className={`${styles.tab} ${styles.active}`}>
               让球&大小
             </div>
             <Link
@@ -145,7 +145,13 @@ class Home extends PureComponent {
             </Link>
           </div>
           {
-            competitionsLoading ? <Loading bg="rgba(0,0,0,0.1)" loadingIconSize="40px" color="#30717b"/> :
+            competitionsLoading ?
+              <Loading
+                bg="rgba(0,0,0,0.1)"
+                loadingIconSize="40px"
+                color="#30717b"
+              />
+              :
               <div>
                 <div className={styles.selection}>
                   <select value={selectArea} className={styles.select} onChange={this.change}>

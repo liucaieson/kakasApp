@@ -2,11 +2,11 @@ import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import Link from 'umi/link';
 import { Pagination } from 'antd-mobile';
+import moment from 'moment';
 import styles from './index.scss';
-import { dishNameMap } from '@/utils/utils';
+import { dishNameMap, betStatusMap, betResultMap } from '@/utils/utils';
 import Loading from '@/components/LoadingMask';
 import Accordion from '@/components/Accordion';
-import moment from 'moment';
 
 
 const betTypeMap = {
@@ -148,32 +148,33 @@ class Transaction extends PureComponent {
                     <span className={styles.money}>￥{val.betMoney}</span>
                     <span className={styles.type}>{betTypeMap[val.betType]}</span>
                     {
-                      val.betStatus === '已结算' ?
+                      val.betStatus === 1 ?
                         <span className={styles.balance}>
                           <span className={styles.num}>
                             {
                               val.bonusMoney > 0 ?
                               <i className={styles.red}>￥{val.bonusMoney}</i>
-                              : <i className={styles.gray}>￥{val.bonusMoney}</i>
+                              :
+                                <i className={styles.gray}>￥{val.bonusMoney}</i>
                             }
                           </span>
-                          {val.betStatus}
+                          {betStatusMap[val.betStatus]}
                        </span>
                         :
-                        <span className={styles.balance}>{val.betStatus}</span>
+                        <span className={styles.balance}>{betStatusMap[val.betStatus]}</span>
                     }
                   </div>
                   <div className={styles.detail}>
                     {
-                      val.detailed && val.detailed.map((item) => (
-                        <div className={styles.info} key={item.betDetailId}>
+                      val.bizBetDetailVOList && val.bizBetDetailVOList.map((item) => (
+                        <div className={styles.info} key={`${item.betId}${item.dishRate}`}>
                           <div className={styles.left}>
                             <div
                               className={styles['dish-name']}>
                               {dishNameMap[item.choiceContent]}{item.choiceHandicap}
                             </div>
-                            <div className={styles['odds-name']}>{item.oddName}</div>
-                            <div className={styles.match}>{item.hostName}---{item.awayName}</div>
+                            <div className={styles['odds-name']}>{item.typeName}</div>
+                            <div className={styles.match}>{item.hostTeam}---{item.awayTeam}</div>
                           </div>
                           <div className={styles.right}>
                             <div className={styles.dish}>
@@ -181,9 +182,14 @@ class Transaction extends PureComponent {
                             </div>
                             <div className={styles.win}>
                               {
-                                item.resultFlag === '胜' ?
-                                  <span className={styles.red}>{item.resultFlag}</span> :
-                                  <span className={styles.green}> {item.resultFlag}</span>
+                                item.resultFlag === 1 ?
+                                  <span className={styles.red}>
+                                    {betResultMap[item.resultFlag]}
+                                  </span>
+                                  :
+                                  <span className={styles.green}>
+                                    {betResultMap[item.resultFlag]}
+                                  </span>
                               }
                             </div>
                           </div>

@@ -43,9 +43,10 @@ export default {
       const data = yield call(checkMatchStatus, payload);
       const chsListObj = {};
       let dishInfo = {};
-      data.forEach(v => {
+      data.map(v => {
         dishInfo = v;
         chsListObj[v.choiceId] = v;
+        return v
       });
       /* 储存以choiceId为key的盘口竟猜项数据 */
       const chsDB = yield select(state => state.chsDB.chsDB);

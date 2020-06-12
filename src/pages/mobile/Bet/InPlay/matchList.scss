@@ -39,6 +39,7 @@
       width: 100%;
       padding-top: 10%;
       text-align: center;
+      background-color: #f7f7f7;
       .noimg{
         padding-bottom: 4px;
         margin: 0 auto;
@@ -90,7 +91,7 @@
       flex-direction: column;
       font-size: px2vw(14);
       .match-date {
-        width: 96%;
+        width: 100%;
         background: #f4eee7;
         color: #fff;
         font-size: px2vw(11);
