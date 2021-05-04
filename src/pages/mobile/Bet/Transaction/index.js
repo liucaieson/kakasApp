@@ -230,11 +230,11 @@ class Transaction extends PureComponent {
     return (
       <div className={styles.transaction}>
         <div className={styles['play-tab']}>
+          <Link to="/bet/accountHistory" className={styles.tab}
+          >账户历史</Link>
           <div className={`${styles.tab} ${styles.active}`}
           >交易状况
           </div>
-          <Link to="/bet/AccountHistory" className={styles.tab}
-          >账户历史</Link>
         </div>
         <div className={styles['game-tab']}>
           <div className={styles.name}>账户交易记录</div>
@@ -264,14 +264,17 @@ class Transaction extends PureComponent {
             }
             {
               total > 9 ?
-                <Pagination total={Math.ceil(total / size)}
-                            className={styles.pagination}
-                            current={current}
-                            locale={{
-                              prevText: (<span onClick={() => this.togglePage('prev')}>上一页</span>),
-                              nextText: (<span onClick={() => this.togglePage('next')}>下一页</span>),
-                            }}
-                /> : ''
+                <Pagination
+                  total={Math.ceil(total / size)}
+                  className={styles.pagination}
+                  current={current}
+                  locale={{
+                    prevText: (<span onClick={() => this.togglePage('prev')}>上一页</span>),
+                    nextText: (<span onClick={() => this.togglePage('next')}>下一页</span>),
+                  }}
+                />
+                :
+                null
             }
           </div>
         </div>

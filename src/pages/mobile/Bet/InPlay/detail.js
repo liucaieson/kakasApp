@@ -136,6 +136,70 @@ class InPlayDetailPage extends PureComponent {
     });
   };
 
+  renderOdds = () => {
+    const {
+      inPlay: {
+        inPlayAllOdds,
+      },
+    } = this.props;
+
+    if (inPlayAllOdds && inPlayAllOdds[0]) {
+      if (inPlayAllOdds[0].odds.length > 0) {
+        return (
+          inPlayAllOdds[0].odds.map((val) => (
+            <CollapseList
+              key={val.oddId}
+              title={val.oddName}
+              isArrow
+              titleStyle={{
+                height: '6vh',
+                lineHeight: '6vh',
+                fontSize: '3.4vw',
+              }}
+            >
+              <div className={styles['odds-item']}>
+                {
+                  val.chs.map((item) => (
+                    <DishItem
+                      key={item.choiceId}
+                      choiceId={item.choiceId}
+                      matchId={inPlayAllOdds[0].matchId}
+                      gamblingId={val.gamblingId}
+                      dishId={item.dishId}
+                      dish={item.dish}
+                      name={item.name}
+                      choiceHandicap={item.choiceHandicap}
+                      oddId={val.oddId}
+                      homeName={inPlayAllOdds[0].homeName}
+                      awayName={inPlayAllOdds[0].awayName}
+                    />
+                  ))
+                }
+              </div>
+            </CollapseList>
+          ))
+        );
+      }
+        return (
+          <CollapseList
+            key={1}
+            title="相关信息"
+            isArrow
+            titleStyle={{
+              height: '6vh',
+              lineHeight: '6vh',
+              fontSize: '3.4vw',
+            }}
+          >
+            <div className={styles.info}>
+              此赛事暂时停止收注或已关闭
+            </div>
+          </CollapseList>
+        );
+    }
+      return null;
+  };
+
   render() {
     const {
       inPlay: {
@@ -148,7 +212,7 @@ class InPlayDetailPage extends PureComponent {
         {
           firstLoading ? <Loading bg="rgba(0,0,0,.2)" loadingIconSize="40px" color="#30717b"/> :
             (
-              inPlayAllOdds[0] ?
+              inPlayAllOdds && inPlayAllOdds[0] ?
                 <div>
                   <div className={styles['game-tab']}>
                     <div className={styles['game-tab']}>
@@ -175,10 +239,13 @@ class InPlayDetailPage extends PureComponent {
                       </div>
                       <div className={styles.score}>
                         <div
-                          className={styles['home-score']}>{inPlayAllOdds[0].soccer && inPlayAllOdds[0].soccer.split('-')[0]}</div>
+                          className={styles['home-score']}>
+                          {inPlayAllOdds[0].soccer && inPlayAllOdds[0].soccer.split('-')[0]}
+                        </div>
                         <div className={styles.vs}>|</div>
-                        <div
-                          className={styles['away-score']}>{inPlayAllOdds[0].soccer && inPlayAllOdds[0].soccer.split('-')[1]}</div>
+                        <div className={styles['away-score']}>
+                          {inPlayAllOdds[0].soccer && inPlayAllOdds[0].soccer.split('-')[1]}
+                        </div>
                       </div>
                       <div className={styles.team}>
                         <div className={styles['home-name']}>{inPlayAllOdds[0].homeName}</div>
@@ -188,38 +255,7 @@ class InPlayDetailPage extends PureComponent {
                     </div>
                     <div className={styles['all-odds']}>
                       {
-                        inPlayAllOdds[0].odds && inPlayAllOdds[0].odds.map((val) => (
-                          <CollapseList
-                            key={val.oddId}
-                            title={val.oddName}
-                            isArrow
-                            titleStyle={{
-                              height: '6vh',
-                              lineHeight: '6vh',
-                              fontSize: '3.4vw',
-                            }}
-                          >
-                            <div className={styles['odds-item']}>
-                              {
-                                val.chs.map((item) => (
-                                  <DishItem
-                                    key={item.choiceId}
-                                    choiceId={item.choiceId}
-                                    matchId={inPlayAllOdds[0].matchId}
-                                    gamblingId={val.gamblingId}
-                                    dishId={item.dishId}
-                                    dish={item.dish}
-                                    name={item.name}
-                                    choiceHandicap={item.choiceHandicap}
-                                    oddId={val.oddId}
-                                    homeName={inPlayAllOdds[0].homeName}
-                                    awayName={inPlayAllOdds[0].awayName}
-                                  />
-                                ))
-                              }
-                            </div>
-                          </CollapseList>
-                        ))
+                        this.renderOdds()
                       }
                     </div>
                   </div>

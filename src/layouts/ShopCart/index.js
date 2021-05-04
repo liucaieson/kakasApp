@@ -189,7 +189,10 @@ class ShopCart extends PureComponent {
    * 投注单注
    */
   postBet = () => {
-    const { dispatch } = this.props;
+    const { dispatch,  submitBetLoading } = this.props;
+    if (submitBetLoading) {
+      return
+    }
     const { money } = this.state;
     if (money >= 50 && money <= 30000) {
       dispatch({
@@ -225,7 +228,11 @@ class ShopCart extends PureComponent {
   postMixedBet = () => {
     const {
       dispatch, shopCart: { mixedDishId, mixedDishInfo },
+      submitMixedLoading
     } = this.props;
+    if (submitMixedLoading){
+      return
+    }
     const { money } = this.state;
     for (let i = 0; i < mixedDishId; i += 1) {
       if (mixedDishInfo[mixedDishId[i]].code !== '208' &&
@@ -271,7 +278,6 @@ class ShopCart extends PureComponent {
           }
 
           /* this.closeShopCart(); */
-
         },
       });
     } else if (money > 30000) {

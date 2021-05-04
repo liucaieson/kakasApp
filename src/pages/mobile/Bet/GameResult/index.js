@@ -132,7 +132,7 @@ class GameResult extends PureComponent {
           <div className={styles.content}>
             <div className={styles.cptName}>{val.competitionName}</div>
             <div className={styles.line}>
-              <div className={styles.time}>{moment.utc(val.matchTime).local().format('YYYY-MM-DD HH:mm')}</div>
+              <div className={styles.time}>{moment(val.matchTime).local().format('YYYY-MM-DD HH:mm')}</div>
               <div className={styles.team}>
                 <div className={styles.item}>{val.hostName}</div>
                 <div className={styles.item}>{val.awayName}</div>

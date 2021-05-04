@@ -56,7 +56,7 @@ $fz-color6: #516375;
   opacity: 0;
   -webkit-animation: flash 1s linear 7 alternate;
   animation: flash 1s linear 7 alternate;
-  transform: translateY(-55%);
+  transform: translateY(-55%) rotate(180deg);
 }
 
 @mixin down($right:20% , $top: 50%) {
@@ -72,7 +72,7 @@ $fz-color6: #516375;
   opacity: 0;
   -webkit-animation: flash 1s linear 7 alternate;
   animation: flash 1s linear 7 alternate;
-  transform: translateY(-55%);
+  transform: translateY(-55%) rotate(180deg);
 }
 
 /* 比赛列表页面比赛信息的公共样式 */

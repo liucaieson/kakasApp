@@ -23,7 +23,7 @@ export const MixedDishItemHoc = (Wrapper) => {
           setTimeout(() => {
             hooker1.classList.remove('bet-wave-animate1');
             hooker2.classList.remove('bet-wave-animate2');
-          }, 800);
+          }, 800)
         }
         dispatch({
           type: 'shopCart/addMixedBetShopCart',

@@ -46,7 +46,7 @@ class Live extends PureComponent {
           <div className={styles.name}>直播现场</div>
         </div>
         <div className={styles.main}>
-          <div className={styles.selection}>
+          {/*     <div className={styles.selection}>
             <select value={selectTime} className={styles.select} onChange={this.changeTime}>
               {
                 timeList.map((item) => (
@@ -71,12 +71,12 @@ class Live extends PureComponent {
                 ))
               }
             </select>
-          </div>
+          </div> */}
           <div className={styles.list}>
             <Link to="/bet/inPlayLive?match=0">
               <div className={styles.item}>
-                <span className={styles['tv-icon']} />
-                <span className={styles['sport-live-icon']} />
+                <span className={styles['tv-icon']}/>
+                <span className={styles['sport-live-icon']}/>
                 <span className={styles.name}>
                   巴西  VS  德国
                 </span>
@@ -84,8 +84,8 @@ class Live extends PureComponent {
             </Link>
             <Link to="/bet/inPlayLive?match=1">
               <div className={styles.item}>
-                <span className={styles['tv-icon']} />
-                <span className={styles['sport-live-icon']} />
+                <span className={styles['tv-icon']}/>
+                <span className={styles['sport-live-icon']}/>
                 <span className={styles.name}>
                   德国  VS  阿根廷
                 </span>
@@ -93,23 +93,23 @@ class Live extends PureComponent {
             </Link>
             <Link to="/bet/inPlayLive?match=2">
               <div className={styles.item}>
-                <span className={styles['tv-icon']} />
-                <span className={styles['sport-live-icon']} />
+                <span className={styles['tv-icon']}/>
+                <span className={styles['sport-live-icon']}/>
                 <span className={styles.name}>
                   尤文图斯  VS  巴塞罗娜
                 </span>
               </div>
             </Link>
             <div className={styles['future-item']}>
-              <span className={styles.date} >5:00</span>
-              <span className={styles['no-live-icon']} />
+              <span className={styles.date}>5:00</span>
+              <span className={styles['no-live-icon']}/>
               <span className={styles.name}>
                 毕尔巴鄂经济  VS  西班牙人
               </span>
             </div>
             <div className={styles['future-item']}>
-              <span className={styles.date} >5:00</span>
-              <span className={styles['no-live-icon']} />
+              <span className={styles.date}>5:00</span>
+              <span className={styles['no-live-icon']}/>
               <span className={styles.name}>
                 拜仁  VS  汉堡
               </span>

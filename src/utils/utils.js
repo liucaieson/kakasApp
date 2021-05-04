@@ -3,15 +3,16 @@ import moment from 'moment';
 
 moment.locale('zh-cn');
 
-export function resErrCheck(data, fallback, isShowToast = false) {
+export function resErrorCheck(data, fallback, isShowToast = false) {
   if (data === undefined || data === null) {
     if (isShowToast) {
       Toast.info('请稍后再试', 4);
     }
-    return fallback
+    return fallback;
   }
   return data;
 }
+
 // 数组扁平化
 export const normalizeData = (data, schema) => {
   const kvObj = {};
@@ -19,16 +20,16 @@ export const normalizeData = (data, schema) => {
   if (Array.isArray(data)) {
     data.forEach(item => {
       kvObj[item[schema]] = item;
-      ids.push(item[schema])
-    })
+      ids.push(item[schema]);
+    });
   } else {
     kvObj[data[schema]] = data;
-    ids.push(data[schema])
+    ids.push(data[schema]);
   }
   return {
     list: kvObj,
-    ids
-  }
+    ids,
+  };
 };
 
 // 数组扁平化成ids:[]和list：{}
@@ -38,16 +39,16 @@ export const normalizeDataToIds = (data, schema) => {
   if (Array.isArray(data)) {
     data.forEach(item => {
       kvObj[item[schema]] = item;
-      ids.push(item[schema])
-    })
+      ids.push(item[schema]);
+    });
   } else {
     kvObj[data[schema]] = data;
-    ids.push(data[schema])
+    ids.push(data[schema]);
   }
   return {
     list: kvObj,
-    ids
-  }
+    ids,
+  };
 };
 
 export const dishNameMap = {
@@ -168,21 +169,21 @@ export const dishNameMap = {
 };
 export const calcDate = (date) => {
   const cacheDate = moment(date, 'YYYYMMDD');
-  return cacheDate.format('YYYY年MM月DD日 周dd')
+  return cacheDate.format('YYYY年MM月DD日 周dd');
 };
 
 export const calcDate2 = (date) => {
-  const time = moment.utc(date).local().format('YYYY年MM月DD日  星期dd');
-  const day = moment.utc(date).local().format('HH:mm')
-  return `${time} ${day}`
+  const time = moment(date).local().format('YYYY年MM月DD日  星期dd');
+  const day = moment(date).local().format('HH:mm');
+  return `${time} ${day}`;
 };
 
 export const calcDate3 = (date) => {
-  return moment.utc(date).local().format('MM/DD HH:mm')
+  return moment(date).local().format('MM/DD HH:mm');
 };
 
 export const calcDate4 = (date) => {
-  return date.split(':')[0] * 60 + date.split(':')[0] - 45 * 60 > 0 ? `下半场 ${date}'` : `上半场 ${date}'`
+  return date.split(':')[0] * 60 + date.split(':')[0] - 45 * 60 > 0 ? `下半场 ${date}'` : `上半场 ${date}'`;
 };
 
 /* 对数组排列组合 */
@@ -200,6 +201,7 @@ export const groupSplit = (arr, size) => {
       _(b, a.slice(i + 1), n - 1);
     }
   }
+
   _([], arr, size);
   return r;
 };
@@ -209,12 +211,12 @@ export function getTimeout(delays, durations) {
     delays = delays.concat(delays);
   }
   return Math.max.apply(null, durations.map((d, i) => {
-    return toMs(d) + toMs(delays[i])
-  }))
+    return toMs(d) + toMs(delays[i]);
+  }));
 }
 
 export function toMs(s) {
-  return Number(s.slice(0, -1)) * 1000
+  return Number(s.slice(0, -1)) * 1000;
 }
 
 export const betTypeMap = {
@@ -230,7 +232,7 @@ export const betTypeMap = {
 
 export const betStatusMap = {
   0: '未结算',
-  1: '已结算'
+  1: '已结算',
 };
 
 export const betResultMap = {
@@ -239,5 +241,31 @@ export const betResultMap = {
   2: '输',
   3: '退款',
   11: '赢一半',
-  12: '输一半'
+  12: '输一半',
+};
+
+export const debounce = (fn, delay = 500) => {
+  // 期间间隔执行 节流
+  window.timeId = null;
+  return (...rest) => { // 箭头函数是没有arguments的 所以用...rest 来代替
+    const args = rest;
+    if (window.timerId) clearTimeout(window.timerId);
+    // 要用this.timerId 而不能直接定义var timerId=null;
+    window.timerId = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
+};
+
+export const throttle = (fn, delay = 500) => { //
+  // 期间间隔执行 节流
+  let canRun = true;
+  return (...rest) => {
+    if (!canRun) return;
+    canRun = false;
+    setTimeout(() => {
+      fn.apply(this, rest);
+      canRun = true;
+    }, delay);
+  };
 };

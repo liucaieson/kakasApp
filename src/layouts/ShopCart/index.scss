@@ -82,7 +82,7 @@
         display: block;
         background-color: white;
         box-sizing: border-box;
-        overflow-y: scroll;
+        overflow-y: auto;
         .err-match {
           filter: opacity(0.5);
         }
@@ -462,7 +462,7 @@
         display: block;
         background-color: white;
         box-sizing: border-box;
-        overflow-y: scroll;
+        overflow-y: auto;
         .infoBox {
           position: relative;
           .delMixed {

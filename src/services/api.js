@@ -21,7 +21,7 @@ export async function getUserInfo(params) {
 
 /* 2.1.添加到购物车 */
 export async function addShopCart(params) {
-  return request(`${baseUrl}/portal/pre/getMatchOdds`, {
+  return request(`${baseUrl}/portal/pre/getMatchOdds?accessCode=${sessionStorage.getItem('accessCode')}`, {
     method: 'POST',
     body: {
       ...params,
@@ -54,7 +54,7 @@ export async function getInPLay(params) {
 
 /* 2.1.获取玩法分组列表 */
 export async function getGg(params) {
-  return request(`${baseUrl}/portal/pre/getGg`, {
+  return request(`${baseUrl}/portal/pre/getGg?accessCode=${sessionStorage.getItem('accessCode')}`, {
     method: 'POST',
     body: {
       ...params,
@@ -84,7 +84,7 @@ export async function getPreStartMatch(params) {
 
 /* 2.1.验证购物车中比赛是否过期 */
 export async function checkMatchStatus(params) {
-  return request(`${baseUrl}/portal/pre/getMatchOdds`, {
+  return request(`${baseUrl}/portal/pre/getMatchOdds?accessCode=${sessionStorage.getItem('accessCode')}`, {
     method: 'POST',
     body: {
       ...params,
@@ -118,7 +118,7 @@ export async function getDates(params) {
 
 /* 2.3.获取赛事列表 */
 export async function getCompetitions(params) {
-  return request(`${baseUrl}/portal/pre/getCompetitions`, {
+  return request(`${baseUrl}/portal/pre/getCompetitions?accessCode=${sessionStorage.getItem('accessCode')}`, {
     method: 'POST',
     body: {
       ...params,

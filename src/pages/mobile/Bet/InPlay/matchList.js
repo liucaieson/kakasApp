@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import Link from 'umi/link';
-import { calcDate4 } from '@/utils/utils';
+import { calcDate4, calcDate3 } from '@/utils/utils';
 import styles from './matchList.scss';
 import Loading from '@/components/LoadingMask';
 import CountDown from '@/components/CountDown/index';
@@ -16,7 +16,7 @@ class RoundPage extends PureComponent {
   timer = null;
 
   state = {
-    firstLoading: true,
+    firstLoading: false,
   };
 
   /* 存储全局的参数 */
@@ -33,7 +33,10 @@ class RoundPage extends PureComponent {
 
   /* 10s轮询余额，10s轮询比赛列表，首次请求赔率列表 */
   componentDidMount() {
-    const { dispatch } = this.props;
+    const {
+      dispatch,
+    } = this.props;
+
     dispatch({
       type: 'inPlay/fetchMatchOdds',
       payload: { ...this.globalParams },
@@ -67,7 +70,7 @@ class RoundPage extends PureComponent {
     const { dispatch, oddsLoading } = this.props;
     /* 需要节流 */
     if (oddsLoading) {
-      return false;
+      return;
     }
     dispatch({
       type: 'inPlay/fetchMatchOdds',
@@ -90,7 +93,7 @@ class RoundPage extends PureComponent {
     const { firstLoading } = this.state;
 
     return (
-      <div className={styles.matchList} >
+      <div className={styles.matchList}>
         <div className={styles['game-tab']}>
           <div className={styles.item}>足球</div>
           <div className={styles.line}>/</div>
@@ -134,24 +137,24 @@ class RoundPage extends PureComponent {
                                 </div>
                                 <div className={styles.time}>
                                   {
-                                    val.period >= 0 ?
+                                    val.goOnFlag >= 0 ?
                                       <div className={styles['round-time']}>
-                                      <span className={styles.in}>
-                                       {calcDate4(val.period)}
-                                      </span>
-                                      </div>
-                                      : <div
-                                        className={styles.time}>
-                                      <span
-                                        className={styles.day}>
-                                        {val.time.substring(8, 10)}:{val.time.substring(10, 12)}
+                                        <span className={styles.in}>
+                                          {calcDate4(val.period)}
                                         </span>
                                       </div>
-                                  }</div>
+                                      :
+                                      <div className={styles.time}>
+                                      <span className={styles.day}>
+                                        {calcDate3(val.time)}
+                                      </span>
+                                      </div>
+                                  }
+                                </div>
                               </div>
                               <div className={styles.text}>让球</div>
                               <div className={styles.text}>大/小</div>
-                              <div />
+                              <div/>
                             </div>
                             <div className={styles['match-odds']}>
                               <div className={styles['match-info']}>
@@ -251,7 +254,7 @@ class RoundPage extends PureComponent {
                             <Link to={`/bet/inPlayDetail?matchId=${val.matchId}`} className={styles['match-play']}>
                               <div className={styles.text}>{val.amount}</div>
                               <div className={styles.text}>玩法</div>
-                              <div className={styles.arrow} />
+                              <div className={styles.arrow}/>
                             </Link>
 
                           </div>

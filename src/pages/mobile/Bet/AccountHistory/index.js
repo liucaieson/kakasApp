@@ -116,12 +116,12 @@ class Announcement extends PureComponent {
     return (
       <div className={styles.accountHistory}>
         <div className={styles['play-tab']}>
-          <Link to="/bet/transaction" className={styles.tab}
-          >交易状况
-          </Link>
           <div className={`${styles.tab} ${styles.active}`}
           >账户历史
           </div>
+          <Link to="/bet/transaction" className={styles.tab}
+          >交易状况
+          </Link>
         </div>
         <div className={styles['game-tab']}>
           <div className={styles.name}>账户历史摘要</div>
